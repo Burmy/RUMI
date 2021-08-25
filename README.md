@@ -17,8 +17,8 @@
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
 | member2      |               |                 |
-| jasmine kilani      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
-| member4      |               |                 |
+| member3      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
+| Rasul Imanov      |     rimanov@mail.sfsu.edu          |      rimanov           |
 | member5      |               |                 |
 | member6      |               |                 |
 
