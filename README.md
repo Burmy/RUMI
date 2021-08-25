@@ -17,7 +17,7 @@
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
 | member2      |        Aredjaian@mail.sfsu.edu       |     Alex-Shirazi1            |
-| member3      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
+| Jasmine Kilani      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
 | Rasul Imanov      |     rimanov@mail.sfsu.edu          |      rimanov           |
 | Joshua Miranda      |       jmiranda7@mail.sfsu.edu        |        jmiranda7         |
 | Anmol Burmy      |   aburmy@mail.sfsu.edu    |    Burmy      |
