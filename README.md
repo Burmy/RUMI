@@ -17,7 +17,7 @@
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
 | member2      |               |                 |
-| member3      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
+| jasmine kilani      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
 | member4      |               |                 |
 | member5      |               |                 |
 | member6      |               |                 |
