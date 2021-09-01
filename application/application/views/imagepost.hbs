@@ -1,0 +1,65 @@
+</div>
+<article class="imagepost-body shadow">
+    <p class="post-content"><img src="/{{currentPost.img_path}}" alt="Cannot show the photo." id="post-image" /></p>
+    <p class="post-title post-content">{{currentPost.title}}</p>
+    <p class="post-content">{{currentPost.description}}</p>
+    <p class="post-remark">{{currentPost.username}} created at {{currentPost.create_time}}</p>
+</article>
+
+<div id="comment-container" class="shadow">
+    <div id="messages">
+        {{#each currentPost.comments}}
+        {{> comment this}}
+        {{/each}}
+    </div>
+    <div id="comment-inputs">
+        <textarea id="comment-input-text"></textarea>
+        <img id="comment-input-btn" src="../public/images/up-arrow.png"></img>
+    </div>
+</div>
+
+<script>
+
+    function addMessage(data) {
+        let template = document.createElement("template");
+        template.innerHTML =
+            `<div id="message-${data.commentId}">
+                <strong class="author-text">@${data.username}</strong>
+                <span class="date-posted">${new Date().toLocaleString()}</span>
+                <div class="comment-text">${data.comment}</div>
+            </div>`;
+        document.getElementById("messages").firstChild.before(template.content.firstChild);
+    }
+
+    document.getElementById("comment-input-btn").onclick = (event) => {
+        let commentText = document.getElementById("comment-input-text").value;
+        let postId = document.location.pathname.match(/\d+/g).map(Number)[0];
+
+        if (!commentText) {
+            return;
+        }
+
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-type": "Application/json"
+            },
+            body: JSON.stringify({
+                comment: commentText,
+                postId: postId
+            })
+        }
+        fetch("/comments/create", fetchOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.code == 1) {
+                    addMessage(data);
+                    document.getElementById("comment-input-text").value = "";
+                } else {
+                    addFlashFromFrontEnd(data.message, data.status);
+                }
+            })
+            .catch((err) => console.log(err));
+
+    }
+</script>

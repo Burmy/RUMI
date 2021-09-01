@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../public/css/form.css">
+    <script src="../../public/js/registration.js"></script>
+    <script defer src="../../public/js/frontend.js"></script>
+    <title>{{title}}</title>
+</head>
+
+<body id="image-body">
+    <div id="container">
+        {{log this}}
+        {{> nav}}
+        {{> header}}
+        {{#if (emptyObject messages)}}
+        {{> flashMessage}}
+        {{/if}}
+        {{{body}}}
+        {{> footer}}
+        {{> postButton}}
+    </div>
+
+    {{#if logged}}
+    <script>
+        let ele = document.getElementById("logout-button");
+        if (ele) {
+            ele.onclick = (event) => {
+                fetch("/users/logout", { method: "POST" })
+                    .then((data) => {
+                        location.replace("/");
+                    })
+            }
+        }
+    </script>
+    {{/if}}
+</body>
+
+</html>

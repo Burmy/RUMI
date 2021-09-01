@@ -1,0 +1,60 @@
+<form method="POST" action="/users/registration" enctype="application/x-www-form-urlencoded">
+    <fieldset class="flex-article shadow">
+        <p>
+            <label for="username-input">Username</label>
+            <input id="username-input" name="username" required type="text" oninput="validateUsernameInput()" />
+        </p>
+        <section id="username-head-hint" hidden="hidden">
+            <label class="hint">Username should begin with a character.</label>
+        </section>
+        <section id="username-content-hint" hidden="hidden">
+            <label class="hint">Username should has a least 3 alphanumeric
+                characters.</label>
+        </section>
+        <p>
+            <label for="email-input">Email</label>
+            <input id="email-input" name="email" required type="email" />
+        </p>
+        <section id="email-hint" hidden="hidden">
+            <label class="hint">Email address is incorrect.</label>
+        </section>
+        <p>
+            <label for="password-input">Password</label>
+            <input id="password-input" name="password" required type="password" oninput="validatePasswordInput()" />
+        </p>
+        <section id="password-8-hint" hidden="hidden">
+            <label class="hint">Password should have a least 8 characters.</label>
+        </section>
+        <section id="password-upper-hint" hidden="hidden">
+            <label class="hint">Password should contain at least 1 upper case letter.</label>
+        </section>
+        <section id="password-number-hint" hidden="hidden">
+            <label class="hint">Password should contain at least 1 number</label>
+        </section>
+        <section id="password-special-hint" hidden="hidden">
+            <label class="hint">Password should contain at least 1 of the following special characters( / * - + ! @
+                # $ ^ & * )</label>
+        </section>
+        <p>
+            <label for="confirm-password-input">Confirm password</label>
+            <input id="confirm-password-input" required type="password" oninput="validateConfirmPasswordInput()" />
+        </p>
+        <section id="password-confirm-hint" hidden="hidden">
+            <label class="hint">Password and confirm password are not the same.</label>
+        </section>
+        <section>
+            <input id="thirteen-check" required type="checkbox" />
+            <label for="thirteen-check">Are you 13+ years of age?</label>
+        </section>
+        <section>
+            <input id="tos-check" required type="checkbox" />
+            <label for="tos-check">Do you accept TOS and Privacy rules? <a href="">TOS and Privacy rules</a></label>
+
+        </section>
+        <hr>
+        <p class="two-evenly-grid">
+            <button class="form-submit" type="submit" onsubmit="return validateSubmitForm()">Register</button>
+            <button class="form-cancel" type="reset">Reset</button>
+        </p>
+    </fieldset>
+</form>

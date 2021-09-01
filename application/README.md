@@ -1,9 +1,36 @@
-# Application Folder
+# CSC 317 Term Project
 
 ## Purpose
-The purpose of this folder is to store all the source code and related files for your team's application. Source code MUST NOT be in any of folder. <strong>YOU HAVE BEEN WARNED</strong>
 
-You are free to organize the contents of the folder as you see fit. But remember your team is graded on how you use Git. This does include the structure of your application. Points will be deducted from poorly structured application folders.
+The purpose of this repository is to store all the code for your web application. This also includes the history of all commits made and who made them. Only code submitted on the master branch will be graded.
 
-## Please use the rest of the README.md to store important information for your team's application.
+Please follow the instructions below and fill in the information requested when prompted.
 
+## Student Information
+
+|               | Information   |
+|:-------------:|:-------------:|
+| Student Name  | Cheng-Yu Chuang        |
+| Student ID    | 920945048              |
+| Student Email | cchuang2@mail.sfsu.edu |
+
+
+
+# Build/Run Instructions
+This project is based on Node.js, Express, and MySQL
+
+## Build Instructions
+1. Initiate the structure of MySQL database
+```
+%MySql bin path%/mysql -u root -p %Database Name% < %Project Path%/application/conf/init_db.sql
+```
+or import the table structure in your database ```application/config/init_db.sql```
+1. Type your dabase setting in ```application/config/database.js```
+2. cd ```application/```
+3. Install node.js dependencies
+```
+npm install
+```
+
+## Run Instructions
+1. ```npm start```

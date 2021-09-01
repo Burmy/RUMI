@@ -1,0 +1,26 @@
+<form id="post-image-form" method="POST" enctype="multipart/form-data" action="/posts/createPost">
+    <fieldset class="flex-article shadow">
+        <p>
+            <label for="title-input">Title</label>
+            <input id="title-input" name="title" required type="text" />
+        </p>
+        <p>
+            <label for="description-input">Description</label>
+            <textarea id="description-input" name="description" required rows="3" cols="30"></textarea>
+        </p>
+        <p>
+            <label for="image-input">Image</label>
+            <input id="image-input" name="uploadImage" required type="file" />
+        </p>
+        <section>
+            <input id="policy-input" type="checkbox" required />
+            <label for="policy-input">Do you accept <a href="">Acceptable Use Policy</a> for uploading
+                images</label>
+        </section>
+        <hr>
+        <p class="two-evenly-grid">
+            <button class="form-submit" type="submit">Submit</button>
+            <button class="form-cancel" type="reset">Reset</button>
+        </p>
+    </fieldset>
+</form>

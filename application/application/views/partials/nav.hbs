@@ -1,0 +1,13 @@
+<div class="nav nav-shadow">
+    <a class="nav-home nav-a" href="/">Home</a>
+    <div id="search-bar">
+        <input id="search-text" name="search-text" type="text">
+        <img class="nav-a" id="search-button" src="../../public/images/search.svg"></img>
+    </div>
+    {{!-- <a class="nav-post nav-a" href="/postimage">Post</a> --}}
+    {{#if logged}}
+    <a class="nav-log nav-a" id="logout-button">Log out</a>
+    {{else}}
+    <a class="nav-log nav-a" id="login-button" href="/users/login">Log in</a>
+    {{/if}}
+</div>
