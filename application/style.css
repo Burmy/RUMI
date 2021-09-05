@@ -18,6 +18,8 @@ a {
     margin: 30px 0 40px 0;
 }
 
+
+
 #team {
     display: flex;
     flex-wrap: wrap;
@@ -39,3 +41,10 @@ a {
     border: 2px #f33d3d dashed;
     color: #f52626;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }
