@@ -15,7 +15,7 @@
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
-| member1      |               |                 |
+| Nakulan Karthikeyan     | nkarthikeyan@mail.sfsu.edu | knakulan2001 |
 | Alex Shirazi     |        Aredjaian@mail.sfsu.edu       |     Alex-Shirazi1            |
 | Jasmine Kilani      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
 | Rasul Imanov      |     rimanov@mail.sfsu.edu          |      rimanov           |
