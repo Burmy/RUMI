@@ -3,8 +3,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(#141e30, #243b55);
-    font-family: 'Kumbh Sans', sans-serif;
+    background: linear-gradient(186deg, #032564, #6a9bcf) no-repeat center center fixed;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
 }
 
@@ -17,7 +17,6 @@ a {
 #heading {
     text-align: center;
     margin: 30px 0 40px 0;
-    color: #ffffff;
 }
 
 #team {
@@ -25,7 +24,6 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-    color: #ffffff;
 }
 
 .member {
@@ -33,18 +31,17 @@ a {
     height: 100px;
     margin: 30px;
     font-size: 18px;
-    border: 2px rgb(0, 0, 0) solid;
+    border: 2px #7cacff9f solid;
+    background: #7cacff9f;
+    box-shadow: 5px 5px #ffffff;
     transition: 0.25s ease;
-    text-align: center;
-    color: #ffffff;
 }
 
 .member:hover {
-    background: rgba(0, 0, 0, .5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
-    border: 2px #f33d3d dashed;
-    color: #f52626;
+    box-shadow: 0px 0px rgba(0, 0, 0, 0);
+    border: 2px #ffffff dashed;
+    background: #81afffc2;
+    transform: translate(5px, 5px);
 }
 
 .center {
@@ -56,7 +53,7 @@ a {
     width: 30%;
 }
 
-.img {
-    max-width: 100%;
-    height: auto;
+img {
+    border: 3px #ffffff solid;
+    box-shadow: 10px 10px #7cacffa9;
 }
