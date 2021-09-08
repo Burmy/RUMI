@@ -21,5 +21,6 @@
 | Rasul Imanov      |     rimanov@mail.sfsu.edu          |      rimanov           |
 | Joshua Miranda      |       jmiranda7@mail.sfsu.edu        |        jmiranda7         |
 | Anmol Burmy      |   aburmy@mail.sfsu.edu    |    Burmy      |
+| Cheng-Yu Chuang | cchuang2@mail.sfsu.edu | yueyue0401 |
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
