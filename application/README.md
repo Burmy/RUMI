@@ -1,4 +1,4 @@
-# Application Folder Test
+# Application Folder
 
 ## Purpose
 
