@@ -1,7 +1,6 @@
 import React from "react";
-import "./Team.js";
 
-const Members = () => {
+const alex = () => {
     return (
         <div>
             <div id="heading">
@@ -15,11 +14,9 @@ const Members = () => {
                     I am a full stack developer interested in learning new technologies introduced to the computer science
                     industry and working with others to create beautiful products.
                 </p>
-                <br />
-                <br />
             </div>
         </div>
     );
 };
 
-export default Members;
+export default alex;

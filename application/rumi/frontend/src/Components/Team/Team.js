@@ -75,11 +75,11 @@ const Team = () => {
                     </Link>
                 </div>
 
-                <a href="members?name=nakulan">
-                    <div class="member">
+                <div class="member">
+                    <Link to={`${url}/nakulan`}>
                         <h1>Nakulan Karthikeyan</h1>
-                    </div>
-                </a>
+                    </Link>
+                </div>
 
                 <a href="members?name=jasmine">
                     <div class="member">
