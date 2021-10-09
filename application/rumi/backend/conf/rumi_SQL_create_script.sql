@@ -52,14 +52,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `rumi-db2`.`location`
+-- Table `rumi-db2`.`list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rumi-db2`.`location` (
+CREATE TABLE IF NOT EXISTS `rumi-db2`.`list` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `location` CHAR(32) NOT NULL,
+  `category` CHAR(32) NOT NULL,
+  `value` CHAR(32) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `location_UNIQUE` (`location` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`post` (
     ON UPDATE NO ACTION,
   CONSTRAINT `locationid`
     FOREIGN KEY (`location`)
-    REFERENCES `rumi-db2`.`location` (`id`)
+    REFERENCES `rumi-db2`.`list` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
