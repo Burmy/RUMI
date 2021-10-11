@@ -135,6 +135,7 @@ INSERT INTO `rumi-db2`.`post`
 `description`,
 `price`,
 `location`,
+`photo`,
 `creator_id`)
 VALUES
 (
@@ -142,6 +143,7 @@ VALUES
 'Near supermarkets',
 1000,
 1,
+'image1.jpeg',
 1);
 
 INSERT INTO `rumi-db2`.`post`
@@ -150,6 +152,7 @@ INSERT INTO `rumi-db2`.`post`
 `description`,
 `price`,
 `location`,
+`photo`,
 `creator_id`)
 VALUES
 (
@@ -157,6 +160,7 @@ VALUES
 'SF',
 800,
 2,
+'image3.jpeg',
 2);
 
 INSERT INTO `rumi-db2`.`post`
@@ -165,6 +169,7 @@ INSERT INTO `rumi-db2`.`post`
 `description`,
 `price`,
 `location`,
+`photo`,
 `creator_id`)
 VALUES
 (
@@ -172,4 +177,5 @@ VALUES
 'Near beach',
 900,
 3,
+'image2.jpeg',
 3);
