@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Home.css";
+// import { logo } from "../../../../backend/public/upload/image1.jpeg";
 
 function Home() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -41,7 +42,7 @@ function Home() {
 
             <div className="category">
                 <div className="search-category">
-                    <p>Select Location: </p>
+                    <p className="search-category-option">Select Location: </p>
                     <select className="search-category-select">
                         <option>Los Angeles</option>
                         <option>San Francisco</option>
@@ -51,7 +52,7 @@ function Home() {
                 </div>
 
                 <div className="search-category">
-                    <p>Select Major: </p>
+                    <p className="search-category-option">Select Major: </p>
                     <select className="search-category-select">
                         <option>Computer Science</option>
                         <option>English Literature</option>
@@ -82,9 +83,19 @@ function Home() {
                                         history.push(`/post/${value.id}`);
                                     }}
                                 >
-                                    <div className="post-caption">{value.caption}</div>
-                                    <div className="post-desc">{value.description}</div>
-                                    <div className="post-date">Posted on: {value.created_date}</div>
+                                    <img
+                                        className="post-image"
+                                        src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                        alt="Missing"
+                                    />
+                                    <div className="post-price-container">
+                                        <div className="post-price">${value.price}</div>
+                                    </div>
+                                    <div className="post-info-container">
+                                        <div className="post-caption">{value.caption}</div>
+                                        <div className="post-desc">{value.description}</div>
+                                        <div className="post-date">{value.created_date}</div>
+                                    </div>
                                 </div>
                             </div>
                         );
