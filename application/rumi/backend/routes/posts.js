@@ -37,9 +37,7 @@ router.get('/', function(req, res, next) {
     parameters.push(priceto);
   }
 
-  console.log(parameters);
-  console.log(baseSQL);
-
+  baseSQL += ` LIMIT 20 `;
 
   db.execute(baseSQL, parameters)
     .then(([results, fields]) => {
