@@ -41,8 +41,9 @@ function Home() {
             {/* Connect it to the backend */}
 
             <div className="category">
+                
                 <div className="search-category">
-                    <p className="search-category-option">Select Location: </p>
+                    <p className="search-category-location">Select Location: </p>
                     <select className="search-category-select">
                         <option>Los Angeles</option>
                         <option>San Francisco</option>
@@ -52,13 +53,35 @@ function Home() {
                 </div>
 
                 <div className="search-category">
-                    <p className="search-category-option">Select Major: </p>
+                    <p className="search-category-price">Select Price Level: </p>
+                    <select className="search-category-select">
+                        <option>0-1000</option>
+                        <option>1000-2000</option>
+                        <option>2000-3000</option>
+                        <option>3000+</option>
+                    </select>
+                </div>
+
+                <div className="search-category">
+                    <p className="search-category-major">Select Major: </p>
                     <select className="search-category-select">
                         <option>Computer Science</option>
                         <option>English Literature</option>
                     </select>
                 </div>
+
+                <div className="search-category">
+                    <p className="search-category-date">Select Date-Posted: </p>
+                    <select className="search-category-select">
+                        <option>Less than 1 Day Ago</option>
+                        <option>Less than 2 Days Ago</option>
+                        <option>Less than 1 Week Ago</option>
+                        <option>All Dates Acceptable</option>
+                    </select>
+                </div>
+
             </div>
+            
 
             <div className="post-container">
                 {listOfPosts
