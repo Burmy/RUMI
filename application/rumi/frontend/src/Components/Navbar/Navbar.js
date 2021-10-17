@@ -5,13 +5,28 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
     return (
         <div>
+            <div className="demo-only">SFSU Software Engineering Project CSC 648-848, Fall 2021. For Demonstration Only</div>
             <div className="navbar">
-                <Link className="nav-links" to="/">
-                    Home
-                </Link>
-                <Link className="nav-links" to="/team">
-                    Team
-                </Link>
+                <div>
+                    <Link className="nav-links" to="/">
+                        Home
+                    </Link>
+                    <Link className="nav-links" to="/team">
+                        About
+                    </Link>
+                </div>
+                <div>
+                    <div className="logo"></div>
+                    RUMI
+                </div>
+                <div>
+                    <Link className="nav-links" to="/">
+                        LogIn
+                    </Link>
+                    <Link className="nav-links" to="/">
+                        SignUp
+                    </Link>
+                </div>
             </div>
         </div>
     );

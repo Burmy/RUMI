@@ -11,6 +11,7 @@ function Rooms() {
     const [startPrice, setStartPrice] = useState("");
     const [endPrice, setEndPrice] = useState("");
     let history = useHistory();
+
     async function getPosts() {
         axios
             .get(
@@ -36,30 +37,30 @@ function Rooms() {
                 <input
                     type="text"
                     className="search-text"
-                    placeholder="Search a post!"
+                    placeholder="Search a Room . . . "
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
-                    placeholder="Start price"
+                    placeholder="Start Price"
                     value={startPrice}
                     onChange={(e) => setStartPrice(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
-                    placeholder="end price"
+                    placeholder="End Price"
                     value={endPrice}
                     onChange={(e) => setEndPrice(e.target.value)}
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
-            <input type="checkbox" onClick={() => setLocation(1)} />
-            LA
-            <input type="checkbox" onClick={() => setLocation(2)} />
-            SF
+            <input className="option-button" type="submit" onClick={() => setLocation(1)} value="LA" />
+            <input className="option-button" type="submit" onClick={() => setLocation(2)} value="SF" />
+            <input className="option-button" type="submit" onClick={() => setLocation(3)} value="??" />
+            <input className="option-button" type="submit" onClick={() => setLocation(6)} value="??" />
             <div className="post-container">
                 {listOfPosts.map((value, key) => {
                     value.created_date = new Date(value.created_date).toDateString();

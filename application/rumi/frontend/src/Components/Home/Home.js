@@ -1,16 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Home.css";
 const Home = () => {
     return (
         <div>
-            <p>Welcome to RUMI</p>
+            <div className="right-half">
+                <div className="heading">Welcome Home.</div>
+                <div className="sub-heading">Introducing a new way to find blablablaba balablabl bla blablabla balabl</div>
+                <div className="find">
+                    <Link to="/rooms">
+                        <p className="find-room">
+                            Find a <span className="highlight">Room</span>
+                        </p>
+                    </Link>
+                    <Link to="/roommates">
+                        <p className="find-roommate">
+                            Find a <span className="highlight">Roommate</span>
+                        </p>
+                    </Link>
+                </div>
+            </div>
 
-            <Link to="/rooms">
-                <p className="search-links">Find a room</p>
-            </Link>
-            <Link to="/roommates">
-                <p className="search-links">Find a roommate</p>
-            </Link>
+            <div className="left-half"></div>
         </div>
     );
 };

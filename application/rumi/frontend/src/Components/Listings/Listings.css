@@ -13,11 +13,10 @@
     flex-direction: column;
     background: #ffffff;
     transition: 0.25s ease;
-    margin: 30px;
+    margin: 20px;
     font-size: 22px;
     text-align: left;
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
-    border-radius: 20px;
     cursor: pointer;
     overflow: hidden;
 }
@@ -26,15 +25,13 @@
     height: 55%;
     vertical-align: top;
     position: relative;
-    border-radius: 20px;
 }
 
 .post-price-container {
-    background: #f83955;
+    background: #ffffff;
     padding: 10px;
     width: 20%;
-    border-radius: 10px;
-    color: #ffffff;
+    color: #1da699;
     position: absolute;
     margin: 15px;
 }
@@ -77,65 +74,79 @@
     margin-bottom: 10px;
 }
 
-/* .search-text {
-    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    border-radius: 10px 0px 0px 10px;
-    border: 2px solid #ffffff;
-    background: #ffffff;
-    margin: 15px 0 15px 0;
-    line-height: 45px;
-    width: 30%;
-    padding: 0 22px;
-    font-size: 18px;
-    font-family: "Josefin Sans", sans-serif;
-} */
 .search-text {
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    border: none;
+    border: 2px solid #ffffff;
     background: #ffffff;
-    margin: 15px 10px 15px 10px;
-    line-height: 45px;
+    margin: 15px 1px 15px 1px;
     width: 30%;
-    padding: 0 22px;
+    padding: 20px 25px;
     font-size: 18px;
     font-family: "Josefin Sans", sans-serif;
-    transition: 0.25s ease;
+    transition: 0.14s ease;
 }
 
 .search-price {
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    border: none;
+    border: 2px solid #ffffff;
     background: #ffffff;
-    margin: 15px 10px 15px 10px;
-    line-height: 45px;
+    margin: 15px 1px 15px 1px;
     width: 10%;
-    padding: 0 22px;
+    padding: 20px 25px;
     font-size: 18px;
     font-family: "Josefin Sans", sans-serif;
-    transition: 0.25s ease;
+    transition: 0.14s ease;
 }
 
 .search-text:hover,
 .search-price:hover {
-    background: #f839561a;
-    border: none;
-    /* border: 2px solid #f83955; */
+    border: 2px solid #1da699;
 }
 .search-text:focus,
 .search-price:focus {
     outline: none;
-    /* border: 2px solid #f83955; */
 }
 
 .search-button {
-    border: 2px solid #f83955;
-    background: #f83955;
+    border: 2px solid #1da699;
+    background: #1da699;
     color: #ffffff;
     text-align: center;
     cursor: pointer;
     font-size: 22px;
-    margin: 15px 10px 15px 10px;
+    margin: 15px 1px 15px 1px;
     width: 170px;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+}
+
+.search-button:hover {
+    border: 2px solid #28bbac;
+    background: #28bbac;
+}
+
+.option-button {
+    border: 2px solid #ffffff;
+    background: #ffffff;
+    color: #696666;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 15px 1px 15px 1px;
+    width: 170px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    padding: 16px 22px;
+}
+
+.option-button:hover {
+    border: 2px solid #1da699;
+}
+
+.option-button:focus {
+    color: #ffffff;
+    background: #1da699;
+    border: 2px solid #1da699;
 }

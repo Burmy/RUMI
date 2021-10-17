@@ -36,30 +36,30 @@ function Roommates() {
                 <input
                     type="text"
                     className="search-text"
-                    placeholder="Search a post!"
+                    placeholder="Search a Roommate . . ."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
-                    placeholder="Start price"
+                    placeholder="Select Major"
                     value={startPrice}
                     onChange={(e) => setStartPrice(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
-                    placeholder="end price"
+                    placeholder="Select School"
                     value={endPrice}
                     onChange={(e) => setEndPrice(e.target.value)}
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
-            <input type="checkbox" onClick={() => setLocation(1)} />
-            LA
-            <input type="checkbox" onClick={() => setLocation(2)} />
-            SF
+            <input className="option-button" type="submit" onClick={() => setLocation(1)} value="Pet Friendly" />
+            <input className="option-button" type="submit" onClick={() => setLocation(2)} value="Smoker" />
+            <input className="option-button" type="submit" onClick={() => setLocation(3)} value="??" />
+            <input className="option-button" type="submit" onClick={() => setLocation(6)} value="??" />
             <div className="post-container">
                 {listOfPosts.map((value, key) => {
                     value.created_date = new Date(value.created_date).toDateString();
