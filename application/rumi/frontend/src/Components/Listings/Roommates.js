@@ -58,6 +58,8 @@ function Roommates() {
             </form>
             <input className="option-button" type="submit" onClick={() => setLocation(1)} value="Pet Friendly" />
             <input className="option-button" type="submit" onClick={() => setLocation(2)} value="Smoker" />
+            <input className="option-button" type="submit" onClick={() => setLocation(3)} value="Male" />
+            <input className="option-button" type="submit" onClick={() => setLocation(6)} value="Female" />
             <input className="option-button" type="submit" onClick={() => setLocation(3)} value="??" />
             <input className="option-button" type="submit" onClick={() => setLocation(6)} value="??" />
             <div className="post-container">

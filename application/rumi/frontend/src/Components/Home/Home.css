@@ -67,3 +67,36 @@
     transform: scale(1.015);
     box-shadow: 5px 5px 24px 10px rgba(0, 0, 0, 0.1);
 }
+
+@media only screen and (max-width: 768px) {
+    .left-half {
+        display: none;
+    }
+    .right-half {
+        width: 100%;
+        height: 80%;
+    }
+    .find {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 60px;
+    }
+    .find-room,
+    .find-roommate {
+        width: 35vw;
+        height: 30vh;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .find {
+        flex-direction: column;
+    }
+    .find-room,
+    .find-roommate {
+        width: 50vw;
+        height: 15vh;
+        margin: 20px;
+    }
+}

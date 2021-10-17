@@ -27,3 +27,34 @@
     background-color: #1da699;
     color: white;
 }
+.hamburger {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        padding: 19px 30px 22px 30px;
+    }
+    .logo-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .hamburger {
+        display: block;
+    }
+    .nav-links {
+        display: none;
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        list-style-type: none;
+        margin-top: 0;
+        padding-left: 0;
+    }
+    .resp-nav-links {
+        display: none;
+    }
+    .show {
+        display: block;
+    }
+}
