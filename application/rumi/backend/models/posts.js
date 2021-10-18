@@ -11,13 +11,31 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
     ON u.id = p.creator_id
     WHERE p.caption like ? `;
 
+  console.log(location);
+
   if (location) {
-    baseSQL += ` AND p.location = ? `;
-    parameters.push(location);
+    baseSQL += ` AND ( `;
+    for (var i = 0; i < location.length; i++) {
+      if (i != 0) {
+        baseSQL += ` OR `;
+      }
+      baseSQL += `p.location = ? `;
+      parameters.push(location[i]);
+    }
+
+    baseSQL += ` ) `;
   }
   if (major) {
-    baseSQL += ` AND u.major = ? `;
-    parameters.push(major);
+    baseSQL += ` AND ( `;
+    for (var i = 0; i < major.length; i++) {
+      if (i != 0) {
+        baseSQL += ` OR `;
+      }
+      baseSQL += `u.major = ? `;
+      parameters.push(major[i]);
+    }
+
+    baseSQL += ` ) `;
   }
   if (pricefrom) {
     baseSQL += ` AND p.price >= ? `;
@@ -29,6 +47,9 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
   }
 
   baseSQL += ` LIMIT 20 `;
+
+  console.log(baseSQL);
+
   return db
     .execute(baseSQL, parameters)
     .then(([results, fields]) => {

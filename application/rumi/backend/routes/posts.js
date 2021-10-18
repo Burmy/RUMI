@@ -10,6 +10,13 @@ router.get("/", function (req, res, next) {
   let pricefrom = req.query.pricefrom;
   let priceto = req.query.priceto;
 
+  if (location) {
+    location = location.split(" ");
+  }
+  if (major) {
+    major = major.split(" ");
+  }
+
   PostModel.search(searchTerm, location, major, pricefrom, priceto)
     .then((results) => {
       if (results && results.length) {
