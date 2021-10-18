@@ -40,7 +40,7 @@ INSERT INTO `rumi-db2`.`list`
 (`category`,
 `value`)
 VALUES
-('location',
+('major',
 'Finance');
 
 -- user

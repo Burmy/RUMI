@@ -1,12 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+var FileModel = require("../models/files");
 
-/* GET home page. */
-router.get('/download', function(req, res, next) {
-    let name = req.query.name;
-    const file = `${__dirname}/../public/upload/` + name;
-    console.log(`${__dirname}`)
-    res.download(file); 
+router.get("/download", function (req, res, next) {
+  res.download(FileModel.getFilePath(req.query.name));
 });
 
 module.exports = router;

@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var UserModel = require("../models/users");
+var CommentModel = require("../models/comments");
 
 router.get('/', function(req, res, next) {
-  res.send('users API path');
+  res.send('comments API path');
 });
 
 module.exports = router;
