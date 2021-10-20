@@ -4,14 +4,13 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Listings.css";
 
-function Rooms() {
+const Rooms = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
     const [location, setLocation] = useState("");
     const [startPrice, setStartPrice] = useState("");
     const [endPrice, setEndPrice] = useState("");
     let history = useHistory();
-
     async function getPosts() {
         axios
             .get(
@@ -57,10 +56,12 @@ function Rooms() {
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
-            <input className="option-button" type="submit" onClick={() => setLocation(1)} value="LA" />
+            <input className="option-button" type="button" onClick={() => setLocation(1)} value="LA" />
             <input className="option-button" type="submit" onClick={() => setLocation(2)} value="SF" />
             <input className="option-button" type="submit" onClick={() => setLocation(3)} value="??" />
             <input className="option-button" type="submit" onClick={() => setLocation(6)} value="??" />
+            <input className="option-button" type="submit" onClick={() => setLocation("")} value="Show All" />
+
             <div className="post-container">
                 {listOfPosts.map((value, key) => {
                     value.created_date = new Date(value.created_date).toDateString();
@@ -92,6 +93,6 @@ function Rooms() {
             </div>
         </div>
     );
-}
+};
 
 export default Rooms;
