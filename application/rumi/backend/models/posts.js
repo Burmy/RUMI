@@ -11,8 +11,6 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
     ON u.id = p.creator_id
     WHERE p.caption like ? `;
 
-  console.log(location);
-
   if (location) {
     baseSQL += ` AND ( `;
     for (var i = 0; i < location.length; i++) {
@@ -57,5 +55,20 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
     })
     .catch((err) => Promise.reject(err));
 };
+
+PostModel.create = (caption, description, photo, thumbnail, location, price, creator_id) => {
+  let baseSQL = `INSERT INTO post 
+  (caption, description, photo, thumbnail, location, price, creator_id) 
+  VALUES 
+  (?,?,?,?,?,?,?);`;
+console.log([caption, description, photo, thumbnail, location, price, creator_id])
+  return db
+    .execute(baseSQL, [caption, description, photo, thumbnail, location, price, creator_id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
 
 module.exports = PostModel;
