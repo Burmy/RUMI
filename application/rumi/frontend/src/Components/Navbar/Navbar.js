@@ -1,6 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 const Navbar = () => {
     return (
@@ -20,14 +21,17 @@ const Navbar = () => {
                     RUMI
                 </div>
                 <div className="resp-nav-links">
-                    <Link className="nav-links" to="/">
+                    <Link className="nav-links" to="/login">
                         LogIn
                     </Link>
-                    <Link className="nav-links" to="/">
+                    <Link className="nav-links" to="/register">
                         SignUp
                     </Link>
                 </div>
-                <div className="hamburger">hamburger</div>
+
+                <div className="hamburger">
+                    <HiOutlineMenuAlt3 />
+                </div>
             </div>
         </div>
     );

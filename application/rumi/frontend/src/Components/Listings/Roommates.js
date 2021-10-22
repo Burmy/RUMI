@@ -56,40 +56,77 @@ function Roommates() {
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
-            <input className="option-button" type="submit" onClick={() => setLocation(1)} value="Pet Friendly" />
-            <input className="option-button" type="submit" onClick={() => setLocation(2)} value="Smoker" />
-            <input className="option-button" type="submit" onClick={() => setLocation(3)} value="Male" />
-            <input className="option-button" type="submit" onClick={() => setLocation(6)} value="Female" />
-            <input className="option-button" type="submit" onClick={() => setLocation(3)} value="??" />
-            <input className="option-button" type="submit" onClick={() => setLocation(6)} value="??" />
-            <div className="post-container">
-                {listOfPosts.map((value, key) => {
-                    value.created_date = new Date(value.created_date).toDateString();
-                    return (
-                        <div key={value.id}>
-                            <div
-                                className="post-card"
-                                onClick={() => {
-                                    history.push(`/post/${value.id}`);
-                                }}
-                            >
-                                <img
-                                    className="post-image"
-                                    src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
-                                    alt="Missing"
-                                />
-                                <div className="post-price-container">
-                                    <div className="post-price">${value.price}</div>
-                                </div>
-                                <div className="post-info-container">
-                                    <div className="post-caption">{value.caption}</div>
-                                    <div className="post-desc">{value.description}</div>
-                                    <div className="post-date">{value.created_date}</div>
+            <div className="post-listings">
+                <div className="filter-container">
+                    Select Preferences
+                    <div className="location-filter">
+                        <div>
+                            <input type="radio" id="pref1" name="pref" onClick={() => setLocation(1)} />
+                            <label className="filter-label" for="pref1">
+                                Pet Friendly
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="pref2" name="pref" onClick={() => setLocation(2)} />
+                            <label className="filter-label" for="pref2">
+                                Smoking
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="pref3" name="pref" onClick={() => setLocation(3)} />
+                            <label className="filter-label" for="pref3">
+                                Male
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="pref4" name="pref" onClick={() => setLocation(6)} />
+                            <label className="filter-label" for="pref4">
+                                Female
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="pref5" name="pref" onClick={() => setLocation("")} />
+                            <label className="filter-label" for="pref5">
+                                For Females
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="pref6" name="pref" onClick={() => setLocation("")} />
+                            <label className="filter-label" for="pref6">
+                                Show All
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div className="post-container">
+                    {listOfPosts.map((value, key) => {
+                        value.created_date = new Date(value.created_date).toDateString();
+                        return (
+                            <div key={value.id}>
+                                <div
+                                    className="post-card"
+                                    onClick={() => {
+                                        history.push(`/post/${value.id}`);
+                                    }}
+                                >
+                                    <img
+                                        className="post-image"
+                                        src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                        alt="Missing"
+                                    />
+                                    <div className="post-price-container">
+                                        <div className="post-price">${value.price}</div>
+                                    </div>
+                                    <div className="post-info-container">
+                                        <div className="post-caption">{value.caption}</div>
+                                        <div className="post-desc">{value.description}</div>
+                                        <div className="post-date">{value.created_date}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );
