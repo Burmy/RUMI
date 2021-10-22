@@ -98,17 +98,20 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
         creator_id
       );
     })
-    .then((isPostCreated) => {
-      if (isPostCreated) {
+    .then((results) => {
+      if (results && results.affectedRows) {
         res.send({
-          message: `Post is created`,
+          id: results.insertId,
+          message: `Post is created`
         });
       } else {
         res.status(400).send({
           message: `Failed`,
         });
       }
-    });
+    })
+    .catch((err) => next(err));
+});
 });
 
 module.exports = router;
