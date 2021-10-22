@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Team from "./Components/Team/Team";
 import Home from "./Components/Home/Home";
-import Rooms from "./Components/Listings/Rooms";
-import Roommates from "./Components/Listings/Roommates";
+import Rooms from "./Components/Posts/Listings/Rooms";
+import Roommates from "./Components/Posts/Listings/Roommates";
 import Members from "./Components/Team/Members";
-import Posts from "./Components/Posts/Posts";
-import Login from "./Components/Forms/Login/Login";
-import Register from "./Components/Forms/Registeration/Registeration";
+import Posts from "./Components/Posts/PostDetails/Posts";
+import Login from "./Components/Forms/Login";
+import Register from "./Components/Forms/Registeration";
 import "./App.css";
 
 function App() {

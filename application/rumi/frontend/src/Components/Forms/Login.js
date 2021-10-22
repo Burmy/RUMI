@@ -1,17 +1,17 @@
 import { useState, React } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import "../Registeration/Form.css";
+import Axios from "axios";
+import "./Form.css";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const login = () => {
-        const data = { username: username, password: password };
-        axios.post("").then((response) => {
-            console.log(response.data);
-        });
+        // const data = { username: username, password: password };
+        // Axios.post("").then((response) => {
+        //     console.log(response.data);
+        // });
     };
     return (
         <div className="form-container">

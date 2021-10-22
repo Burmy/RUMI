@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
+import Axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Listings.css";
 
-function Roommates() {
+function Rooms() {
     const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
     const [location, setLocation] = useState("");
@@ -12,10 +12,9 @@ function Roommates() {
     const [endPrice, setEndPrice] = useState("");
     let history = useHistory();
     async function getPosts() {
-        axios
-            .get(
-                `http://18.190.48.206:3001/posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}`
-            )
+        Axios.get(
+            `http://18.190.48.206:3001/posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}`
+        )
             .then((response) => {
                 console.log(response.data.results);
                 setListOfPosts(response.data.results);
@@ -36,52 +35,86 @@ function Roommates() {
                 <input
                     type="text"
                     className="search-text"
-                    placeholder="Search a Roommate . . ."
+                    placeholder="Search a Room . . . "
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
-                    placeholder="Select Major"
+                    placeholder="Start Price"
                     value={startPrice}
                     onChange={(e) => setStartPrice(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
-                    placeholder="Select School"
+                    placeholder="End Price"
                     value={endPrice}
                     onChange={(e) => setEndPrice(e.target.value)}
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
+
             <div className="post-listings">
                 <div className="filter-container">
+                    Select Location
+                    <div className="location-filter">
+                        <div>
+                            <input type="radio" id="location1" name="location" onClick={() => setLocation(1)} />
+                            <label className="filter-label" for="location1">
+                                LA
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="location2" name="location" onClick={() => setLocation(2)} />
+                            <label className="filter-label" for="location2">
+                                SF
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="location3" name="location" onClick={() => setLocation(3)} />
+                            <label className="filter-label" for="location3">
+                                ??
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="location4" name="location" onClick={() => setLocation(6)} />
+                            <label className="filter-label" for="location4">
+                                ??
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="location5" name="location" onClick={() => setLocation("")} />
+                            <label className="filter-label" for="location5">
+                                Show All
+                            </label>
+                        </div>
+                    </div>
                     Select Preferences
                     <div className="location-filter">
                         <div>
                             <input type="radio" id="pref1" name="pref" onClick={() => setLocation(1)} />
                             <label className="filter-label" for="pref1">
-                                Pet Friendly
+                                With Parking
                             </label>
                         </div>
                         <div>
                             <input type="radio" id="pref2" name="pref" onClick={() => setLocation(2)} />
                             <label className="filter-label" for="pref2">
-                                Smoking
+                                Pet Friendly
                             </label>
                         </div>
                         <div>
                             <input type="radio" id="pref3" name="pref" onClick={() => setLocation(3)} />
                             <label className="filter-label" for="pref3">
-                                Male
+                                Smoking
                             </label>
                         </div>
                         <div>
                             <input type="radio" id="pref4" name="pref" onClick={() => setLocation(6)} />
                             <label className="filter-label" for="pref4">
-                                Female
+                                For Males
                             </label>
                         </div>
                         <div>
@@ -132,4 +165,4 @@ function Roommates() {
     );
 }
 
-export default Roommates;
+export default Rooms;
