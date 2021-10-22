@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var listRouter = require('./routes/list');
 var filesRouter = require('./routes/files');
+var commentsRouter = require('./routes/comments');
 
 var app = express();
 app.use(cors())
@@ -29,6 +30,7 @@ app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/list', listRouter);
 app.use('/files', filesRouter);
+app.use('/comments', commentsRouter);
 
 
 // catch 404 and forward to error handler
