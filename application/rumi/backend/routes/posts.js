@@ -112,6 +112,20 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
     })
     .catch((err) => next(err));
 });
+
+router.delete("/", function (req, res, next) {
+  let id = req.body.id;
+  PostModel.delete(id)
+    .then((isPostDeleted) => {
+      if (isPostDeleted) {
+        res.send({message: `Post is deleted`});
+      } else {
+        res.status(400).send({
+          message: `id not found`
+        })
+      }
+    })
+    .catch((err) => next(err));
 });
 
 module.exports = router;

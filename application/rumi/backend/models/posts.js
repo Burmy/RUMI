@@ -9,7 +9,7 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
     FROM post p 
     JOIN user u
     ON u.id = p.creator_id
-    WHERE p.caption like ? `;
+    WHERE p.caption like ? AND p.deleted = 0 `;
 
   if (location) {
     baseSQL += ` AND ( `;
@@ -56,19 +56,44 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
     .catch((err) => Promise.reject(err));
 };
 
-PostModel.create = (caption, description, photo, thumbnail, location, price, creator_id) => {
+PostModel.create = (
+  caption,
+  description,
+  photo,
+  thumbnail,
+  location,
+  price,
+  creator_id
+) => {
   let baseSQL = `INSERT INTO post 
-  (caption, description, photo, thumbnail, location, price, creator_id) 
+  (caption, description, photo, thumbnail, location, price, creator_id, deleted) 
   VALUES 
-  (?,?,?,?,?,?,?);`;
-console.log([caption, description, photo, thumbnail, location, price, creator_id])
+  (?,?,?,?,?,?,?,0);`;
+
   return db
-    .execute(baseSQL, [caption, description, photo, thumbnail, location, price, creator_id])
+    .execute(baseSQL, [
+      caption,
+      description,
+      photo,
+      thumbnail,
+      location,
+      price,
+      creator_id,
+    ])
     .then(([results, fields]) => {
       return Promise.resolve(results);
     })
     .catch((err) => Promise.reject(err));
 };
 
+PostModel.delete = (id) => {
+  let baseSQL = `UPDATE post SET deleted = 1 WHERE id = ?;`;
+  return db
+  .execute(baseSQL, [id])
+  .then(([results, fields])=> {
+    return Promise.resolve(results && results.affectedRows);
+  })
+  .catch((err) => Promise.reject(err));
+};
 
 module.exports = PostModel;
