@@ -23,16 +23,29 @@ router.get("/", function (req, res, next) {
   let location = req.query.location;
   let pricefrom = req.query.pricefrom;
   let priceto = req.query.priceto;
+  let parking = req.query.parking;
+  let pet = req.query.pet;
+  let smoking = req.query.smoking;
+  let gender = req.query.gender;
+  let page = req.query.page;
+  let size = req.query.size;
 
   if (location) {
     location = location.split(" ");
   }
 
-  if (!searchTerm) {
-    return res.status(400).send({ message: `Search term should not be null` });
-  }
-
-  PostModel.search(searchTerm, location, pricefrom, priceto)
+  PostModel.search(
+    searchTerm,
+    location,
+    pricefrom,
+    priceto,
+    parking,
+    pet,
+    smoking,
+    gender,
+    page,
+    size
+  )
     .then((results) => {
       if (results && results.length) {
         res.send({
@@ -98,7 +111,7 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
       if (results && results.affectedRows) {
         res.send({
           id: results.insertId,
-          message: `Post is created`
+          message: `Post is created`,
         });
       } else {
         res.status(400).send({
@@ -114,11 +127,11 @@ router.delete("/", function (req, res, next) {
   PostModel.delete(id)
     .then((isPostDeleted) => {
       if (isPostDeleted) {
-        res.send({message: `Post is deleted`});
+        res.send({ message: `Post is deleted` });
       } else {
         res.status(400).send({
-          message: `id not found`
-        })
+          message: `id not found`,
+        });
       }
     })
     .catch((err) => next(err));

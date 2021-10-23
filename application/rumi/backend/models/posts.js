@@ -1,14 +1,30 @@
 var db = require("../conf/database");
 const PostModel = {};
 
-PostModel.search = (searchTerm, location, pricefrom, priceto) => {
-  let sqlReadySearchTerm = "%" + searchTerm + "%";
-  parameters = [sqlReadySearchTerm];
+PostModel.search = (
+  searchTerm,
+  location,
+  pricefrom,
+  priceto,
+  parking,
+  pet,
+  smoking,
+  gender,
+  page,
+  size
+) => {
+  parameters = [];
 
   let baseSQL = `SELECT * 
     FROM post 
-    WHERE caption like ? AND deleted = 0 `;
+    WHERE deleted = 0 `;
 
+  if (searchTerm) {
+    baseSQL += ` AND (caption like ? OR description like ?) `;
+    let sqlReadySearchTerm = "%" + searchTerm + "%";
+    parameters.push(sqlReadySearchTerm);
+    parameters.push(sqlReadySearchTerm);
+  }
   if (location) {
     baseSQL += ` AND ( `;
     for (var i = 0; i < location.length; i++) {
@@ -29,10 +45,29 @@ PostModel.search = (searchTerm, location, pricefrom, priceto) => {
     baseSQL += ` AND price <= ? `;
     parameters.push(priceto);
   }
-
-  baseSQL += ` LIMIT 20 `;
-
-  console.log(baseSQL);
+  if (parking) {
+    baseSQL += ` AND parking = ? `;
+    parameters.push(parking);
+  }
+  if (pet) {
+    baseSQL += ` AND pet = ? `;
+    parameters.push(pet);
+  }
+  if (smoking) {
+    baseSQL += ` AND smoking = ? `;
+    parameters.push(smoking);
+  }
+  if (gender) {
+    baseSQL += ` AND gender = ? `;
+    parameters.push(gender);
+  }
+  if (page && size && size < 200) {
+    baseSQL += ` LIMIT ?, ? `;
+    parameters.push(page);
+    parameters.push(size);
+  } else {
+    baseSQL += ` LIMIT 20 `;
+  }
 
   return db
     .execute(baseSQL, parameters)
@@ -75,11 +110,11 @@ PostModel.create = (
 PostModel.delete = (id) => {
   let baseSQL = `UPDATE post SET deleted = 1 WHERE id = ?;`;
   return db
-  .execute(baseSQL, [id])
-  .then(([results, fields])=> {
-    return Promise.resolve(results && results.affectedRows);
-  })
-  .catch((err) => Promise.reject(err));
+    .execute(baseSQL, [id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results && results.affectedRows);
+    })
+    .catch((err) => Promise.reject(err));
 };
 
 module.exports = PostModel;
