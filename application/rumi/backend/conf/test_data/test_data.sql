@@ -1,26 +1,4 @@
 
--- list location
-INSERT INTO `rumi-db2`.`list`
-(`category`,
-`value`)
-VALUES
-('location',
-'Los Angeles');
-
-INSERT INTO `rumi-db2`.`list`
-(`category`,
-`value`)
-VALUES
-('location',
-'San Francisco');
-
-INSERT INTO `rumi-db2`.`list`
-(`category`,
-`value`)
-VALUES
-('location',
-'San Diego');
-
 -- list major
 INSERT INTO `rumi-db2`.`list`
 (`category`,
