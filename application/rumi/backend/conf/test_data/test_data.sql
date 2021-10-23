@@ -136,7 +136,12 @@ INSERT INTO `rumi-db2`.`post`
 `price`,
 `location`,
 `photo`,
-`creator_id`)
+`parking`,
+`pet`,
+`smoking`,
+`gender`,
+`creator_id`,
+`deleted`)
 VALUES
 (
 'The Best House in California',
@@ -144,7 +149,12 @@ VALUES
 1000,
 1,
 'image1.jpeg',
-1);
+0,
+1,
+1,
+'N',
+1,
+0);
 
 INSERT INTO `rumi-db2`.`post`
 (
@@ -153,7 +163,12 @@ INSERT INTO `rumi-db2`.`post`
 `price`,
 `location`,
 `photo`,
-`creator_id`)
+`parking`,
+`pet`,
+`smoking`,
+`gender`,
+`creator_id`,
+`deleted`)
 VALUES
 (
 'Great in California',
@@ -161,7 +176,12 @@ VALUES
 800,
 2,
 'image3.jpeg',
-2);
+1,
+0,
+1,
+'F',
+2,
+0);
 
 INSERT INTO `rumi-db2`.`post`
 (
@@ -170,7 +190,12 @@ INSERT INTO `rumi-db2`.`post`
 `price`,
 `location`,
 `photo`,
-`creator_id`)
+`parking`,
+`pet`,
+`smoking`,
+`gender`,
+`creator_id`,
+`deleted`)
 VALUES
 (
 'Beach House',
@@ -178,4 +203,9 @@ VALUES
 900,
 3,
 'image2.jpeg',
-3);
+1,
+1,
+0,
+'M',
+3,
+0);
