@@ -21,6 +21,9 @@ const Navbar = () => {
                     RUMI
                 </div>
                 <div className="resp-nav-links">
+                    <Link className="nav-links" to="/createpost">
+                        Create
+                    </Link>
                     <Link className="nav-links" to="/login">
                         LogIn
                     </Link>

@@ -10,10 +10,15 @@ function Rooms() {
     const [location, setLocation] = useState("");
     const [startPrice, setStartPrice] = useState("");
     const [endPrice, setEndPrice] = useState("");
+    const [parking, setParking] = useState("");
+    const [smoking, setSmoking] = useState("");
+    const [pet, setPet] = useState("");
+    const [gender, setGender] = useState("");
+
     let history = useHistory();
     async function getPosts() {
         Axios.get(
-            `http://18.190.48.206:3001/posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}`
+            `http://18.190.48.206:3001/posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}&parking=${parking}&smoking=${smoking}&pet=${pet}&gender=${gender}`
         )
             .then((response) => {
                 console.log(response.data.results);
@@ -21,6 +26,7 @@ function Rooms() {
             })
             .catch((error) => {
                 console.error(error);
+                <p>test</p>;
             });
     }
 
@@ -94,41 +100,89 @@ function Rooms() {
                     Select Preferences
                     <div className="location-filter">
                         <div>
-                            <input type="radio" id="pref1" name="pref" onClick={() => setLocation(1)} />
+                            <input
+                                type="radio"
+                                id="pref1"
+                                name="pref"
+                                onClick={() => {
+                                    setParking(1);
+                                    setPet("");
+                                    setSmoking("");
+                                }}
+                            />
                             <label className="filter-label" for="pref1">
                                 With Parking
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="pref2" name="pref" onClick={() => setLocation(2)} />
+                            <input
+                                type="radio"
+                                id="pref2"
+                                name="pref"
+                                onClick={() => {
+                                    setPet(1);
+                                    setParking("");
+                                    setSmoking("");
+                                }}
+                            />
                             <label className="filter-label" for="pref2">
                                 Pet Friendly
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="pref3" name="pref" onClick={() => setLocation(3)} />
+                            <input
+                                type="radio"
+                                id="pref3"
+                                name="pref"
+                                onClick={() => {
+                                    setSmoking(1);
+                                    setParking("");
+                                    setPet("");
+                                }}
+                            />
                             <label className="filter-label" for="pref3">
                                 Smoking
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="pref4" name="pref" onClick={() => setLocation(6)} />
+                            <input
+                                type="radio"
+                                id="pref4"
+                                name="pref"
+                                onClick={() => {
+                                    setSmoking("");
+                                    setParking("");
+                                    setPet("");
+                                }}
+                            />
+                            <label className="filter-label" for="pref4">
+                                Reset
+                            </label>
+                        </div>
+                        {/* <div>
+                            <input type="radio" id="pref4" name="pref" onClick={() => setGender("M")} />
                             <label className="filter-label" for="pref4">
                                 For Males
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="pref5" name="pref" onClick={() => setLocation("")} />
+                            <input type="radio" id="pref5" name="pref" onClick={() => setGender("F")} />
                             <label className="filter-label" for="pref5">
                                 For Females
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="pref6" name="pref" onClick={() => setLocation("")} />
+                            <input type="radio" id="pref6" name="pref" onClick={() => setGender("N")} />
                             <label className="filter-label" for="pref6">
-                                Show All
+                                For Non Binaries
                             </label>
                         </div>
+                        <div>
+                            <input type="radio" id="pref7" name="pref" onClick={() => setLocation("")} />
+                            <label className="filter-label" for="pref7">
+                                Show All
+                            </label>
+                        </div> */}
                     </div>
                 </div>
                 <div className="post-container">

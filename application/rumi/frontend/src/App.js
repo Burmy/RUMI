@@ -9,6 +9,7 @@ import Members from "./Components/Team/Members";
 import Posts from "./Components/Posts/PostDetails/Posts";
 import Login from "./Components/Forms/Login";
 import Register from "./Components/Forms/Registeration";
+import CreatePost from "./Components/Posts/CreatePost/CreatePost";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/rooms" exact component={Rooms} />
                     <Route path="/roommates" exact component={Roommates} />
                     <Route path="/team" exact component={Team} />
+                    <Route path="/createpost" exact component={CreatePost} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/register" exact component={Register} />
                     <Route path="/post/:id" exact component={Posts} />
