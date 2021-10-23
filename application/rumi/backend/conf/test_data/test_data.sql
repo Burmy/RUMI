@@ -1,26 +1,3 @@
-
--- list major
-INSERT INTO `rumi-db2`.`list`
-(`category`,
-`value`)
-VALUES
-('major',
-'Computer Science');
-
-INSERT INTO `rumi-db2`.`list`
-(`category`,
-`value`)
-VALUES
-('major',
-'English Literature');
-
-INSERT INTO `rumi-db2`.`list`
-(`category`,
-`value`)
-VALUES
-('major',
-'Finance');
-
 -- user
 INSERT INTO `rumi-db2`.`user`
 (
