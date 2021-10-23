@@ -68,6 +68,10 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   let description = req.body.description;
   let location = req.body.location;
   let price = req.body.price;
+  let parking = req.body.parking;
+  let pet = req.body.pet;
+  let smoking = req.body.smoking;
+  let gender = req.body.gender;
   let creator_id = req.body.creator_id;
   let photo = req.file.path;
   let photoName = req.file.filename;
@@ -104,6 +108,10 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
         thumbnail,
         location,
         price,
+        parking,
+        pet,
+        smoking,
+        gender,
         creator_id
       );
     })
