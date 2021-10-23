@@ -1,15 +1,13 @@
 var db = require("../conf/database");
 const PostModel = {};
 
-PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
+PostModel.search = (searchTerm, location, pricefrom, priceto) => {
   let sqlReadySearchTerm = "%" + searchTerm + "%";
   parameters = [sqlReadySearchTerm];
 
-  let baseSQL = `SELECT p.* 
-    FROM post p 
-    JOIN user u
-    ON u.id = p.creator_id
-    WHERE p.caption like ? AND p.deleted = 0 `;
+  let baseSQL = `SELECT * 
+    FROM post 
+    WHERE caption like ? AND deleted = 0 `;
 
   if (location) {
     baseSQL += ` AND ( `;
@@ -17,30 +15,18 @@ PostModel.search = (searchTerm, location, major, pricefrom, priceto) => {
       if (i != 0) {
         baseSQL += ` OR `;
       }
-      baseSQL += `p.location = ? `;
+      baseSQL += `location = ? `;
       parameters.push(location[i]);
     }
 
     baseSQL += ` ) `;
   }
-  if (major) {
-    baseSQL += ` AND ( `;
-    for (var i = 0; i < major.length; i++) {
-      if (i != 0) {
-        baseSQL += ` OR `;
-      }
-      baseSQL += `u.major = ? `;
-      parameters.push(major[i]);
-    }
-
-    baseSQL += ` ) `;
-  }
   if (pricefrom) {
-    baseSQL += ` AND p.price >= ? `;
+    baseSQL += ` AND price >= ? `;
     parameters.push(pricefrom);
   }
   if (priceto) {
-    baseSQL += ` AND p.price <= ? `;
+    baseSQL += ` AND price <= ? `;
     parameters.push(priceto);
   }
 

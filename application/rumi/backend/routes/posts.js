@@ -21,22 +21,18 @@ var uploader = multer({ storage: storage });
 router.get("/", function (req, res, next) {
   let searchTerm = req.query.search;
   let location = req.query.location;
-  let major = req.query.major;
   let pricefrom = req.query.pricefrom;
   let priceto = req.query.priceto;
 
   if (location) {
     location = location.split(" ");
   }
-  if (major) {
-    major = major.split(" ");
-  }
 
   if (!searchTerm) {
     return res.status(400).send({ message: `Search term should not be null` });
   }
 
-  PostModel.search(searchTerm, location, major, pricefrom, priceto)
+  PostModel.search(searchTerm, location, pricefrom, priceto)
     .then((results) => {
       if (results && results.length) {
         res.send({
