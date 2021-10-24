@@ -1,5 +1,6 @@
 import React from "react";
 import photo from "../../../Assets/Members/jasmine.png"
+
 const jasmine = () => {
     return (
         <div>
