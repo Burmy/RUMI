@@ -26,14 +26,12 @@ export default class Location extends Component {
 
     handleChange(e) {
         this.setState({ id: e.value, name: e.label });
+        this.props.location(e.value);
+        // console.log(e.value);
     }
 
     componentDidMount() {
         this.getOptions();
-    }
-
-    selectLocation() {
-        this.props.location(this.state.id);
     }
 
     render() {
@@ -42,7 +40,6 @@ export default class Location extends Component {
                 <Select
                     options={this.state.selectOptions}
                     onChange={this.handleChange.bind(this)}
-                    onClick={this.selectLocation()}
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,

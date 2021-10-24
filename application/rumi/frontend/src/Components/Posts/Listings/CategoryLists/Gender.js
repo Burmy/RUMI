@@ -1,34 +1,36 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import axios from "axios";
 
 const options = [
     { label: "Male", value: "M" },
     { label: "Female", value: "F" },
     { label: "Non-binary", value: "N" },
+    { label: "No Preference", value: "" },
 ];
 export default class Gender extends Component {
-    state = {
-        selectedOptions: [],
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectOptions: [],
+        };
+    }
+    componentDidMount() {
+        this.setState({ selectOptions: options });
+    }
 
-    handleChange = (selectedOptions) => {
-        this.setState({ selectedOptions });
-    };
-
-    selectGender() {
-        this.props.gender(this.selectedOptions);
+    handleChange(e) {
+        this.setState({ id: e.value });
+        this.props.gender(e.value);
+        // console.log(e.value);
     }
 
     render() {
-        const { selectedOption } = this.state;
         return (
             <div>
                 <Select
-                    options={options}
-                    onChange={this.handleChange}
-                    value={selectedOption}
-                    onClick={this.selectGender()}
+                    options={this.state.selectOptions}
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.value}
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,

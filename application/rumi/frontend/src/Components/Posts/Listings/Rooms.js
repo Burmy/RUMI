@@ -29,7 +29,7 @@ function Rooms() {
                 setListOfPosts(response.data.results);
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error, error.message, error.response);
             });
     }
 
@@ -71,11 +71,11 @@ function Rooms() {
                         <div className="filter-heading">Select Location</div>
                         <Location location={setLocation} />
                     </div>
-                    {/* <div className="filter-location">
+                    <div className="filter-location">
                         <div className="filter-heading">Select Gender</div>
                         <Gender gender={setGender} />
-                    </div> */}
-                    <div className="location-filter">
+                    </div>
+                    <div className="">
                         <div className="filter-heading">Select Preferences</div>
                         <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
                     </div>
