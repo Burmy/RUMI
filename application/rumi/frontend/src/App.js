@@ -10,6 +10,7 @@ import Posts from "./Components/Posts/PostDetails/Posts";
 import Login from "./Components/Forms/Login";
 import Register from "./Components/Forms/Registeration";
 import CreatePost from "./Components/Posts/CreatePost/CreatePost";
+
 import "./App.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/login" exact component={Login} />
                     <Route path="/register" exact component={Register} />
                     <Route path="/post/:id" exact component={Posts} />
+                    <Route component={Error} />
                 </Switch>
                 <Route path="/team/:member" exact component={Members} />
             </div>

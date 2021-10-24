@@ -4,6 +4,10 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Listings.css";
 
+import Location from "./CategoryLists/Location";
+import Gender from "./CategoryLists/Gender";
+import RoomPref from "./CategoryLists/RoomPref";
+
 function Rooms() {
     const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -25,8 +29,7 @@ function Rooms() {
                 setListOfPosts(response.data.results);
             })
             .catch((error) => {
-                console.error(error);
-                <p>test</p>;
+                console.log(error);
             });
     }
 
@@ -64,125 +67,17 @@ function Rooms() {
 
             <div className="post-listings">
                 <div className="filter-container">
-                    Select Location
-                    <div className="location-filter">
-                        <div>
-                            <input type="radio" id="location1" name="location" onClick={() => setLocation(1)} />
-                            <label className="filter-label" for="location1">
-                                LA
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="location2" name="location" onClick={() => setLocation(2)} />
-                            <label className="filter-label" for="location2">
-                                SF
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="location3" name="location" onClick={() => setLocation(3)} />
-                            <label className="filter-label" for="location3">
-                                ??
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="location4" name="location" onClick={() => setLocation(6)} />
-                            <label className="filter-label" for="location4">
-                                ??
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="location5" name="location" onClick={() => setLocation("")} />
-                            <label className="filter-label" for="location5">
-                                Show All
-                            </label>
-                        </div>
+                    <div className="filter-location">
+                        <div className="filter-heading">Select Location</div>
+                        <Location location={setLocation} />
                     </div>
-                    Select Preferences
+                    {/* <div className="filter-location">
+                        <div className="filter-heading">Select Gender</div>
+                        <Gender gender={setGender} />
+                    </div> */}
                     <div className="location-filter">
-                        <div>
-                            <input
-                                type="radio"
-                                id="pref1"
-                                name="pref"
-                                onClick={() => {
-                                    setParking(1);
-                                    setPet("");
-                                    setSmoking("");
-                                }}
-                            />
-                            <label className="filter-label" for="pref1">
-                                With Parking
-                            </label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="pref2"
-                                name="pref"
-                                onClick={() => {
-                                    setPet(1);
-                                    setParking("");
-                                    setSmoking("");
-                                }}
-                            />
-                            <label className="filter-label" for="pref2">
-                                Pet Friendly
-                            </label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="pref3"
-                                name="pref"
-                                onClick={() => {
-                                    setSmoking(1);
-                                    setParking("");
-                                    setPet("");
-                                }}
-                            />
-                            <label className="filter-label" for="pref3">
-                                Smoking
-                            </label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="pref4"
-                                name="pref"
-                                onClick={() => {
-                                    setSmoking("");
-                                    setParking("");
-                                    setPet("");
-                                }}
-                            />
-                            <label className="filter-label" for="pref4">
-                                Reset
-                            </label>
-                        </div>
-                        {/* <div>
-                            <input type="radio" id="pref4" name="pref" onClick={() => setGender("M")} />
-                            <label className="filter-label" for="pref4">
-                                For Males
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="pref5" name="pref" onClick={() => setGender("F")} />
-                            <label className="filter-label" for="pref5">
-                                For Females
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="pref6" name="pref" onClick={() => setGender("N")} />
-                            <label className="filter-label" for="pref6">
-                                For Non Binaries
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="pref7" name="pref" onClick={() => setLocation("")} />
-                            <label className="filter-label" for="pref7">
-                                Show All
-                            </label>
-                        </div> */}
+                        <div className="filter-heading">Select Preferences</div>
+                        <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
                     </div>
                 </div>
                 <div className="post-container">

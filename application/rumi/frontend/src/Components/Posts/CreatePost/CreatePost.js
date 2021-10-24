@@ -1,6 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
 import Axios from "axios";
 import React from "react";
 
@@ -17,9 +16,14 @@ const CreatePost = () => {
     });
 
     const onSubmit = (data) => {
-        Axios.post("http://18.190.48.206:3001/posts", data).then((response) => {
-            console.log("IT WORKED");
-        });
+        Axios.post("http://18.190.48.206:3001/posts", data)
+            .then((response) => {
+                console.log("IT WORKED");
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error(error.response.data);
+            });
     };
     return (
         <div className="form-container">

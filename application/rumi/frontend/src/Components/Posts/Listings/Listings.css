@@ -14,15 +14,29 @@
     border-right: 2px solid #1da699;
 }
 
-.location-filter {
+.filter-heading {
+    margin: 10px;
+    font-size: 26px;
+    color: #000000;
+}
+.filter-location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 25px;
+    font-size: 20px;
+    color: #696666;
+}
+/* .location-filter {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     padding: 30px;
-}
+} */
 
-.filter-label {
+/* .filter-label {
     display: inline-block;
     border: 2px solid #ffffff;
     background: #ffffff;
@@ -50,7 +64,7 @@ input[type="radio"]:checked + label {
     color: #ffffff;
     background: #1da699;
     border: 2px solid #1da699;
-}
+} */
 
 .post-container {
     display: flex;
@@ -173,7 +187,7 @@ input[type="radio"]:checked + label {
 
 .search-button {
     border: 2px solid #1da699;
-    background: #1da699;
+    background: #1eb4a5;
     color: #ffffff;
     text-align: center;
     cursor: pointer;
@@ -188,4 +202,39 @@ input[type="radio"]:checked + label {
 .search-button:hover {
     border: 2px solid #28bbac;
     background: #28bbac;
+}
+
+.filter-label {
+    display: inline-block;
+    background: #ffffff;
+    cursor: pointer;
+    font-size: 20px;
+    width: 9.5vw;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    transition: 0.14s ease;
+    border: 2px solid #ffffff;
+    margin: 5px;
+}
+
+.filter-label:hover {
+    border: 2px solid #1da699;
+}
+
+.filter-label label span {
+    color: #696666;
+    text-align: center;
+    padding: 20px 0px;
+    display: block;
+    cursor: pointer;
+}
+
+.filter-label label input {
+    position: absolute;
+    top: -20px;
+}
+
+.filter-label input:checked + span {
+    color: #ffffff;
+    background: #1da699;
+    border: 2px solid #1da699;
 }
