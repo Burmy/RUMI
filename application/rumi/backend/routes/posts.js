@@ -73,6 +73,11 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   let smoking = req.body.smoking;
   let gender = req.body.gender;
   let creator_id = req.body.creator_id;
+
+  if (!req.file) {
+    return res.status(400).send({ message: "Photo should not be null" });
+  }
+
   let photo = req.file.path;
   let photoName = req.file.filename;
   let thumbnail = `thumbnail-${photoName}`;
@@ -96,6 +101,19 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   if (!photo || !photo.length) {
     return res.status(400).send({ message: "Photo should not be null" });
   }
+  if (!parking || !parking.length) {
+    return res.status(400).send({ message: "parking should not be null" });
+  }
+  if (!pet || !pet.length) {
+    return res.status(400).send({ message: "pet should not be null" });
+  }
+  if (!smoking || !smoking.length) {
+    return res.status(400).send({ message: "smoking should not be null" });
+  }
+  if (!gender || !gender.length) {
+    return res.status(400).send({ message: "gender should not be null" });
+  }
+
 
   sharp(photo)
     .resize(200)
