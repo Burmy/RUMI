@@ -1,48 +1,109 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Axios from "axios";
-import React from "react";
+// import React from "react";
+// import Axios from "axios";
+// import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const CreatePost = () => {
-    const initialValues = {
-        caption: "",
-        description: "",
-    };
+// const CreatePost = () => {
+//     const [hasPosted, setHasPosted] = React.useState(false);
+//     // const { authTokens } = useAuth();
 
-    //Yup npm package used to do form validation
-    const validationSchema = Yup.object().shape({
-        caption: Yup.string().min(3).max(15).required("✖ You must create a Cap"),
-        description: Yup.string().required("✖ You must enter an Desc"),
-    });
+//     const postListing = (body, { setSubmitting }) => {
+//         const fd = new FormData();
+//         Object.entries(body).forEach(([key, val]) => {
+//             fd.append(key, val);
+//         });
+//         Axios.post("/api/listing", fd)
+//             .then((res) => {
+//                 setHasPosted(true);
+//             })
+//             .catch((error) => {
+//                 console.log(error);
+//                 setSubmitting(false);
+//             });
+//     };
 
-    const onSubmit = (data) => {
-        Axios.post("http://18.190.48.206:3001/posts", data)
-            .then((response) => {
-                console.log("IT WORKED");
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error(error.response.data);
-            });
-    };
-    return (
-        <div className="form-container">
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <Form className="reg-card">
-                    <p className="form-heading">test</p>
-                    <Field className="form-input" name="caption" placeholder="Enter Your Caption" />
-                    <ErrorMessage className="form-error" name="caption" component="span" />
+//     const formData = {
+//         street: "",
+//         city: "",
+//         state: "",
+//         description: "",
+//         unit_type: "",
+//         offer_type: "",
+//         bedrooms: "",
+//         bathrooms: "",
+//         building_num: "",
+//         zip_code: "",
+//         cost: "",
+//         sq_footage: "",
+//         lease_length: "",
+//         img_path: "",
+//         full_address: "",
+//         // user_id: authTokens?.id,
+//         listingImage: undefined,
+//     };
 
-                    <Field className="form-input" name="description" placeholder="Enter Your Description" />
-                    <ErrorMessage className="form-error" name="description" component="span" />
+//     // define form validation rules
+//     // const page1Validation = Yup.object({
+//     //     state: Yup.string()
+//     //         .matches(/^[A-z]{2}$/, "Must be two letters")
+//     //         .required("Required"),
+//     //     zip_code: Yup.string()
+//     //         .matches(/^[0-9]{5}$/, "Must be 5 digits")
+//     //         .required("Required"),
+//     //     street: Yup.string().required("Required"),
+//     //     city: Yup.string().required("Required"),
+//     //     building_num: Yup.number().positive().integer().required("Required"),
+//     // });
 
-                    <button className="form-input-btn" type="submit">
-                        Submit
-                    </button>
-                </Form>
-            </Formik>
-        </div>
-    );
-};
+//     // const page2Validation = Yup.object({
+//     //     bedrooms: Yup.number().positive().integer().required("Required"),
+//     //     bathrooms: Yup.number().positive().required("Required"),
+//     //     unit_type: Yup.string().required("Required"),
+//     //     offer_type: Yup.string().required("Required"),
+//     // });
 
-export default CreatePost;
+//     // const page3Validation = Yup.object({
+//     //     cost: Yup.number().positive().integer().required("Required"),
+//     //     sq_footage: Yup.number().positive().integer().required("Required"),
+//     //     lease_length: Yup.number().positive().integer().required("Required"),
+//     //     listingImage: Yup.mixed().required("Required"),
+//     // });
+
+//     // if (hasPosted) {
+//     //     return <Redirect to="/account" />;
+//     // }
+
+//     return (
+//         <div>
+//             <center>
+//                 <h4 className="mt-3">Post a Listing</h4>
+//             </center>
+//             <div className="row container-fluid align-item-center justify-content-center mt-2">
+//                 <div className="col-md-6">
+//                     <div className="card mb-4">
+//                         <div className="card-body">
+//                             <Formik
+//                                 initialValues={{ ...formData }}
+//                                 onSubmit={(values, { setSubmitting }) => {
+//                                     setSubmitting(true);
+//                                     postListing(values, { setSubmitting });
+//                                 }}
+//                             >
+//                                 <WizardStep validationSchema={page1Validation}>
+//                                     <Page1 />
+//                                 </WizardStep>
+//                                 <WizardStep validationSchema={page2Validation}>
+//                                     <Page2 />
+//                                 </WizardStep>
+//                                 <WizardStep validationSchema={page3Validation}>
+//                                     <Page3 />
+//                                 </WizardStep>
+//                             </Formik>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default CreatePost;
