@@ -17,8 +17,10 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div>
+                <Link to="/">   
                     <div className="logo"></div>
                     RUMI
+                </Link>
                 </div>
                 <div className="resp-nav-links">
                     <Link className="nav-links" to="/login">
