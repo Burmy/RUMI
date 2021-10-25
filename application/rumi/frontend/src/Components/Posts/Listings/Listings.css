@@ -35,17 +35,27 @@
     justify-content: center;
     width: 75%;
     height: 100%;
-    /* overflow: auto;
-    position: relative;
-    height: 650px;
-    width: 1500px;
-    overflow-y: auto; */
 }
 
 .post-card {
     position: relative;
     width: 400px;
     height: 500px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    transition: 0.25s ease;
+    margin: 20px;
+    font-size: 22px;
+    text-align: left;
+    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    overflow: hidden;
+}
+.user-card {
+    position: relative;
+    width: 500px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     background: #ffffff;

@@ -5,10 +5,12 @@ import Team from "./Components/Team/Team";
 import Home from "./Components/Home/Home";
 import Rooms from "./Components/Posts/Listings/Rooms";
 import Roommates from "./Components/Posts/Listings/Roommates";
-import Posts from "./Components/Posts/PostDetails/Posts";
+import RoomDetails from "./Components/Posts/PostDetails/RoomDetails";
+import RoommateDetails from "./Components/Posts/PostDetails/RoommateDetails";
 import Login from "./Components/Forms/Login";
 import Register from "./Components/Forms/Registeration";
 import CreatePost from "./Components/Posts/CreatePost/CreatePost";
+import Error from "./Components/Error/Error";
 import Alex from "./Components/Team/TeamMembers/alex";
 import Nakulan from "./Components/Team/TeamMembers/nakulan";
 import Jasmine from "./Components/Team/TeamMembers/jasmine";
@@ -31,8 +33,9 @@ function App() {
                     <Route path="/createpost" exact component={CreatePost} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/register" exact component={Register} />
-                    <Route path="/post/:id" exact component={Posts} />
-                    <Route component={Error} />
+                    <Route path="/post/:id" exact component={RoomDetails} />
+                    <Route path="/user/:id" exact component={RoommateDetails} />
+                    <Route path="*" component={Error} />
                 </Switch>
                 <Route path="/team/alex" exact component={Alex} />
                 <Route path="/team/nakulan" exact component={Nakulan} />
