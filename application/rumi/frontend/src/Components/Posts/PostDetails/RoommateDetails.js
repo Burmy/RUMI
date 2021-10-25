@@ -16,10 +16,11 @@ function RoommateDetails() {
             {/* {id} */}
             <div>
                 {userObject.map(
-                    (value) => (
+                    (value, key) => (
+                        // eslint-disable-next-line no-sequences
                         (value.created_date = new Date(value.created_date).toDateString()),
                         (
-                            <div className="user-container">
+                            <div key={value.id} className="user-container">
                                 <div className="user-info-container">
                                     <div className="user-info-main">
                                         <div>

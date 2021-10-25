@@ -17,10 +17,10 @@ function RoomDetails() {
         <div>
             <div className="room-container">
                 {postObject.map(
-                    (value) => (
+                    (value, key) => (
                         (value.created_date = new Date(value.created_date).toDateString()),
                         (
-                            <div>
+                            <div key={value.id}>
                                 <div className="room-post-container">
                                     <div className="room-post-card">
                                         <img
