@@ -101,18 +101,6 @@ class CreatePost extends Component {
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* <div className="upload-info-pref">
-                                <input
-                                    onChange={(create) => {
-                                        creator_id = create.target.value;
-                                    }}
-                                    value={1}
-                                    type="checkbox"
-                                    name="creator_id"
-                                />
-                                id
-                            </div> */}
                             </div>
                         </div>
                     </form>
@@ -134,7 +122,7 @@ class CreatePost extends Component {
                                     form.append("pet", document.querySelector('input[name="pet"]:checked').value);
                                     form.append("smoking", document.querySelector('input[name="smoke"]:checked').value);
                                     form.append("gender", document.querySelector('input[name="gender"]:checked').value);
-                                    form.append("creator_id", creator_id);
+                                    form.append("creator_id", 1);
                                     form.append("photo", photo.files[0]);
 
                                     console.log(
@@ -154,11 +142,7 @@ class CreatePost extends Component {
                                     })
                                         .then((result) => {
                                             console.log(result);
-                                            if (result.data.success) {
-                                                alert("Successfully Posted");
-                                            } else {
-                                                alert("Post Failure Occurred");
-                                            }
+                                            alert("Successfully Posted");
                                         })
                                         .catch((error) => {
                                             console.log(error.response);
