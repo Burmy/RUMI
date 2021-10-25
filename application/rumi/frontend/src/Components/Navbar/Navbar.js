@@ -24,8 +24,10 @@ export default class Navbar extends Component {
                         </Link>
                     </div>
                     <div>
-                        <div className="logo"></div>
-                        RUMI
+                        <Link to="/">
+                            <div className="logo"></div>
+                            RUMI
+                        </Link>
                     </div>
                     <div className="resp-nav-links">
                         <Link className="nav-links" to="/createpost">
