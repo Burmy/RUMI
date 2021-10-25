@@ -1,4 +1,5 @@
 import React from "react";
+import photo from "../../../Assets/Members/alex.jpg"
 
 const alex = () => {
     return (
@@ -8,7 +9,7 @@ const alex = () => {
             </div>
 
             <div class="center">
-                <img src="/imgs/alex.jpg" alt="Alex Shirazi" width="100%" height="100%" />
+                <img src={photo} alt="Alex Shirazi" width="100%" height="100%" />
                 <h2>Frontend/Backend Developer</h2>
                 <p>
                     I am a full stack developer interested in learning new technologies introduced to the computer science

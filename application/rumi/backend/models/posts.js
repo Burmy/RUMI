@@ -77,6 +77,17 @@ PostModel.search = (
     .catch((err) => Promise.reject(err));
 };
 
+PostModel.queryById = (id) => {
+  let baseSQL = `SELECT * FROM post WHERE id = ?;`;
+  
+  return db
+    .execute(baseSQL, [id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
 PostModel.create = (
   caption,
   description,
