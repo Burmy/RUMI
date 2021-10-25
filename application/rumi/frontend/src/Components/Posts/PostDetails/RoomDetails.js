@@ -18,6 +18,7 @@ function RoomDetails() {
             <div className="room-container">
                 {postObject.map(
                     (value, key) => (
+                        // eslint-disable-next-line no-sequences
                         (value.created_date = new Date(value.created_date).toDateString()),
                         (
                             <div key={value.id}>

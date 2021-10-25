@@ -4,20 +4,20 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Listings.css";
 
-import Location from "./CategoryLists/Location";
-import Gender from "./CategoryLists/Gender";
-import RoomPref from "./CategoryLists/RoomPref";
+// import Location from "./CategoryLists/Location";
+// import Gender from "./CategoryLists/Gender";
+// import RoomPref from "./CategoryLists/RoomPref";
 
 function Roommates() {
     const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
-    const [location, setLocation] = useState("");
+    // const [location, setLocation] = useState("");
     const [startPrice, setStartPrice] = useState("");
     const [endPrice, setEndPrice] = useState("");
-    const [parking, setParking] = useState("");
-    const [smoking, setSmoking] = useState("");
-    const [pet, setPet] = useState("");
-    const [gender, setGender] = useState("");
+    // const [parking, setParking] = useState("");
+    // const [smoking, setSmoking] = useState("");
+    // const [pet, setPet] = useState("");
+    // const [gender, setGender] = useState("");
 
     let history = useHistory();
     async function getPosts() {
@@ -65,7 +65,7 @@ function Roommates() {
 
             <div className="post-listings">
                 <div className="filter-container">
-                    <div className="filter-location">
+                    {/* <div className="filter-location">
                         <div className="filter-heading">Select Location</div>
                         <Location location={setLocation} />
                     </div>
@@ -75,8 +75,8 @@ function Roommates() {
                     </div>
                     <div className="">
                         <div className="filter-heading">Select Preferences</div>
-                        {/* <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} /> */}
-                    </div>
+                        <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
+                    </div> */}
                 </div>
                 <div className="post-container">
                     {listOfPosts.map((value, key) => {
