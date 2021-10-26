@@ -65,6 +65,34 @@ router.post("/registration", function (req, res, next) {
   let smoker = req.body.smoker;
   let pets = req.body.pets;
 
+  if (!username || !username.length) {
+    return res.status(400).send({ message: "username should not be null" });
+  }
+  if (!email || !email.length) {
+    return res.status(400).send({ message: "email should not be null" });
+  }
+  if (!password || !password.length) {
+    return res.status(400).send({ message: "password should not be null" });
+  }
+  if (!description || !description.length) {
+    return res.status(400).send({ message: "Description should not be null" });
+  }
+  if (!gender || !gender.length) {
+    return res.status(400).send({ message: "gender should not be null" });
+  }
+  if (!school || !school.length) {
+    return res.status(400).send({ message: "school should not be null" });
+  }
+  if (!major || !major.length) {
+    return res.status(400).send({ message: "major should not be null" });
+  }
+  if (!smoker || !smoker.length) {
+    return res.status(400).send({ message: "smoker should not be null" });
+  }
+  if (!pets || !pets.length) {
+    return res.status(400).send({ message: "pets should not be null" });
+  }
+
   let emailRegex =
     "^w{1,63}@[a-zA-Z0-9]{2,63}.[a-zA-Z]{2,63}(.[a-zA-Z]{2,63})?$";
   var eight = password.length >= 8;
@@ -116,7 +144,7 @@ router.post("/registration", function (req, res, next) {
         res.status(500).send("Internal server error1");
       } else {
         return res.send({
-          message: "registration secceed!"
+          message: "registration secceed!",
         });
       }
     })
@@ -141,7 +169,7 @@ router.post("/login", function (req, res, next) {
         req.session.username = username;
         req.session.userId = loggedUserId;
         res.locals.logged = true;
-        res.send({message: "${username} is logged in"});
+        res.send({ message: `${username} is logged in` });
       } else {
         throw new UserError("invalid username/password", "/users/login", 400);
       }

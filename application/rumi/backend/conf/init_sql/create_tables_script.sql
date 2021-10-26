@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`user` (
   `description` TEXT NULL,
   `gender` CHAR(1) NULL,
   `birthday` DATETIME NULL,
-  `school` int NULL,
+  `school` CHAR(255) NULL,
   `major` CHAR(255) NULL,
   `smoker` INT NULL,
   `pets` INT NULL,
@@ -59,7 +59,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `rumi-db2`.`list` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `category` CHAR(32) NOT NULL,
-  `value` CHAR(32) NOT NULL,
+  `value` CHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
