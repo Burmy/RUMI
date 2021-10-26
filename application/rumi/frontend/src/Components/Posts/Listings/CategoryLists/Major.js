@@ -27,7 +27,7 @@ export default class Major extends Component {
     handleChange(e) {
         this.setState({ id: e.value, name: e.label });
         this.props.major(e.value);
-        // console.log(e.value);
+        console.log(e.value);
     }
 
     componentDidMount() {
@@ -53,8 +53,8 @@ export default class Major extends Component {
                         control: (provided, state) => ({
                             ...provided,
                             boxShadow: "none",
-                            width: 300,
-                            height: 60,
+                            width: 270,
+                            height: 67,
                             border: "2px solid #f1f5f9",
                             borderColor: "#1da699",
                             "&:hover": {

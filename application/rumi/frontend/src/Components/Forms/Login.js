@@ -6,7 +6,7 @@ import "./Form.css";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    Axios.defaults.withCredentials = true;
+    Axios.defaults.withCredentials = false;
     const login = () => {
         const data = { username: username, password: password };
         Axios.post("http://18.190.48.206:3001/users/login", data)
@@ -15,8 +15,25 @@ const Login = () => {
                 console.log(response.headers);
             })
             .catch((error) => {
-                console.log(data);
-                console.log(error, error.message, error.response);
+                // Error
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(data);
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the
+                    // browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
             });
     };
     return (

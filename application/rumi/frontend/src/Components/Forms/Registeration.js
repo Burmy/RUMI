@@ -17,6 +17,7 @@ const Registeration = () => {
         major: "",
         smoker: "",
         pets: "",
+        interests: "",
     };
 
     //Yup npm package used to do form validation
@@ -37,7 +38,6 @@ const Registeration = () => {
         //     .required("✖ You must enter a Password")
         //     .oneOf([Yup.ref("password1"), null], "✖ Passwords must match"),
     });
-    // Axios.defaults.withCredentials = true;
     const onSubmit = (data) => {
         Axios.post("http://18.190.48.206:3001/users/registration", data)
             .then((response) => {
@@ -45,8 +45,25 @@ const Registeration = () => {
                 console.log(data);
             })
             .catch((error) => {
-                console.log(data);
-                console.log(error, error.message, error.response);
+                // Error
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(data);
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the
+                    // browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
             });
     };
     return (
@@ -108,7 +125,9 @@ const Registeration = () => {
                         </label>
                     </div>
 
-                    {/* <Major /> */}
+                    <Field className="form-input" name="interests" placeholder="Enter Interests" />
+
+                    {/* <Major major={props.major} /> */}
 
                     {/* <Field className="form-input" type="password" name="password2" placeholder="Confirm Password" />
                     <ErrorMessage className="form-error" name="password2" component="span" /> */}

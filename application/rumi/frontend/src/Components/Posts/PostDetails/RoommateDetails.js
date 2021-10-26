@@ -13,7 +13,7 @@ function RoommateDetails() {
     });
     return (
         <div>
-            {/* {id} */}
+            {id}
             <div>
                 {userObject.map(
                     (value, key) => (
@@ -24,13 +24,9 @@ function RoommateDetails() {
                                 <div className="user-info-container">
                                     <div className="user-info-main">
                                         <div>
-                                            {value.first_name} <span className="user-info-highlight">{value.last_name}</span>
+                                            {value.username} <span className="user-info-highlight">{value.last_name}</span>
                                         </div>
-                                        <div className="user-info-main-desc">
-                                            I’m a responsible roommate who is clean, and easy-going with a great credit score. I
-                                            am always with my pup and I always pick up after her. She and I both are really
-                                            friendly and will get along with just about anyone!
-                                        </div>
+                                        <div className="user-info-main-desc">{value.description}</div>
                                     </div>
                                     <ul className="user-info-sub">
                                         <li>
