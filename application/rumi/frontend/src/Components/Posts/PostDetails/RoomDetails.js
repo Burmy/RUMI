@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 import "./PostDetails.css";
 import { Link } from "react-router-dom";
+import  MapContainer  from "../../Map/MapContainer.js"
 
 function RoomDetails() {
     let { id } = useParams();
@@ -45,6 +46,10 @@ function RoomDetails() {
                                         </div>
                                     </div>
                                 </div>
+                                <div><h1>Map</h1>
+                                <MapContainer/>
+                                </div>
+
                             </div>
                         )
                     )
