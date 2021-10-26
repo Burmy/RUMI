@@ -1,21 +1,41 @@
 import React from "react";
-import ReactMapGL from 'react-map-gl';
+//import {GoogleMaps, withScriptjs, withGoogleMap} from "react-google-maps";
+import {GoogleMap, useLoadScript, Marker, InfoWindow,} from "@react-google-maps/api";
+import mapStyles from "./mapStyles.js";
 
 function MapContainer() {
-    const [viewport, setViewport] = React.useState({
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 8
-    });
-  
-    return (
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        width="25%"
-        height="25%"
-        onViewportChange={(viewport) => setViewport(viewport)}
-      />
-    );
+
+const libraries = ["places"];
+const MapContainerStyle = {
+  width: '100vw',
+  height: '100vh',
+}
+const mapCenter = {
+  lat: 37.774929,
+  lng: -122.419418,
+}
+const options = {
+  styles: mapStyles,
   }
+
+const { isLoaded, loadError } = useLoadScript({
+  googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  libraries,
+});
+
+if(loadError) return "Error Loading map";
+if(!isLoaded) return "Map loading";
+
+return (
+  <div>
+<GoogleMap 
+mapContainerStyle = {MapContainerStyle}
+zoom ={12}
+center = {mapCenter}
+options = {options}
+></GoogleMap>
+</div>
+);
+
+}
   export default MapContainer;
