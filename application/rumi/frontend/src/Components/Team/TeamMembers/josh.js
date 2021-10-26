@@ -5,7 +5,9 @@ const josh = () => {
     return (
         <div>
             <div id="heading">
-                <h1>Joshua Miranda</h1>
+                <h1>
+                    Joshua <span className="user-info-highlight">Miranda</span>
+                </h1>
             </div>
 
             <div className="center">

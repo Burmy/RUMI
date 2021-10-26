@@ -5,7 +5,9 @@ const rasul = () => {
     return (
         <div>
             <div id="heading">
-                <h1>Rasul Imanov</h1>
+                <h1>
+                    Rasul <span className="user-info-highlight">Imanov</span>
+                </h1>
             </div>
 
             <div className="center">

@@ -5,13 +5,19 @@ const alan = () => {
     return (
         <div>
             <div id="heading">
-                <h1>Cheng-Yu(Alan) Chuang</h1>
+                <h1>
+                    Cheng-Yu(Alan) <span className="user-info-highlight">Chuang</span>
+                </h1>
             </div>
 
             <div className="center">
-                <img src={photo} alt="Cheng-Yu(Alan) Chuang" width="100%" height="100%" />
-                <h2>Backend Developer</h2>
-                <p>I'm a backend developer and generally interested in Machine Learning and Bioinformatics.</p>
+                <div>
+                    <img src={photo} alt="Cheng-Yu(Alan) Chuang" width="100%" height="100%" />
+                </div>
+                <div>
+                    <h2>Backend Developer</h2>
+                    <p>I'm a backend developer and generally interested in Machine Learning and Bioinformatics.</p>
+                </div>
             </div>
         </div>
     );

@@ -5,7 +5,9 @@ const anmol = () => {
     return (
         <div>
             <div id="heading">
-                <h1>Anmol Burmy</h1>
+                <h1>
+                    Anmol <span className="user-info-highlight">Burmy</span>
+                </h1>
             </div>
 
             <div className="center">

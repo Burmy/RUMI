@@ -1,6 +1,7 @@
 #heading {
     text-align: center;
     margin: 30px 0 40px 0;
+    font-size: 28px;
 }
 
 #team {
@@ -9,23 +10,30 @@
     justify-content: center;
     text-align: center;
 }
-
+.team-page {
+    display: flex;
+    justify-content: ;
+}
 .member {
     width: 450px;
-    height: 100px;
-    margin: 30px;
-    font-size: 18px;
-    border: 2px #7cacff9f solid;
-    background: #7cacff9f;
-    box-shadow: 5px 5px #ffffff;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
     transition: 0.25s ease;
+    margin: 20px;
+    font-size: 35px;
+    padding: 0 20px 0 20px;
+    text-align: center;
+    justify-content: center;
+    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .member:hover {
-    box-shadow: 0px 0px rgba(0, 0, 0, 0);
-    border: 2px #ffffff dashed;
-    background: #81afffc2;
-    transform: translate(5px, 5px);
+    transform: scale(1.015);
+    box-shadow: 5px 5px 24px 10px rgba(0, 0, 0, 0.1);
 }
 
 .center {
@@ -36,6 +44,12 @@
     max-height: auto;
     width: 30%;
 }
+
+/* .team-card {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+} */
 
 /* img {
     border: 3px #ffffff solid;

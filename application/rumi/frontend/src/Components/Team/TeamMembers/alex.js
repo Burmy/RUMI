@@ -5,10 +5,12 @@ const alex = () => {
     return (
         <div>
             <div id="heading">
-                <h1>Alex Shirazi</h1>
+                <h1>
+                    Alex <span className="user-info-highlight">Shirazi</span>
+                </h1>
             </div>
 
-            <div className="center">
+            <div class="center">
                 <img src={photo} alt="Alex Shirazi" width="100%" height="100%" />
                 <h2>Frontend/Backend Developer</h2>
                 <p>
