@@ -34,7 +34,13 @@ app.use(
   })
 );
 
-app.use(cors())
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.options('*', cors(corsConfig));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
