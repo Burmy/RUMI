@@ -3,6 +3,18 @@ import Axios from "axios";
 import "./CreatePost.css";
 
 class CreatePost extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            file: null,
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState({
+            file: URL.createObjectURL(event.target.files[0]),
+        });
+    }
     render() {
         var caption;
         var description;
@@ -14,13 +26,19 @@ class CreatePost extends Component {
                     <form>
                         <p className="form-heading">Post</p>
 
-                        <div class="upload-container">
-                            <div class="upload-image">
+                        <div className="upload-container">
+                            <div className="upload-image">
                                 <label for="upload">Upload your Image:</label>
-                                <input type="file" id="photo" accept="image/jpg,image/jpeg,image/png" />
+                                <input
+                                    type="file"
+                                    id="photo"
+                                    accept="image/jpg,image/jpeg,image/png"
+                                    onChange={this.handleChange}
+                                />
+                                <img src={this.state.file} id="imgPreview" />
                             </div>
 
-                            <div class="upload-info">
+                            <div className="upload-info">
                                 <input
                                     className="form-input"
                                     value={caption}
@@ -40,7 +58,7 @@ class CreatePost extends Component {
                                     placeholder="Enter Your Description"
                                 />
 
-                                <div class="upload-info-price">
+                                <div className="upload-info-price">
                                     <input
                                         className="form-input"
                                         type="number"

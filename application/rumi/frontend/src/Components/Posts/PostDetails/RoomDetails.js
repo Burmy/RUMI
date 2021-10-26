@@ -30,7 +30,7 @@ function RoomDetails() {
                                             alt="Missing"
                                         />
                                     </div>
-                                    <div class="room-comments-container">Comments</div>
+                                    <div className="room-comments-container">Comments</div>
                                 </div>
                                 <div className="room-info-container">
                                     <div className="room-info-container-caption">{value.caption}</div>

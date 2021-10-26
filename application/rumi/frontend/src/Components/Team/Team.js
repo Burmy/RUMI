@@ -1,13 +1,12 @@
 import React from "react";
 import "./Team.css";
 
-import {Link, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const Team = () => {
-    const {url} = useRouteMatch();
-    
+    const { url } = useRouteMatch();
+
     return (
-        
         <div>
             <div id="heading">
                 <h1>Software Engineering SFSU</h1>
@@ -17,43 +16,43 @@ const Team = () => {
             </div>
 
             <div id="team">
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/alex`}>
                         <h1>Alex Shirazi</h1>
                     </Link>
                 </div>
 
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/nakulan`}>
                         <h1>Nakulan Karthikeyan</h1>
                     </Link>
                 </div>
 
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/jasmine`}>
                         <h1>Jasmine Kilani</h1>
                     </Link>
                 </div>
 
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/josh`}>
                         <h1>Joshua Miranda</h1>
                     </Link>
                 </div>
 
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/anmol`}>
                         <h1>Anmol Burmy</h1>
                     </Link>
                 </div>
 
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/alan`}>
                         <h1>Cheng-Yu(Alan) Chuang</h1>
                     </Link>
                 </div>
 
-                <div class="member">
+                <div className="member">
                     <Link to={`${url}/rasul`}>
                         <h1>Rasul Imanov</h1>
                     </Link>

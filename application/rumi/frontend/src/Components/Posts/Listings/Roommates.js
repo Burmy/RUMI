@@ -9,8 +9,9 @@ import Gender from "./CategoryLists/Gender";
 import RoommatePref from "./CategoryLists/RoommatePref";
 
 function Roommates() {
-    const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
+    const [postCount, setPostCount] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [major, setMajor] = useState("");
     const [school, setSchool] = useState("");
     const [smoking, setSmoking] = useState("");
@@ -25,6 +26,8 @@ function Roommates() {
 
             .then((response) => {
                 console.log(response.data.results);
+                console.log(response.data);
+                setPostCount(response.data.message);
                 setListOfPosts(response.data.results);
             })
             .catch((error) => {
@@ -56,7 +59,7 @@ function Roommates() {
 
     return (
         <div className="home">
-            <form class="search" onSubmit={submit}>
+            <form className="search" onSubmit={submit}>
                 <input
                     type="text"
                     className="search-text"
@@ -76,7 +79,7 @@ function Roommates() {
                 </div>
                 <input className="search-button" type="submit" value="Search" />
             </form>
-
+            <div>{postCount}</div>
             <div className="post-listings">
                 <div className="filter-container">
                     <div className="filter-location">

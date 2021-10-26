@@ -9,9 +9,10 @@ import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
 
 function Rooms() {
-    const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
-    const [location, setLocation] = useState("");
+    const [postCount, setPostCount] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [location, setLocation] = useState([]);
     const [startPrice, setStartPrice] = useState("");
     const [endPrice, setEndPrice] = useState("");
     const [parking, setParking] = useState("");
@@ -26,6 +27,8 @@ function Rooms() {
         )
             .then((response) => {
                 console.log(response.data.results);
+                console.log(response.data);
+                setPostCount(response.data.message);
                 setListOfPosts(response.data.results);
             })
             .catch((error) => {
@@ -57,7 +60,7 @@ function Rooms() {
 
     return (
         <div className="home">
-            <form class="search" onSubmit={submit}>
+            <form className="search" onSubmit={submit}>
                 <input
                     type="text"
                     className="search-text"
@@ -67,21 +70,21 @@ function Rooms() {
                 />
                 <input
                     className="search-price"
-                    type="text"
-                    placeholder="Start Price"
+                    type="number"
+                    placeholder="Start Price ($)"
                     value={startPrice}
                     onChange={(e) => setStartPrice(e.target.value)}
                 />
                 <input
                     className="search-price"
-                    type="text"
-                    placeholder="End Price"
+                    type="number"
+                    placeholder="End Price ($)"
                     value={endPrice}
                     onChange={(e) => setEndPrice(e.target.value)}
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
-
+            <div>{postCount}</div>
             <div className="post-listings">
                 <div className="filter-container">
                     <div className="filter-location">

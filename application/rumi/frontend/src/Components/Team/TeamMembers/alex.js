@@ -1,5 +1,5 @@
 import React from "react";
-import photo from "../../../Assets/Members/alex.jpg"
+import photo from "../../../Assets/Members/alex.jpg";
 
 const alex = () => {
     return (
@@ -8,7 +8,7 @@ const alex = () => {
                 <h1>Alex Shirazi</h1>
             </div>
 
-            <div class="center">
+            <div className="center">
                 <img src={photo} alt="Alex Shirazi" width="100%" height="100%" />
                 <h2>Frontend/Backend Developer</h2>
                 <p>

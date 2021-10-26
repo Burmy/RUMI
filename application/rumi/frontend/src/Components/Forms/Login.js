@@ -9,6 +9,7 @@ const Login = () => {
     Axios.defaults.withCredentials = true;
     const login = () => {
         const data = { username: username, password: password };
+
         Axios.post("http://18.190.48.206:3001/users/login", data)
             .then((response) => {
                 console.log(response.data);

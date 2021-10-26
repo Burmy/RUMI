@@ -6,7 +6,9 @@ const Home = () => {
         <div>
             <div className="right-half">
                 <div className="heading">Welcome Home.</div>
-                <div className="sub-heading">Introducing a new way to find blablablaba balablabl bla blablabla balabl</div>
+                <div className="sub-heading">
+                    Introducing a new way to find Rooms and Roommates around San Francisco Bay Area.
+                </div>
                 <div className="find">
                     <Link to="/rooms">
                         <p className="find-room">
