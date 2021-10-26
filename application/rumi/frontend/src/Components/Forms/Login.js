@@ -1,20 +1,45 @@
 import { useState, React } from "react";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 import Axios from "axios";
 import "./Form.css";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    Axios.defaults.withCredentials = false;
+    //Axios.defaults.withCredentials = false;
+
+    let axiosConfig = {
+        withCredentials: true,
+      }
+      
     const login = () => {
+        let axiosConfig = {
+            withCredentials: true,
+          }
+          
         const data = { username: username, password: password };
-        Axios.post("http://18.190.48.206:3001/users/login", data)
-            .then((response) => {
-                console.log(response.data);
-                console.log(response.headers);
-            })
-            .catch((error) => {
+
+        fetch("http://localhost:3001/users/login", {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body:JSON.stringify(data),
+          }).then(res => {
+            console.log(res.headers.get('set-cookie')); // undefined
+            console.log(document.cookie); // nope
+            return res.json();
+          }).then(json => {
+            if (json.success) {
+              this.setState({ error: '' });
+              this.context.router.push(json.redirect);
+            }
+            else {
+              this.setState({ error: json.error });
+            }
+          }).catch((error) => {
                 // Error
                 if (error.response) {
                     // The request was made and the server responded with a status code
