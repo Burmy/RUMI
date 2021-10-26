@@ -69,7 +69,7 @@ class CreatePost extends Component {
 
                                 <div className="upload-info-pref">
                                     <div>
-                                        <div className="upload-info-pref-heading">Parking Allowed?</div>
+                                        <div className="upload-info-pref-heading">Parking Available?</div>
                                         <div className="upload-info-pref-values">
                                             <input type="radio" id="p1" name="park" value="1" /> Yes
                                             <input type="radio" id="p2" name="park" value="0" /> No
@@ -85,7 +85,7 @@ class CreatePost extends Component {
                                     </div>
 
                                     <div>
-                                        <div className="upload-info-pref-heading">Smoking Allowed</div>
+                                        <div className="upload-info-pref-heading">Smoking Allowed?</div>
                                         <div className="upload-info-pref-values">
                                             <input type="radio" id="s1" name="smoke" value="1" /> Yes
                                             <input type="radio" id="s2" name="smoke" value="0" /> No

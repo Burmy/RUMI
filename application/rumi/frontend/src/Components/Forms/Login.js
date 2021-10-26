@@ -6,7 +6,7 @@ import "./Form.css";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    Axios.defaults.withCredentials = false;
+    Axios.defaults.withCredentials = true;
     const login = () => {
         const data = { username: username, password: password };
         Axios.post("http://18.190.48.206:3001/users/login", data)

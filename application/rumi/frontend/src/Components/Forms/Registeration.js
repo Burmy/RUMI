@@ -5,8 +5,10 @@ import Axios from "axios";
 import React from "react";
 import "./Form.css";
 import Major from "../Posts/Listings/CategoryLists/Major";
+import { useState } from "react";
 
 const Registeration = () => {
+    // const [major, setMajor] = useState("");
     const initialValues = {
         username: "",
         email: "",
@@ -17,7 +19,6 @@ const Registeration = () => {
         major: "",
         smoker: "",
         pets: "",
-        interests: "",
     };
 
     //Yup npm package used to do form validation
@@ -125,9 +126,7 @@ const Registeration = () => {
                         </label>
                     </div>
 
-                    <Field className="form-input" name="interests" placeholder="Enter Interests" />
-
-                    {/* <Major major={props.major} /> */}
+                    {/* <Major major={setMajor} /> */}
 
                     {/* <Field className="form-input" type="password" name="password2" placeholder="Confirm Password" />
                     <ErrorMessage className="form-error" name="password2" component="span" /> */}

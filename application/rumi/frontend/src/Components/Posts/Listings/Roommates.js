@@ -90,28 +90,31 @@ function Roommates() {
                     </div>
                 </div>
                 <div className="post-container">
-                    {listOfPosts.map((value, key) => {
-                        value.created_date = new Date(value.created_date).toDateString();
-                        value.birthday = new Date(value.birthday).toDateString();
-                        return (
-                            <div key={value.id}>
-                                <div
-                                    className="user-card"
-                                    onClick={() => {
-                                        history.push(`/user/${value.id}`);
-                                    }}
-                                >
-                                    <div className="user-card-info-container">
-                                        <div className="user-card-caption">{value.username}</div>
-                                        <div className="user-card-desc">{value.description}</div>
-                                        <div className="user-card-desc">Studies at {value.school}</div>
-                                        <div className="user-card-desc">Was born on {value.birthday}</div>
-                                        <div className="user-card-date">{value.created_date}</div>
+                    {listOfPosts
+                        .slice(0)
+                        .reverse()
+                        .map((value, key) => {
+                            value.created_date = new Date(value.created_date).toDateString();
+                            value.birthday = new Date(value.birthday).toDateString();
+                            return (
+                                <div key={value.id}>
+                                    <div
+                                        className="user-card"
+                                        onClick={() => {
+                                            history.push(`/user/${value.id}`);
+                                        }}
+                                    >
+                                        <div className="user-card-info-container">
+                                            <div className="user-card-caption">{value.username}</div>
+                                            <div className="user-card-desc">{value.description}</div>
+                                            <div className="user-card-desc">Studies at {value.school}</div>
+                                            <div className="user-card-desc">Was born on {value.birthday}</div>
+                                            <div className="user-card-date">{value.created_date}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             </div>
         </div>

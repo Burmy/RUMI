@@ -98,33 +98,36 @@ function Rooms() {
                     </div>
                 </div>
                 <div className="post-container">
-                    {listOfPosts.map((value, key) => {
-                        value.created_date = new Date(value.created_date).toDateString();
-                        return (
-                            <div key={value.id}>
-                                <div
-                                    className="post-card"
-                                    onClick={() => {
-                                        history.push(`/post/${value.id}`);
-                                    }}
-                                >
-                                    <img
-                                        className="post-image"
-                                        src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
-                                        alt="Missing"
-                                    />
-                                    <div className="post-price-container">
-                                        <div className="post-price">${value.price}</div>
-                                    </div>
-                                    <div className="post-info-container">
-                                        <div className="post-caption">{value.caption}</div>
-                                        <div className="post-desc">{value.description}</div>
-                                        <div className="post-date">{value.created_date}</div>
+                    {listOfPosts
+                        .slice(0)
+                        .reverse()
+                        .map((value, key) => {
+                            value.created_date = new Date(value.created_date).toDateString();
+                            return (
+                                <div key={value.id}>
+                                    <div
+                                        className="post-card"
+                                        onClick={() => {
+                                            history.push(`/post/${value.id}`);
+                                        }}
+                                    >
+                                        <img
+                                            className="post-image"
+                                            src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                            alt="Missing"
+                                        />
+                                        <div className="post-price-container">
+                                            <div className="post-price">${value.price}</div>
+                                        </div>
+                                        <div className="post-info-container">
+                                            <div className="post-caption">{value.caption}</div>
+                                            <div className="post-desc">{value.description}</div>
+                                            <div className="post-date">{value.created_date}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             </div>
         </div>
