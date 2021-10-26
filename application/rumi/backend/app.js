@@ -12,7 +12,28 @@ var listRouter = require('./routes/list');
 var filesRouter = require('./routes/files');
 var commentsRouter = require('./routes/comments');
 
+var sessions = require("express-session");
+var mysqlSession = require("express-mysql-session")(sessions);
+
 var app = express();
+
+var mysqlSessionStore = new mysqlSession(
+  {
+    /* using default options */
+  },
+  require("./conf/database")
+);
+
+app.use(
+  sessions({
+    key: "csid",
+    secret: "this is a secret",
+    store: mysqlSessionStore,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use(cors())
 
 // view engine setup
@@ -45,8 +66,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  return res.status(err.status || 500).send({err_message:err});
 });
 
 module.exports = app;
