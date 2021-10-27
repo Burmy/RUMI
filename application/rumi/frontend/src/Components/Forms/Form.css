@@ -11,12 +11,38 @@
     justify-content: center;
     overflow: hidden;
 }
+.reg-form {
+    max-width: 100vw;
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden;
+}
 .reg-card {
     width: 600px;
     background: #ffffff;
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     padding: 30px;
     margin: 30px;
+}
+.reg-check {
+    margin-top: 30px;
+    font-size: 25px;
+    color: #696666;
+}
+.reg-check > label {
+    margin: 20px;
+}
+.reg-check-pref {
+    font-size: 25px;
+    color: #696666;
+    margin: 30px;
+}
+.reg-check-pref > label {
+    margin: 15px;
 }
 .login-card {
     width: 450px;
@@ -81,6 +107,12 @@
 .form-input-login {
     margin: 10px;
     font-size: 25px;
+}
+
+.form-input-reg {
+    margin: 35px 0 5px 0;
+    font-size: 25px;
+    color: #696666;
 }
 
 .form-error {

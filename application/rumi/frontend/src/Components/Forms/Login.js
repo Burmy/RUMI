@@ -6,8 +6,6 @@ import "./Form.css";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    //Axios.defaults.withCredentials = false;
-
    
       
     const login = () => {
@@ -34,6 +32,7 @@ const Login = () => {
               this.setState({ error: json.error });
             }
           }).catch((error) => {
+
                 // Error
                 if (error.response) {
                     // The request was made and the server responded with a status code

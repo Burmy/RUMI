@@ -35,15 +35,15 @@ function App() {
                     <Route path="/register" exact component={Register} />
                     <Route path="/post/:id" exact component={RoomDetails} />
                     <Route path="/user/:id" exact component={RoommateDetails} />
+                    <Route path="/team/alex" exact component={Alex} />
+                    <Route path="/team/nakulan" exact component={Nakulan} />
+                    <Route path="/team/jasmine" exact component={Jasmine} />
+                    <Route path="/team/josh" exact component={Joshua} />
+                    <Route path="/team/anmol" exact component={Anmol} />
+                    <Route path="/team/alan" exact component={Alan} />
+                    <Route path="/team/rasul" exact component={Rasul} />
                     <Route path="*" component={Error} />
                 </Switch>
-                <Route path="/team/alex" exact component={Alex} />
-                <Route path="/team/nakulan" exact component={Nakulan} />
-                <Route path="/team/jasmine" exact component={Jasmine} />
-                <Route path="/team/josh" exact component={Joshua} />
-                <Route path="/team/anmol" exact component={Anmol} />
-                <Route path="/team/alan" exact component={Alan} />
-                <Route path="/team/rasul" exact component={Rasul} />
             </div>
         </Router>
     );

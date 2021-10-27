@@ -9,8 +9,9 @@ import Gender from "./CategoryLists/Gender";
 import RoommatePref from "./CategoryLists/RoommatePref";
 
 function Roommates() {
-    const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
+    const [postCount, setPostCount] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [major, setMajor] = useState("");
     const [school, setSchool] = useState("");
     const [smoking, setSmoking] = useState("");
@@ -25,6 +26,8 @@ function Roommates() {
 
             .then((response) => {
                 console.log(response.data.results);
+                console.log(response.data);
+                setPostCount(response.data.message);
                 setListOfPosts(response.data.results);
             })
             .catch((error) => {
@@ -56,7 +59,7 @@ function Roommates() {
 
     return (
         <div className="home">
-            <form class="search" onSubmit={submit}>
+            <form className="search" onSubmit={submit}>
                 <input
                     type="text"
                     className="search-text"
@@ -76,7 +79,7 @@ function Roommates() {
                 </div>
                 <input className="search-button" type="submit" value="Search" />
             </form>
-
+            <div>{postCount}</div>
             <div className="post-listings">
                 <div className="filter-container">
                     <div className="filter-location">
@@ -90,28 +93,31 @@ function Roommates() {
                     </div>
                 </div>
                 <div className="post-container">
-                    {listOfPosts.map((value, key) => {
-                        value.created_date = new Date(value.created_date).toDateString();
-                        value.birthday = new Date(value.birthday).toDateString();
-                        return (
-                            <div key={value.id}>
-                                <div
-                                    className="user-card"
-                                    onClick={() => {
-                                        history.push(`/user/${value.id}`);
-                                    }}
-                                >
-                                    <div className="user-card-info-container">
-                                        <div className="user-card-caption">{value.username}</div>
-                                        <div className="user-card-desc">{value.description}</div>
-                                        <div className="user-card-desc">Studies at {value.school}</div>
-                                        <div className="user-card-desc">Was born on {value.birthday}</div>
-                                        <div className="user-card-date">{value.created_date}</div>
+                    {listOfPosts
+                        .slice(0)
+                        .reverse()
+                        .map((value, key) => {
+                            value.created_date = new Date(value.created_date).toDateString();
+                            value.birthday = new Date(value.birthday).toDateString();
+                            return (
+                                <div key={value.id}>
+                                    <div
+                                        className="user-card"
+                                        onClick={() => {
+                                            history.push(`/user/${value.id}`);
+                                        }}
+                                    >
+                                        <div className="user-card-info-container">
+                                            <div className="user-card-caption">{value.username}</div>
+                                            <div className="user-card-desc">{value.description}</div>
+                                            <div className="user-card-desc">Studies at {value.school}</div>
+                                            <div className="user-card-desc">Was born on {value.birthday}</div>
+                                            <div className="user-card-date">{value.created_date}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             </div>
         </div>

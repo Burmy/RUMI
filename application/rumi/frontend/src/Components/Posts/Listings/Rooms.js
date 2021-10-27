@@ -9,9 +9,10 @@ import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
 
 function Rooms() {
-    const [searchTerm, setSearchTerm] = useState("");
     const [listOfPosts, setListOfPosts] = useState([]);
-    const [location, setLocation] = useState("");
+    const [postCount, setPostCount] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [location, setLocation] = useState([]);
     const [startPrice, setStartPrice] = useState("");
     const [endPrice, setEndPrice] = useState("");
     const [parking, setParking] = useState("");
@@ -26,6 +27,8 @@ function Rooms() {
         )
             .then((response) => {
                 console.log(response.data.results);
+                console.log(response.data);
+                setPostCount(response.data.message);
                 setListOfPosts(response.data.results);
             })
             .catch((error) => {
@@ -57,7 +60,7 @@ function Rooms() {
 
     return (
         <div className="home">
-            <form class="search" onSubmit={submit}>
+            <form className="search" onSubmit={submit}>
                 <input
                     type="text"
                     className="search-text"
@@ -67,21 +70,21 @@ function Rooms() {
                 />
                 <input
                     className="search-price"
-                    type="text"
-                    placeholder="Start Price"
+                    type="number"
+                    placeholder="Start Price ($)"
                     value={startPrice}
                     onChange={(e) => setStartPrice(e.target.value)}
                 />
                 <input
                     className="search-price"
-                    type="text"
-                    placeholder="End Price"
+                    type="number"
+                    placeholder="End Price ($)"
                     value={endPrice}
                     onChange={(e) => setEndPrice(e.target.value)}
                 />
                 <input className="search-button" type="submit" value="Search" />
             </form>
-
+            <div>{postCount}</div>
             <div className="post-listings">
                 <div className="filter-container">
                     <div className="filter-location">
@@ -98,33 +101,36 @@ function Rooms() {
                     </div>
                 </div>
                 <div className="post-container">
-                    {listOfPosts.map((value, key) => {
-                        value.created_date = new Date(value.created_date).toDateString();
-                        return (
-                            <div key={value.id}>
-                                <div
-                                    className="post-card"
-                                    onClick={() => {
-                                        history.push(`/post/${value.id}`);
-                                    }}
-                                >
-                                    <img
-                                        className="post-image"
-                                        src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
-                                        alt="Missing"
-                                    />
-                                    <div className="post-price-container">
-                                        <div className="post-price">${value.price}</div>
-                                    </div>
-                                    <div className="post-info-container">
-                                        <div className="post-caption">{value.caption}</div>
-                                        <div className="post-desc">{value.description}</div>
-                                        <div className="post-date">{value.created_date}</div>
+                    {listOfPosts
+                        .slice(0)
+                        .reverse()
+                        .map((value, key) => {
+                            value.created_date = new Date(value.created_date).toDateString();
+                            return (
+                                <div key={value.id}>
+                                    <div
+                                        className="post-card"
+                                        onClick={() => {
+                                            history.push(`/post/${value.id}`);
+                                        }}
+                                    >
+                                        <img
+                                            className="post-image"
+                                            src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                            alt="Missing"
+                                        />
+                                        <div className="post-price-container">
+                                            <div className="post-price">${value.price}</div>
+                                        </div>
+                                        <div className="post-info-container">
+                                            <div className="post-caption">{value.caption}</div>
+                                            <div className="post-desc">{value.description}</div>
+                                            <div className="post-date">{value.created_date}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             </div>
         </div>
