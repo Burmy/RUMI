@@ -38,13 +38,14 @@ const Registeration = () => {
             ),
         password2: Yup.string()
             .required("✖ You must enter a Password")
-            .oneOf([Yup.ref("password1"), null], "✖ Passwords must match"),
+            .oneOf([Yup.ref("password"), null], "✖ Passwords must match"),
     });
     const onSubmit = (data) => {
-        Axios.post("http://localhost:3001/users/registration", data)
+        Axios.post("http://18.190.48.206:3001/users/registration", data)
             .then((response) => {
                 console.log("IT WORKED");
                 console.log(data);
+                alert("Successfully Registered");
             })
             .catch((error) => {
                 // Error
@@ -83,7 +84,7 @@ const Registeration = () => {
                         <Field className="form-input" type="text" name="password" placeholder="Enter Password" />
                         <ErrorMessage className="form-error" name="password" component="span" />
 
-                        <Field className="form-input" type="password" name="password2" placeholder="Confirm Password" />
+                        <Field className="form-input" type="text" name="password2" placeholder="Confirm Password" />
                         <ErrorMessage className="form-error" name="password2" component="span" />
                         <p className="form-input-reg">
                             Already have an account? Login{" "}
@@ -95,7 +96,7 @@ const Registeration = () => {
 
                     <div className="reg-card">
                         <p className="form-heading">Tell us about yourself!</p>
-                        <textarea
+                        <Field
                             className="form-input"
                             type="textarea"
                             name="description"
@@ -103,6 +104,8 @@ const Registeration = () => {
                         />
 
                         <Field className="form-input" name="school" placeholder="Enter School" />
+
+                        <Field className="form-input" name="major" placeholder="Enter Major" />
 
                         <div className="reg-check" role="group" aria-labelledby="my-radio-group">
                             <label>
@@ -118,8 +121,6 @@ const Registeration = () => {
                                 Non-Binary
                             </label>
                         </div>
-
-                        {/* <Field className="form-input" name="major" placeholder="Enter Major" /> */}
 
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Do you Smoke?

@@ -110,8 +110,8 @@ function Roommates() {
                                         <div className="user-card-info-container">
                                             <div className="user-card-caption">{value.username}</div>
                                             <div className="user-card-desc">{value.description}</div>
-                                            <div className="user-card-desc">Studies at {value.school}</div>
-                                            <div className="user-card-desc">Was born on {value.birthday}</div>
+                                            <div className="user-card-desc2">Studies at {value.school}</div>
+                                            <div className="user-card-desc2">Was born on {value.birthday}</div>
                                             <div className="user-card-date">{value.created_date}</div>
                                         </div>
                                     </div>
