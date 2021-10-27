@@ -8,15 +8,9 @@ const Login = () => {
     const [password, setPassword] = useState("");
     //Axios.defaults.withCredentials = false;
 
-    let axiosConfig = {
-        withCredentials: true,
-      }
+   
       
     const login = () => {
-        let axiosConfig = {
-            withCredentials: true,
-          }
-          
         const data = { username: username, password: password };
 
         fetch("http://localhost:3001/users/login", {
