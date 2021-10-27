@@ -20,6 +20,9 @@
     width: 75px;
     height: 70px;
 }
+.logo-div {
+    margin-right: -180px;
+}
 
 .demo-only {
     font-size: 16px;
@@ -31,7 +34,7 @@
     display: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1033px) {
     .navbar {
         padding: 19px 30px 22px 30px;
     }

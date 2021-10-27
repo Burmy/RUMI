@@ -23,7 +23,7 @@ export default class Navbar extends Component {
                             About
                         </Link>
                     </div>
-                    <div>
+                    <div className="logo-div">
                         <Link to="/">
                             <div className="logo"></div>
                             RUMI

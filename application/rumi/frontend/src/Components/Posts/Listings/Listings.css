@@ -140,8 +140,16 @@
     padding: 15px 0 0 5px;
     font-size: 20px;
     color: #696666;
+    overflow: auto;
+    height: 50px;
 }
-.user-card-date {
+.user-card-desc2 {
+    padding: 15px 0 0 5px;
+    font-size: 20px;
+    color: #696666;
+    overflow: hidden;
+}
+.user-card .user-card-date {
     font-size: 20px;
     position: absolute;
     bottom: 20px;

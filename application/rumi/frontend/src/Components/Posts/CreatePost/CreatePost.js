@@ -116,6 +116,7 @@ class CreatePost extends Component {
                                             <input type="radio" id="g1" name="gender" value="M" /> Male
                                             <input type="radio" id="g2" name="gender" value="F" /> Female
                                             <input type="radio" id="g2" name="gender" value="N" /> Non-Binary
+                                            <input type="radio" id="g2" name="gender" value=" " /> No preference
                                         </div>
                                     </div>
                                 </div>
