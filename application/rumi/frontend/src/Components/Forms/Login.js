@@ -33,7 +33,7 @@ const Login = () => {
         //         }
         //     })
         Axios.defaults.withCredentials = true;
-        Axios.post("http://localhost:3001/users/login", data)
+        Axios.post("http://18.190.48.206:3001/users/login", data)
             .then((response) => {
                 console.log(response.data);
                 console.log(response.headers);
