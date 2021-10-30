@@ -169,8 +169,8 @@ router.post("/login", function (req, res, next) {
         req.session.username = username;
         req.session.userId = loggedUserId;
         res.locals.logged = true;
-        res.cookie('username', username, { sameSite: "none", secure: true });
-        res.cookie('logged', true, { sameSite: "none", secure: true });
+        res.cookie('username', username, { sameSite: false });
+        res.cookie('logged', true, { sameSite: false });
         res.send({ message: `${username} is logged in` });
       } else {
         throw new UserError("invalid username/password", "/users/login", 400);
