@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 import "./PostDetails.css";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function RoomDetails() {
+    let history = useHistory();
     let { id } = useParams();
     const [postObject, setPostObject] = useState([]);
     useEffect(() => {
@@ -30,7 +32,7 @@ function RoomDetails() {
                                             alt="Missing"
                                         />
                                     </div>
-                                    <div className="room-comments-container">Comments</div>
+                                    <div className="room-comments-container">Comments Here.....................</div>
                                 </div>
                                 <div className="room-info-container">
                                     <div className="room-info-container-caption">{value.caption}</div>
@@ -42,6 +44,7 @@ function RoomDetails() {
                                         <div>Posted on: {value.created_date}</div>
                                         <div>
                                             Posted by: <Link to={`/user/${value.id}`}>{value.id}</Link>
+                                            <button onClick={() => history.goBack()}>Back</button>
                                         </div>
                                     </div>
                                 </div>

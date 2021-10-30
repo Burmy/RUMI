@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./Listings.css";
 
@@ -11,50 +11,66 @@ import RoommatePref from "./CategoryLists/RoommatePref";
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
+
+    //searchTerm
+    const [search, setSearch] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    const [major, setMajor] = useState("");
+
+    //start price
+    const [searchSchool, setSearchSchool] = useState("");
     const [school, setSchool] = useState("");
+
+    //end price
+    const [searchMajor, setSearchMajor] = useState("");
+    const [major, setMajor] = useState("");
+
     const [smoking, setSmoking] = useState("");
     const [pet, setPet] = useState("");
     const [gender, setGender] = useState("");
 
     let history = useHistory();
-    async function getPosts() {
-        Axios.get(
-            `http://18.190.48.206:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoking=${smoking}&pet=${pet}&gender=${gender}`
-        )
 
-            .then((response) => {
-                console.log(response.data.results);
-                console.log(response.data);
-                setPostCount(response.data.message);
-                setListOfPosts(response.data.results);
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the
-                    // browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    }
+    useEffect(() => {
+        async function getPosts() {
+            Axios.get(
+                `http://18.190.48.206:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoking=${smoking}&pet=${pet}&gender=${gender}`
+            )
+
+                .then((response) => {
+                    console.log(response.data.results);
+                    console.log(response.data);
+                    setPostCount(response.data.message);
+                    setListOfPosts(response.data.results);
+                })
+                .catch((error) => {
+                    // Error
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the
+                        // browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
+                });
+        }
+        getPosts();
+    }, [searchTerm, major, school, smoking, pet, gender]);
 
     const submit = (e) => {
         e.preventDefault();
-        getPosts();
+        setSearchTerm(search);
+        setSchool(searchSchool);
+        setMajor(searchMajor);
     };
 
     return (
@@ -64,18 +80,18 @@ function Roommates() {
                     type="text"
                     className="search-text"
                     placeholder="Search a Roommate . . . "
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                 />
                 <input
                     className="search-price"
                     type="text"
                     placeholder="Select School"
-                    value={school}
-                    onChange={(e) => setSchool(e.target.value)}
+                    value={searchSchool}
+                    onChange={(e) => setSearchSchool(e.target.value)}
                 />
                 <div className="filter-gender">
-                    <Major major={setMajor} />
+                    <Major major={setSearchMajor} />
                 </div>
                 <input className="search-button" type="submit" value="Search" />
             </form>
