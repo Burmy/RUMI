@@ -32,6 +32,7 @@ const Login = () => {
         //             this.setState({ error: json.error });
         //         }
         //     })
+        Axios.defaults.withCredentials = true;
         Axios.post("http://18.190.48.206:3001/users/login", data)
             .then((response) => {
                 console.log(response.data);
