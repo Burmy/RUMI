@@ -27,7 +27,7 @@ var mysqlSessionStore = new mysqlSession(
 
 app.use(
   sessions({
-    key: "userid",
+    key: "csid",
     secret: "this is a secret for csc648 team01",
     store: mysqlSessionStore,
     resave: false,

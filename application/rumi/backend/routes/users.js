@@ -169,7 +169,7 @@ router.post("/login", function (req, res, next) {
         req.session.username = username;
         req.session.userId = loggedUserId;
         res.locals.logged = true;
-        res.cookie('userid', userId);
+        res.cookie('loggedUserid', loggedUserId);
         res.cookie('username', username);
         res.cookie('logged', true);
         res.send({ message: `${username} is logged in` });
