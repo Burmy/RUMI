@@ -31,6 +31,12 @@ function RoomDetails() {
                                             src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
                                             alt="Missing"
                                         />
+                                        <input
+                                            className="room-back-button"
+                                            type="submit"
+                                            onClick={() => history.goBack()}
+                                            value="Go Back"
+                                        />
                                     </div>
                                     <div className="room-comments-container">Comments Here.....................</div>
                                 </div>
@@ -44,7 +50,6 @@ function RoomDetails() {
                                         <div>Posted on: {value.created_date}</div>
                                         <div>
                                             Posted by: <Link to={`/user/${value.id}`}>{value.id}</Link>
-                                            <button onClick={() => history.goBack()}>Back</button>
                                         </div>
                                     </div>
                                 </div>

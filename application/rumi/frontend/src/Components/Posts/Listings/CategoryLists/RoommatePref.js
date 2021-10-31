@@ -41,7 +41,7 @@ export default class RoommatePref extends Component {
                     <div className="filter-label">
                         <label>
                             <input type="checkbox" onChange={this.smokingChecked} />
-                            <span>Smoking Allowed</span>
+                            <span>Smoker</span>
                         </label>
                     </div>
                 </div>

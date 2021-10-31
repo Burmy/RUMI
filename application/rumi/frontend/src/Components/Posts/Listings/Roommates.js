@@ -7,6 +7,8 @@ import "./Listings.css";
 import Major from "./CategoryLists/Major";
 import Gender from "./CategoryLists/Gender";
 import RoommatePref from "./CategoryLists/RoommatePref";
+import { Link } from "react-router-dom";
+import { BsPersonFill } from "react-icons/bs";
 
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -33,7 +35,7 @@ function Roommates() {
     useEffect(() => {
         async function getPosts() {
             Axios.get(
-                `http://18.190.48.206:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoking=${smoking}&pet=${pet}&gender=${gender}`
+                `http://18.190.48.206:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
             )
 
                 .then((response) => {
@@ -76,6 +78,9 @@ function Roommates() {
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
+                <Link className="search-icon" to="/rooms">
+                    <BsPersonFill />
+                </Link>
                 <input
                     type="text"
                     className="search-text"

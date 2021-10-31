@@ -114,9 +114,23 @@
 }
 .post-desc {
     padding: 15px 0 0 5px;
-    font-size: 20px;
+    font-size: 21px;
     color: #696666;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+/* .post-desc-pref {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-desc-pref > div {
+    padding: 5px;
+} */
 .post-date {
     font-size: 20px;
     position: absolute;
@@ -140,8 +154,11 @@
     padding: 15px 0 0 5px;
     font-size: 20px;
     color: #696666;
-    overflow: auto;
-    height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .user-card-desc2 {
     padding: 15px 0 0 5px;
@@ -214,6 +231,15 @@
     background: #28bbac;
 }
 
+.search-icon {
+    color: #ffffff;
+    width: 80px;
+    font-size: 28px;
+    cursor: pointer;
+    margin: 15px 1px 15px 1px;
+    background: #1da699;
+    padding-top: 17px;
+}
 .filter-label {
     display: inline-block;
     background: #ffffff;

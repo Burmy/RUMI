@@ -7,6 +7,8 @@ import "./Listings.css";
 import Location from "./CategoryLists/Location";
 import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
+import { Link } from "react-router-dom";
+import { ImHome } from "react-icons/im";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -77,6 +79,9 @@ function Rooms() {
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
+                <Link className="search-icon" to="/roommates">
+                    <ImHome />
+                </Link>
                 <input
                     type="text"
                     className="search-text"
@@ -141,6 +146,11 @@ function Rooms() {
                                         <div className="post-info-container">
                                             <div className="post-caption">{value.caption}</div>
                                             <div className="post-desc">{value.description}</div>
+                                            <div className="post-desc-pref">
+                                                <div className="">{value.parking}park</div>
+                                                <div className="">{value.pet}pet</div>
+                                                <div className="">{value.smoking}smoke</div>
+                                            </div>
                                             <div className="post-date">{value.created_date}</div>
                                         </div>
                                     </div>
