@@ -9,6 +9,7 @@ import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
 import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
+import { AiFillCaretRight } from "react-icons/ai";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -107,56 +108,71 @@ function Rooms() {
             </form>
             <div>{postCount}</div>
             <div className="post-listings">
-                <div className="filter-container">
-                    <div className="filter-location">
-                        <div className="filter-heading">Select Location</div>
-                        <Location location={setLocation} />
-                    </div>
-                    <div className="filter-location">
-                        <div className="filter-heading">Select Gender</div>
-                        <Gender gender={setGender} />
-                    </div>
-                    <div className="">
-                        <div className="filter-heading">Select Preferences</div>
-                        <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
+                <div className="filter-toggle">
+                    <label className="collapse" for="_1">
+                        Filters
+                        <AiFillCaretRight
+                            style={{
+                                position: "absolute",
+                                top: "18px",
+                                right: "20px",
+                            }}
+                        />
+                    </label>
+                    <input id="_1" type="checkbox" />
+                    <div className="filter-container">
+                        <div className="filter-location">
+                            <div className="filter-heading">Select Location</div>
+                            <Location location={setLocation} />
+                        </div>
+                        <div className="filter-location">
+                            <div className="filter-heading">Select Gender</div>
+                            <Gender gender={setGender} />
+                        </div>
+                        <div className="">
+                            <div className="filter-heading">Select Preferences</div>
+                            <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
+                        </div>
                     </div>
                 </div>
+
                 <div className="post-container">
-                    {listOfPosts
-                        .slice(0)
-                        .reverse()
-                        .map((value, key) => {
-                            value.created_date = new Date(value.created_date).toDateString();
-                            return (
-                                <div key={value.id}>
-                                    <div
-                                        className="post-card"
-                                        onClick={() => {
-                                            history.push(`/post/${value.id}`);
-                                        }}
-                                    >
-                                        <img
-                                            className="post-image"
-                                            src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
-                                            alt="Missing"
-                                        />
-                                        <div className="post-price-container">
-                                            <div className="post-price">${value.price}</div>
-                                        </div>
-                                        <div className="post-info-container">
-                                            <div className="post-caption">{value.caption}</div>
-                                            <div className="post-desc">{value.description}</div>
-                                            <div className="post-desc-pref">
+                    {listOfPosts &&
+                        listOfPosts
+                            .slice(0)
+                            .reverse()
+                            .map((value, key) => {
+                                value.created_date = new Date(value.created_date).toDateString();
+                                return (
+                                    <div key={value.id}>
+                                        <div
+                                            className="post-card"
+                                            onClick={() => {
+                                                history.push(`/post/${value.id}`);
+                                            }}
+                                        >
+                                            <img
+                                                className="post-image"
+                                                src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                                alt="Missing"
+                                            />
+                                            <div className="post-price-container">
+                                                <div className="post-price">${value.price}</div>
+                                            </div>
+                                            <div className="post-info-container">
+                                                <div className="post-caption">{value.caption}</div>
+                                                <div className="post-desc">{value.description}</div>
+                                                {/* <div className="post-desc-pref">
                                                 <div className="">{value.parking}park</div>
                                                 <div className="">{value.pet}pet</div>
                                                 <div className="">{value.smoking}smoke</div>
+                                            </div> */}
+                                                <div className="post-date">{value.created_date}</div>
                                             </div>
-                                            <div className="post-date">{value.created_date}</div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
                 </div>
             </div>
         </div>

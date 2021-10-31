@@ -9,7 +9,7 @@ import Gender from "./CategoryLists/Gender";
 import RoommatePref from "./CategoryLists/RoommatePref";
 import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
-
+import { AiFillCaretRight } from "react-icons/ai";
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -102,43 +102,58 @@ function Roommates() {
             </form>
             <div>{postCount}</div>
             <div className="post-listings">
-                <div className="filter-container">
-                    <div className="filter-location">
-                        <div className="filter-heading">Select Gender</div>
-                        <Gender gender={setGender} />
-                    </div>
+                <div className="filter-toggle">
+                    <label className="collapse" for="_2">
+                        Filters
+                        <AiFillCaretRight
+                            style={{
+                                position: "absolute",
+                                top: "18px",
+                                right: "20px",
+                            }}
+                        />
+                    </label>
+                    <input id="_2" type="checkbox" />
 
-                    <div className="">
-                        <div className="filter-heading">Select Preferences</div>
-                        <RoommatePref pet={setPet} smoking={setSmoking} />
+                    <div className="filter-container">
+                        <div className="filter-location">
+                            <div className="filter-heading">Select Gender</div>
+                            <Gender gender={setGender} />
+                        </div>
+
+                        <div className="">
+                            <div className="filter-heading">Select Preferences</div>
+                            <RoommatePref pet={setPet} smoking={setSmoking} />
+                        </div>
                     </div>
                 </div>
                 <div className="post-container">
-                    {listOfPosts
-                        .slice(0)
-                        .reverse()
-                        .map((value, key) => {
-                            value.created_date = new Date(value.created_date).toDateString();
-                            value.birthday = new Date(value.birthday).toDateString();
-                            return (
-                                <div key={value.id}>
-                                    <div
-                                        className="user-card"
-                                        onClick={() => {
-                                            history.push(`/user/${value.id}`);
-                                        }}
-                                    >
-                                        <div className="user-card-info-container">
-                                            <div className="user-card-caption">{value.username}</div>
-                                            <div className="user-card-desc">{value.description}</div>
-                                            <div className="user-card-desc2">Studies at {value.school}</div>
-                                            <div className="user-card-desc2">Was born on {value.birthday}</div>
-                                            <div className="user-card-date">{value.created_date}</div>
+                    {listOfPosts &&
+                        listOfPosts
+                            .slice(0)
+                            .reverse()
+                            .map((value, key) => {
+                                value.created_date = new Date(value.created_date).toDateString();
+                                value.birthday = new Date(value.birthday).toDateString();
+                                return (
+                                    <div key={value.id}>
+                                        <div
+                                            className="user-card"
+                                            onClick={() => {
+                                                history.push(`/user/${value.id}`);
+                                            }}
+                                        >
+                                            <div className="user-card-info-container">
+                                                <div className="user-card-caption">{value.username}</div>
+                                                <div className="user-card-desc">{value.description}</div>
+                                                <div className="user-card-desc2">Studies at {value.school}</div>
+                                                <div className="user-card-desc2">Was born on {value.birthday}</div>
+                                                <div className="user-card-date">{value.created_date}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
                 </div>
             </div>
         </div>
