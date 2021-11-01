@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Team from "./Components/Team/Team";
 import Home from "./Components/Home/Home";
+import Map from "./Components/Map/Map";
 import Rooms from "./Components/Posts/Listings/Rooms";
 import Roommates from "./Components/Posts/Listings/Roommates";
 import RoomDetails from "./Components/Posts/PostDetails/RoomDetails";
@@ -32,6 +33,7 @@ function App() {
                     <Route path="/rooms" exact component={Rooms} />
                     <Route path="/roommates" exact component={Roommates} />
                     <Route path="/team" exact component={Team} />
+                    <Route path="/map" exact component={Map} />
                     <Route path="/createpost" exact component={CreatePost} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/register" exact component={Register} />
