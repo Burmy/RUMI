@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 import "./PostDetails.css";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import  MapContainer  from "../../Map/MapContainer.js"
 import { useHistory } from "react-router-dom";
 

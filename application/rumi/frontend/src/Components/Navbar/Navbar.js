@@ -22,6 +22,9 @@ export default class Navbar extends Component {
                         <Link className="nav-links" to="/team">
                             About
                         </Link>
+                        <Link className="nav-links" to="/map">
+                            Map
+                        </Link>
                     </div>
                     <div className="logo-div">
                         <Link to="/">
