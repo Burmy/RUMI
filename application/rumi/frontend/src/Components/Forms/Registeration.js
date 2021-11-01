@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import React from "react";
 import "./Form.css";
@@ -22,6 +22,10 @@ const majorOptions = [
 ];
 
 const Registeration = () => {
+    // const [major, setMajor] = useState("");
+
+    let history = useHistory();
+
     const initialValues = {
         username: "",
         email: "",
@@ -123,6 +127,7 @@ const Registeration = () => {
                     closeButton: false,
                     progress: 0,
                 });
+                history.push("/login");
             })
             .catch((error) => {
                 // Error

@@ -1,5 +1,5 @@
 import { useState, React } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +7,8 @@ import "./Form.css";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    let history = useHistory();
 
     const login = () => {
         const data = { username: username, password: password };
@@ -48,6 +50,7 @@ const Login = () => {
                     closeButton: false,
                     progress: 0,
                 });
+                history.push("/");
             })
             .catch((error) => {
                 // Error
