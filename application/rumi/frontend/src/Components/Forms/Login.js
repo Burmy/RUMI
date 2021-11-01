@@ -1,5 +1,5 @@
 import { useState, React } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Axios from "axios";
 import "./Form.css";
 
@@ -7,6 +7,10 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+
+    let history = useHistory();
+
+    
     const login = () => {
         const data = { username: username, password: password };
 
@@ -37,7 +41,7 @@ const Login = () => {
             .then((response) => {
                 console.log(response.data);
                 console.log(response.headers);
-                alert("Successfully Logged In");
+                history.push('/');
             })
             .catch((error) => {
                 // Error
