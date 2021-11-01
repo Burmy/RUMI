@@ -73,7 +73,7 @@ class CreatePost extends Component {
                                         placeholder="Enter Your Price($)"
                                     />
 
-                                    <select className="form-input" name="location" id="location">
+                                    <select className="form-input-select-create" name="location" id="location">
                                         <option value="0" selected disabled>
                                             Select a Location
                                         </option>

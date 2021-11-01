@@ -4,26 +4,10 @@ import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import React from "react";
 import "./Form.css";
-import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const majorOptions = [
-    { value: "9", label: "Accounting" },
-    { value: "10", label: "Computer Science" },
-    { value: "11", label: "Finance" },
-    { value: "12", label: "Business Management" },
-    { value: "13", label: "Biology" },
-    { value: "14", label: "Economics" },
-    { value: "15", label: "Chinese" },
-    { value: "16", label: "English" },
-    { value: "17", label: "Law" },
-    { value: "18", label: "Physical Science" },
-];
-
 const Registeration = () => {
-    // const [major, setMajor] = useState("");
-
     let history = useHistory();
 
     const initialValues = {
@@ -37,61 +21,6 @@ const Registeration = () => {
         major: "",
         smoker: "",
         pets: "",
-    };
-
-    const FormSelect = ({ name, options }) => {
-        const [field, meta, helpers] = useField(name);
-        return (
-            <>
-                <Select
-                    name={name}
-                    value={field.value}
-                    onChange={(value) => helpers.setValue(value)}
-                    options={options}
-                    onBlur={() => helpers.setTouched(true)}
-                    placeholder="Select Major"
-                    theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        colors: {
-                            ...theme.colors,
-                            primary25: "#1eb4a53b",
-                            primary: "#1da699",
-                        },
-                    })}
-                    styles={{
-                        control: (provided, state) => ({
-                            ...provided,
-                            boxShadow: "none",
-                            width: 505,
-                            height: 65,
-                            border: "2px solid #0000000e",
-                            fontSize: "18px",
-                            textAlign: "left",
-                            paddingLeft: "12px",
-                            backgroundColor: "#ffffff",
-                            boxShadow: "5px 5px 24px 5px rgba(0, 0, 0, 0.04)",
-                            marginTop: "12px",
-                            cursor: "pointer",
-                            "&:hover": {
-                                borderColor: "#1da699",
-                            },
-                        }),
-                        menu: (provided, state) => ({
-                            ...provided,
-                            fontSize: "18px",
-                            border: "none",
-                            boxShadow: "none",
-                        }),
-                        option: (provided, state) => ({
-                            ...provided,
-                            padding: 20,
-                        }),
-                    }}
-                />
-                <ErrorMessage name={name} />
-            </>
-        );
     };
 
     //Yup npm package used to do form validation
@@ -188,9 +117,22 @@ const Registeration = () => {
                         />
                         <Field className="form-input" name="school" placeholder="Enter School" />
 
-                        {/* enter int 9-18 for now */}
-                        <Field className="form-input" name="major" placeholder="Enter Major" />
-                        {/* <FormSelect id="form-input" name="major" options={majorOptions} /> */}
+                        <Field component="select" className="form-input-select-reg" name="major">
+                            <option value="0" selected disabled>
+                                Select a Major
+                            </option>
+                            <option value="9">Accounting</option>
+                            <option value="10">Computer Science</option>
+                            <option value="11">Finance</option>
+                            <option value="12">Business Management</option>
+                            <option value="13">Biology</option>
+                            <option value="14">Economics</option>
+                            <option value="15">Chinese</option>
+                            <option value="16">English</option>
+                            <option value="17">Law</option>
+                            <option value="18">Physical Science</option>
+                        </Field>
+
                         <div className="reg-check" role="group" aria-labelledby="my-radio-group">
                             <label>
                                 <Field type="radio" name="gender" value="M" />
