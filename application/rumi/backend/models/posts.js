@@ -15,9 +15,11 @@ PostModel.search = (
 ) => {
   parameters = [];
 
-  let baseSQL = `SELECT * 
-    FROM post 
-    WHERE deleted = 0 `;
+  let baseSQL = `SELECT p.*, u.username
+    FROM post p 
+    JOIN user u
+    ON p.creator_id = u.id
+    WHERE p.deleted = 0 and u.deleted = 0 and u.activated = 1 `;
 
   if (searchTerm) {
     baseSQL += ` AND (caption like ? OR description like ?) `;
@@ -66,7 +68,7 @@ PostModel.search = (
     parameters.push(page);
     parameters.push(size);
   } else {
-    baseSQL += ` LIMIT 20 `;
+    baseSQL += ` LIMIT 100 `;
   }
 
   return db
@@ -78,8 +80,12 @@ PostModel.search = (
 };
 
 PostModel.queryById = (id) => {
-  let baseSQL = `SELECT * FROM post WHERE id = ?;`;
-  
+  let baseSQL = `SELECT p.*, u.username 
+    FROM post p  
+    JOIN user u 
+    ON p.creator_id = u.id 
+    WHERE p.id = ?; `;
+
   return db
     .execute(baseSQL, [id])
     .then(([results, fields]) => {

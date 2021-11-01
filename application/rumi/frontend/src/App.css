@@ -6,3 +6,17 @@ a {
 .app {
     text-align: center;
 }
+
+.Toastify__toast--success {
+    border: 1px solid #ffffff !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
+    font-family: "Josefin Sans", sans-serif !important;
+    font-size: 25px !important;
+    margin-top: 30px !important;
+}
+
+.Toastify__progress-bar--success {
+    background: #1da699 !important;
+}

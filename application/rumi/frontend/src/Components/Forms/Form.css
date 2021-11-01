@@ -11,12 +11,42 @@
     justify-content: center;
     overflow: hidden;
 }
+.reg-form {
+    max-width: 100vw;
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden;
+}
 .reg-card {
     width: 600px;
     background: #ffffff;
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     padding: 30px;
     margin: 30px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.reg-check {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: #696666;
+}
+.reg-check > label {
+    margin: 20px;
+}
+.reg-check-pref {
+    font-size: 25px;
+    color: #696666;
+    margin: 20px;
+}
+.reg-check-pref > label {
+    margin: 15px;
 }
 .login-card {
     width: 450px;
@@ -52,10 +82,34 @@
     transition: 0.14s ease;
     width: 75%;
 }
-.form-input:hover {
+
+.form-input-select-reg {
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    border: 2px solid #0000000e;
+    background: #ffffff;
+    margin: 15px 10px 15px 10px;
+    padding: 20px 26px;
+    font-size: 18px;
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    width: 84%;
+    color: #696666;
+}
+.form-input-select-reg > option {
+    line-height: 20px;
+    margin: 15px;
+    font-size: 20px;
+    padding: 15px;
+}
+option:disabled {
+    color: #868484;
+}
+.form-input:hover,
+.form-input-select-reg:hover {
     border: 2px solid #1da699;
 }
-.form-input:focus {
+.form-input:focus,
+.form-input-select-reg:hover {
     outline: none;
 }
 .form-input-btn {
@@ -83,6 +137,12 @@
     font-size: 25px;
 }
 
+.form-input-reg {
+    margin: 35px 0 5px 0;
+    font-size: 25px;
+    color: #696666;
+}
+
 .form-error {
     display: flex;
     justify-content: center;
@@ -92,4 +152,10 @@
 
 .login-link {
     color: #1da699;
+}
+
+#textarea {
+    resize: none;
+    width: 75% !important;
+    line-height: 25px;
 }

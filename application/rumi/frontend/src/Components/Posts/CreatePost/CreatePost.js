@@ -1,8 +1,22 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "./CreatePost.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class CreatePost extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            file: null,
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState({
+            file: URL.createObjectURL(event.target.files[0]),
+        });
+    }
     render() {
         var caption;
         var description;
@@ -14,13 +28,19 @@ class CreatePost extends Component {
                     <form>
                         <p className="form-heading">Post</p>
 
-                        <div class="upload-container">
-                            <div class="upload-image">
+                        <div className="upload-container">
+                            <div className="upload-image">
                                 <label for="upload">Upload your Image:</label>
-                                <input type="file" id="photo" accept="image/jpg,image/jpeg,image/png" />
+                                <input
+                                    type="file"
+                                    id="photo"
+                                    accept="image/jpg,image/jpeg,image/png"
+                                    onChange={this.handleChange}
+                                />
+                                <img src={this.state.file} id="imgPreview" />
                             </div>
 
-                            <div class="upload-info">
+                            <div className="upload-info">
                                 <input
                                     className="form-input"
                                     value={caption}
@@ -30,7 +50,8 @@ class CreatePost extends Component {
                                         caption = word.target.value;
                                     }}
                                 />
-                                <input
+                                <textarea
+                                    id="textarea-post"
                                     className="form-input"
                                     value={description}
                                     onChange={(des) => {
@@ -40,7 +61,7 @@ class CreatePost extends Component {
                                     placeholder="Enter Your Description"
                                 />
 
-                                <div class="upload-info-price">
+                                <div className="upload-info-price">
                                     <input
                                         className="form-input"
                                         type="number"
@@ -52,7 +73,7 @@ class CreatePost extends Component {
                                         placeholder="Enter Your Price($)"
                                     />
 
-                                    <select className="form-input" name="location" id="location">
+                                    <select className="form-input-select-create" name="location" id="location">
                                         <option value="0" selected disabled>
                                             Select a Location
                                         </option>
@@ -69,7 +90,7 @@ class CreatePost extends Component {
 
                                 <div className="upload-info-pref">
                                     <div>
-                                        <div className="upload-info-pref-heading">Parking Allowed?</div>
+                                        <div className="upload-info-pref-heading">Parking Available?</div>
                                         <div className="upload-info-pref-values">
                                             <input type="radio" id="p1" name="park" value="1" /> Yes
                                             <input type="radio" id="p2" name="park" value="0" /> No
@@ -85,7 +106,7 @@ class CreatePost extends Component {
                                     </div>
 
                                     <div>
-                                        <div className="upload-info-pref-heading">Smoking Allowed</div>
+                                        <div className="upload-info-pref-heading">Smoking Allowed?</div>
                                         <div className="upload-info-pref-values">
                                             <input type="radio" id="s1" name="smoke" value="1" /> Yes
                                             <input type="radio" id="s2" name="smoke" value="0" /> No
@@ -98,6 +119,7 @@ class CreatePost extends Component {
                                             <input type="radio" id="g1" name="gender" value="M" /> Male
                                             <input type="radio" id="g2" name="gender" value="F" /> Female
                                             <input type="radio" id="g2" name="gender" value="N" /> Non-Binary
+                                            <input type="radio" id="g2" name="gender" value=" " /> No preference
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +164,16 @@ class CreatePost extends Component {
                                     })
                                         .then((result) => {
                                             console.log(result);
-                                            alert("Successfully Posted");
+                                            toast.success("Posted Successfully!", {
+                                                position: "top-right",
+                                                autoClose: 4000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: true,
+                                                draggable: true,
+                                                closeButton: false,
+                                                progress: 0,
+                                            });
                                         })
                                         .catch((error) => {
                                             console.log(error.response);

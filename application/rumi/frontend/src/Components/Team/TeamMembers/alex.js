@@ -1,11 +1,13 @@
 import React from "react";
-import photo from "../../../Assets/Members/alex.jpg"
+import photo from "../../../Assets/Members/alex.jpg";
 
 const alex = () => {
     return (
         <div>
             <div id="heading">
-                <h1>Alex Shirazi</h1>
+                <h1>
+                    Alex <span className="user-info-highlight">Shirazi</span>
+                </h1>
             </div>
 
             <div class="center">

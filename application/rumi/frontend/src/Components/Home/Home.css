@@ -34,8 +34,9 @@
 }
 .sub-heading {
     font-size: 30px;
-    padding: 0 30px;
+    padding: 0 60px;
     color: #696666;
+    line-height: 40px;
 }
 
 .find {
