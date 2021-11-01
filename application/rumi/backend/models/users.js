@@ -24,9 +24,11 @@ UserModel.search = (
 ) => {
   parameters = [];
 
-  let baseSQL = `SELECT * 
+  let baseSQL = `SELECT id, username, last_name, first_name, 
+    email, phone, description, gender, birthday, school, major,
+    smoker, pets, language, interests, hobbies, admin
     FROM user 
-    WHERE 1=1 `; // TODO delete = 0
+    WHERE 1=1 and activated = 1 and deleted = 0 `;
 
   if (searchTerm) {
     baseSQL += ` AND description like ? `;
@@ -90,9 +92,10 @@ UserModel.create = (
     major,
     smoker,
     pets,
-    deleted) 
+    deleted,
+    activated) 
     VALUES 
-    (?,?,?,?,?,?,?,?,?,0);`;
+    (?,?,?,?,?,?,?,?,?,0,1);`;
 
   return db
     .execute(baseSQL, [

@@ -49,7 +49,7 @@ function RoomDetails() {
                                     <div className="room-info-main-cont">
                                         <div>Posted on: {value.created_date}</div>
                                         <div>
-                                            Posted by: <Link to={`/user/${value.id}`}>{value.id}</Link>
+                                            Posted by: <Link to={`/user/${value.creator_id}`}>{value.username}</Link>
                                         </div>
                                     </div>
                                 </div>
