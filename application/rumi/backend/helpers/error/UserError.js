@@ -8,7 +8,7 @@ class UserError extends Error {
     return this.message;
   }
 
-  getStatus() {
+  getStatus() {Ｆ
     return this.status;
   }
 }

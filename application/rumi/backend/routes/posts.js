@@ -4,6 +4,7 @@ var multer = require("multer");
 var crypto = require("crypto");
 var router = express.Router();
 var PostModel = require("../models/posts");
+var PostError = require("../helpers/error/PostError");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {

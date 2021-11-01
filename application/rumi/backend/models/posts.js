@@ -15,9 +15,11 @@ PostModel.search = (
 ) => {
   parameters = [];
 
-  let baseSQL = `SELECT * 
-    FROM post 
-    WHERE deleted = 0 `;
+  let baseSQL = `SELECT p.*, u.username
+    FROM post p 
+    JOIN user u
+    ON p.creator_id = u.id
+    WHERE p.deleted = 0 and u.deleted = 0 and u.activated = 1 `;
 
   if (searchTerm) {
     baseSQL += ` AND (caption like ? OR description like ?) `;
