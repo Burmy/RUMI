@@ -1,14 +1,27 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import React from "react";
 import "./Form.css";
-import Major from "../Posts/Listings/CategoryLists/Major";
-import { useState } from "react";
+import Select from "react-select";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const majorOptions = [
+    { value: "9", label: "Accounting" },
+    { value: "10", label: "Computer Science" },
+    { value: "11", label: "Finance" },
+    { value: "12", label: "Business Management" },
+    { value: "13", label: "Biology" },
+    { value: "14", label: "Economics" },
+    { value: "15", label: "Chinese" },
+    { value: "16", label: "English" },
+    { value: "17", label: "Law" },
+    { value: "18", label: "Physical Science" },
+];
 
 const Registeration = () => {
-    // const [major, setMajor] = useState("");
     const initialValues = {
         username: "",
         email: "",
@@ -20,6 +33,61 @@ const Registeration = () => {
         major: "",
         smoker: "",
         pets: "",
+    };
+
+    const FormSelect = ({ name, options }) => {
+        const [field, meta, helpers] = useField(name);
+        return (
+            <>
+                <Select
+                    name={name}
+                    value={field.value}
+                    onChange={(value) => helpers.setValue(value)}
+                    options={options}
+                    onBlur={() => helpers.setTouched(true)}
+                    placeholder="Select Major"
+                    theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        colors: {
+                            ...theme.colors,
+                            primary25: "#1eb4a53b",
+                            primary: "#1da699",
+                        },
+                    })}
+                    styles={{
+                        control: (provided, state) => ({
+                            ...provided,
+                            boxShadow: "none",
+                            width: 505,
+                            height: 65,
+                            border: "2px solid #0000000e",
+                            fontSize: "18px",
+                            textAlign: "left",
+                            paddingLeft: "12px",
+                            backgroundColor: "#ffffff",
+                            boxShadow: "5px 5px 24px 5px rgba(0, 0, 0, 0.04)",
+                            marginTop: "12px",
+                            cursor: "pointer",
+                            "&:hover": {
+                                borderColor: "#1da699",
+                            },
+                        }),
+                        menu: (provided, state) => ({
+                            ...provided,
+                            fontSize: "18px",
+                            border: "none",
+                            boxShadow: "none",
+                        }),
+                        option: (provided, state) => ({
+                            ...provided,
+                            padding: 20,
+                        }),
+                    }}
+                />
+                <ErrorMessage name={name} />
+            </>
+        );
     };
 
     //Yup npm package used to do form validation
@@ -45,7 +113,16 @@ const Registeration = () => {
             .then((response) => {
                 console.log("IT WORKED");
                 console.log(data);
-                alert("Successfully Registered");
+                toast.success("Registered Successfully!", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
             })
             .catch((error) => {
                 // Error
@@ -97,16 +174,18 @@ const Registeration = () => {
                     <div className="reg-card">
                         <p className="form-heading">Tell us about yourself!</p>
                         <Field
+                            id="textarea"
+                            component="textarea"
                             className="form-input"
-                            type="textarea"
+                            type="text"
                             name="description"
                             placeholder="What are you looking for on this website?"
                         />
-
                         <Field className="form-input" name="school" placeholder="Enter School" />
 
+                        {/* enter int 9-18 for now */}
                         <Field className="form-input" name="major" placeholder="Enter Major" />
-
+                        {/* <FormSelect id="form-input" name="major" options={majorOptions} /> */}
                         <div className="reg-check" role="group" aria-labelledby="my-radio-group">
                             <label>
                                 <Field type="radio" name="gender" value="M" />
@@ -121,7 +200,6 @@ const Registeration = () => {
                                 Non-Binary
                             </label>
                         </div>
-
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Do you Smoke?
                             <label>
@@ -133,7 +211,6 @@ const Registeration = () => {
                                 No
                             </label>
                         </div>
-
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Have any Pets?
                             <label>
@@ -145,9 +222,6 @@ const Registeration = () => {
                                 No
                             </label>
                         </div>
-
-                        {/* <Major major={setMajor} /> */}
-
                         <button className="form-input-btn" type="submit">
                             Submit
                         </button>

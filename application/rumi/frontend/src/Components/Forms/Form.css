@@ -27,6 +27,9 @@
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     padding: 30px;
     margin: 30px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 .reg-check {
     margin-top: 30px;
@@ -78,6 +81,7 @@
     transition: 0.14s ease;
     width: 75%;
 }
+
 .form-input:hover {
     border: 2px solid #1da699;
 }
@@ -124,4 +128,24 @@
 
 .login-link {
     color: #1da699;
+}
+
+#textarea {
+    resize: none;
+    width: 75% !important;
+    line-height: 25px;
+}
+
+.Toastify__toast--success {
+    border: 1px solid #ffffff !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
+    font-family: "Josefin Sans", sans-serif !important;
+    font-size: 25px !important;
+    margin-top: 30px !important;
+}
+
+.Toastify__progress-bar--success {
+    background: #1da699 !important;
 }

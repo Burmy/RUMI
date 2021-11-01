@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "./CreatePost.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class CreatePost extends Component {
     constructor(props) {
@@ -48,7 +50,8 @@ class CreatePost extends Component {
                                         caption = word.target.value;
                                     }}
                                 />
-                                <input
+                                <textarea
+                                    id="textarea-post"
                                     className="form-input"
                                     value={description}
                                     onChange={(des) => {
@@ -161,7 +164,16 @@ class CreatePost extends Component {
                                     })
                                         .then((result) => {
                                             console.log(result);
-                                            alert("Successfully Posted");
+                                            toast.success("Posted Successfully!", {
+                                                position: "top-right",
+                                                autoClose: 4000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: true,
+                                                draggable: true,
+                                                closeButton: false,
+                                                progress: 0,
+                                            });
                                         })
                                         .catch((error) => {
                                             console.log(error.response);

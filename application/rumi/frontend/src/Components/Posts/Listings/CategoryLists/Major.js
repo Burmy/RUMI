@@ -40,6 +40,7 @@ export default class Major extends Component {
                 <Select
                     options={this.state.selectOptions}
                     onChange={this.handleChange.bind(this)}
+                    placeholder="Select Major"
                     theme={(theme) => ({
                         ...theme,
                         borderRadius: 0,
@@ -55,8 +56,14 @@ export default class Major extends Component {
                             boxShadow: "none",
                             width: 270,
                             height: 67,
-                            border: "2px solid #f1f5f9",
-                            borderColor: "#1da699",
+                            border: "2px solid #0000000e",
+
+                            fontSize: "18px",
+                            textAlign: "left",
+                            paddingLeft: "12px",
+                            backgroundColor: "#ffffff",
+                            boxShadow: "5px 5px 24px 5px rgba(0, 0, 0, 0.04)",
+                            cursor: "pointer",
                             "&:hover": {
                                 borderColor: "#1da699",
                             },
