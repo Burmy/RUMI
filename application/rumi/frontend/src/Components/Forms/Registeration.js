@@ -6,6 +6,7 @@ import React from "react";
 import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
 
 const Registeration = () => {
     let history = useHistory();
@@ -84,8 +85,12 @@ const Registeration = () => {
         <div className="form-container">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form className="reg-form">
-                    <div className="reg-card">
+                    <input id="step2" type="checkbox" />
+                    <input id="step3" type="checkbox" />
+
+                    <div className="reg-card" id="part1">
                         <p className="form-heading">Join Us!</p>
+
                         <Field className="form-input" name="username" placeholder="Enter Your Username" />
                         <ErrorMessage className="form-error" name="username" component="span" />
 
@@ -97,6 +102,16 @@ const Registeration = () => {
 
                         <Field className="form-input" type="text" name="password2" placeholder="Confirm Password" />
                         <ErrorMessage className="form-error" name="password2" component="span" />
+
+                        <div className="step">
+                            <label for="step2">
+                                <div className="form-input-btn-step">
+                                    <div className="form-input-btn-step-text">Continue</div>
+                                    <AiOutlineCaretRight />
+                                </div>
+                            </label>
+                        </div>
+
                         <p className="form-input-reg">
                             Already have an account? Login{" "}
                             <Link className="login-link" to="/login">
@@ -105,7 +120,7 @@ const Registeration = () => {
                         </p>
                     </div>
 
-                    <div className="reg-card">
+                    <div className="reg-card" id="part2">
                         <p className="form-heading">Tell us about yourself!</p>
                         <Field
                             id="textarea"
@@ -169,9 +184,43 @@ const Registeration = () => {
                                 No
                             </label>
                         </div>
+
+                        <div className="step-container">
+                            <div className="step">
+                                <label for="step2">
+                                    <div className="form-input-btn-step">
+                                        <AiOutlineCaretLeft />
+                                        <div className="form-input-btn-step-text">Back</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="step">
+                                <label for="step3">
+                                    <div className="form-input-btn-step">
+                                        <div className="form-input-btn-step-text">Continue</div>
+                                        <AiOutlineCaretRight />
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
                         <button className="form-input-btn" type="submit">
                             Submit
                         </button>
+                    </div>
+
+                    <div className="reg-card" id="part3">
+                        <p className="form-heading">Join Us!</p>
+
+                        <label for="step3" id="back-step3" class="back">
+                            <div class="btn btn-default btn-primary btn-lg">Back</div>
+                        </label>
+                        {/* <label class="continue">
+                            <button type="submit" class="btn btn-default btn-success btn-lg">
+                                Submit
+                            </button>
+                        </label> */}
                     </div>
                 </Form>
             </Formik>

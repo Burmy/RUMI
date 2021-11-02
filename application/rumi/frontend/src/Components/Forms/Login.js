@@ -1,40 +1,21 @@
-import { useState, React } from "react";
+import { useState, React, useContext } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Form.css";
+import { AuthContext } from "../../Helpers/AuthContext";
+
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const { setAuthState } = useContext(AuthContext);
 
     let history = useHistory();
 
     const login = () => {
         const data = { username: username, password: password };
 
-        // fetch("http://18.190.48.206:3001/users/login", {
-        //     method: "POST",
-        //     headers: {
-        //         Accept: "application/json",
-        //         "Content-Type": "application/json",
-        //     },
-        //     credentials: "include",
-        //     body: JSON.stringify(data),
-        // })
-        //     .then((res) => {
-        //         console.log(res.headers.get("set-cookie")); // undefined
-        //         console.log(document.cookie); // nope
-        //         return res.json();
-        //     })
-        //     .then((json) => {
-        //         if (json.success) {
-        //             this.setState({ error: "" });
-        //             this.context.router.push(json.redirect);
-        //         } else {
-        //             this.setState({ error: json.error });
-        //         }
-        //     })
         Axios.defaults.withCredentials = true;
         Axios.post("http://18.190.48.206:3001/users/login", data)
             .then((response) => {
@@ -50,6 +31,7 @@ const Login = () => {
                     closeButton: false,
                     progress: 0,
                 });
+                setAuthState(true);
                 history.push("/");
             })
             .catch((error) => {
