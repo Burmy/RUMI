@@ -13,7 +13,7 @@ export default class Major extends Component {
     }
 
     async getOptions() {
-        const res = await Axios.get("http://18.190.48.206:3001/list?category=major");
+        const res = await Axios.get("http://localhost:3001/list?category=major");
         const data = res.data.results;
 
         const options = data.map((d) => ({

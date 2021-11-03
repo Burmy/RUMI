@@ -10,7 +10,7 @@ function RoomDetails() {
     let { id } = useParams();
     const [postObject, setPostObject] = useState([]);
     useEffect(() => {
-        Axios.get(`http://18.190.48.206:3001/posts?id=${id}`).then((response) => {
+        Axios.get(`http://localhost:3001/posts?id=${id}`).then((response) => {
             setPostObject(response.data.results);
         });
     });
@@ -28,7 +28,7 @@ function RoomDetails() {
                                     <div className="room-post-card">
                                         <img
                                             className="room-post-image"
-                                            src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                            src={`http://localhost:3001/files/download?name=${value.photo}`}
                                             alt="Missing"
                                         />
                                         <input

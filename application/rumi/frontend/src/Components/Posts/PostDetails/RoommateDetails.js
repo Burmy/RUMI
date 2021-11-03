@@ -6,7 +6,7 @@ function RoommateDetails() {
     let { id } = useParams();
     const [userObject, setUserObject] = useState([]);
     useEffect(() => {
-        Axios.get(`http://18.190.48.206:3001/users?id=${id}`).then((response) => {
+        Axios.get(`http://localhost:3001/users?id=${id}`).then((response) => {
             setUserObject(response.data.results);
             // console.log(response.data.results, "yoo");
         });

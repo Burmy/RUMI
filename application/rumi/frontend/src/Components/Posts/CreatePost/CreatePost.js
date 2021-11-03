@@ -159,7 +159,7 @@ class CreatePost extends Component {
                                         form.getAll("creator_id"),
                                         form.getAll("photo")
                                     );
-                                    Axios.post("http://18.190.48.206:3001/posts/", form, {
+                                    Axios.post("http://localhost:3001/posts/", form, {
                                         headers: { "content-type": "multipart/form-data" },
                                     })
                                         .then((result) => {

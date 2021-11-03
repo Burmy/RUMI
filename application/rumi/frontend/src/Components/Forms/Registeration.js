@@ -43,7 +43,7 @@ const Registeration = () => {
             .oneOf([Yup.ref("password"), null], "✖ Passwords must match"),
     });
     const onSubmit = (data) => {
-        Axios.post("http://18.190.48.206:3001/users/registration", data)
+        Axios.post("http://localhost:3001/users/registration", data)
             .then((response) => {
                 console.log("IT WORKED");
                 console.log(data);

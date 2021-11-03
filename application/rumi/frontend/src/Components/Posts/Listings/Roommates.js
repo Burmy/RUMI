@@ -35,7 +35,7 @@ function Roommates() {
     useEffect(() => {
         async function getPosts() {
             Axios.get(
-                `http://18.190.48.206:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
+                `http://localhost:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
             )
 
                 .then((response) => {

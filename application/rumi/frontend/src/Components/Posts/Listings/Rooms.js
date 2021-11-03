@@ -38,7 +38,7 @@ function Rooms() {
     useEffect(() => {
         async function getPosts() {
             Axios.get(
-                `http://18.190.48.206:3001/posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}&parking=${parking}&smoking=${smoking}&pet=${pet}&gender=${gender}`
+                `http://localhost:3001/posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}&parking=${parking}&smoking=${smoking}&pet=${pet}&gender=${gender}`
             )
                 .then((response) => {
                     console.log(response.data.results);
@@ -153,7 +153,7 @@ function Rooms() {
                                         >
                                             <img
                                                 className="post-image"
-                                                src={`http://18.190.48.206:3001/files/download?name=${value.photo}`}
+                                                src={`http://localhost:3001/files/download?name=${value.photo}`}
                                                 alt="Missing"
                                             />
                                             <div className="post-price-container">
