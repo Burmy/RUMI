@@ -19,11 +19,13 @@ import Anmol from "./Components/Team/TeamMembers/anmol";
 import Alan from "./Components/Team/TeamMembers/alan";
 import Rasul from "./Components/Team/TeamMembers/rasul";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
     return (
         <Router>
             <div className="app">
+                <ToastContainer />
                 <Navbar />
                 <Switch>
                     <Route path="/" exact component={Home} />

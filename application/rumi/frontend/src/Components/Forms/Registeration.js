@@ -1,14 +1,15 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import React from "react";
 import "./Form.css";
-import Major from "../Posts/Listings/CategoryLists/Major";
-import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Registeration = () => {
-    // const [major, setMajor] = useState("");
+    let history = useHistory();
+
     const initialValues = {
         username: "",
         email: "",
@@ -45,7 +46,17 @@ const Registeration = () => {
             .then((response) => {
                 console.log("IT WORKED");
                 console.log(data);
-                alert("Successfully Registered");
+                toast.success("Registered Successfully!", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
+                history.push("/login");
             })
             .catch((error) => {
                 // Error
@@ -97,15 +108,30 @@ const Registeration = () => {
                     <div className="reg-card">
                         <p className="form-heading">Tell us about yourself!</p>
                         <Field
+                            id="textarea"
+                            component="textarea"
                             className="form-input"
-                            type="textarea"
+                            type="text"
                             name="description"
                             placeholder="What are you looking for on this website?"
                         />
-
                         <Field className="form-input" name="school" placeholder="Enter School" />
 
-                        <Field className="form-input" name="major" placeholder="Enter Major" />
+                        <Field component="select" className="form-input-select-reg" name="major">
+                            <option value="0" selected disabled>
+                                Select a Major
+                            </option>
+                            <option value="9">Accounting</option>
+                            <option value="10">Computer Science</option>
+                            <option value="11">Finance</option>
+                            <option value="12">Business Management</option>
+                            <option value="13">Biology</option>
+                            <option value="14">Economics</option>
+                            <option value="15">Chinese</option>
+                            <option value="16">English</option>
+                            <option value="17">Law</option>
+                            <option value="18">Physical Science</option>
+                        </Field>
 
                         <div className="reg-check" role="group" aria-labelledby="my-radio-group">
                             <label>
@@ -121,7 +147,6 @@ const Registeration = () => {
                                 Non-Binary
                             </label>
                         </div>
-
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Do you Smoke?
                             <label>
@@ -133,7 +158,6 @@ const Registeration = () => {
                                 No
                             </label>
                         </div>
-
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Have any Pets?
                             <label>
@@ -145,9 +169,6 @@ const Registeration = () => {
                                 No
                             </label>
                         </div>
-
-                        {/* <Major major={setMajor} /> */}
-
                         <button className="form-input-btn" type="submit">
                             Submit
                         </button>

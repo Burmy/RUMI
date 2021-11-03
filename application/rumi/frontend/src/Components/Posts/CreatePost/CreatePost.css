@@ -13,7 +13,22 @@
     margin: 30px 0 30px 0;
     align-items: center;
 }
+.form-input-select-create {
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    border: 2px solid #0000000e;
+    background: #ffffff;
+    margin: 15px 10px 15px 10px;
+    padding: 20px 26px;
+    font-size: 18px;
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    width: 85%;
+    color: #696666;
+}
 
+.form-input-select-create:hover {
+    border: 2px solid #1da699;
+}
 /* #imgPreview{
     width: 100%;
     max-width: 500px;
@@ -80,6 +95,12 @@
     margin: 30px;
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
 }
+#textarea-post {
+    resize: none;
+    width: 75% !important;
+    line-height: 25px;
+}
+
 @media only screen and (max-width: 1480px) {
     #imgPreview {
         width: 550px;

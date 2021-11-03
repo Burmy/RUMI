@@ -1,22 +1,16 @@
 class PostError extends Error {
-    constructor(message, redirectURL, status) {
-      super(message);
-      this.redirectURL = redirectURL;
-      this.status = status;
-    }
-  
-    getMessage() {
-      return this.message;
-    }
-  
-    getRedirectURL() {
-      return this.redirectURL;
-    }
-  
-    getStatus() {
-      return this.status;
-    }
+  constructor(message, status) {
+    super(message);
+    this.status = status;
   }
-  
-  module.exports = PostError;
-  
+
+  getMessage() {
+    return this.message;
+  }
+
+  getStatus() {
+    return this.status;
+  }
+}
+
+module.exports = PostError;

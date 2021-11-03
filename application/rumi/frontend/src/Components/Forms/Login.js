@@ -1,11 +1,14 @@
 import { useState, React } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Form.css";
-
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    let history = useHistory();
 
     const login = () => {
         const data = { username: username, password: password };
@@ -32,11 +35,22 @@ const Login = () => {
         //             this.setState({ error: json.error });
         //         }
         //     })
+        Axios.defaults.withCredentials = true;
         Axios.post("http://18.190.48.206:3001/users/login", data)
             .then((response) => {
                 console.log(response.data);
                 console.log(response.headers);
-                alert("Successfully Logged In");
+                toast.success("Logged In!", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
+                history.push("/");
             })
             .catch((error) => {
                 // Error
@@ -84,7 +98,6 @@ const Login = () => {
                             setPassword(e.target.value);
                         }}
                     />
-
                     <button className="form-input-btn" onClick={login} type="button">
                         Log in
                     </button>
