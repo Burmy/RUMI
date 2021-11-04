@@ -2,6 +2,8 @@ import { useState, React } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import Axios from "axios";
 import "./Form.css";
+import UserProfile from "../../helpers/UserProfile";
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -9,7 +11,7 @@ const Login = () => {
 
 
     let history = useHistory();
-
+    
     
     const login = () => {
         const data = { username: username, password: password };
@@ -37,10 +39,16 @@ const Login = () => {
         //         }
         //     })
         Axios.defaults.withCredentials = true;
-        Axios.post("http://18.190.48.206:3001/users/login", data)
+        Axios.post("http://localhost:3001/users/login", data)
             .then((response) => {
                 console.log(response.data);
                 console.log(response.headers);
+                UserProfile.setName(Cookies.get('username'));
+
+                localStorage.setItem("user", Cookies.get('username'));
+                console.log(localStorage);
+                console.log("username set from cookie");
+                console.log(UserProfile.getName())
                 history.push('/');
             })
             .catch((error) => {

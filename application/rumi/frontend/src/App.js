@@ -1,5 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import axios from "axios";
+import Cookies from 'js-cookie';
 import Navbar from "./Components/Navbar/Navbar";
 import Team from "./Components/Team/Team";
 import Home from "./Components/Home/Home";
@@ -19,8 +21,12 @@ import Anmol from "./Components/Team/TeamMembers/anmol";
 import Alan from "./Components/Team/TeamMembers/alan";
 import Rasul from "./Components/Team/TeamMembers/rasul";
 import "./App.css";
+import UserProfile from "./helpers/UserProfile";
 
-function App() {
+class App extends Component{
+    //const[notlogged,logged] = React.useState('');
+
+     render(){
     return (
         <Router>
             <div className="app">
@@ -31,6 +37,7 @@ function App() {
                     <Route path="/roommates" exact component={Roommates} />
                     <Route path="/team" exact component={Team} />
                     <Route path="/createpost" exact component={CreatePost} />
+                    
                     <Route path="/login" exact component={Login} />
                     <Route path="/register" exact component={Register} />
                     <Route path="/post/:id" exact component={RoomDetails} />
@@ -46,7 +53,8 @@ function App() {
                 </Switch>
             </div>
         </Router>
-    );
+    )
+    }
 }
 
 export default App;
