@@ -13,9 +13,16 @@ class CreatePost extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event) {
-        this.setState({
-            file: URL.createObjectURL(event.target.files[0]),
-        });
+        if(event.target.files.length !== 0){
+            this.setState({
+                file: URL.createObjectURL(event.target.files[0]),
+            });
+        }
+        else {
+            this.setState({
+                file: URL.revokeObjectURL(event.target.files[0]),
+            });
+        }
     }
     render() {
         var caption;
