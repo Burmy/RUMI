@@ -115,12 +115,14 @@ PostModel.create = (
   pet,
   smoking,
   gender,
-  creator_id
+  creator_id,
+  latitude,
+  longitude,
 ) => {
   let baseSQL = `INSERT INTO post 
-  (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted) 
+  (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted, latitude, longitude) 
   VALUES 
-  (?,?,?,?,?,?,?,?,?,?,?,0);`;
+  (?,?,?,?,?,?,?,?,?,?,?,0,?,?);`;
 
   return db
     .execute(baseSQL, [
@@ -135,6 +137,8 @@ PostModel.create = (
       smoking,
       gender,
       creator_id,
+      latitude,
+      longitude,
     ])
     .then(([results, fields]) => {
       return Promise.resolve(results);

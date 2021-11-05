@@ -99,6 +99,8 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   let smoking = req.body.smoking;
   let gender = req.body.gender;
   let creator_id = req.body.creator_id;
+  let latitude = req.body.latitude;
+  let longitude = req.body.longitude;
 
   if (!req.file) {
     return res.status(400).send({ message: "Photo should not be null" });
@@ -114,6 +116,12 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   }
   if (!description || !description.length) {
     return res.status(400).send({ message: "Description should not be null" });
+  }
+  if (!latitude || !latitude.length) {
+    return res.status(400).send({ message: "Latitude should not be null" });
+  }
+  if (!longitude || !longitude.length) {
+    return res.status(400).send({ message: "Longitude should not be null" });
   }
   if (!location || !location.length) {
     return res.status(400).send({ message: "Location should not be null" });
@@ -156,7 +164,9 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
         pet,
         smoking,
         gender,
-        creator_id
+        creator_id,
+        latitude,
+        longitude,
       );
     })
     .then((results) => {
