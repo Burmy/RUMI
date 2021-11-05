@@ -207,7 +207,6 @@ UserModel.update = (id) => {
     baseSQL += `pets = ?`;
     parameters.push(pets);
   }
-
   baseSQL += `WHERE id = ?`;
 
   return db

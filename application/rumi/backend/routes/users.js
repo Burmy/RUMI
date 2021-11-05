@@ -207,10 +207,6 @@ router.patch("/user/:id", function (req, res, next) {
     pets
   )
 
-  let modified = original;
-  if (changes !== original) {
-    
-  }
 });
 
 router.post("/logout", (req, res, next) => {
