@@ -10,6 +10,8 @@ PostModel.search = (
   pet,
   smoking,
   gender,
+  latitude,
+  longitude,
   page,
   size
 ) => {
@@ -63,6 +65,14 @@ PostModel.search = (
     baseSQL += ` AND gender = ? `;
     parameters.push(gender);
   }
+  if (latitude) {
+    baseSQL += ` AND latitude = ? `;
+    parameters.push(latitude);
+  }
+  if (longitude) {
+    baseSQL += ` AND longitude = ? `;
+    parameters.push(longitude);
+  }
   if (page && size && size < 200) {
     baseSQL += ` LIMIT ?, ? `;
     parameters.push(page);
@@ -105,12 +115,14 @@ PostModel.create = (
   pet,
   smoking,
   gender,
-  creator_id
+  creator_id,
+  latitude,
+  longitude,
 ) => {
   let baseSQL = `INSERT INTO post 
-  (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted) 
+  (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted, latitude, longitude) 
   VALUES 
-  (?,?,?,?,?,?,?,?,?,?,?,0);`;
+  (?,?,?,?,?,?,?,?,?,?,?,0,?,?);`;
 
   return db
     .execute(baseSQL, [
@@ -125,6 +137,8 @@ PostModel.create = (
       smoking,
       gender,
       creator_id,
+      latitude,
+      longitude,
     ])
     .then(([results, fields]) => {
       return Promise.resolve(results);

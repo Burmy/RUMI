@@ -2,9 +2,9 @@ var db = require("../conf/database");
 const CommentModel = {};
 
 CommentModel.search = (
-    id,
-    creator_id,
-    post_id,
+  id,
+  creator_id,
+  post_id,
 ) => {
   parameters = [];
 
@@ -13,7 +13,7 @@ CommentModel.search = (
     JOIN user u 
     ON c.creator_id = u.id
     WHERE c.deleted = 0 and u.deleted = 0 and u.activated = 1 `;
-  
+
   if (id) {
     baseSQL += ` AND c.id = ? `;
     parameters.push(id);
@@ -29,6 +29,28 @@ CommentModel.search = (
 
   return db
     .execute(baseSQL, parameters)
+    .then(([results, fields]) => {
+      return Promise.resolve(results);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
+CommentModel.create = (
+  text,
+  post_id,
+  creator_id
+) => {
+  let baseSQL = `INSERT INTO comment 
+  (text, post_id, creator_id, deleted) 
+  VALUES 
+  (?,?,?,0);`;
+
+  return db
+    .execute(baseSQL, [
+      text,
+      post_id,
+      creator_id
+    ])
     .then(([results, fields]) => {
       return Promise.resolve(results);
     })
