@@ -207,6 +207,10 @@ router.patch("/user/:id", function (req, res, next) {
     pets
   )
 
+  if (changes === changes) {
+    return res.status(400).send({ message: " Nothing"})
+  }
+
 });
 
 router.post("/logout", (req, res, next) => {
