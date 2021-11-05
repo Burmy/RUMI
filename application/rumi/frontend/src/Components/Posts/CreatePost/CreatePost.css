@@ -46,6 +46,15 @@
     margin: 30px;
 }
 
+#photo {
+    display: flex;
+    margin: 30px;
+    margin-left: auto;
+    margin-right: 2cm;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 17px;
+}
+
 .upload-info {
     display: flex;
     flex-direction: column;

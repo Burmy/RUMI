@@ -105,7 +105,7 @@ ENGINE = InnoDB;
 -- Table `rumi-db2`.`comment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rumi-db2`.`comment` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT(2048) NOT NULL,
   `post_id` INT NOT NULL,
   `creator_id` INT NOT NULL,
