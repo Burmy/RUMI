@@ -26,7 +26,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="resp-nav-links">
-                        {authTokens && (
+                        {!authTokens && (
                             <>
                                 <Link className="nav-links" to="/createpost">
                                     Create
