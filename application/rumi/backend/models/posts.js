@@ -10,6 +10,8 @@ PostModel.search = (
   pet,
   smoking,
   gender,
+  latitude,
+  longitude,
   page,
   size
 ) => {
@@ -62,6 +64,14 @@ PostModel.search = (
   if (gender) {
     baseSQL += ` AND gender = ? `;
     parameters.push(gender);
+  }
+  if (latitude) {
+    baseSQL += ` AND latitude = ? `;
+    parameters.push(latitude);
+  }
+  if (longitude) {
+    baseSQL += ` AND longitude = ? `;
+    parameters.push(longitude);
   }
   if (page && size && size < 200) {
     baseSQL += ` LIMIT ?, ? `;

@@ -49,6 +49,8 @@ router.get("/", function (req, res, next) {
   let pet = req.query.pet;
   let smoking = req.query.smoking;
   let gender = req.query.gender;
+  let latitude = req.query.latitude;
+  let longitude = req.query.longitude;
   let page = req.query.page;
   let size = req.query.size;
 
@@ -65,6 +67,8 @@ router.get("/", function (req, res, next) {
     pet,
     smoking,
     gender,
+    latitude,
+    longitude,
     page,
     size
   )
