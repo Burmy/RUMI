@@ -5,6 +5,7 @@ import "./PostDetails.css";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
+import { AiOutlineCaretRight } from "react-icons/ai";
 
 function RoomDetails() {
     let history = useHistory();
@@ -95,23 +96,26 @@ function RoomDetails() {
                                     </div>
                                     <div className="room-comments-container">
                                         <div className="messages">
-                                            {comments.map(
-                                                (comment, key) => (
-                                                    // eslint-disable-next-line no-sequences
-                                                    (comment.created_date = new Date(comment.created_date).toDateString()),
-                                                    (
-                                                        <div id="message-" key={key}>
-                                                            <div className="author-text">{comment.username}</div>
-                                                            <div className="date-posted">{comment.created_date}</div>
-                                                            <div className="comment-text">{comment.text}</div>
-                                                        </div>
+                                            {comments
+                                                .slice(0)
+                                                .reverse()
+                                                .map(
+                                                    (comment, key) => (
+                                                        // eslint-disable-next-line no-sequences
+                                                        (comment.created_date = new Date(comment.created_date).toDateString()),
+                                                        (
+                                                            <div id="message-" key={key}>
+                                                                <div className="author-text">@{comment.username}</div>
+                                                                <div className="date-posted">{comment.created_date}</div>
+                                                                <div className="comment-text">- {comment.text}</div>
+                                                            </div>
+                                                        )
                                                     )
-                                                )
-                                            )}
+                                                )}
                                         </div>
-                                        <div className="enter-comments">
+                                        <div className="enter-comments-container">
                                             <input
-                                                id="comment-text"
+                                                className="comment-input"
                                                 type="text"
                                                 placeholder="Comment..."
                                                 autoComplete="off"
@@ -120,8 +124,8 @@ function RoomDetails() {
                                                     setNewComment(event.target.value);
                                                 }}
                                             />
-                                            <button onClick={addComment} id="comment-button">
-                                                Add Comment
+                                            <button onClick={addComment} className="comment-button">
+                                                <AiOutlineCaretRight />
                                             </button>
                                         </div>
                                     </div>

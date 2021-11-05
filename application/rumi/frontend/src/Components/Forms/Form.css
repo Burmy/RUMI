@@ -106,7 +106,7 @@ option:disabled {
     border: 2px solid #1da699;
 }
 .form-input:focus,
-.form-input-select-reg:hover {
+.form-input-select-reg:focus {
     outline: none;
 }
 .form-input-btn {
