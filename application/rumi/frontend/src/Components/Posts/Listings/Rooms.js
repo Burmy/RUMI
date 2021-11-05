@@ -149,6 +149,7 @@ function Rooms() {
                                             className="post-card"
                                             onClick={() => {
                                                 history.push(`/post/${value.id}`);
+                                                // history.push(`${value.creator_id}`);
                                             }}
                                         >
                                             <img

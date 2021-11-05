@@ -10,6 +10,7 @@
     vertical-align: middle;
     position: relative;
     height: auto;
+    border: 2px solid white;
 }
 
 .room-post-container {
@@ -151,4 +152,79 @@
     font-size: 25px;
     color: #696666;
     padding-bottom: 50px;
+}
+
+/* Comments */
+.room-comments-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: center;
+    background: #ffffff;
+    padding: 0 15px 0 15px;
+    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
+}
+
+.enter-comments {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+#comment-button {
+    border: 0px solid #00000000;
+    background: #ffffff;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 20px;
+    margin: 15px 0 15px 0;
+    width: 70px;
+}
+
+#messages {
+    margin-top: 10px;
+    height: 80vh;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-flow: column-reverse nowrap;
+    scroll-behavior: smooth;
+}
+
+div[id^="message-"] {
+    padding: 15px;
+    border: 1px solid rgba(17, 17, 17, 0.466);
+    border-radius: 8px;
+    margin: 5px 0 5px 0;
+    text-align: left;
+    display: grid;
+    grid-template-rows: 0.3fr 1fr;
+    gap: 20px;
+    grid-template-areas:
+        "author created"
+        "comment comment";
+}
+
+.author-text {
+    color: #8d61f5;
+    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+}
+
+.date-posted {
+    display: flex;
+    font-size: 16px;
+    text-align: right;
+}
+
+.comment-text {
+    margin: 0;
+    padding: 0;
+    grid-area: comment;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

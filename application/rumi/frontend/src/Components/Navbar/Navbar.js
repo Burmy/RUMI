@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { useAuth } from "../../Helpers/AuthContext";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
     const { authTokens, setAuthTokens } = useAuth();
@@ -31,7 +32,11 @@ const Navbar = () => {
                                 <Link className="nav-links" to="/createpost">
                                     Create
                                 </Link>
-                                <Link className="nav-links" to="/">
+                                <Link
+                                    className="nav-links"
+                                    //  onClick={Cookies.remove("logged")}
+                                    to="/"
+                                >
                                     Logout
                                 </Link>
                             </>

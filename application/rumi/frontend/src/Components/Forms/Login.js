@@ -34,7 +34,7 @@ const Login = () => {
                 });
                 setAuthState(true);
                 // setAuthState(Cookies.get("logged"));
-                localStorage.setItem("user", Cookies.get("username"));
+                localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
                 history.push("/");
             })
             .catch((error) => {
