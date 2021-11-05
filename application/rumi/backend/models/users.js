@@ -160,4 +160,62 @@ UserModel.authenticate = (username, password) => {
     .catch((err) => Promise.reject(err));
 };
 
+UserModel.update = (id) => {
+  let baseSQL = `UPDATE user SET(`
+  
+  if (username) {
+    baseSQL += `username = ?`;
+    parameters.push(username);
+  }
+
+  if (password) {
+    baseSQL += `password = ?`;
+    parameters.push(password);
+  }
+
+  if (email) {
+    baseSQL += `email = ?`;
+    parameters.push(email);
+  }
+
+  if (description) {
+    baseSQL += `description = ?`;
+    parameters.push(description);
+  }
+
+  if (gender) {
+    baseSQL += `gender = ?`;
+    parameters.push(gender);
+  }
+
+  if (school) {
+    baseSQL += `school = ?`;
+    parameters.push(school);
+  }
+
+  if (major) {
+    baseSQL += `major = ?`;
+    parameters.push(major);
+  }
+
+  if (smoker) {
+    baseSQL += `smoker = ?`;
+    parameters.push(smoker);
+  }
+
+  if (pets) {
+    baseSQL += `pets = ?`;
+    parameters.push(pets);
+  }
+
+  baseSQL += `WHERE id = ?`;
+
+  return db
+    .execute(baseSQL, [id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results && results.affectedRows);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
 module.exports = UserModel;

@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
     let fileExt = file.mimetype.split("/")[1];
     let randomName = crypto.randomBytes(22).toString("hex");
     cb(null, `${randomName}.${fileExt}`);
-  },
+  }, 
 });
 
 var uploader = multer({ storage: storage });

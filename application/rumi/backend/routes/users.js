@@ -183,6 +183,36 @@ router.post("/login", function (req, res, next) {
     });
 });
 
+router.patch("/user/:id", function (req, res, next) {
+  let username = req.body.username;
+  let email = req.body.email;
+  let password = req.body.password;
+  let description = req.body.description;
+  let gender = req.body.gender;
+  let school = req.body.school;
+  let major = req.body.major;
+  let smoker = req.body.smoker;
+  let pets = req.body.pets;
+  const changes = req.body;
+
+  const original = retrieveOriginal(
+    username,
+    email,
+    password,
+    description,
+    gender,
+    school,
+    major,
+    smoker,
+    pets
+  )
+
+  let modified = original;
+  if (changes !== original) {
+    
+  }
+});
+
 router.post("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
