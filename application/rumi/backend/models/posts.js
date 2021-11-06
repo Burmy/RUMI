@@ -24,7 +24,7 @@ PostModel.search = (
     WHERE p.deleted = 0 and u.deleted = 0 and u.activated = 1 `;
 
   if (searchTerm) {
-    baseSQL += ` AND (caption like ? OR description like ?) `;
+    baseSQL += ` AND (p.caption like ? OR p.description like ?) `;
     let sqlReadySearchTerm = "%" + searchTerm + "%";
     parameters.push(sqlReadySearchTerm);
     parameters.push(sqlReadySearchTerm);
@@ -35,42 +35,42 @@ PostModel.search = (
       if (i != 0) {
         baseSQL += ` OR `;
       }
-      baseSQL += `location = ? `;
+      baseSQL += `p.location = ? `;
       parameters.push(location[i]);
     }
 
     baseSQL += ` ) `;
   }
   if (pricefrom) {
-    baseSQL += ` AND price >= ? `;
+    baseSQL += ` AND p.price >= ? `;
     parameters.push(pricefrom);
   }
   if (priceto) {
-    baseSQL += ` AND price <= ? `;
+    baseSQL += ` AND p.price <= ? `;
     parameters.push(priceto);
   }
   if (parking) {
-    baseSQL += ` AND parking = ? `;
+    baseSQL += ` AND p.parking = ? `;
     parameters.push(parking);
   }
   if (pet) {
-    baseSQL += ` AND pet = ? `;
+    baseSQL += ` AND p.pet = ? `;
     parameters.push(pet);
   }
   if (smoking) {
-    baseSQL += ` AND smoking = ? `;
+    baseSQL += ` AND p.smoking = ? `;
     parameters.push(smoking);
   }
   if (gender) {
-    baseSQL += ` AND gender = ? `;
+    baseSQL += ` AND p.gender = ? `;
     parameters.push(gender);
   }
   if (latitude) {
-    baseSQL += ` AND latitude = ? `;
+    baseSQL += ` AND p.latitude = ? `;
     parameters.push(latitude);
   }
   if (longitude) {
-    baseSQL += ` AND longitude = ? `;
+    baseSQL += ` AND p.longitude = ? `;
     parameters.push(longitude);
   }
   if (page && size && size < 200) {
