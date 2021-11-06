@@ -97,7 +97,7 @@ function RoomDetails() {
                                     </div>
                                     <div className="room-comments-container">
                                         <div className="messages">
-                                            {comments
+                                            { comments ? (comments
                                                 .slice(0)
                                                 .reverse()
                                                 .map(
@@ -112,7 +112,7 @@ function RoomDetails() {
                                                             </div>
                                                         )
                                                     )
-                                                )}
+                                                )) : (null)}
                                         </div>
                                         <div className="enter-comments-container">
                                             <input
