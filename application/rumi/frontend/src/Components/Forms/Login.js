@@ -1,16 +1,15 @@
-import { useState, React, useContext } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
-import Axios from "axios";
+import { useState, React } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Form.css";
-import { AuthContext } from "../../Helpers/AuthContext";
+import UserProfile from "../../Helpers/UserProfile";
 import Cookies from "js-cookie";
+import Axios from "axios";
+import "./Form.css";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const { setAuthState } = useContext(AuthContext);
 
     let history = useHistory();
 
@@ -32,10 +31,13 @@ const Login = () => {
                     closeButton: false,
                     progress: 0,
                 });
-                setAuthState(true);
-                // setAuthState(Cookies.get("logged"));
-                localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
+                UserProfile.setName(Cookies.get("username"));
+                localStorage.setItem("user", Cookies.get("username"));
+                console.log(localStorage);
+                console.log("username set from cookie");
+                console.log(UserProfile.getName());
                 history.push("/");
+                window.location.reload();
             })
             .catch((error) => {
                 // Error

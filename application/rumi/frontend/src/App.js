@@ -1,4 +1,4 @@
-import { useState, React } from "react";
+import { React } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Team from "./Components/Team/Team";
@@ -19,41 +19,35 @@ import Anmol from "./Components/Team/TeamMembers/anmol";
 import Alan from "./Components/Team/TeamMembers/alan";
 import Rasul from "./Components/Team/TeamMembers/rasul";
 import { ToastContainer } from "react-toastify";
-import { AuthContext } from "./Helpers/AuthContext";
-import ProtectedRoute from "./Helpers/ProtectedRoute";
 import "./App.css";
 
 function App() {
-    const [authState, setAuthState] = useState(false);
-
     return (
-        <AuthContext.Provider value={{ authState, setAuthState }}>
-            <Router>
-                <div className="app">
-                    <ToastContainer />
-                    <Navbar />
-                    <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/rooms" exact component={Rooms} />
-                        <Route path="/roommates" exact component={Roommates} />
-                        <Route path="/team" exact component={Team} />
-                        <ProtectedRoute path="/createpost" exact component={CreatePost} />
-                        <Route path="/login" exact component={Login} />
-                        <Route path="/register" exact component={Register} />
-                        <Route path="/post/:id" exact component={RoomDetails} />
-                        <Route path="/user/:id" exact component={RoommateDetails} />
-                        <Route path="/team/alex" exact component={Alex} />
-                        <Route path="/team/nakulan" exact component={Nakulan} />
-                        <Route path="/team/jasmine" exact component={Jasmine} />
-                        <Route path="/team/josh" exact component={Joshua} />
-                        <Route path="/team/anmol" exact component={Anmol} />
-                        <Route path="/team/alan" exact component={Alan} />
-                        <Route path="/team/rasul" exact component={Rasul} />
-                        <Route path="*" component={Error} />
-                    </Switch>
-                </div>
-            </Router>
-        </AuthContext.Provider>
+        <Router>
+            <div className="app">
+                <ToastContainer />
+                <Navbar />
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/rooms" exact component={Rooms} />
+                    <Route path="/roommates" exact component={Roommates} />
+                    <Route path="/team" exact component={Team} />
+                    <Route path="/createpost" exact component={CreatePost} />
+                    <Route path="/login" exact component={Login} />
+                    <Route path="/register" exact component={Register} />
+                    <Route path="/post/:id" exact component={RoomDetails} />
+                    <Route path="/user/:id" exact component={RoommateDetails} />
+                    <Route path="/team/alex" exact component={Alex} />
+                    <Route path="/team/nakulan" exact component={Nakulan} />
+                    <Route path="/team/jasmine" exact component={Jasmine} />
+                    <Route path="/team/josh" exact component={Joshua} />
+                    <Route path="/team/anmol" exact component={Anmol} />
+                    <Route path="/team/alan" exact component={Alan} />
+                    <Route path="/team/rasul" exact component={Rasul} />
+                    <Route path="*" component={Error} />
+                </Switch>
+            </div>
+        </Router>
     );
 }
 
