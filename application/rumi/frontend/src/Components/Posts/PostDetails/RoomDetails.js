@@ -124,7 +124,7 @@ function RoomDetails() {
                                             <input
                                                 className="comment-input"
                                                 type="text"
-                                                placeholder="Comment..."
+                                                placeholder="Comment Here..."
                                                 autoComplete="off"
                                                 value={newComment}
                                                 onChange={(event) => {

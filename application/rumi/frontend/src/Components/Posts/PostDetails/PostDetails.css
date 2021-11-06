@@ -154,6 +154,7 @@
 
 .enter-comments-container {
     display: flex;
+    margin-top: 2px;
 }
 .comment-input {
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);

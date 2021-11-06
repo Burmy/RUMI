@@ -1,6 +1,6 @@
 import { useState, React, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import Axios from "axios";
@@ -40,8 +40,18 @@ const Login = () => {
                 if (error.response) {
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
+                    toast.error("Invalid Username and Password!", {
+                        position: "top-right",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        closeButton: false,
+                        progress: 0,
+                    });
                     console.log(data);
-                    console.log(error.response.data);
+                    console.log(error.response.data, "yo");
                     console.log(error.response.status);
                     console.log(error.response.headers);
                 } else if (error.request) {

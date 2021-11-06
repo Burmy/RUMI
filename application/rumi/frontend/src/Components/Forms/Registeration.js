@@ -36,7 +36,7 @@ const Registeration = () => {
         password: Yup.string()
             .required("✖ You must enter a Password")
             .matches(
-                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[(/*-+!@#$^&*)])/g,
+                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[(-/*+!@#$^&*)])/g,
                 "✖ Must contain at least 1 upper case letter and 1 number and 1 of the following special characters ( / * - + ! @ # $ ^ & * )."
             ),
         password2: Yup.string()
@@ -134,9 +134,7 @@ const Registeration = () => {
                         <Field className="form-input" name="school" placeholder="Enter School" />
 
                         <Field component="select" className="form-input-select-reg" name="major">
-                            <option value="0" selected disabled>
-                                Select a Major
-                            </option>
+                            <option value="0">Select a Major</option>
                             <option value="9">Accounting</option>
                             <option value="10">Computer Science</option>
                             <option value="11">Finance</option>
