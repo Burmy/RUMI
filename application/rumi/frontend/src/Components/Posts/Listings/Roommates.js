@@ -10,6 +10,8 @@ import RoommatePref from "./CategoryLists/RoommatePref";
 import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
+import configData from "../../../Configs/config.json";
+
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -35,7 +37,7 @@ function Roommates() {
     useEffect(() => {
         async function getPosts() {
             Axios.get(
-                `http://localhost:3001/users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
+                configData.SERVER_URL + `users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
             )
 
                 .then((response) => {

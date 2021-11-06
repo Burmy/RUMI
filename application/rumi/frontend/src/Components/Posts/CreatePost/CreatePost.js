@@ -3,6 +3,7 @@ import Axios from "axios";
 import "./CreatePost.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import configData from "../../../Configs/config.json";
 
 class CreatePost extends Component {
     constructor(props) {
@@ -166,7 +167,7 @@ class CreatePost extends Component {
                                         form.getAll("creator_id"),
                                         form.getAll("photo")
                                     );
-                                    Axios.post("http://localhost:3001/posts/", form, {
+                                    Axios.post(configData.SERVER_URL + "posts/", form, {
                                         headers: { "content-type": "multipart/form-data" },
                                     })
                                         .then((result) => {

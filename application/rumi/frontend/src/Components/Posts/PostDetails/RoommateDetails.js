@@ -1,12 +1,13 @@
 import { React, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import configData from "../../../Configs/config.json";
 
 function RoommateDetails() {
     let { id } = useParams();
     const [userObject, setUserObject] = useState([]);
     useEffect(() => {
-        Axios.get(`http://localhost:3001/users?id=${id}`).then((response) => {
+        Axios.get(configData.SERVER_URL + `users?id=${id}`).then((response) => {
             setUserObject(response.data.results);
             // console.log(response.data.results, "yoo");
         });

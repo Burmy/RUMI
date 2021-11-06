@@ -7,6 +7,7 @@ import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
+import configData from "../../Configs/config.json";
 
 const Registeration = () => {
     let history = useHistory();
@@ -43,7 +44,7 @@ const Registeration = () => {
             .oneOf([Yup.ref("password"), null], "✖ Passwords must match"),
     });
     const onSubmit = (data) => {
-        Axios.post("http://localhost:3001/users/registration", data)
+        Axios.post(configData.SERVER_URL + "users/registration", data)
             .then((response) => {
                 console.log("IT WORKED");
                 console.log(data);

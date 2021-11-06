@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import Axios from "axios";
+import configData from "../../../../Configs/config.json";
 
 export default class Location extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class Location extends Component {
     }
 
     async getOptions() {
-        const res = await Axios.get("http://localhost:3001/list?category=location");
+        const res = await Axios.get(configData.SERVER_URL + "list?category=location");
         const data = res.data.results;
 
         const options = data.map((d) => ({

@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Form.css";
 import { AuthContext } from "../../Helpers/AuthContext";
 import Cookies from "js-cookie";
+import configData from "../../Configs/config.json";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ const Login = () => {
         const data = { username: username, password: password };
 
         Axios.defaults.withCredentials = true;
-        Axios.post("http://localhost:3001/users/login", data)
+        Axios.post(configData.SERVER_URL + "users/login", data)
             .then((response) => {
                 console.log(response.data);
                 console.log(response.headers);
