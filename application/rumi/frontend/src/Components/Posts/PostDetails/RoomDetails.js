@@ -140,6 +140,8 @@ function RoomDetails() {
                                 <div className="room-info-container">
                                     <div className="room-info-container-caption">{value.caption}</div>
                                     <div className="room-info-container-desc">{value.description}</div>
+                                    <div className="room-info-container-desc">lat = {value.latitude}</div>
+                                    <div className="room-info-container-desc">long = {value.longitude}</div>
                                     <div className="room-info-container-price">
                                         Starting from <span className="user-info-highlight">${value.price}</span>
                                     </div>

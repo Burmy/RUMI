@@ -29,6 +29,8 @@ class CreatePost extends Component {
         var caption;
         var description;
         var price;
+        var latitude;
+        var longitude;
         return (
             <div className="form-container">
                 <div className="upload-card">
@@ -130,6 +132,24 @@ class CreatePost extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                <input
+                                    className="form-input"
+                                    value={latitude}
+                                    name="lat"
+                                    placeholder="TEMP LAT"
+                                    onChange={(lat) => {
+                                        latitude = lat.target.value;
+                                    }}
+                                />
+                                <input
+                                    className="form-input"
+                                    value={longitude}
+                                    name="long"
+                                    placeholder="TEMP LONG"
+                                    onChange={(long) => {
+                                        longitude = long.target.value;
+                                    }}
+                                />
                             </div>
                         </div>
                     </form>
@@ -153,6 +173,8 @@ class CreatePost extends Component {
                                     form.append("gender", document.querySelector('input[name="gender"]:checked').value);
                                     form.append("creator_id", Cookies.get("loggedUserid"));
                                     form.append("photo", photo.files[0]);
+                                    form.append("latitude", latitude);
+                                    form.append("longitude", longitude);
 
                                     console.log(
                                         form.getAll("caption"),
@@ -164,7 +186,10 @@ class CreatePost extends Component {
                                         form.getAll("smoking"),
                                         form.getAll("gender"),
                                         form.getAll("creator_id"),
-                                        form.getAll("photo")
+                                        form.getAll("photo"),
+
+                                        form.getAll("latitude"),
+                                        form.getAll("longitude")
                                     );
                                     Axios.post(configData.SERVER_URL + "posts/", form, {
                                         headers: { "content-type": "multipart/form-data" },
