@@ -39,7 +39,8 @@ function Rooms() {
     useEffect(() => {
         async function getPosts() {
             Axios.get(
-                configData.SERVER_URL + `posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}&parking=${parking}&smoking=${smoking}&pet=${pet}&gender=${gender}`
+                configData.SERVER_URL +
+                    `posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}&parking=${parking}&smoking=${smoking}&pet=${pet}&gender=${gender}`
             )
                 .then((response) => {
                     console.log(response.data.results);
@@ -150,7 +151,6 @@ function Rooms() {
                                             className="post-card"
                                             onClick={() => {
                                                 history.push(`/post/${value.id}`);
-                                                // history.push(`${value.creator_id}`);
                                             }}
                                         >
                                             <img

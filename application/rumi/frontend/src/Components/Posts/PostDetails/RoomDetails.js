@@ -49,6 +49,7 @@ function RoomDetails() {
             creator_id: Cookies.get("loggedUserid"),
         })
             .then((response) => {
+                window.location.reload(); //comments dont update untill page is reloaded
                 console.log(id, "post");
                 console.log(Cookies.get("loggedUserid"), "creator");
                 const commentToAdd = { text: newComment };
@@ -98,21 +99,26 @@ function RoomDetails() {
                                     <div className="room-comments-container">
                                         <div className="messages">
                                             {comments
-                                                .slice(0)
-                                                .reverse()
-                                                .map(
-                                                    (comment, key) => (
-                                                        // eslint-disable-next-line no-sequences
-                                                        (comment.created_date = new Date(comment.created_date).toDateString()),
-                                                        (
-                                                            <div id="message-" key={key}>
-                                                                <div className="author-text">@{comment.username}</div>
-                                                                <div className="date-posted">{comment.created_date}</div>
-                                                                <div className="comment-text">- {comment.text}</div>
-                                                            </div>
-                                                        )
-                                                    )
-                                                )}
+                                                ? comments
+                                                      .slice(0)
+                                                      .reverse()
+                                                      .map(
+                                                          (comment, key) => (
+                                                              // eslint-disable-next-line no-sequences
+                                                              (comment.created_date = new Date(
+                                                                  comment.created_date
+                                                                  // eslint-disable-next-line no-sequences
+                                                              ).toDateString()),
+                                                              (
+                                                                  <div id="message-" key={key}>
+                                                                      <div className="author-text">@{comment.username}</div>
+                                                                      <div className="date-posted">{comment.created_date}</div>
+                                                                      <div className="comment-text">- {comment.text}</div>
+                                                                  </div>
+                                                              )
+                                                          )
+                                                      )
+                                                : null}
                                         </div>
                                         <div className="enter-comments-container">
                                             <input

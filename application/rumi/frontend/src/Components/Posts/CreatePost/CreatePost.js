@@ -4,6 +4,7 @@ import "./CreatePost.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
 
 class CreatePost extends Component {
     constructor(props) {
@@ -14,12 +15,11 @@ class CreatePost extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event) {
-        if(event.target.files.length !== 0){
+        if (event.target.files.length !== 0) {
             this.setState({
                 file: URL.createObjectURL(event.target.files[0]),
             });
-        }
-        else {
+        } else {
             this.setState({
                 file: URL.revokeObjectURL(event.target.files[0]),
             });
@@ -29,7 +29,6 @@ class CreatePost extends Component {
         var caption;
         var description;
         var price;
-        var creator_id;
         return (
             <div className="form-container">
                 <div className="upload-card">
@@ -152,7 +151,7 @@ class CreatePost extends Component {
                                     form.append("pet", document.querySelector('input[name="pet"]:checked').value);
                                     form.append("smoking", document.querySelector('input[name="smoke"]:checked').value);
                                     form.append("gender", document.querySelector('input[name="gender"]:checked').value);
-                                    form.append("creator_id", 1);
+                                    form.append("creator_id", Cookies.get("loggedUserid"));
                                     form.append("photo", photo.files[0]);
 
                                     console.log(
@@ -182,6 +181,7 @@ class CreatePost extends Component {
                                                 closeButton: false,
                                                 progress: 0,
                                             });
+                                            this.props.history.push("/post/" + result.data.id);
                                         })
                                         .catch((error) => {
                                             console.log(error.response);
