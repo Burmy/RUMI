@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import { AiOutlineCaretRight } from "react-icons/ai";
+import configData from "../../../Configs/config.json";
 
 function RoomDetails() {
     let history = useHistory();
@@ -15,7 +16,7 @@ function RoomDetails() {
     const [newComment, setNewComment] = useState("");
 
     useEffect(() => {
-        Axios.get(`http://localhost:3001/posts?id=${id}`)
+        Axios.get(configData.SERVER_URL + `posts?id=${id}`)
             .then((response) => {
                 console.log(id, "post");
                 console.log(Cookies.get("loggedUserid"), "creator");
@@ -35,14 +36,14 @@ function RoomDetails() {
                 }
                 console.log(error.config);
             });
-        Axios.get(`http://localhost:3001/comments?post_id=${id}`).then((response) => {
+        Axios.get(configData.SERVER_URL + `comments?post_id=${id}`).then((response) => {
             console.log(response.data.results);
             setComments(response.data.results);
         });
     }, [id]);
 
     const addComment = () => {
-        Axios.post("http://localhost:3001/comments", {
+        Axios.post(configData.SERVER_URL + "comments", {
             text: newComment,
             post_id: id,
             creator_id: Cookies.get("loggedUserid"),
@@ -84,7 +85,7 @@ function RoomDetails() {
                                     <div className="room-post-card">
                                         <img
                                             className="room-post-image"
-                                            src={`http://localhost:3001/files/download?name=${value.photo}`}
+                                            src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                             alt="Missing"
                                         />
                                         <input
