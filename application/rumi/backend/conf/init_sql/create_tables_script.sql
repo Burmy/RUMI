@@ -84,8 +84,8 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`post` (
   `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `deleted` INT NOT NULL,
   `deleted_date` DATETIME NULL,
-  `lat` INT NOT NULL
-  `long` INT NOT NULL
+  `latitude` INT NOT NULL
+  `longitude` INT NOT NULL
   PRIMARY KEY (`id`),
   INDEX `userid_idx` (`creator_id` ASC) VISIBLE,
   INDEX `locationid_idx` (`location` ASC) VISIBLE,
