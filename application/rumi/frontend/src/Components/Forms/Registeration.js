@@ -148,38 +148,42 @@ const Registeration = () => {
                         </Field>
 
                         <div className="reg-check" role="group" aria-labelledby="my-radio-group">
-                            <label>
-                                <Field type="radio" name="gender" value="M" />
+                            <Field type="radio" name="gender" value="M" id="gen1" />
+                            <label htmlFor="gen1" required>
                                 Male
                             </label>
-                            <label>
-                                <Field type="radio" name="gender" value="F" />
+
+                            <Field type="radio" name="gender" value="F" id="gen2" />
+                            <label htmlFor="gen2" required>
                                 Female
                             </label>
-                            <label>
-                                <Field type="radio" name="gender" value="N" />
+
+                            <Field type="radio" name="gender" value="N" id="gen3" />
+                            <label htmlFor="gen3" required>
                                 Non-Binary
                             </label>
                         </div>
+
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Do you Smoke?
-                            <label>
-                                <Field type="radio" name="smoker" value="1" />
+                            <Field type="radio" name="smoker" value="1" id="smok1" />
+                            <label htmlFor="smok1" required>
                                 Yes
                             </label>
-                            <label>
-                                <Field type="radio" name="smoker" value="0" />
+                            <Field type="radio" name="smoker" value="0" id="smok2" />
+                            <label htmlFor="smok2" required>
                                 No
                             </label>
                         </div>
+
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Have any Pets?
-                            <label>
-                                <Field type="radio" name="pets" value="1" />
+                            <Field type="radio" name="pets" value="1" id="pet1" />
+                            <label htmlFor="pet1" required>
                                 Yes
                             </label>
-                            <label>
-                                <Field type="radio" name="pets" value="0" />
+                            <Field type="radio" name="pets" value="0" id="pet2" />
+                            <label htmlFor="pet2" required>
                                 No
                             </label>
                         </div>

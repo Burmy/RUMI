@@ -35,7 +35,8 @@
     color: #696666;
 }
 .reg-check > label {
-    margin: 20px;
+    margin: 10px 0 0px 40px;
+    color: #999595 !important;
 }
 .reg-check-pref {
     font-size: 25px;
@@ -43,7 +44,8 @@
     margin: 20px;
 }
 .reg-check-pref > label {
-    margin: 15px;
+    margin: 15px 0px 0px 30px;
+    color: #999595 !important;
 }
 .login-card {
     width: 450px;
