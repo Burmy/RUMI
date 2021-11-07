@@ -144,7 +144,7 @@ function Rooms() {
                             .slice(0)
                             .reverse()
                             .map((value, key) => {
-                                value.created_date = new Date(value.created_date).toTimeString();
+                                value.created_date = new Date(value.created_date).toDateString();
                                 return (
                                     <div key={value.id}>
                                         <div
