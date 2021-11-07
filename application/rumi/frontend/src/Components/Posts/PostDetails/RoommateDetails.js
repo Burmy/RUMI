@@ -11,7 +11,7 @@ function RoommateDetails() {
             setUserObject(response.data.results);
             // console.log(response.data.results, "yoo");
         });
-    });
+    }, [id]);
     return (
         <div>
             {id}
