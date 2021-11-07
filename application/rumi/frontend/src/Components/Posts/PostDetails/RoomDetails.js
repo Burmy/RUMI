@@ -36,10 +36,24 @@ function RoomDetails() {
                 }
                 console.log(error.config);
             });
-        Axios.get(configData.SERVER_URL + `comments?post_id=${id}`).then((response) => {
-            console.log(response.data.results);
-            setComments(response.data.results);
-        });
+        Axios.get(configData.SERVER_URL + `comments?post_id=${id}`)
+            .then((response) => {
+                console.log(response.data.results);
+                setComments(response.data.results);
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
     }, [id]);
 
     const addComment = () => {
