@@ -106,7 +106,7 @@ function RoomDetails() {
                                         <input
                                             className="room-back-button"
                                             type="submit"
-                                            onClick={() => history.push("/rooms")}
+                                            onClick={() => history.goBack()}
                                             value="Go Back"
                                         />
                                     </div>
@@ -134,21 +134,24 @@ function RoomDetails() {
                                                       )
                                                 : null}
                                         </div>
-                                        <div className="enter-comments-container">
-                                            <input
-                                                className="comment-input"
-                                                type="text"
-                                                placeholder="Comment Here..."
-                                                autoComplete="off"
-                                                value={newComment}
-                                                onChange={(event) => {
-                                                    setNewComment(event.target.value);
-                                                }}
-                                            />
-                                            <button onClick={addComment} className="comment-button">
-                                                <AiOutlineCaretRight />
-                                            </button>
-                                        </div>
+                                        {Cookies.get("username") && (
+                                            <div className="enter-comments-container">
+                                                <input
+                                                    className="comment-input"
+                                                    type="text"
+                                                    placeholder="Comment Here..."
+                                                    autoComplete="off"
+                                                    value={newComment}
+                                                    onChange={(event) => {
+                                                        setNewComment(event.target.value);
+                                                    }}
+                                                />
+
+                                                <button onClick={addComment} className="comment-button">
+                                                    <AiOutlineCaretRight />
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="room-info-container">

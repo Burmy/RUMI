@@ -1,7 +1,6 @@
 .room-container {
     display: flex;
     justify-content: center;
-    overflow: hidden;
     padding-top: 50px;
 }
 .room-post-image {
@@ -236,4 +235,41 @@ div[id^="message-"] {
     grid-area: comment;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.user-info-container-posts {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    flex-wrap: wrap;
+}
+.user-info-posts-heading {
+    font-size: 35px;
+}
+.user-info-posts-container {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px 0 15px;
+    flex-wrap: wrap;
+}
+.post-delete-button {
+    padding: 10px;
+    margin: 15px 25px 15px 25px;
+    border: 2px solid #c7230696;
+    background: #c7230696;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    z-index: 5;
+}
+.post-delete-button:hover {
+    border: 2px solid #e03416ec;
+    background: #e03416ec;
 }
