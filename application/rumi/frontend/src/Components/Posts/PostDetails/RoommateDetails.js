@@ -13,6 +13,7 @@ function RoommateDetails() {
     let history = useHistory();
     const [userObject, setUserObject] = useState([]);
     const [userPosts, setUserPosts] = useState([]);
+    const [postCount, setPostCount] = useState([]);
 
     useEffect(() => {
         Axios.get(configData.SERVER_URL + `users?id=${id}`)
@@ -36,6 +37,7 @@ function RoommateDetails() {
             .then((response) => {
                 console.log(response.data.results);
                 setUserPosts(response.data.results);
+                setPostCount(response.data.message);
             })
             .catch((error) => {
                 // Error
@@ -135,13 +137,14 @@ function RoommateDetails() {
                                 </div>
                                 <div className="user-info-posts-container">
                                     <div className="user-info-posts-heading">{value.username}'s Posts</div>
+                                    <div>{postCount}</div>
                                     <div className="user-info-container-posts">
                                         {userPosts &&
                                             userPosts
                                                 .slice(0)
                                                 .reverse()
                                                 .map((value, key) => {
-                                                    value.created_date = new Date(value.created_date).toTimeString();
+                                                    value.created_date = new Date(value.created_date).toDateString();
                                                     return (
                                                         <div key={value.id}>
                                                             <div

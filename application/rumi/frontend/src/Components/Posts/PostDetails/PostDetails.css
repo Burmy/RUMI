@@ -258,9 +258,11 @@ div[id^="message-"] {
     text-align: center;
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 20px;
 }
 .user-info-posts-heading {
     font-size: 35px;
+    padding-bottom: 30px;
 }
 .user-info-posts-container {
     width: 70%;
