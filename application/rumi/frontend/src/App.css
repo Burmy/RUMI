@@ -35,3 +35,7 @@ a {
 .Toastify__progress-bar--error {
     background: red !important;
 }
+
+.favicon {
+    width: 4px !important;
+}
