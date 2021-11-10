@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import Axios from "axios";
+import configData from "../../../../Configs/config.json";
 
 export default class Major extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class Major extends Component {
     }
 
     async getOptions() {
-        const res = await Axios.get("http://18.190.48.206:3001/list?category=major");
+        const res = await Axios.get(configData.SERVER_URL + "list?category=major");
         const data = res.data.results;
 
         const options = data.map((d) => ({

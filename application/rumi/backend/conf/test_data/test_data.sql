@@ -84,6 +84,8 @@ INSERT INTO `rumi-db2`.`post`
 `pet`,
 `smoking`,
 `gender`,
+`latitude`,
+`longitude`,
 `creator_id`,
 `deleted`)
 VALUES
@@ -98,6 +100,7 @@ VALUES
 1,
 1,
 'N',
+1,1,
 2,
 0);
 
@@ -113,6 +116,8 @@ INSERT INTO `rumi-db2`.`post`
 `pet`,
 `smoking`,
 `gender`,
+`latitude`,
+`longitude`,
 `creator_id`,
 `deleted`)
 VALUES
@@ -126,7 +131,7 @@ VALUES
 1,
 0,
 1,
-'F',
+'F',1,1,
 1,
 0);
 
@@ -142,6 +147,8 @@ INSERT INTO `rumi-db2`.`post`
 `pet`,
 `smoking`,
 `gender`,
+`latitude`,
+`longitude`,
 `creator_id`,
 `deleted`)
 VALUES
@@ -155,6 +162,6 @@ VALUES
 1,
 1,
 0,
-'M',
+'M',1,1,
 2,
 0);

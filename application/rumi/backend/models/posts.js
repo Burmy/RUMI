@@ -10,6 +10,9 @@ PostModel.search = (
   pet,
   smoking,
   gender,
+  latitude,
+  longitude,
+  creator_id,
   page,
   size
 ) => {
@@ -22,7 +25,7 @@ PostModel.search = (
     WHERE p.deleted = 0 and u.deleted = 0 and u.activated = 1 `;
 
   if (searchTerm) {
-    baseSQL += ` AND (caption like ? OR description like ?) `;
+    baseSQL += ` AND (p.caption like ? OR p.description like ?) `;
     let sqlReadySearchTerm = "%" + searchTerm + "%";
     parameters.push(sqlReadySearchTerm);
     parameters.push(sqlReadySearchTerm);
@@ -33,35 +36,47 @@ PostModel.search = (
       if (i != 0) {
         baseSQL += ` OR `;
       }
-      baseSQL += `location = ? `;
+      baseSQL += `p.location = ? `;
       parameters.push(location[i]);
     }
 
     baseSQL += ` ) `;
   }
   if (pricefrom) {
-    baseSQL += ` AND price >= ? `;
+    baseSQL += ` AND p.price >= ? `;
     parameters.push(pricefrom);
   }
   if (priceto) {
-    baseSQL += ` AND price <= ? `;
+    baseSQL += ` AND p.price <= ? `;
     parameters.push(priceto);
   }
   if (parking) {
-    baseSQL += ` AND parking = ? `;
+    baseSQL += ` AND p.parking = ? `;
     parameters.push(parking);
   }
   if (pet) {
-    baseSQL += ` AND pet = ? `;
+    baseSQL += ` AND p.pet = ? `;
     parameters.push(pet);
   }
   if (smoking) {
-    baseSQL += ` AND smoking = ? `;
+    baseSQL += ` AND p.smoking = ? `;
     parameters.push(smoking);
   }
   if (gender) {
-    baseSQL += ` AND gender = ? `;
+    baseSQL += ` AND p.gender = ? `;
     parameters.push(gender);
+  }
+  if (latitude) {
+    baseSQL += ` AND p.latitude = ? `;
+    parameters.push(latitude);
+  }
+  if (longitude) {
+    baseSQL += ` AND p.longitude = ? `;
+    parameters.push(longitude);
+  }
+  if (creator_id) {
+    baseSQL += ` AND p.creator_id = ? `;
+    parameters.push(creator_id);
   }
   if (page && size && size < 200) {
     baseSQL += ` LIMIT ?, ? `;
@@ -105,12 +120,14 @@ PostModel.create = (
   pet,
   smoking,
   gender,
-  creator_id
+  creator_id,
+  latitude,
+  longitude,
 ) => {
   let baseSQL = `INSERT INTO post 
-  (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted) 
+  (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted, latitude, longitude) 
   VALUES 
-  (?,?,?,?,?,?,?,?,?,?,?,0);`;
+  (?,?,?,?,?,?,?,?,?,?,?,0,?,?);`;
 
   return db
     .execute(baseSQL, [
@@ -125,6 +142,8 @@ PostModel.create = (
       smoking,
       gender,
       creator_id,
+      latitude,
+      longitude,
     ])
     .then(([results, fields]) => {
       return Promise.resolve(results);

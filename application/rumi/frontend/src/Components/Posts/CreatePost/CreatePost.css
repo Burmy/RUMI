@@ -46,6 +46,15 @@
     margin: 30px;
 }
 
+#photo {
+    display: flex;
+    margin: 30px;
+    margin-left: auto;
+    margin-right: 2cm;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 17px;
+}
+
 .upload-info {
     display: flex;
     flex-direction: column;
@@ -71,7 +80,7 @@
 
 .upload-info-pref-heading {
     font-size: 22px;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
     color: #696666;
 }
 
@@ -79,15 +88,12 @@
     font-size: 22px;
 }
 
-.upload-info-pref-values > input {
-    margin-left: 15px;
-    margin-right: -3px;
+.upload-info-pref-values > label {
+    padding-top: 2px !important;
+    margin-left: 10px !important;
+    color: #999595 !important;
 }
 #imgPreview {
-    /* width: 100%;
-    max-width: 500px;
-    height: auto;
-    margin: 15px; */
     width: 650px;
     vertical-align: middle;
     position: relative;
@@ -99,6 +105,56 @@
     resize: none;
     width: 75% !important;
     line-height: 25px;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+    position: relative;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+    padding: 0 30px 10px 30px;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: #1da699;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
 
 @media only screen and (max-width: 1480px) {

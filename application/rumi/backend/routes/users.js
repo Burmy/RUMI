@@ -174,13 +174,39 @@ router.post("/login", function (req, res, next) {
         res.cookie('logged', true);
         res.send({ message: `${username} is logged in` });
       } else {
-        throw new UserError("invalid username/password", "/users/login", 400);
+        throw new UserError("invalid username/password", 400);
       }
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       next(err);
     });
+});
+
+router.patch("/user/:id", function (req, res, next) {
+  let username = req.body.username;
+  let email = req.body.email;
+  let password = req.body.password;
+  let description = req.body.description;
+  let gender = req.body.gender;
+  let school = req.body.school;
+  let major = req.body.major;
+  let smoker = req.body.smoker;
+  let pets = req.body.pets;
+  const changes = req.body;
+
+  const original = retrieveOriginal(
+    username,
+    email,
+    password,
+    description,
+    gender,
+    school,
+    major,
+    smoker,
+    pets
+  )
+
 });
 
 router.post("/logout", (req, res, next) => {

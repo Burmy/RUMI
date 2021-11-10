@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, React } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Team from "./Components/Team/Team";
@@ -19,10 +19,13 @@ import Joshua from "./Components/Team/TeamMembers/josh";
 import Anmol from "./Components/Team/TeamMembers/anmol";
 import Alan from "./Components/Team/TeamMembers/alan";
 import Rasul from "./Components/Team/TeamMembers/rasul";
-import "./App.css";
 import { ToastContainer } from "react-toastify";
+import { AuthContext } from "./Helpers/AuthContext";
+import ProtectedRoute from "./Helpers/ProtectedRoute";
+import "./App.css";
 
 function App() {
+    const [authState, setAuthState] = useState(false);
     return (
         <Router>
             <div className="app">

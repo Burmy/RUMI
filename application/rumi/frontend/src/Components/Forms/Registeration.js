@@ -6,6 +6,8 @@ import React from "react";
 import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
+import configData from "../../Configs/config.json";
 
 const Registeration = () => {
     let history = useHistory();
@@ -34,7 +36,7 @@ const Registeration = () => {
         password: Yup.string()
             .required("✖ You must enter a Password")
             .matches(
-                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[(/*-+!@#$^&*)])/g,
+                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[(-/*+!@#$^&*)])/g,
                 "✖ Must contain at least 1 upper case letter and 1 number and 1 of the following special characters ( / * - + ! @ # $ ^ & * )."
             ),
         password2: Yup.string()
@@ -42,7 +44,7 @@ const Registeration = () => {
             .oneOf([Yup.ref("password"), null], "✖ Passwords must match"),
     });
     const onSubmit = (data) => {
-        Axios.post("http://18.190.48.206:3001/users/registration", data)
+        Axios.post(configData.SERVER_URL + "users/registration", data)
             .then((response) => {
                 console.log("IT WORKED");
                 console.log(data);
@@ -84,8 +86,12 @@ const Registeration = () => {
         <div className="form-container">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form className="reg-form">
-                    <div className="reg-card">
+                    <input id="step2" type="checkbox" />
+                    <input id="step3" type="checkbox" />
+
+                    <div className="reg-card" id="part1">
                         <p className="form-heading">Join Us!</p>
+
                         <Field className="form-input" name="username" placeholder="Enter Your Username" />
                         <ErrorMessage className="form-error" name="username" component="span" />
 
@@ -97,6 +103,16 @@ const Registeration = () => {
 
                         <Field className="form-input" type="text" name="password2" placeholder="Confirm Password" />
                         <ErrorMessage className="form-error" name="password2" component="span" />
+
+                        <div className="step">
+                            <label for="step2">
+                                <div className="form-input-btn-step">
+                                    <div className="form-input-btn-step-text">Continue</div>
+                                    <AiOutlineCaretRight />
+                                </div>
+                            </label>
+                        </div>
+
                         <p className="form-input-reg">
                             Already have an account? Login{" "}
                             <Link className="login-link" to="/login">
@@ -105,7 +121,7 @@ const Registeration = () => {
                         </p>
                     </div>
 
-                    <div className="reg-card">
+                    <div className="reg-card" id="part2">
                         <p className="form-heading">Tell us about yourself!</p>
                         <Field
                             id="textarea"
@@ -118,9 +134,7 @@ const Registeration = () => {
                         <Field className="form-input" name="school" placeholder="Enter School" />
 
                         <Field component="select" className="form-input-select-reg" name="major">
-                            <option value="0" selected disabled>
-                                Select a Major
-                            </option>
+                            <option value="0">Select a Major</option>
                             <option value="9">Accounting</option>
                             <option value="10">Computer Science</option>
                             <option value="11">Finance</option>
@@ -134,44 +148,82 @@ const Registeration = () => {
                         </Field>
 
                         <div className="reg-check" role="group" aria-labelledby="my-radio-group">
-                            <label>
-                                <Field type="radio" name="gender" value="M" />
+                            <Field type="radio" name="gender" value="M" id="gen1" />
+                            <label htmlFor="gen1" required>
                                 Male
                             </label>
-                            <label>
-                                <Field type="radio" name="gender" value="F" />
+
+                            <Field type="radio" name="gender" value="F" id="gen2" />
+                            <label htmlFor="gen2" required>
                                 Female
                             </label>
-                            <label>
-                                <Field type="radio" name="gender" value="N" />
+
+                            <Field type="radio" name="gender" value="N" id="gen3" />
+                            <label htmlFor="gen3" required>
                                 Non-Binary
                             </label>
                         </div>
+
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Do you Smoke?
-                            <label>
-                                <Field type="radio" name="smoker" value="1" />
+                            <Field type="radio" name="smoker" value="1" id="smok1" />
+                            <label htmlFor="smok1" required>
                                 Yes
                             </label>
-                            <label>
-                                <Field type="radio" name="smoker" value="0" />
+                            <Field type="radio" name="smoker" value="0" id="smok2" />
+                            <label htmlFor="smok2" required>
                                 No
                             </label>
                         </div>
+
                         <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                             Have any Pets?
-                            <label>
-                                <Field type="radio" name="pets" value="1" />
+                            <Field type="radio" name="pets" value="1" id="pet1" />
+                            <label htmlFor="pet1" required>
                                 Yes
                             </label>
-                            <label>
-                                <Field type="radio" name="pets" value="0" />
+                            <Field type="radio" name="pets" value="0" id="pet2" />
+                            <label htmlFor="pet2" required>
                                 No
                             </label>
                         </div>
+
+                        <div className="step-container">
+                            <div className="step">
+                                <label for="step2">
+                                    <div className="form-input-btn-step">
+                                        <AiOutlineCaretLeft />
+                                        <div className="form-input-btn-step-text">Back</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="step">
+                                <label for="step3">
+                                    <div className="form-input-btn-step">
+                                        <div className="form-input-btn-step-text">Continue</div>
+                                        <AiOutlineCaretRight />
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
                         <button className="form-input-btn" type="submit">
                             Submit
                         </button>
+                    </div>
+
+                    <div className="reg-card" id="part3">
+                        <p className="form-heading">Join Us!</p>
+
+                        <label for="step3" id="back-step3" class="back">
+                            <div class="btn btn-default btn-primary btn-lg">Back</div>
+                        </label>
+                        {/* <label class="continue">
+                            <button type="submit" class="btn btn-default btn-success btn-lg">
+                                Submit
+                            </button>
+                        </label> */}
                     </div>
                 </Form>
             </Formik>

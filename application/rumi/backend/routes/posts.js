@@ -23,24 +23,24 @@ router.get("/", function (req, res, next) {
   let id = req.query.id;
   if (id) {
     PostModel.queryById(id)
-    .then((results) => {
-      if (results && results.length) {
-        res.send({
-          resultsStatus: "info",
-          message: `${results.length} result found`,
-          results: results,
-        });
-      } else {
-        res.send({
-          resultsStatus: "info",
-          message: `Cannot find any post by id ${id}`,
-        });
-      }
-    })
-    .catch((err) => next(err));
+      .then((results) => {
+        if (results && results.length) {
+          res.send({
+            resultsStatus: "info",
+            message: `${results.length} result found`,
+            results: results,
+          });
+        } else {
+          res.send({
+            resultsStatus: "info",
+            message: `Cannot find any post by id ${id}`,
+          });
+        }
+      })
+      .catch((err) => next(err));
     return;
   }
-  console.log(id);
+
   let searchTerm = req.query.search;
   let location = req.query.location;
   let pricefrom = req.query.pricefrom;
@@ -49,6 +49,9 @@ router.get("/", function (req, res, next) {
   let pet = req.query.pet;
   let smoking = req.query.smoking;
   let gender = req.query.gender;
+  let latitude = req.query.latitude;
+  let longitude = req.query.longitude;
+  let creator_id = req.query.creator_id;
   let page = req.query.page;
   let size = req.query.size;
 
@@ -65,6 +68,9 @@ router.get("/", function (req, res, next) {
     pet,
     smoking,
     gender,
+    latitude,
+    longitude,
+    creator_id,
     page,
     size
   )
@@ -95,6 +101,8 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   let smoking = req.body.smoking;
   let gender = req.body.gender;
   let creator_id = req.body.creator_id;
+  let latitude = req.body.latitude;
+  let longitude = req.body.longitude;
 
   if (!req.file) {
     return res.status(400).send({ message: "Photo should not be null" });
@@ -110,6 +118,12 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
   }
   if (!description || !description.length) {
     return res.status(400).send({ message: "Description should not be null" });
+  }
+  if (!latitude || !latitude.length) {
+    return res.status(400).send({ message: "Latitude should not be null" });
+  }
+  if (!longitude || !longitude.length) {
+    return res.status(400).send({ message: "Longitude should not be null" });
   }
   if (!location || !location.length) {
     return res.status(400).send({ message: "Location should not be null" });
@@ -136,7 +150,6 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
     return res.status(400).send({ message: "gender should not be null" });
   }
 
-
   sharp(photo)
     .resize(200)
     .toFile(destinationOfThumbnail)
@@ -152,7 +165,9 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
         pet,
         smoking,
         gender,
-        creator_id
+        creator_id,
+        latitude,
+        longitude
       );
     })
     .then((results) => {

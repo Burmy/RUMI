@@ -4,11 +4,11 @@ class UserError extends Error {
     this.status = status;
   }
 
-  getMessage() {
+  message() {
     return this.message;
   }
 
-  getStatus() {Ｆ
+  status() {Ｆ
     return this.status;
   }
 }
