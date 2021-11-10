@@ -31,8 +31,9 @@ UserModel.search = (
     WHERE 1=1 and activated = 1 and deleted = 0 `;
 
   if (searchTerm) {
-    baseSQL += ` AND description like ? `;
+    baseSQL += ` AND (description like ? OR username like ?) `;
     let sqlReadySearchTerm = "%" + searchTerm + "%";
+    parameters.push(sqlReadySearchTerm);
     parameters.push(sqlReadySearchTerm);
   }
   if (major) {
