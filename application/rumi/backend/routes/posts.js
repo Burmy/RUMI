@@ -51,6 +51,7 @@ router.get("/", function (req, res, next) {
   let gender = req.query.gender;
   let latitude = req.query.latitude;
   let longitude = req.query.longitude;
+  let creator_id = req.query.creator_id;
   let page = req.query.page;
   let size = req.query.size;
 
@@ -69,6 +70,7 @@ router.get("/", function (req, res, next) {
     gender,
     latitude,
     longitude,
+    creator_id,
     page,
     size
   )
