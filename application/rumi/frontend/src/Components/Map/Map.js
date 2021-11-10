@@ -28,14 +28,16 @@ if(!isLoaded) return "Map loading";
 
 return (
   <div>
-<GoogleMap 
+<GoogleMap
 mapContainerStyle = {MapContainerStyle}
 zoom ={12}
 center = {mapCenter}
 options = {options}
 ></GoogleMap>
+<Marker key="marker_1"position={{lat: 37.774929,lng: -122.419418}}/>
+
 </div>
-); 
+);
 
 
 
