@@ -57,6 +57,16 @@ CommentModel.create = (
     .catch((err) => Promise.reject(err));
 };
 
+CommentModel.delete = (id) => {
+  let baseSQL = `UPDATE comment SET deleted = 1 WHERE id = ?;`;
+  return db
+    .execute(baseSQL, [id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results && results.affectedRows);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
 module.exports = CommentModel;
 
 

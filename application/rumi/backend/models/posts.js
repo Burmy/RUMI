@@ -12,7 +12,6 @@ PostModel.search = (
   gender,
   latitude,
   longitude,
-  creator_id,
   page,
   size
 ) => {
@@ -73,10 +72,6 @@ PostModel.search = (
   if (longitude) {
     baseSQL += ` AND p.longitude = ? `;
     parameters.push(longitude);
-  }
-  if (creator_id) {
-    baseSQL += ` AND p.creator_id = ? `;
-    parameters.push(creator_id);
   }
   if (page && size && size < 200) {
     baseSQL += ` LIMIT ?, ? `;

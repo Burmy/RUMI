@@ -224,4 +224,19 @@ router.post("/logout", (req, res, next) => {
   });
 });
 
+router.delete("/", function (req, res, next) {
+  let id = req.body.id;
+  UserModel.delete(id)
+    .then((isUserDeleted) => {
+      if (isUserDeleted) {
+        res.send({ message: `User is deleted` });
+      } else {
+        res.status(400).send({
+          message: `id not found`,
+        });
+      }
+    })
+    .catch((err) => next(err));
+});
+
 module.exports = router;

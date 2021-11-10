@@ -218,4 +218,14 @@ UserModel.update = (id) => {
     .catch((err) => Promise.reject(err));
 };
 
+UserModel.delete = (id) => {
+  let baseSQL = `UPDATE user SET deleted = 1 WHERE id = ?;`;
+  return db
+    .execute(baseSQL, [id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results && results.affectedRows);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
 module.exports = UserModel;
