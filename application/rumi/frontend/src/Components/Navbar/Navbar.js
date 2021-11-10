@@ -23,7 +23,7 @@ export default class Navbar extends Component {
                             About
                         </Link>
                         <Link className="nav-links" to="/map">
-                            Map
+                          MapContainer
                         </Link>
                     </div>
                     <div className="logo-div">

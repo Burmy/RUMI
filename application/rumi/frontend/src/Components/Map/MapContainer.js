@@ -35,7 +35,13 @@ center = {mapCenter}
 options = {options}
 ></GoogleMap>
 </div>
-);
+); 
+
+
+<div><h1>Map</h1>
+                                <MapContainer/>
+                                </div>
+
 
 }
   export default MapContainer;
