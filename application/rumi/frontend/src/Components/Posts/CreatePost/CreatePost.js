@@ -3,6 +3,8 @@ import Axios from "axios";
 import "./CreatePost.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
 
 class CreatePost extends Component {
     constructor(props) {
@@ -13,12 +15,11 @@ class CreatePost extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event) {
-        if(event.target.files.length !== 0){
+        if (event.target.files.length !== 0) {
             this.setState({
                 file: URL.createObjectURL(event.target.files[0]),
             });
-        }
-        else {
+        } else {
             this.setState({
                 file: URL.revokeObjectURL(event.target.files[0]),
             });
@@ -28,7 +29,8 @@ class CreatePost extends Component {
         var caption;
         var description;
         var price;
-        var creator_id;
+        var latitude;
+        var longitude;
         return (
             <div className="form-container">
                 <div className="upload-card">
@@ -37,12 +39,13 @@ class CreatePost extends Component {
 
                         <div className="upload-container">
                             <div className="upload-image">
-                                <label for="upload">Upload your Image:</label>
+                                <label htmlFor="upload">Upload your Image:</label>
                                 <input
                                     type="file"
                                     id="photo"
                                     accept="image/jpg,image/jpeg,image/png"
                                     onChange={this.handleChange}
+                                    autoComplete="off"
                                 />
                                 <img src={this.state.file} id="imgPreview" />
                             </div>
@@ -56,6 +59,7 @@ class CreatePost extends Component {
                                     onChange={(word) => {
                                         caption = word.target.value;
                                     }}
+                                    autoComplete="off"
                                 />
                                 <textarea
                                     id="textarea-post"
@@ -78,10 +82,16 @@ class CreatePost extends Component {
                                         }}
                                         name="price"
                                         placeholder="Enter Your Price($)"
+                                        autoComplete="off"
                                     />
 
-                                    <select className="form-input-select-create" name="location" id="location">
-                                        <option value="0" selected disabled>
+                                    <select
+                                        className="form-input-select-create"
+                                        defaultValue={"DEFAULT"}
+                                        name="location"
+                                        id="location"
+                                    >
+                                        <option value="DEFAULT" disabled>
                                             Select a Location
                                         </option>
                                         <option value="1">Daly City</option>
@@ -99,37 +109,69 @@ class CreatePost extends Component {
                                     <div>
                                         <div className="upload-info-pref-heading">Parking Available?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="p1" name="park" value="1" /> Yes
-                                            <input type="radio" id="p2" name="park" value="0" /> No
+                                            <input type="radio" id="p1" name="park" value="1" />
+                                            <label htmlFor="p1" required>
+                                                Yes
+                                            </label>
+                                            <input type="radio" id="p2" name="park" value="0" />
+                                            <label htmlFor="p2" required>
+                                                No
+                                            </label>
                                         </div>
                                     </div>
 
                                     <div>
                                         <div className="upload-info-pref-heading">Pets Allowed?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="pe1" name="pet" value="1" /> Yes
-                                            <input type="radio" id="pe2" name="pet" value="0" /> No
+                                            <input type="radio" id="pe1" name="pet" value="1" required />
+                                            <label htmlFor="pe1">Yes</label>
+                                            <input type="radio" id="pe2" name="pet" value="0" required />
+                                            <label htmlFor="pe2">No</label>
                                         </div>
                                     </div>
 
                                     <div>
                                         <div className="upload-info-pref-heading">Smoking Allowed?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="s1" name="smoke" value="1" /> Yes
-                                            <input type="radio" id="s2" name="smoke" value="0" /> No
+                                            <input type="radio" id="s1" name="smoke" value="1" required />
+                                            <label htmlFor="s1">Yes</label>
+                                            <input type="radio" id="s2" name="smoke" value="0" required />
+                                            <label htmlFor="s2">No</label>
                                         </div>
                                     </div>
 
                                     <div>
                                         <div className="upload-info-pref-heading">Gender Specific?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="g1" name="gender" value="M" /> Male
-                                            <input type="radio" id="g2" name="gender" value="F" /> Female
-                                            <input type="radio" id="g2" name="gender" value="N" /> Non-Binary
-                                            <input type="radio" id="g2" name="gender" value=" " /> No preference
+                                            <input type="radio" id="g1" name="gender" value="M" required />
+                                            <label htmlFor="g1">Male</label>
+                                            <input type="radio" id="g2" name="gender" value="F" required />
+                                            <label htmlFor="g2">Female</label>
+                                            <input type="radio" id="g3" name="gender" value="N" required />
+                                            <label htmlFor="g3">Non-Binary</label>
+                                            <input type="radio" id="g4" name="gender" value=" " required />
+                                            <label htmlFor="g4">No Preference</label>
                                         </div>
                                     </div>
                                 </div>
+                                <input
+                                    className="form-input"
+                                    value={latitude}
+                                    name="lat"
+                                    placeholder="TEMP LAT"
+                                    onChange={(lat) => {
+                                        latitude = lat.target.value;
+                                    }}
+                                />
+                                <input
+                                    className="form-input"
+                                    value={longitude}
+                                    name="long"
+                                    placeholder="TEMP LONG"
+                                    onChange={(long) => {
+                                        longitude = long.target.value;
+                                    }}
+                                />
                             </div>
                         </div>
                     </form>
@@ -138,8 +180,28 @@ class CreatePost extends Component {
                             type="submit"
                             className="form-input-btn"
                             onClick={() => {
-                                if (!caption || !caption.length || !description || !description.length || !price) {
-                                    return alert("You must fill the form to continue.");
+                                if (
+                                    !caption ||
+                                    !caption.length ||
+                                    !description ||
+                                    !description.length ||
+                                    !price ||
+                                    !price.length ||
+                                    !latitude ||
+                                    !latitude.length ||
+                                    !longitude ||
+                                    !longitude.length
+                                ) {
+                                    toast.error("You must fill the form to continue.", {
+                                        position: "top-right",
+                                        autoClose: 4000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        closeButton: false,
+                                        progress: 0,
+                                    });
                                 } else {
                                     var photo = document.getElementById("photo");
                                     var form = new FormData();
@@ -151,8 +213,10 @@ class CreatePost extends Component {
                                     form.append("pet", document.querySelector('input[name="pet"]:checked').value);
                                     form.append("smoking", document.querySelector('input[name="smoke"]:checked').value);
                                     form.append("gender", document.querySelector('input[name="gender"]:checked').value);
-                                    form.append("creator_id", 1);
+                                    form.append("creator_id", Cookies.get("loggedUserid"));
                                     form.append("photo", photo.files[0]);
+                                    form.append("latitude", latitude);
+                                    form.append("longitude", longitude);
 
                                     console.log(
                                         form.getAll("caption"),
@@ -164,9 +228,12 @@ class CreatePost extends Component {
                                         form.getAll("smoking"),
                                         form.getAll("gender"),
                                         form.getAll("creator_id"),
-                                        form.getAll("photo")
+                                        form.getAll("photo"),
+
+                                        form.getAll("latitude"),
+                                        form.getAll("longitude")
                                     );
-                                    Axios.post("http://18.190.48.206:3001/posts/", form, {
+                                    Axios.post(configData.SERVER_URL + "posts/", form, {
                                         headers: { "content-type": "multipart/form-data" },
                                     })
                                         .then((result) => {
@@ -181,6 +248,7 @@ class CreatePost extends Component {
                                                 closeButton: false,
                                                 progress: 0,
                                             });
+                                            this.props.history.push("/post/" + result.data.id);
                                         })
                                         .catch((error) => {
                                             console.log(error.response);

@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
     let fileExt = file.mimetype.split("/")[1];
     let randomName = crypto.randomBytes(22).toString("hex");
     cb(null, `${randomName}.${fileExt}`);
-  }, 
+  },
 });
 
 var uploader = multer({ storage: storage });
@@ -23,24 +23,24 @@ router.get("/", function (req, res, next) {
   let id = req.query.id;
   if (id) {
     PostModel.queryById(id)
-    .then((results) => {
-      if (results && results.length) {
-        res.send({
-          resultsStatus: "info",
-          message: `${results.length} result found`,
-          results: results,
-        });
-      } else {
-        res.send({
-          resultsStatus: "info",
-          message: `Cannot find any post by id ${id}`,
-        });
-      }
-    })
-    .catch((err) => next(err));
+      .then((results) => {
+        if (results && results.length) {
+          res.send({
+            resultsStatus: "info",
+            message: `${results.length} result found`,
+            results: results,
+          });
+        } else {
+          res.send({
+            resultsStatus: "info",
+            message: `Cannot find any post by id ${id}`,
+          });
+        }
+      })
+      .catch((err) => next(err));
     return;
   }
-  console.log(id);
+
   let searchTerm = req.query.search;
   let location = req.query.location;
   let pricefrom = req.query.pricefrom;
@@ -51,6 +51,7 @@ router.get("/", function (req, res, next) {
   let gender = req.query.gender;
   let latitude = req.query.latitude;
   let longitude = req.query.longitude;
+  let creator_id = req.query.creator_id;
   let page = req.query.page;
   let size = req.query.size;
 
@@ -69,6 +70,7 @@ router.get("/", function (req, res, next) {
     gender,
     latitude,
     longitude,
+    creator_id,
     page,
     size
   )
@@ -148,7 +150,6 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
     return res.status(400).send({ message: "gender should not be null" });
   }
 
-
   sharp(photo)
     .resize(200)
     .toFile(destinationOfThumbnail)
@@ -166,7 +167,7 @@ router.post("/", uploader.single("photo"), function (req, res, next) {
         gender,
         creator_id,
         latitude,
-        longitude,
+        longitude
       );
     })
     .then((results) => {

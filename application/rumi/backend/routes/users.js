@@ -174,11 +174,11 @@ router.post("/login", function (req, res, next) {
         res.cookie('logged', true);
         res.send({ message: `${username} is logged in` });
       } else {
-        throw new UserError("invalid username/password", "/users/login", 400);
+        throw new UserError("invalid username/password", 400);
       }
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       next(err);
     });
 });

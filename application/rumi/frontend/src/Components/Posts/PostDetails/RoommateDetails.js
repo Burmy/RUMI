@@ -1,16 +1,30 @@
 import { React, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import configData from "../../../Configs/config.json";
 
 function RoommateDetails() {
     let { id } = useParams();
     const [userObject, setUserObject] = useState([]);
     useEffect(() => {
-        Axios.get(`http://18.190.48.206:3001/users?id=${id}`).then((response) => {
-            setUserObject(response.data.results);
-            // console.log(response.data.results, "yoo");
-        });
-    });
+        Axios.get(configData.SERVER_URL + `users?id=${id}`)
+            .then((response) => {
+                setUserObject(response.data.results);
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    }, [id]);
     return (
         <div>
             {id}
