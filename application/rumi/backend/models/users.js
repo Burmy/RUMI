@@ -139,13 +139,14 @@ UserModel.emailExists = (email) => {
 };
 
 UserModel.authenticate = (username, password) => {
-  let userId;
-  let baseSQL = "SELECT id, username, password FROM user WHERE username = ?";
+  let result = {};
+  let baseSQL = "SELECT id, username, password, admin FROM user WHERE username = ?";
   return db
     .execute(baseSQL, [username])
     .then(([results, fields]) => {
       if (results && results.length == 1) {
-        userId = results[0].id;
+        result.id = results[0].id;
+        result.admin = results[0].admin;
         return password == results[0].password;
       } else {
         return Promise.resolve(-1);
@@ -153,7 +154,7 @@ UserModel.authenticate = (username, password) => {
     })
     .then((passwordsMatch) => {
       if (passwordsMatch) {
-        return Promise.resolve(userId);
+        return Promise.resolve(result);
       } else {
         return Promise.resolve(-1);
       }
