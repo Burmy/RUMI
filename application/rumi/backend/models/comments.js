@@ -27,6 +27,8 @@ CommentModel.search = (
     parameters.push(post_id);
   }
 
+  baseSQL += ` ORDER BY created_date ASC `;
+
   return db
     .execute(baseSQL, parameters)
     .then(([results, fields]) => {
@@ -44,6 +46,7 @@ CommentModel.create = (
   (text, post_id, creator_id, deleted) 
   VALUES 
   (?,?,?,0);`;
+  // should have indentation (by alan)
 
   return db
     .execute(baseSQL, [
@@ -53,6 +56,16 @@ CommentModel.create = (
     ])
     .then(([results, fields]) => {
       return Promise.resolve(results);
+    })
+    .catch((err) => Promise.reject(err));
+};
+
+CommentModel.delete = (id) => {
+  let baseSQL = `UPDATE comment SET deleted = 1 WHERE id = ?;`;
+  return db
+    .execute(baseSQL, [id])
+    .then(([results, fields]) => {
+      return Promise.resolve(results && results.affectedRows);
     })
     .catch((err) => Promise.reject(err));
 };

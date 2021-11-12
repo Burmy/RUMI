@@ -160,18 +160,20 @@ router.post("/registration", function (req, res, next) {
 router.post("/login", function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
-  let userId;
 
   UserModel.authenticate(username, password)
-    .then((loggedUserId) => {
-      if (loggedUserId > 0) {
+    .then((result) => {
+      if (result.id > 0) {
         console.log(`User ${username} is logged in`);
         req.session.username = username;
-        req.session.userId = loggedUserId;
+        req.session.userId = result.id;
         res.locals.logged = true;
-        res.cookie('loggedUserid', loggedUserId);
+        res.cookie('loggedUserid', result.id);
         res.cookie('username', username);
         res.cookie('logged', true);
+        if (1 == result.admin) {
+          res.cookie('admin', true);
+        }
         res.send({ message: `${username} is logged in` });
       } else {
         throw new UserError("invalid username/password", 400);
@@ -222,6 +224,21 @@ router.post("/logout", (req, res, next) => {
       res.json({ status: "ok", message: "user is logged out." });
     }
   });
+});
+
+router.delete("/", function (req, res, next) {
+  let id = req.body.id;
+  UserModel.delete(id)
+    .then((isUserDeleted) => {
+      if (isUserDeleted) {
+        res.send({ message: `User is deleted` });
+      } else {
+        res.status(400).send({
+          message: `id not found`,
+        });
+      }
+    })
+    .catch((err) => next(err));
 });
 
 module.exports = router;
