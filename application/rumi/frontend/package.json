@@ -24,7 +24,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true&&SSL_CRT_FILE=../../../credentials/HTTPS/localhost.pem&&SSL_KEY_FILE=../../../credentials/HTTPS/localhost-key.pem&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
