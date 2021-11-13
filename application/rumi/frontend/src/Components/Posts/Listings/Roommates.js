@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
 
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -77,7 +78,38 @@ function Roommates() {
         setSchool(searchSchool);
         setMajor(searchMajor);
     };
-
+    const deleteComment = (commentid) => {
+        const data = { id: commentid };
+        Axios.delete(configData.SERVER_URL + `comments`, { data })
+            .then(() => {
+                console.log("deleted");
+                // history.push("/");
+                window.location.reload();
+                // toast.success("Post Deleted!", {
+                //     position: "top-right",
+                //     autoClose: 4000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     closeButton: false,
+                //     progress: 0,
+                // });
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    };
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -152,6 +184,16 @@ function Roommates() {
                                                 <div className="user-card-desc2">Studies at {value.school}</div>
                                                 <div className="user-card-desc2">Was born on {value.birthday}</div>
                                                 {/* <div className="user-card-date">{value.created_date}</div> */}
+                                                {Cookies.get("admin") && (
+                                                    <button
+                                                        className="post-delete-button"
+                                                        onClick={() => {
+                                                            // deleteComment(comment.id);
+                                                        }}
+                                                    >
+                                                        Delete User
+                                                    </button>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

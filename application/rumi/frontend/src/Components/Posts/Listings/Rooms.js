@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { AiFillCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -77,6 +78,39 @@ function Rooms() {
         setSearchTerm(search);
         setStartPrice(price1);
         setEndPrice(price2);
+    };
+
+    const deleteComment = (commentid) => {
+        const data = { id: commentid };
+        Axios.delete(configData.SERVER_URL + `comments`, { data })
+            .then(() => {
+                console.log("deleted");
+                // history.push("/");
+                window.location.reload();
+                // toast.success("Post Deleted!", {
+                //     position: "top-right",
+                //     autoClose: 4000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     closeButton: false,
+                //     progress: 0,
+                // });
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
     };
 
     return (
@@ -169,6 +203,16 @@ function Rooms() {
                                                 <div className="">{value.pet}pet</div>
                                                 <div className="">{value.smoking}smoke</div>
                                             </div> */}
+                                                {Cookies.get("admin") && (
+                                                    <button
+                                                        className="post-delete-button"
+                                                        onClick={() => {
+                                                            // deleteComment(comment.id);
+                                                        }}
+                                                    >
+                                                        Delete Post
+                                                    </button>
+                                                )}
                                                 <div className="post-date">{value.created_date}</div>
                                             </div>
                                         </div>
