@@ -33,7 +33,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 24
+      expires: 60 * 60 * 24,
+      secure: true,
+      httpOnly: false,
+      sameSite: 'none',
     }
   })
 );
