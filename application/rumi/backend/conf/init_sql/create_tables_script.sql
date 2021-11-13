@@ -134,13 +134,14 @@ ENGINE = InnoDB;
 -- Table `rumi-db2`.`message`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rumi-db2`.`message` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `text` VARCHAR(2048) NOT NULL,
   `from_id` INT NOT NULL,
   `to_id` INT NOT NULL,
+  `is_read` INT NOT NULL,
   `creator_id` INT NOT NULL,
   `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `deleted` BIT(1) NULL,
+  `deleted` INT NULL,
   `deleted_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fromid_idx` (`from_id` ASC) VISIBLE,
