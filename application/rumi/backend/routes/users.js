@@ -168,11 +168,11 @@ router.post("/login", function (req, res, next) {
         req.session.username = username;
         req.session.userId = result.id;
         res.locals.logged = true;
-        res.cookie('loggedUserid', result.id);
-        res.cookie('username', username);
-        res.cookie('logged', true);
+        res.cookie('loggedUserid', result.id, {sameSite:"none", secure:true});
+        res.cookie('username', username, {sameSite:"none", secure:true});
+        res.cookie('logged', true, {sameSite:"none", secure:true});
         if (1 == result.admin) {
-          res.cookie('admin', true);
+          res.cookie('admin', true, {sameSite:"none", secure:true});
         }
         res.send({ message: `${username} is logged in` });
       } else {
