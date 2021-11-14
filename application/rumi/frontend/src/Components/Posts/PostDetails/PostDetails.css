@@ -1,7 +1,6 @@
 .room-container {
     display: flex;
     justify-content: center;
-    overflow: hidden;
     padding-top: 50px;
 }
 .room-post-image {
@@ -36,24 +35,36 @@
 }
 
 .room-back-button {
-    padding: 10px;
-    width: 20%;
-    position: absolute;
-    margin: 15px;
-    border: 2px solid #1da699;
-    background: #1da699;
-    color: #ffffff;
-    text-align: center;
+    padding: 5px 10px;
+    border: 2px solid #1da69800;
+    color: #1da699;
     cursor: pointer;
-    font-size: 22px;
-    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    font-family: "Josefin Sans", sans-serif;
     transition: 0.14s ease;
+    margin-left: -60px;
+}
+.room-back-button:hover {
+    color: #28bbac;
 }
 
-.room-back-button:hover {
-    border: 2px solid #28bbac;
-    background: #28bbac;
+.back-link {
+    display: flex;
+    height: 50px;
+}
+.addText {
+    display: inline-block; /* inline-block so we can set a width */
+    width: 0;
+    white-space: nowrap; /* keep text one line */
+    direction: rtl; /* change direction so the text overflow on the left */
+    color: rgba(255, 255, 255, 0);
+    transition: 0.22s ease;
+    padding: 12px 45px 0 0;
+    transform: translateX(10px); /* put the value you want here */
+    pointer-events: none; /* to avoid the hover on the text, remove to see the difference */
+}
+
+.back-link:hover .addText {
+    color: #1da699;
+    transform: translateX(0);
 }
 .room-info-container {
     background: #ffffff;
@@ -95,13 +106,16 @@
     padding-bottom: 50px;
 }
 
+.user-info-plus-back {
+    display: flex;
+    margin-left: -45px;
+}
 .user-info-container {
-    width: 70%;
+    width: 70vw;
     display: flex;
     flex-direction: column;
     text-align: center;
     background: #ffffff;
-    padding: 0 15px 0 15px;
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     margin-bottom: 50px;
 }
@@ -236,4 +250,44 @@ div[id^="message-"] {
     grid-area: comment;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.user-info-container-posts {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.user-info-posts-heading {
+    font-size: 35px;
+    padding-bottom: 30px;
+}
+.user-info-posts-container {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px 0 15px;
+    flex-wrap: wrap;
+}
+.post-delete-button {
+    padding: 10px;
+    margin: 15px 25px 15px 25px;
+    border: 2px solid #c7230696;
+    background: #c7230696;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    z-index: 5;
+}
+.post-delete-button:hover {
+    border: 2px solid #e03416ec;
+    background: #e03416ec;
 }

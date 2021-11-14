@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import { AiOutlineCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
+import { AiOutlineCaretLeft } from "react-icons/ai";
 
 function RoomDetails() {
     let history = useHistory();
@@ -86,10 +87,15 @@ function RoomDetails() {
                 console.log(error.config);
             });
     };
-
+    const style = { width: "37px", height: "37px" };
     return (
         <div>
             <div className="room-container">
+                <div class="back-link">
+                    <span class="addText">Go Back</span>
+                    <AiOutlineCaretLeft style={style} className="room-back-button" onClick={() => history.goBack()} />
+                </div>
+
                 {postObject.map(
                     (value, key) => (
                         // eslint-disable-next-line no-sequences
@@ -102,12 +108,6 @@ function RoomDetails() {
                                             className="room-post-image"
                                             src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                             alt="Missing"
-                                        />
-                                        <input
-                                            className="room-back-button"
-                                            type="submit"
-                                            onClick={() => history.push("/rooms")}
-                                            value="Go Back"
                                         />
                                     </div>
                                     <div className="room-comments-container">
@@ -134,21 +134,24 @@ function RoomDetails() {
                                                       )
                                                 : null}
                                         </div>
-                                        <div className="enter-comments-container">
-                                            <input
-                                                className="comment-input"
-                                                type="text"
-                                                placeholder="Comment Here..."
-                                                autoComplete="off"
-                                                value={newComment}
-                                                onChange={(event) => {
-                                                    setNewComment(event.target.value);
-                                                }}
-                                            />
-                                            <button onClick={addComment} className="comment-button">
-                                                <AiOutlineCaretRight />
-                                            </button>
-                                        </div>
+                                        {Cookies.get("username") && (
+                                            <div className="enter-comments-container">
+                                                <input
+                                                    className="comment-input"
+                                                    type="text"
+                                                    placeholder="Comment Here..."
+                                                    autoComplete="off"
+                                                    value={newComment}
+                                                    onChange={(event) => {
+                                                        setNewComment(event.target.value);
+                                                    }}
+                                                />
+
+                                                <button onClick={addComment} className="comment-button">
+                                                    <AiOutlineCaretRight />
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="room-info-container">

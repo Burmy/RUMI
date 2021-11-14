@@ -12,6 +12,7 @@ var postsRouter = require("./routes/posts");
 var listRouter = require("./routes/list");
 var filesRouter = require("./routes/files");
 var commentsRouter = require("./routes/comments");
+var messagesRouter = require("./routes/messages");
 
 var sessions = require("express-session");
 var mysqlSession = require("express-mysql-session")(sessions);
@@ -33,7 +34,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60 * 60 * 24
+      expires: 60 * 60 * 24,
+      secure: true,
+      httpOnly: false,
+      sameSite: 'none',
     }
   })
 );
@@ -64,6 +68,7 @@ app.use("/posts", postsRouter);
 app.use("/list", listRouter);
 app.use("/files", filesRouter);
 app.use("/comments", commentsRouter);
+app.use("/messages", messagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

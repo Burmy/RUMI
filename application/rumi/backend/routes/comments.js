@@ -66,4 +66,19 @@ router.post("/", function (req, res, next) {
 
 });
 
+router.delete("/", function (req, res, next) {
+  let id = req.body.id;
+  CommentModel.delete(id)
+    .then((isCommentDeleted) => {
+      if (isCommentDeleted) {
+        res.send({ message: `Comment is deleted` });
+      } else {
+        res.status(400).send({
+          message: `id not found`,
+        });
+      }
+    })
+    .catch((err) => next(err));
+});
+
 module.exports = router;

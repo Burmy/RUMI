@@ -37,7 +37,8 @@ function Roommates() {
     useEffect(() => {
         async function getPosts() {
             Axios.get(
-                configData.SERVER_URL + `users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
+                configData.SERVER_URL +
+                    `users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
             )
 
                 .then((response) => {
@@ -135,7 +136,7 @@ function Roommates() {
                             .slice(0)
                             .reverse()
                             .map((value, key) => {
-                                value.created_date = new Date(value.created_date).toDateString();
+                                // value.created_date = new Date(value.created_date).toDateString();
                                 value.birthday = new Date(value.birthday).toDateString();
                                 return (
                                     <div key={value.id}>
@@ -150,7 +151,7 @@ function Roommates() {
                                                 <div className="user-card-desc">{value.description}</div>
                                                 <div className="user-card-desc2">Studies at {value.school}</div>
                                                 <div className="user-card-desc2">Was born on {value.birthday}</div>
-                                                <div className="user-card-date">{value.created_date}</div>
+                                                {/* <div className="user-card-date">{value.created_date}</div> */}
                                             </div>
                                         </div>
                                     </div>
