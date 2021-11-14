@@ -80,23 +80,13 @@ function Rooms() {
         setEndPrice(price2);
     };
 
+    /* only admin can delete any posts */
     const deletePost = (postid) => {
         const data = { id: postid };
         Axios.delete(configData.SERVER_URL + `posts`, { data })
             .then(() => {
                 console.log("deleted");
-                // history.push("/");
                 window.location.reload();
-                // toast.success("Post Deleted!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
             })
             .catch((error) => {
                 // Error
@@ -112,6 +102,7 @@ function Rooms() {
                 console.log(error.config);
             });
     };
+
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -180,38 +171,44 @@ function Rooms() {
                                 value.created_date = new Date(value.created_date).toDateString();
                                 return (
                                     <div key={value.id}>
-                                        <div
-                                            className="post-card"
-                                            onClick={() => {
-                                                history.push(`/post/${value.id}`);
-                                            }}
-                                        >
+                                        <div className="post-card">
                                             <img
                                                 className="post-image"
                                                 src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                                 alt="Missing"
+                                                onClick={() => {
+                                                    history.push(`/post/${value.id}`);
+                                                }}
                                             />
+
                                             <div className="post-price-container">
                                                 <div className="post-price">${value.price}</div>
                                             </div>
-                                            <div className="post-info-container">
+                                            {/* only admin can delete any posts */}
+                                            {Cookies.get("admin") && (
+                                                <button
+                                                    className="post-delete-button"
+                                                    onClick={() => {
+                                                        deletePost(value.id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            )}
+                                            <div
+                                                className="post-info-container"
+                                                onClick={() => {
+                                                    history.push(`/post/${value.id}`);
+                                                }}
+                                            >
                                                 <div className="post-caption">{value.caption}</div>
                                                 <div className="post-desc">{value.description}</div>
                                                 {/* <div className="post-desc-pref">
-                                                <div className="">{value.parking}park</div>
-                                                <div className="">{value.pet}pet</div>
-                                                <div className="">{value.smoking}smoke</div>
-                                            </div> */}
-                                                {Cookies.get("admin") && (
-                                                    <button
-                                                        className="post-delete-button"
-                                                        onClick={() => {
-                                                            deletePost(value.id);
-                                                        }}
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                )}
+                                                    <div className="">{value.parking}park</div>
+                                                    <div className="">{value.pet}pet</div>
+                                                    <div className="">{value.smoking}smoke</div>
+                                                </div> */}
+
                                                 <div className="post-date">{value.created_date}</div>
                                             </div>
                                         </div>

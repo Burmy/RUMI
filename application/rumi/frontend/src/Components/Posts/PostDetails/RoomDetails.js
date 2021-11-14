@@ -162,19 +162,9 @@ function RoomDetails() {
                                                                       <div className="author-text">@{comment.username}</div>
                                                                       <div className="date-posted">{comment.created_date}</div>
                                                                       <div className="comment-text">- {comment.text}</div>
-                                                                      {/* {Cookies.get("username") === value.username && (
-                                                                          <button
-                                                                              className="post-delete-button"
-                                                                              onClick={() => {
-                                                                                  deleteComment(comment.id);
-                                                                              }}
-                                                                          >
-                                                                              Delete Comment
-                                                                          </button>
-                                                                      )} */}
                                                                       {Cookies.get("admin") && (
                                                                           <button
-                                                                              className="post-delete-button"
+                                                                              className="comment-delete-button"
                                                                               onClick={() => {
                                                                                   deleteComment(comment.id);
                                                                               }}

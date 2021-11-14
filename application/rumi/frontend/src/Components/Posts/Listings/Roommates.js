@@ -78,23 +78,14 @@ function Roommates() {
         setSchool(searchSchool);
         setMajor(searchMajor);
     };
+
+    /* only admin can delete any users */
     const deleteUser = (userid) => {
         const data = { id: userid };
         Axios.delete(configData.SERVER_URL + `users`, { data })
             .then(() => {
                 console.log("deleted");
-                // history.push("/");
                 window.location.reload();
-                // toast.success("Post Deleted!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
             })
             .catch((error) => {
                 // Error
@@ -110,6 +101,7 @@ function Roommates() {
                 console.log(error.config);
             });
     };
+
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -172,28 +164,30 @@ function Roommates() {
                                 value.birthday = new Date(value.birthday).toDateString();
                                 return (
                                     <div key={value.id}>
-                                        <div
-                                            className="user-card"
-                                            // onClick={() => {
-                                            //     history.push(`/user/${value.id}`);
-                                            // }}
-                                        >
-                                            <div className="user-card-info-container">
+                                        <div className="user-card">
+                                            {/* only admin can delete any users */}
+                                            {Cookies.get("admin") && (
+                                                <button
+                                                    className="post-delete-button"
+                                                    onClick={() => {
+                                                        deleteUser(value.id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            )}
+
+                                            <div
+                                                className="user-card-info-container"
+                                                onClick={() => {
+                                                    history.push(`/user/${value.id}`);
+                                                }}
+                                            >
                                                 <div className="user-card-caption">{value.username}</div>
                                                 <div className="user-card-desc">{value.description}</div>
                                                 <div className="user-card-desc2">Studies at {value.school}</div>
                                                 <div className="user-card-desc2">Was born on {value.birthday}</div>
                                                 {/* <div className="user-card-date">{value.created_date}</div> */}
-                                                {Cookies.get("admin") && (
-                                                    <button
-                                                        className="post-delete-button"
-                                                        onClick={() => {
-                                                            deleteUser(value.id);
-                                                        }}
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                )}
                                             </div>
                                         </div>
                                     </div>

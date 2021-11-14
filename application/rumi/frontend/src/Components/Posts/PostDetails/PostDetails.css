@@ -287,12 +287,34 @@ div[id^="message-"] {
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     font-family: "Josefin Sans", sans-serif;
     transition: 0.14s ease;
-    z-index: 5;
+    z-index: 55;
     right: 0;
     top: 0;
     position: absolute;
 }
 .post-delete-button:hover {
+    border: 2px solid #eb3c1d;
+    background: #eb3c1d;
+}
+
+.comment-delete-button {
+    padding: 8px 16px 6px 16px;
+    margin: 15px;
+    background: #c72306;
+    border: 2px solid #c72306;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    z-index: 55;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+.comment-delete-button:hover {
     border: 2px solid #eb3c1d;
     background: #eb3c1d;
 }
