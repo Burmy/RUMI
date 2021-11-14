@@ -166,7 +166,7 @@ function Roommates() {
                                     <div key={value.id}>
                                         <div className="user-card">
                                             {/* only admin can delete any users */}
-                                            {Cookies.get("admin") && (
+                                            {Cookies.get("token") && Cookies.get("admin") && (
                                                 <button
                                                     className="post-delete-button"
                                                     onClick={() => {

@@ -185,7 +185,7 @@ function Rooms() {
                                                 <div className="post-price">${value.price}</div>
                                             </div>
                                             {/* only admin can delete any posts */}
-                                            {Cookies.get("admin") && (
+                                            {Cookies.get("token") && Cookies.get("admin") && (
                                                 <button
                                                     className="post-delete-button"
                                                     onClick={() => {

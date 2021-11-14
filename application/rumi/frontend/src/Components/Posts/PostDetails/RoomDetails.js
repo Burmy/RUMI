@@ -162,7 +162,7 @@ function RoomDetails() {
                                                                       <div className="author-text">@{comment.username}</div>
                                                                       <div className="date-posted">{comment.created_date}</div>
                                                                       <div className="comment-text">- {comment.text}</div>
-                                                                      {Cookies.get("admin") && (
+                                                                      {Cookies.get("token") && Cookies.get("admin") && (
                                                                           <button
                                                                               className="comment-delete-button"
                                                                               onClick={() => {
@@ -178,7 +178,7 @@ function RoomDetails() {
                                                       )
                                                 : null}
                                         </div>
-                                        {Cookies.get("username") && (
+                                        {Cookies.get("token") && Cookies.get("username") && (
                                             <div className="enter-comments-container">
                                                 <input
                                                     className="comment-input"

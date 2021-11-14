@@ -318,3 +318,17 @@ div[id^="message-"] {
     border: 2px solid #eb3c1d;
     background: #eb3c1d;
 }
+
+.react-tabs__tab-list {
+    border-bottom: 3px solid #1da699 !important;
+    margin-bottom: 50px !important;
+    padding: 0 0 0 50px !important;
+}
+
+.react-tabs__tab--selected {
+    background: #1da699 !important;
+    border: none !important;
+    border-bottom: none !important;
+    color: #ffffff !important;
+    padding: 8px 15px !important;
+}

@@ -106,18 +106,7 @@ function RoommateDetails() {
         Axios.delete(configData.SERVER_URL + `comments`, { data })
             .then(() => {
                 console.log("deleted");
-                // history.push("/");
                 window.location.reload();
-                // toast.success("Post Deleted!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
             })
             .catch((error) => {
                 // Error
@@ -219,16 +208,17 @@ function RoommateDetails() {
                                                                             <div className="post-price">${value.price}</div>
                                                                         </div>
                                                                         {/* only logged in user can delete their posts */}
-                                                                        {Cookies.get("username") === value.username && (
-                                                                            <button
-                                                                                className="post-delete-button"
-                                                                                onClick={() => {
-                                                                                    deletePost(value.id);
-                                                                                }}
-                                                                            >
-                                                                                Delete
-                                                                            </button>
-                                                                        )}
+                                                                        {Cookies.get("token") &&
+                                                                            Cookies.get("username") === value.username && (
+                                                                                <button
+                                                                                    className="post-delete-button"
+                                                                                    onClick={() => {
+                                                                                        deletePost(value.id);
+                                                                                    }}
+                                                                                >
+                                                                                    Delete
+                                                                                </button>
+                                                                            )}
                                                                         <div
                                                                             className="post-info-container"
                                                                             onClick={() => {
@@ -252,7 +242,7 @@ function RoommateDetails() {
                                             </div>
                                         </TabPanel>
                                         <TabPanel>
-                                            <div>{commentsCount}</div>
+                                            <div style={{ marginBottom: `50px` }}>{commentsCount}</div>
                                             <div>
                                                 {userComments
                                                     ? userComments
@@ -266,28 +256,31 @@ function RoommateDetails() {
                                                                       // eslint-disable-next-line no-sequences
                                                                   ).toDateString()),
                                                                   (
-                                                                      <div
-                                                                          id="message-"
-                                                                          key={key}
-                                                                          onClick={() => {
-                                                                              history.push(`/post/${comment.post_id}`);
-                                                                          }}
-                                                                      >
+                                                                      <div id="message-" key={key}>
                                                                           <div className="author-text">@{comment.username}</div>
                                                                           <div className="date-posted">
                                                                               {comment.created_date}
                                                                           </div>
-                                                                          <div className="comment-text">- {comment.text}</div>
-                                                                          {Cookies.get("username") === value.username && (
-                                                                              <button
-                                                                                  className="comment-delete-button"
-                                                                                  onClick={() => {
-                                                                                      deleteComment(comment.id);
-                                                                                  }}
-                                                                              >
-                                                                                  Delete
-                                                                              </button>
-                                                                          )}
+                                                                          <div
+                                                                              className="comment-text"
+                                                                              onClick={() => {
+                                                                                  history.push(`/post/${comment.post_id}`);
+                                                                              }}
+                                                                              style={{ cursor: `pointer` }}
+                                                                          >
+                                                                              - {comment.text}
+                                                                          </div>
+                                                                          {Cookies.get("token") &&
+                                                                              Cookies.get("username") === value.username && (
+                                                                                  <button
+                                                                                      className="comment-delete-button"
+                                                                                      onClick={() => {
+                                                                                          deleteComment(comment.id);
+                                                                                      }}
+                                                                                  >
+                                                                                      Delete
+                                                                                  </button>
+                                                                              )}
                                                                       </div>
                                                                   )
                                                               )
