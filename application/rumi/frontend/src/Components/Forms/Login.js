@@ -32,6 +32,12 @@ const Login = () => {
                 //     progress: 0,
                 // });
                 localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
+                const projectID="0aaa01bf-ebf8-4269-9d8b-78e64e5fea25";
+                const authObject = { 'Project-ID': projectID, 'User-Name': username, 'User-Secret': password };
+                Axios.get('https://api.chatengine.io/chats', { headers: authObject });
+
+                 localStorage.setItem('username', username);
+                 localStorage.setItem('password', password);
                 history.push("/");
                 window.location.reload();
             })

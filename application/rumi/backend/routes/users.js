@@ -5,6 +5,7 @@ var bcrypt = require("bcrypt");
 const { json } = require("express");
 var UserError = require("../helpers/error/UserError");
 var jwt = require("jsonwebtoken")
+var axios=require('axios');
 
 router.get("/", function (req, res, next) {
   let id = req.query.id;
@@ -144,6 +145,11 @@ router.post("/registration", function (req, res, next) {
       if (createdUserId < 0) {
         res.status(500).send("Internal server error1");
       } else {
+        //chat user init 
+        axios.post('https://api.chatengine.io/projects/people/',
+      { username: username, secret: password },
+      { headers: { 'Private-Key': "0aaa01bf-ebf8-4269-9d8b-78e64e5fea25" } },
+    )
         return res.send({
           message: "registration secceed!",
         });

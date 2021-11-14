@@ -21,6 +21,7 @@ import Rasul from "./Components/Team/TeamMembers/rasul";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "./Helpers/AuthContext";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
+import Chat from "./Components/Chat/Chat"
 import "./App.css";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                         <Route path="/roommates" exact component={Roommates} />
                         <Route path="/team" exact component={Team} />
                         <ProtectedRoute path="/createpost" exact component={CreatePost} />
+                        <Route path="/chat" exact component ={Chat}/>
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />
                         <Route path="/post/:id" exact component={RoomDetails} />
