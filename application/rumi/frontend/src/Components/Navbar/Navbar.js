@@ -74,6 +74,8 @@ const Navbar = () => {
                                                             Cookies.remove("loggedUserid");
                                                             Cookies.remove("logged");
                                                             Cookies.remove("admin");
+                                                            Cookies.remove("token");
+                                                            Cookies.remove("csid");
                                                             window.location.reload();
 
                                                             // toast.success("Logged Out!", {
