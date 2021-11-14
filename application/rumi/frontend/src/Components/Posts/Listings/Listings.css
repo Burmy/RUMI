@@ -72,7 +72,6 @@
     overflow: hidden;
 }
 .post-image {
-    max-width: 100%;
     height: 55%;
     vertical-align: middle;
     position: relative;

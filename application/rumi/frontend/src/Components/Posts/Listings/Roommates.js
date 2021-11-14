@@ -78,9 +78,9 @@ function Roommates() {
         setSchool(searchSchool);
         setMajor(searchMajor);
     };
-    const deleteComment = (commentid) => {
-        const data = { id: commentid };
-        Axios.delete(configData.SERVER_URL + `comments`, { data })
+    const deleteUser = (userid) => {
+        const data = { id: userid };
+        Axios.delete(configData.SERVER_URL + `users`, { data })
             .then(() => {
                 console.log("deleted");
                 // history.push("/");
@@ -174,9 +174,9 @@ function Roommates() {
                                     <div key={value.id}>
                                         <div
                                             className="user-card"
-                                            onClick={() => {
-                                                history.push(`/user/${value.id}`);
-                                            }}
+                                            // onClick={() => {
+                                            //     history.push(`/user/${value.id}`);
+                                            // }}
                                         >
                                             <div className="user-card-info-container">
                                                 <div className="user-card-caption">{value.username}</div>
@@ -188,10 +188,10 @@ function Roommates() {
                                                     <button
                                                         className="post-delete-button"
                                                         onClick={() => {
-                                                            // deleteComment(comment.id);
+                                                            deleteUser(value.id);
                                                         }}
                                                     >
-                                                        Delete User
+                                                        Delete
                                                     </button>
                                                 )}
                                             </div>

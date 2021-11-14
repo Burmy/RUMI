@@ -223,6 +223,7 @@ div[id^="message-"] {
     display: grid;
     grid-template-rows: 0.3fr 1fr;
     gap: 20px;
+    position: relative;
     grid-template-areas:
         "author created"
         "comment comment";
@@ -275,10 +276,10 @@ div[id^="message-"] {
     flex-wrap: wrap;
 }
 .post-delete-button {
-    padding: 10px;
-    margin: 15px 25px 15px 25px;
-    border: 2px solid #c7230696;
-    background: #c7230696;
+    padding: 11px 16px 9px 16px;
+    margin: 15px;
+    background: #c72306;
+    border: 2px solid #c72306;
     color: #ffffff;
     text-align: center;
     cursor: pointer;
@@ -287,8 +288,11 @@ div[id^="message-"] {
     font-family: "Josefin Sans", sans-serif;
     transition: 0.14s ease;
     z-index: 5;
+    right: 0;
+    top: 0;
+    position: absolute;
 }
 .post-delete-button:hover {
-    border: 2px solid #e03416ec;
-    background: #e03416ec;
+    border: 2px solid #eb3c1d;
+    background: #eb3c1d;
 }

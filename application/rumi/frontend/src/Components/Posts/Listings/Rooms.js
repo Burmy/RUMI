@@ -80,9 +80,9 @@ function Rooms() {
         setEndPrice(price2);
     };
 
-    const deleteComment = (commentid) => {
-        const data = { id: commentid };
-        Axios.delete(configData.SERVER_URL + `comments`, { data })
+    const deletePost = (postid) => {
+        const data = { id: postid };
+        Axios.delete(configData.SERVER_URL + `posts`, { data })
             .then(() => {
                 console.log("deleted");
                 // history.push("/");
@@ -112,7 +112,6 @@ function Rooms() {
                 console.log(error.config);
             });
     };
-
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -207,10 +206,10 @@ function Rooms() {
                                                     <button
                                                         className="post-delete-button"
                                                         onClick={() => {
-                                                            // deleteComment(comment.id);
+                                                            deletePost(value.id);
                                                         }}
                                                     >
-                                                        Delete Post
+                                                        Delete
                                                     </button>
                                                 )}
                                                 <div className="post-date">{value.created_date}</div>

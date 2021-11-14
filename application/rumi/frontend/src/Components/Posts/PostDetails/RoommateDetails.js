@@ -177,7 +177,7 @@ function RoommateDetails() {
                                                                             deletePost(value.id);
                                                                         }}
                                                                     >
-                                                                        Delete Post
+                                                                        Delete
                                                                     </button>
                                                                 )}
                                                             </div>

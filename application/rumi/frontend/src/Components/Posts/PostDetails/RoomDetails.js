@@ -88,38 +88,38 @@ function RoomDetails() {
             });
     };
 
-    // const deleteComment = (commentid) => {
-    //     const data = { id: commentid };
-    //     Axios.delete(configData.SERVER_URL + `comments`, { data })
-    //         .then(() => {
-    //             console.log("deleted");
-    //             // history.push("/");
-    //             window.location.reload();
-    //             // toast.success("Post Deleted!", {
-    //             //     position: "top-right",
-    //             //     autoClose: 4000,
-    //             //     hideProgressBar: false,
-    //             //     closeOnClick: true,
-    //             //     pauseOnHover: true,
-    //             //     draggable: true,
-    //             //     closeButton: false,
-    //             //     progress: 0,
-    //             // });
-    //         })
-    //         .catch((error) => {
-    //             // Error
-    //             if (error.response) {
-    //                 console.log(error.response.data);
-    //                 console.log(error.response.status);
-    //                 console.log(error.response.headers);
-    //             } else if (error.request) {
-    //                 console.log(error.request);
-    //             } else {
-    //                 console.log("Error", error.message);
-    //             }
-    //             console.log(error.config);
-    //         });
-    // };
+    const deleteComment = (commentid) => {
+        const data = { id: commentid };
+        Axios.delete(configData.SERVER_URL + `comments`, { data })
+            .then(() => {
+                console.log("deleted");
+                // history.push("/");
+                window.location.reload();
+                // toast.success("Post Deleted!", {
+                //     position: "top-right",
+                //     autoClose: 4000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     closeButton: false,
+                //     progress: 0,
+                // });
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    };
 
     const style = { width: "37px", height: "37px" };
     return (
@@ -176,10 +176,10 @@ function RoomDetails() {
                                                                           <button
                                                                               className="post-delete-button"
                                                                               onClick={() => {
-                                                                                  // deleteComment(comment.id);
+                                                                                  deleteComment(comment.id);
                                                                               }}
                                                                           >
-                                                                              Delete Post
+                                                                              Delete
                                                                           </button>
                                                                       )}
                                                                   </div>
