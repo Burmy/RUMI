@@ -135,7 +135,7 @@ function RoomDetails() {
                         // eslint-disable-next-line no-sequences
                         (value.created_date = new Date(value.created_date).toDateString()),
                         (
-                            <div key={value.id}>
+                            <div className="room-detail-container" key={value.id}>
                                 <div className="room-post-container">
                                     <div className="room-post-card">
                                         <img
