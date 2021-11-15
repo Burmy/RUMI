@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
 
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -78,6 +79,29 @@ function Roommates() {
         setMajor(searchMajor);
     };
 
+    /* only admin can delete any users */
+    const deleteUser = (userid) => {
+        const data = { id: userid };
+        Axios.delete(configData.SERVER_URL + `users`, { data })
+            .then(() => {
+                console.log("deleted");
+                window.location.reload();
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    };
+
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -140,13 +164,25 @@ function Roommates() {
                                 value.birthday = new Date(value.birthday).toDateString();
                                 return (
                                     <div key={value.id}>
-                                        <div
-                                            className="user-card"
-                                            onClick={() => {
-                                                history.push(`/user/${value.id}`);
-                                            }}
-                                        >
-                                            <div className="user-card-info-container">
+                                        <div className="user-card">
+                                            {/* only admin can delete any users */}
+                                            {Cookies.get("token") && Cookies.get("admin") && (
+                                                <button
+                                                    className="post-delete-button"
+                                                    onClick={() => {
+                                                        deleteUser(value.id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            )}
+
+                                            <div
+                                                className="user-card-info-container"
+                                                onClick={() => {
+                                                    history.push(`/user/${value.id}`);
+                                                }}
+                                            >
                                                 <div className="user-card-caption">{value.username}</div>
                                                 <div className="user-card-desc">{value.description}</div>
                                                 <div className="user-card-desc2">Studies at {value.school}</div>

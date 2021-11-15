@@ -89,6 +89,40 @@ function RoomDetails() {
                 console.log(error.config);
             });
     };
+
+    const deleteComment = (commentid) => {
+        const data = { id: commentid };
+        Axios.delete(configData.SERVER_URL + `comments`, { data })
+            .then(() => {
+                console.log("deleted");
+                // history.push("/");
+                window.location.reload();
+                // toast.success("Post Deleted!", {
+                //     position: "top-right",
+                //     autoClose: 4000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     closeButton: false,
+                //     progress: 0,
+                // });
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    };
+
     const style = { width: "37px", height: "37px" };
     return (
         <div>
@@ -103,7 +137,7 @@ function RoomDetails() {
                         // eslint-disable-next-line no-sequences
                         (value.created_date = new Date(value.created_date).toDateString()),
                         (
-                            <div key={value.id}>
+                            <div className="room-detail-container" key={value.id}>
                                 <div className="room-post-container">
                                     <div className="room-post-card">
                                         <img
@@ -130,13 +164,23 @@ function RoomDetails() {
                                                                       <div className="author-text">@{comment.username}</div>
                                                                       <div className="date-posted">{comment.created_date}</div>
                                                                       <div className="comment-text">- {comment.text}</div>
+                                                                      {Cookies.get("token") && Cookies.get("admin") && (
+                                                                          <button
+                                                                              className="comment-delete-button"
+                                                                              onClick={() => {
+                                                                                  deleteComment(comment.id);
+                                                                              }}
+                                                                          >
+                                                                              Delete
+                                                                          </button>
+                                                                      )}
                                                                   </div>
                                                               )
                                                           )
                                                       )
                                                 : null}
                                         </div>
-                                        {Cookies.get("username") && (
+                                        {Cookies.get("token") && Cookies.get("username") && (
                                             <div className="enter-comments-container">
                                                 <input
                                                     className="comment-input"
