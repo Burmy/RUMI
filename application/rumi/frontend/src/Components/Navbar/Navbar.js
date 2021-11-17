@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useRef } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -7,11 +7,15 @@ import Cookies from "js-cookie";
 // import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
+import { useDetectOutsideClick } from "./useDetectOutsideClick";
 
 const Navbar = () => {
     // const { authTokens, setAuthTokens } = useAuth();
     let history = useHistory();
     let logged = Cookies.get("logged");
+    const dropdownRef = useRef(null);
+    const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+    const onClick = () => setIsActive(!isActive);
 
     return (
         <div>
@@ -45,35 +49,54 @@ const Navbar = () => {
                                 <Link className="nav-links" to="/createpost">
                                     Create
                                 </Link>
-                                <Link
-                                    to="/"
-                                    className="nav-links"
-                                    onClick={() => {
-                                        // axios post logout api
-                                        history.push("/");
-                                        console.log("clicked");
-                                        Cookies.remove("username");
-                                        Cookies.remove("loggedUserid");
-                                        Cookies.remove("logged");
-                                        Cookies.remove("admin");
-                                        Cookies.remove("token");
-                                        Cookies.remove("csid");
-                                        window.location.reload();
+                                <div className="nav-links">
+                                    <div className="menu-container">
+                                        <button onClick={onClick} className="menu-trigger">
+                                            {/* <span>{Cookies.get("username")}</span> */}
+                                            {/* <img src="https://i.redd.it/v0caqchbtn741.jpg" alt="User avatar" /> */}
+                                        </button>
+                                        <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>
+                                            <ul>
+                                                <li>
+                                                    <Link to={`/user/${Cookies.get("loggedUserid")}`} className="nav-links">
+                                                        Dashboard
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link
+                                                        to="/"
+                                                        className="nav-links"
+                                                        onClick={() => {
+                                                            // axios post logout api
+                                                            history.push("/");
+                                                            console.log("clicked");
+                                                            Cookies.remove("username");
+                                                            Cookies.remove("loggedUserid");
+                                                            Cookies.remove("logged");
+                                                            Cookies.remove("admin");
+                                                            Cookies.remove("token");
+                                                            Cookies.remove("csid");
+                                                            window.location.reload();
 
-                                        // toast.success("Logged Out!", {
-                                        //     position: "top-right",
-                                        //     autoClose: 4000,
-                                        //     hideProgressBar: false,
-                                        //     closeOnClick: true,
-                                        //     pauseOnHover: true,
-                                        //     draggable: true,
-                                        //     closeButton: false,
-                                        //     progress: 0,
-                                        // });
-                                    }}
-                                >
-                                    Logout
-                                </Link>
+                                                            // toast.success("Logged Out!", {
+                                                            //     position: "top-right",
+                                                            //     autoClose: 4000,
+                                                            //     hideProgressBar: false,
+                                                            //     closeOnClick: true,
+                                                            //     pauseOnHover: true,
+                                                            //     draggable: true,
+                                                            //     closeButton: false,
+                                                            //     progress: 0,
+                                                            // });
+                                                        }}
+                                                    >
+                                                        Logout
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
                             </>
                         ) : (
                             <>

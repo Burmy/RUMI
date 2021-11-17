@@ -3,24 +3,18 @@
     justify-content: center;
     padding-top: 50px;
 }
-.room-post-image {
-    /* width: 100%; */
-    width: 1000px;
-    vertical-align: middle;
-    position: relative;
-    height: -webkit-fill-available;
-    border: 2px solid white;
-}
 
+.room-detail-container {
+    width: 75vw;
+}
 .room-post-container {
     grid-area: content;
     display: grid;
     grid-gap: 15px;
-    /* grid-template-columns: 2.5fr 1fr; */
+    grid-template-columns: 2.5fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "photoinfo comments";
     margin: 0 0px 15px 0px;
-    justify-items: center;
     justify-content: center;
 }
 
@@ -33,7 +27,15 @@
     position: relative;
     /* width: 100%; */
 }
-
+.room-post-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    position: relative;
+    height: -webkit-fill-available;
+    border: 2px solid white;
+}
 .room-back-button {
     padding: 5px 10px;
     border: 2px solid #1da69800;
@@ -206,7 +208,6 @@
 .messages {
     /* margin-top: 10px; */
     height: 70vh;
-    width: 100%;
     overflow-y: auto;
     display: flex;
     flex-flow: column-reverse nowrap;
@@ -222,6 +223,7 @@ div[id^="message-"] {
     display: grid;
     grid-template-rows: 0.3fr 1fr;
     gap: 20px;
+    position: relative;
     grid-template-areas:
         "author created"
         "comment comment";
@@ -274,10 +276,10 @@ div[id^="message-"] {
     flex-wrap: wrap;
 }
 .post-delete-button {
-    padding: 10px;
-    margin: 15px 25px 15px 25px;
-    border: 2px solid #c7230696;
-    background: #c7230696;
+    padding: 11px 16px 9px 16px;
+    margin: 15px;
+    background: #c72306;
+    border: 2px solid #c72306;
     color: #ffffff;
     text-align: center;
     cursor: pointer;
@@ -285,9 +287,48 @@ div[id^="message-"] {
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     font-family: "Josefin Sans", sans-serif;
     transition: 0.14s ease;
-    z-index: 5;
+    z-index: 55;
+    right: 0;
+    top: 0;
+    position: absolute;
 }
 .post-delete-button:hover {
-    border: 2px solid #e03416ec;
-    background: #e03416ec;
+    border: 2px solid #eb3c1d;
+    background: #eb3c1d;
+}
+
+.comment-delete-button {
+    padding: 8px 16px 6px 16px;
+    margin: 15px;
+    background: #c72306;
+    border: 2px solid #c72306;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    z-index: 55;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+.comment-delete-button:hover {
+    border: 2px solid #eb3c1d;
+    background: #eb3c1d;
+}
+
+.react-tabs__tab-list {
+    border-bottom: 3px solid #1da699 !important;
+    margin-bottom: 50px !important;
+    padding: 0 0 0 50px !important;
+}
+
+.react-tabs__tab--selected {
+    background: #1da699 !important;
+    border: none !important;
+    border-bottom: none !important;
+    color: #ffffff !important;
+    padding: 8px 15px !important;
 }

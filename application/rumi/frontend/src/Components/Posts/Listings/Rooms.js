@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { AiFillCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -77,6 +78,29 @@ function Rooms() {
         setSearchTerm(search);
         setStartPrice(price1);
         setEndPrice(price2);
+    };
+
+    /* only admin can delete any posts */
+    const deletePost = (postid) => {
+        const data = { id: postid };
+        Axios.delete(configData.SERVER_URL + `posts`, { data })
+            .then(() => {
+                console.log("deleted");
+                window.location.reload();
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
     };
 
     return (
@@ -147,28 +171,44 @@ function Rooms() {
                                 value.created_date = new Date(value.created_date).toDateString();
                                 return (
                                     <div key={value.id}>
-                                        <div
-                                            className="post-card"
-                                            onClick={() => {
-                                                history.push(`/post/${value.id}`);
-                                            }}
-                                        >
+                                        <div className="post-card">
                                             <img
                                                 className="post-image"
                                                 src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                                 alt="Missing"
+                                                onClick={() => {
+                                                    history.push(`/post/${value.id}`);
+                                                }}
                                             />
+
                                             <div className="post-price-container">
                                                 <div className="post-price">${value.price}</div>
                                             </div>
-                                            <div className="post-info-container">
+                                            {/* only admin can delete any posts */}
+                                            {Cookies.get("token") && Cookies.get("admin") && (
+                                                <button
+                                                    className="post-delete-button"
+                                                    onClick={() => {
+                                                        deletePost(value.id);
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            )}
+                                            <div
+                                                className="post-info-container"
+                                                onClick={() => {
+                                                    history.push(`/post/${value.id}`);
+                                                }}
+                                            >
                                                 <div className="post-caption">{value.caption}</div>
                                                 <div className="post-desc">{value.description}</div>
                                                 {/* <div className="post-desc-pref">
-                                                <div className="">{value.parking}park</div>
-                                                <div className="">{value.pet}pet</div>
-                                                <div className="">{value.smoking}smoke</div>
-                                            </div> */}
+                                                    <div className="">{value.parking}park</div>
+                                                    <div className="">{value.pet}pet</div>
+                                                    <div className="">{value.smoking}smoke</div>
+                                                </div> */}
+
                                                 <div className="post-date">{value.created_date}</div>
                                             </div>
                                         </div>
