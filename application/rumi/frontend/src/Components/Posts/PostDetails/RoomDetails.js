@@ -214,11 +214,12 @@ function RoomDetails() {
                                             Posted by: <Link to={`/user/${value.creator_id}`}>{value.username}</Link>
                                         </div>
                                     </div>
+
                                 </div>
-                                <div><h1>Map</h1>
+                                 <div><h1>Map</h1>
                                 <MapContainer/>
                                 </div>
-
+                                
                             </div>
                         )
                     )
