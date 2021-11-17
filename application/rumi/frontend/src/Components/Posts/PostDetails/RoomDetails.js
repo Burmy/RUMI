@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 import "./PostDetails.css";
 import { Link } from "react-router-dom";
+import  MapContainer  from "../../Map/MapContainer.js"
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import { AiOutlineCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
 import { AiOutlineCaretLeft } from "react-icons/ai";
+
 
 function RoomDetails() {
     let history = useHistory();
@@ -213,6 +215,10 @@ function RoomDetails() {
                                         </div>
                                     </div>
                                 </div>
+                                <div><h1>Map</h1>
+                                <MapContainer/>
+                                </div>
+
                             </div>
                         )
                     )
