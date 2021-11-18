@@ -146,10 +146,25 @@ router.post("/registration", function (req, res, next) {
         res.status(500).send("Internal server error1");
       } else {
         //chat user init 
-        axios.post('https://api.chatengine.io/projects/people/',
-      { username: username, secret: password },
-      { headers: { 'Private-Key': "0aaa01bf-ebf8-4269-9d8b-78e64e5fea25" } },
-    )
+        return axios.post('https://api.chatengine.io/projects/people/', { username: username, secret: password },
+        { headers: { 'Private-Key': "0aaa01bf-ebf8-4269-9d8b-78e64e5fea25" } },)
+      
+      .then((res)=>{
+        res.send({
+          message:"chatengine io link",
+        })
+      })
+      .catch((err=>{
+        res.status(400).send(err.getMessage());
+      })
+
+
+    
+    ).then((res)=>{
+      res.send({
+        message:"chatengine io link",
+      })
+    })
         return res.send({
           message: "registration secceed!",
         });

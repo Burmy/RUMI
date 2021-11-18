@@ -21,8 +21,31 @@ import Rasul from "./Components/Team/TeamMembers/rasul";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "./Helpers/AuthContext";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
-import Chat from "./Components/Chat/Chat"
+import DashboardComponent from "./Components/Dashboard/dashboard";
+//import Chat from "./Components/Chat/Chat"
 import "./App.css";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyA-pBBNyIuWIEs-fQl60G-fvyfoKyobDC4",
+  authDomain: "csc648rumi.firebaseapp.com",
+  projectId: "csc648rumi",
+  storageBucket: "csc648rumi.appspot.com",
+  messagingSenderId: "807183421594",
+  appId: "1:807183421594:web:1c5c2ee1b2efb53b9a0f23",
+  measurementId: "G-B7GP0DS5CY"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 function App() {
     const [authState, setAuthState] = useState(false);
@@ -38,7 +61,7 @@ function App() {
                         <Route path="/roommates" exact component={Roommates} />
                         <Route path="/team" exact component={Team} />
                         <ProtectedRoute path="/createpost" exact component={CreatePost} />
-                        <Route path="/chat" exact component ={Chat}/>
+                        <Route path="/dashboard" exact component={DashboardComponent} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />
                         <Route path="/post/:id" exact component={RoomDetails} />
