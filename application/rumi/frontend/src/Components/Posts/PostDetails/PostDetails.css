@@ -205,6 +205,11 @@
     color: #1da699;
 }
 
+.nocomm {
+    position: absolute;
+    margin-bottom: 20px;
+}
+
 .messages {
     /* margin-top: 10px; */
     height: 70vh;
@@ -212,6 +217,7 @@
     display: flex;
     flex-flow: column-reverse nowrap;
     scroll-behavior: smooth;
+    align-items: center;
 }
 
 div[id^="message-"] {
