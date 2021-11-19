@@ -25,6 +25,8 @@ import ProtectedRoute from "./Helpers/ProtectedRoute";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./App.css";
 
+import ChatList from "./Components/Chat/ChatList";
+
 const style = { width: "100vw", height: "100vh" };
 function App() {
     const [authState, setAuthState] = useState(false);
@@ -50,6 +52,9 @@ function App() {
                         <ProtectedRoute path="/createpost" exact component={CreatePost} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />
+
+                        <Route path="/chat" exact component={ChatList} />
+
                         <Route path="/post/:id" exact component={RoomDetails} />
                         <Route path="/user/:id" exact component={RoommateDetails} />
                         <Route path="/team/alex" exact component={Alex} />
