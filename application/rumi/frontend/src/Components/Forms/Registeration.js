@@ -110,8 +110,6 @@ const Registeration = () => {
                 .set(userObj)
                 .then(() => {
                     history.push("/login");
-                    // console.log("created in firebase", cred.user);
-                    // addDoc(usersCollectionRef, { email: fireEmail, friends: [], messages: [] });
                 })
                 .catch((error) => {
                     // Error
