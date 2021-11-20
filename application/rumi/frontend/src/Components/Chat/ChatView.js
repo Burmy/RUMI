@@ -13,32 +13,25 @@ class ChatViewComponent extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
-
         if (this.props.chat === undefined) {
-            return <main className={classes.content}></main>;
-        } else if (this.props.chat !== undefined) {
+            return <div className="chat-view-container">heloooooooooooooooooo there will be some text here!!</div>;
+        } else {
             return (
-                <div>
-                    <div className={classes.chatHeader}>
+                <div className="chat-view-container">
+                    <div className="">
                         Your conversation with {this.props.chat.users.filter((_usr) => _usr !== this.props.user)[0]}
                     </div>
-                    <main id="chatview-container" className={classes.content}>
+                    <div id="chatview-container" className="">
                         {this.props.chat.messages.map((_msg, _index) => {
                             return (
-                                <div
-                                    key={_index}
-                                    className={_msg.sender === this.props.user ? classes.userSent : classes.friendSent}
-                                >
+                                <div key={_index} className={_msg.sender === this.props.user ? "sent" : "received"}>
                                     {_msg.message}
                                 </div>
                             );
                         })}
-                    </main>
+                    </div>
                 </div>
             );
-        } else {
-            return <div className="chatview-container">Loading...</div>;
         }
     }
 }

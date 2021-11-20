@@ -1,8 +1,4 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Send from "@material-ui/icons/Send";
-import styles from "./styles";
-import { withStyles } from "@material-ui/core/styles";
 
 class ChatTextBoxComponent extends React.Component {
     constructor() {
@@ -13,18 +9,18 @@ class ChatTextBoxComponent extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <div className={classes.chatTextBoxContainer}>
-                <TextField
+            <div className="chat-input">
+                <input
                     placeholder="Type your message.."
                     onKeyUp={(e) => this.userTyping(e)}
                     id="chattextbox"
-                    className={classes.chatTextBox}
+                    className="chat-input-send"
                     onFocus={this.userClickedInput}
-                ></TextField>
-                <Send onClick={this.submitMessage} className={classes.sendBtn}></Send>
+                ></input>
+                <button onClick={this.submitMessage} className="chat-btn-send">
+                    send
+                </button>
             </div>
         );
     }
@@ -39,4 +35,4 @@ class ChatTextBoxComponent extends React.Component {
     };
 }
 
-export default withStyles(styles)(ChatTextBoxComponent);
+export default ChatTextBoxComponent;

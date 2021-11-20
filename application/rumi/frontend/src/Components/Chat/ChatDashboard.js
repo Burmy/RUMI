@@ -30,11 +30,9 @@ class DashboardComponent extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
-
         if (this.state.email) {
             return (
-                <div className="dashboard-container" id="dashboard-container">
+                <div className="chat-dashboard-container" id="dashboard-container">
                     <ChatListComponent
                         history={this.props.history}
                         userEmail={this.state.email}
@@ -58,9 +56,9 @@ class DashboardComponent extends React.Component {
                     {this.state.newChatFormVisible ? (
                         <NewChatComponent goToChatFn={this.goToChat} newChatSubmitFn={this.newChatSubmit}></NewChatComponent>
                     ) : null}
-                    <Button onClick={this.signOut} className={classes.signOutBtn}>
-                        Sign Out
-                    </Button>
+                    <button onClick={this.signOut} className="log-out">
+                        temp log out
+                    </button>
                 </div>
             );
         } else {

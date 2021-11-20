@@ -15,46 +15,34 @@ class NewChatComponent extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <main className={classes.main}>
-                <CssBaseline />
-                <Paper className={classes.paper}>
-                    <Typography component="h1" variant="h5">
-                        Send A Message!
-                    </Typography>
-                    <form className={classes.form} onSubmit={(e) => this.submitNewChat(e)}>
-                        <FormControl fullWidth>
-                            <InputLabel htmlFor="new-chat-username">Enter Your Friend's Email</InputLabel>
-                            <Input
-                                required
-                                className={classes.input}
-                                autoFocus
-                                onChange={(e) => this.userTyping("username", e)}
-                                id="new-chat-username"
-                            ></Input>
-                        </FormControl>
-                        <FormControl fullWidth>
-                            <InputLabel htmlFor="new-chat-message">Enter Your Message</InputLabel>
-                            <Input
-                                required
-                                className={classes.input}
-                                onChange={(e) => this.userTyping("message", e)}
-                                id="new-chat-message"
-                            ></Input>
-                        </FormControl>
-                        <Button fullWidth variant="contained" color="primary" className={classes.submit} type="submit">
+            <div className="">
+                <div className="login-card">
+                    <form className="form" noValidate>
+                        <p className="form-heading">Send A Message!</p>
+                        <input
+                            className="form-input"
+                            type="text"
+                            name="username"
+                            placeholder="Enter Your Friend's Email"
+                            onChange={(e) => this.userTyping("username", e)}
+                            id="new-chat-username"
+                        />
+
+                        <textarea
+                            className="form-input"
+                            type="text"
+                            name="password"
+                            placeholder="Enter Your Message"
+                            onChange={(e) => this.userTyping("message", e)}
+                            id="new-chat-message"
+                        />
+                        <button className="form-input-btn" onClick={(e) => this.submitNewChat(e)} type="button">
                             Send
-                        </Button>
+                        </button>
                     </form>
-                    {this.state.serverError ? (
-                        <Typography component="h5" variant="h6" className={classes.errorText}>
-                            Unable to locate the user
-                        </Typography>
-                    ) : null}
-                </Paper>
-            </main>
+                </div>
+            </div>
         );
     }
 
@@ -111,4 +99,4 @@ class NewChatComponent extends React.Component {
     };
 }
 
-export default withStyles(styles)(NewChatComponent);
+export default NewChatComponent;
