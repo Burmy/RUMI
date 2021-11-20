@@ -56,17 +56,12 @@ class DashboardComponent extends React.Component {
                     {this.state.newChatFormVisible ? (
                         <NewChatComponent goToChatFn={this.goToChat} newChatSubmitFn={this.newChatSubmit}></NewChatComponent>
                     ) : null}
-                    <button onClick={this.signOut} className="log-out">
-                        temp log out
-                    </button>
                 </div>
             );
         } else {
             return <div>LOADING....</div>;
         }
     }
-
-    signOut = () => firebase.auth().signOut();
 
     submitMessage = (msg) => {
         const docKey = this.buildDocKey(

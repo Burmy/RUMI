@@ -1,4 +1,4 @@
-import { React, useRef } from "react";
+import { React, useRef, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -8,14 +8,31 @@ import Cookies from "js-cookie";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
 import { useDetectOutsideClick } from "./useDetectOutsideClick";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import { IoMdChatboxes } from "react-icons/io";
 
 const Navbar = () => {
-    // const { authTokens, setAuthTokens } = useAuth();
     let history = useHistory();
     let logged = Cookies.get("logged");
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+
     const onClick = () => setIsActive(!isActive);
+
+    const logout = () => {
+        history.push("/");
+        window.location.reload();
+        firebase.auth().signOut();
+        console.log("clicked");
+        Cookies.remove("username");
+        Cookies.remove("loggedUserid");
+        Cookies.remove("logged");
+        Cookies.remove("admin");
+        Cookies.remove("token");
+        Cookies.remove("csid");
+    };
 
     return (
         <div>
@@ -30,7 +47,7 @@ const Navbar = () => {
                             About
                         </Link>
                         <Link className="nav-links" to="/map">
-                          Map
+                            Map
                         </Link>
                     </div>
                     <div className="logo-div">
@@ -40,13 +57,6 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="resp-nav-links">
-                        {/* {!authTokens && (
-                            <>
-                                <Link className="nav-links" to="/createpost">
-                                    Create
-                                </Link>
-                            </>
-                        )} */}
                         {logged ? (
                             <>
                                 <Link className="nav-links" to="/createpost">
@@ -61,6 +71,11 @@ const Navbar = () => {
                                         <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>
                                             <ul>
                                                 <li>
+                                                    <Link to={`/chat`} className="nav-links">
+                                                        <IoMdChatboxes />
+                                                    </Link>
+                                                </li>
+                                                <li>
                                                     <Link to={`/user/${Cookies.get("loggedUserid")}`} className="nav-links">
                                                         Dashboard
                                                     </Link>
@@ -69,29 +84,17 @@ const Navbar = () => {
                                                     <Link
                                                         to="/"
                                                         className="nav-links"
-                                                        onClick={() => {
-                                                            // axios post logout api
-                                                            history.push("/");
-                                                            console.log("clicked");
-                                                            Cookies.remove("username");
-                                                            Cookies.remove("loggedUserid");
-                                                            Cookies.remove("logged");
-                                                            Cookies.remove("admin");
-                                                            Cookies.remove("token");
-                                                            Cookies.remove("csid");
-                                                            window.location.reload();
-
-                                                            // toast.success("Logged Out!", {
-                                                            //     position: "top-right",
-                                                            //     autoClose: 4000,
-                                                            //     hideProgressBar: false,
-                                                            //     closeOnClick: true,
-                                                            //     pauseOnHover: true,
-                                                            //     draggable: true,
-                                                            //     closeButton: false,
-                                                            //     progress: 0,
-                                                            // });
-                                                        }}
+                                                        onClick={logout}
+                                                        // toast.success("Logged Out!", {
+                                                        //     position: "top-right",
+                                                        //     autoClose: 4000,
+                                                        //     hideProgressBar: false,
+                                                        //     closeOnClick: true,
+                                                        //     pauseOnHover: true,
+                                                        //     draggable: true,
+                                                        //     closeButton: false,
+                                                        //     progress: 0,
+                                                        // });
                                                     >
                                                         Logout
                                                     </Link>
