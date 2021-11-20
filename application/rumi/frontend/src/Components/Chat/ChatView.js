@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 class ChatViewComponent extends React.Component {
     componentDidMount = () => {
@@ -11,7 +12,9 @@ class ChatViewComponent extends React.Component {
         const container = document.getElementById("chatview-container");
         if (container) container.scrollTo(0, container.scrollHeight);
     };
+    getUserFromEmail=()=>{
 
+    };
     render() {
         if (this.props.chat === undefined) {
             return <div className="chat-view-container">heloooooooooooooooooo there will be some text here!!</div>;

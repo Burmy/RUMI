@@ -1,4 +1,5 @@
 var db = require("../conf/database");
+const { use } = require("../routes/users");
 const UserModel = {};
 
 UserModel.getById = (id) => {
@@ -11,7 +12,15 @@ UserModel.getById = (id) => {
     })
     .catch((err) => Promise.reject(err));
 };
-
+UserModel.getEmailByUsername = (username) =>{
+  console.log(username);
+let baseSQL= `SELECT email FROM user WHERE username=?;`;
+return db.execute(baseSQL,[username])
+.then(([results,fields])=>{
+  return Promise.resolve(results);
+})
+.catch((err) => Promise.reject(err));
+};
 UserModel.search = (
   searchTerm,
   major,

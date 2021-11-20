@@ -70,8 +70,8 @@ const Login = () => {
         //         }
         //         console.log(error.config);
         //     });
-
-        signInWithEmailAndPassword(auth, username, password)
+            let email = Axios.post(configData.SERVER_URL + "users/getEmailbyUser", username)
+        signInWithEmailAndPassword(auth, email, password)
             .then((cred) => {
                 console.log("logged in firebase", cred.user);
                 history.push("/chat");

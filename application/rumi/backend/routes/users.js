@@ -157,7 +157,13 @@ router.post("/registration", function (req, res, next) {
       }
     });
 });
-
+router.post("/getEmailByUser", function (req,res,next){
+let username = req.body.username;
+  UserModel.getEmailByUsername(username)
+  .then((results)=>{
+    return results;
+  })
+});
 router.post("/login", function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
