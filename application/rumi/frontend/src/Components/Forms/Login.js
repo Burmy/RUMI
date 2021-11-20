@@ -77,7 +77,7 @@ const Login = () => {
                 history.push("/chat");
             })
             .catch((error) => {
-                // Error
+                // Errorn
                 if (error.response) {
                     console.log(error.response.data);
                     console.log(error.response.status);
