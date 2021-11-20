@@ -14,11 +14,11 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
-
+import { getDatabase, ref, set } from "firebase/database";
 const Registeration = () => {
     let history = useHistory();
 
-    // const [fireUser, setFireUser] = useState("");
+    const [fireUser, setFireUser] = useState("");
     const [fireEmail, setFireEmail] = useState("");
     const [firePass, setFirePass] = useState("");
 
@@ -98,9 +98,11 @@ const Registeration = () => {
         createUserWithEmailAndPassword(auth, fireEmail, firePass).then(() => {
             const userObj = {
                 email: fireEmail,
+                username: fireUser,
                 friends: [],
                 messages: [],
             };
+
             firebase
                 .firestore()
                 .collection("users")
@@ -138,9 +140,9 @@ const Registeration = () => {
                         <p className="form-heading">Join Us!</p>
 
                         <Field
-                            // onBlur={(event) => {
-                            //     setFireUser(event.target.value);
-                            // }}
+                            onBlur={(event) => {
+                                setFireUser(event.target.value);
+                            }}
                             className="form-input"
                             name="username"
                             placeholder="Enter Your Username"

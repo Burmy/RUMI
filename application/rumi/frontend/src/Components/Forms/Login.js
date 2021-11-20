@@ -71,6 +71,19 @@ const Login = () => {
         //         console.log(error.config);
         //     });
 
+        db.collection("users")
+            .where("username", "==", username)
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    setUsername(doc.get("email"));
+                    console.log(doc.get("email"));
+                });
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+            });
+
         signInWithEmailAndPassword(auth, username, password)
             .then((cred) => {
                 console.log("logged in firebase", cred.user);
