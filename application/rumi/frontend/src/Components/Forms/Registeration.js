@@ -2,15 +2,25 @@ import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
-import React from "react";
+import { useState } from "react";
 import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
 import configData from "../../Configs/config.json";
+import { collection, addDoc } from "firebase/firestore";
+import { db, auth } from "../Chat/Firebase";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import firebase from "firebase/compat/app";
 
 const Registeration = () => {
     let history = useHistory();
+
+    // const [fireUser, setFireUser] = useState("");
+    const [fireEmail, setFireEmail] = useState("");
+    const [firePass, setFirePass] = useState("");
 
     const initialValues = {
         username: "",
@@ -43,45 +53,80 @@ const Registeration = () => {
             .required("✖ You must enter a Password")
             .oneOf([Yup.ref("password"), null], "✖ Passwords must match"),
     });
+
     const onSubmit = (data) => {
-        Axios.post(configData.SERVER_URL + "users/registration", data)
-            .then((response) => {
-                console.log("IT WORKED");
-                console.log(data);
-                toast.success("Registered Successfully!", {
-                    position: "top-right",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    closeButton: false,
-                    progress: 0,
-                });
-                history.push("/login");
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(data);
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the
-                    // browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
+        // Axios.post(configData.SERVER_URL + "users/registration", data)
+        //     .then((response) => {
+        //         console.log("IT WORKED");
+        //         console.log(data);
+        //         toast.success("Registered Successfully!", {
+        //             position: "top-right",
+        //             autoClose: 4000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             closeButton: false,
+        //             progress: 0,
+        //         });
+        //         history.push("/login");
+        //     })
+        //     .catch((error) => {
+        //         // Error
+        //         if (error.response) {
+        //             // The request was made and the server responded with a status code
+        //             // that falls out of the range of 2xx
+        //             console.log(data);
+        //             console.log(error.response.data);
+        //             console.log(error.response.status);
+        //             console.log(error.response.headers);
+        //         } else if (error.request) {
+        //             // The request was made but no response was received
+        //             // `error.request` is an instance of XMLHttpRequest in the
+        //             // browser and an instance of
+        //             // http.ClientRequest in node.js
+        //             console.log(error.request);
+        //         } else {
+        //             // Something happened in setting up the request that triggered an Error
+        //             console.log("Error", error.message);
+        //         }
+        //         console.log(error.config);
+        //     });
     };
+
+    const createFirebaseUser = async () => {
+        createUserWithEmailAndPassword(auth, fireEmail, firePass).then(() => {
+            const userObj = {
+                email: fireEmail,
+                friends: [],
+                messages: [],
+            };
+            firebase
+                .firestore()
+                .collection("users")
+                .doc(fireEmail)
+                .set(userObj)
+                .then(() => {
+                    history.push("/login");
+                    // console.log("created in firebase", cred.user);
+                    // addDoc(usersCollectionRef, { email: fireEmail, friends: [], messages: [] });
+                })
+                .catch((error) => {
+                    // Error
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
+                });
+        });
+    };
+
     return (
         <div className="form-container">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
@@ -92,13 +137,35 @@ const Registeration = () => {
                     <div className="reg-card" id="part1">
                         <p className="form-heading">Join Us!</p>
 
-                        <Field className="form-input" name="username" placeholder="Enter Your Username" />
+                        <Field
+                            // onBlur={(event) => {
+                            //     setFireUser(event.target.value);
+                            // }}
+                            className="form-input"
+                            name="username"
+                            placeholder="Enter Your Username"
+                        />
                         <ErrorMessage className="form-error" name="username" component="span" />
 
-                        <Field className="form-input" name="email" placeholder="Enter Your Email" />
+                        <Field
+                            onBlur={(event) => {
+                                setFireEmail(event.target.value);
+                            }}
+                            className="form-input"
+                            name="email"
+                            placeholder="Enter Your Email"
+                        />
                         <ErrorMessage className="form-error" name="email" component="span" />
 
-                        <Field className="form-input" type="text" name="password" placeholder="Enter Password" />
+                        <Field
+                            onBlur={(event) => {
+                                setFirePass(event.target.value);
+                            }}
+                            className="form-input"
+                            type="text"
+                            name="password"
+                            placeholder="Enter Password"
+                        />
                         <ErrorMessage className="form-error" name="password" component="span" />
 
                         <Field className="form-input" type="text" name="password2" placeholder="Confirm Password" />
@@ -208,7 +275,7 @@ const Registeration = () => {
                             </div>
                         </div>
 
-                        <button className="form-input-btn" type="submit">
+                        <button onClick={createFirebaseUser} className="form-input-btn" type="submit">
                             Submit
                         </button>
                     </div>
