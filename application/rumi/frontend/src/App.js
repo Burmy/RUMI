@@ -24,11 +24,19 @@ import { AuthContext } from "./Helpers/AuthContext";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./App.css";
-
+import ReactGA from "react-ga";
+import { initGA, logPageView } from "./utils/analytics";
 import ChatDashboard from "./Components/Chat/ChatDashboard";
+
+ReactGA.initialize("G-JKVQRG8KYM");
 
 const style = { width: "100vw", height: "100vh" };
 function App() {
+    if (!window.GA_INITIALIZED) {
+        initGA();
+        window.GA_INITIALIZED = true;
+    }
+    logPageView();
     const [authState, setAuthState] = useState(false);
     return (
         <Router>
