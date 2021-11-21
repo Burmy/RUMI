@@ -5,11 +5,11 @@ const style = { width: "50%", height: "50%", marginLeft: "10px", marginTop: "-5p
 class ChatViewComponent extends React.Component {
     componentDidMount = () => {
         const container = document.getElementById("chatview-container");
-        if (container) container.scrollTo(0, container.scrollHeight);
+        if (container) container.scrollIntoView({ behavior: 'smooth', block: 'end' })
     };
     componentDidUpdate = () => {
         const container = document.getElementById("chatview-container");
-        if (container) container.scrollTo(0, container.scrollHeight);
+        if (container) container.scrollIntoView({ behavior: 'smooth', block: 'end' })
     };
 
     render() {
