@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { FaSmoking } from "react-icons/fa";
+import { RiParkingBoxLine } from "react-icons/ri";
+import { MdOutlinePets } from "react-icons/md";
 
 export default class RoomPref extends Component {
     constructor(props) {
@@ -20,6 +23,9 @@ export default class RoomPref extends Component {
     smokingChecked() {
         this.setState({ smokingisChecked: !this.state.smokingisChecked });
     }
+
+    style = { width: "25px", height: "25px", marginBottom: "-5px", marginRight: "8px" };
+
     render() {
         if (this.state.parkingisChecked) {
             this.props.parking(1);
@@ -45,19 +51,28 @@ export default class RoomPref extends Component {
                     <div className="filter-label">
                         <label>
                             <input type="checkbox" onChange={this.parkingChecked} />
-                            <span>With Parking</span>
+                            <span>
+                                <RiParkingBoxLine style={this.style} />
+                                With Parking
+                            </span>
                         </label>
                     </div>
                     <div className="filter-label">
                         <label>
                             <input type="checkbox" onChange={this.petChecked} />
-                            <span>Pet Friendly</span>
+                            <span>
+                                <MdOutlinePets style={this.style} />
+                                Pet Friendly
+                            </span>
                         </label>
                     </div>
                     <div className="filter-label">
                         <label>
                             <input type="checkbox" onChange={this.smokingChecked} />
-                            <span>Smoking Allowed</span>
+                            <span>
+                                <FaSmoking style={this.style} />
+                                Can Smoke
+                            </span>
                         </label>
                     </div>
                 </div>

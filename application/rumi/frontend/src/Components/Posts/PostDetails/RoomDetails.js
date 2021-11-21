@@ -203,8 +203,8 @@ function RoomDetails() {
                                 <div className="room-info-container">
                                     <div className="room-info-container-caption">{value.caption}</div>
                                     <div className="room-info-container-desc">{value.description}</div>
-                                    <div className="room-info-container-desc">lat = {value.latitude}</div>
-                                    <div className="room-info-container-desc">long = {value.longitude}</div>
+                                    {/* <div className="room-info-container-desc">lat = {value.latitude}</div>
+                                    <div className="room-info-container-desc">long = {value.longitude}</div> */}
                                     <div className="room-info-container-price">
                                         Starting from <span className="user-info-highlight">${value.price}</span>
                                     </div>
@@ -213,11 +213,13 @@ function RoomDetails() {
                                         <div>
                                             Posted by: <Link to={`/user/${value.creator_id}`}>{value.username}</Link>
                                         </div>
+
+                                        <Link className="offer-button" to={`/chat/${value.email}`}>
+                                            Offer
+                                        </Link>
                                     </div>
                                 </div>
-                                <div>
-                                    <Link to={`/chat/${value.email}`}>Chat</Link>
-                                </div>
+
                                 <div>
                                     <h1>Map</h1>
                                     <MapContainer />

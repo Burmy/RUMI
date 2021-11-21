@@ -95,8 +95,26 @@
     font-size: 25px;
     color: #696666;
     padding-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.offer-button {
+    padding: 18px 10px;
+    background: #1da699;
+    display: flex;
+    color: #ffffff;
+    justify-content: center;
+    width: 10vw;
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+.offer-button:hover {
+    background: #28bbac;
+}
 .user-container {
     display: flex;
     flex-direction: column;

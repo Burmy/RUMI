@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { FaSmoking } from "react-icons/fa";
+import { MdOutlinePets } from "react-icons/md";
 
 export default class RoommatePref extends Component {
     constructor(props) {
@@ -16,6 +18,8 @@ export default class RoommatePref extends Component {
     smokingChecked() {
         this.setState({ smokingisChecked: !this.state.smokingisChecked });
     }
+
+    style = { width: "25px", height: "25px", marginBottom: "-5px", marginRight: "8px" };
     render() {
         if (this.state.petisChecked) {
             this.props.pet(1);
@@ -35,13 +39,20 @@ export default class RoommatePref extends Component {
                     <div className="filter-label">
                         <label>
                             <input type="checkbox" onChange={this.petChecked} />
-                            <span>Pet Friendly</span>
+
+                            <span>
+                                <MdOutlinePets style={this.style} />
+                                Pet Friendly
+                            </span>
                         </label>
                     </div>
                     <div className="filter-label">
                         <label>
                             <input type="checkbox" onChange={this.smokingChecked} />
-                            <span>Smoker</span>
+                            <span>
+                                <FaSmoking style={this.style} />
+                                Smoker
+                            </span>
                         </label>
                     </div>
                 </div>

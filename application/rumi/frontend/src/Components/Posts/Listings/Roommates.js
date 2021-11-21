@@ -7,11 +7,14 @@ import "./Listings.css";
 import Major from "./CategoryLists/Major";
 import Gender from "./CategoryLists/Gender";
 import RoommatePref from "./CategoryLists/RoommatePref";
+import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
+
 import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
-import configData from "../../../Configs/config.json";
-import Cookies from "js-cookie";
+import { FaSmoking } from "react-icons/fa";
+import { MdOutlinePets } from "react-icons/md";
 
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -101,7 +104,7 @@ function Roommates() {
                 console.log(error.config);
             });
     };
-
+    const style = { width: "32px", height: "32px" };
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -187,7 +190,32 @@ function Roommates() {
                                                 <div className="user-card-desc">{value.description}</div>
                                                 <div className="user-card-desc2">Studies at {value.school}</div>
                                                 <div className="user-card-desc2">Was born on {value.birthday}</div>
-                                                {/* <div className="user-card-date">{value.created_date}</div> */}
+                                                <div className="post-desc-pref">
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.pets == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <MdOutlinePets style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.smoker == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <FaSmoking style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

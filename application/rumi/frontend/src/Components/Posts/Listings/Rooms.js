@@ -3,15 +3,18 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./Listings.css";
-
 import Location from "./CategoryLists/Location";
 import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
+import configData from "../../../Configs/config.json";
+import Cookies from "js-cookie";
+
 import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { AiFillCaretRight } from "react-icons/ai";
-import configData from "../../../Configs/config.json";
-import Cookies from "js-cookie";
+import { FaSmoking } from "react-icons/fa";
+import { RiParkingBoxLine } from "react-icons/ri";
+import { MdOutlinePets } from "react-icons/md";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -102,7 +105,7 @@ function Rooms() {
                 console.log(error.config);
             });
     };
-
+    const style = { width: "32px", height: "32px" };
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
@@ -203,11 +206,44 @@ function Rooms() {
                                             >
                                                 <div className="post-caption">{value.caption}</div>
                                                 <div className="post-desc">{value.description}</div>
-                                                {/* <div className="post-desc-pref">
-                                                    <div className="">{value.parking}park</div>
-                                                    <div className="">{value.pet}pet</div>
-                                                    <div className="">{value.smoking}smoke</div>
-                                                </div> */}
+                                                <div className="post-desc-pref">
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.parking == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <RiParkingBoxLine style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.pet == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <MdOutlinePets style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.smoking == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <FaSmoking style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                </div>
 
                                                 <div className="post-date">{value.created_date}</div>
                                             </div>
