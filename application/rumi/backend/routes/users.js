@@ -4,7 +4,7 @@ var UserModel = require("../models/users");
 var bcrypt = require("bcrypt");
 const { json } = require("express");
 var UserError = require("../helpers/error/UserError");
-var jwt = require("jsonwebtoken")
+var jwt = require("jsonwebtoken");
 
 router.get("/", function (req, res, next) {
   let id = req.query.id;
@@ -172,19 +172,28 @@ router.post("/login", function (req, res, next) {
 
         let payload = {
           userId: result.id,
-          username: username
-        }
+          username: username,
+        };
 
-        let token = jwt.sign({ payload, exp: Math.floor(Date.now() / 1000) + (60 * 15) }, 'my_secret_key');
+        let token = jwt.sign(
+          { payload, exp: Math.floor(Date.now() / 1000) + 60 * 15 },
+          "my_secret_key"
+        );
 
-        res.cookie('token', token, {sameSite:"none", secure:true})
-        res.cookie('loggedUserid', result.id, {sameSite:"none", secure:true});
-        res.cookie('username', username, {sameSite:"none", secure:true});
-        res.cookie('logged', true, {sameSite:"none", secure:true});
+        res.cookie("token", token, { sameSite: "none", secure: true });
+        res.cookie("loggedUserid", result.id, {
+          sameSite: "none",
+          secure: true,
+        });
+        res.cookie("username", username, { sameSite: "none", secure: true });
+        res.cookie("logged", true, { sameSite: "none", secure: true });
         if (1 == result.admin) {
-          res.cookie('admin', true, {sameSite:"none", secure:true});
+          res.cookie("admin", true, { sameSite: "none", secure: true });
         }
-        res.send({ message: `${username} is logged in` });
+        res.send({
+          message: `${username} is logged in`,
+          result: result ,
+        });
       } else {
         throw new UserError("invalid username/password", 400);
       }
@@ -217,8 +226,7 @@ router.patch("/user/:id", function (req, res, next) {
     major,
     smoker,
     pets
-  )
-
+  );
 });
 
 router.post("/logout", (req, res, next) => {

@@ -140,13 +140,14 @@ UserModel.emailExists = (email) => {
 
 UserModel.authenticate = (username, password) => {
   let result = {};
-  let baseSQL = "SELECT id, username, password, admin FROM user WHERE username = ?";
+  let baseSQL = "SELECT id, username, password, admin, email FROM user WHERE username = ?";
   return db
     .execute(baseSQL, [username])
     .then(([results, fields]) => {
       if (results && results.length == 1) {
         result.id = results[0].id;
         result.admin = results[0].admin;
+        result.email = results[0].email;
         return password == results[0].password;
       } else {
         return Promise.resolve(-1);

@@ -13,137 +13,110 @@ import "firebase/compat/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [fbUsername, setFBUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [fbUsername, setFBUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    let history = useHistory();
+  let history = useHistory();
 
-    const login = () => {
-        const data = { username: username, password: password };
+  const login = () => {
+    const data = { username: username, password: password };
 
-        Axios.defaults.withCredentials = true;
-        Axios.post(configData.SERVER_URL + "users/login", data)
-            .then((response) => {
-                console.log("logged in sql db");
-                // toast.success("Logged In!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
-                localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
-                history.push("/");
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    toast.error("Invalid Username and Password!", {
-                        position: "top-right",
-                        autoClose: 4000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        closeButton: false,
-                        progress: 0,
-                    });
-                    console.log(data);
-                    console.log(error.response.data, "yo");
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the
-                    // browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
+    let email;
 
-        signInWithEmailAndPassword(auth, fbUsername, password)
-            .then((cred) => {
-                console.log("logged in firebase", cred.user);
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
+    Axios.defaults.withCredentials = true;
+    Axios.post(configData.SERVER_URL + "users/login", data)
+      .then((response) => {
+        console.log("logged in sql db");
+        // toast.success("Logged In!", {
+        //     position: "top-right",
+        //     autoClose: 4000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     closeButton: false,
+        //     progress: 0,
+        // });
+        email = response.data.result.email;
+        localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .then((cred) => {
+        console.log("logged in firebase", cred.user);
+        history.push("/");
+        window.location.reload();
+      })
+      .catch((error) => {
+          console.log("oh nononoon")
+        // Error
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+  };
 
-    const getEmail = () => {
-        db.collection("users")
-            .where("username", "==", fbUsername)
-            .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    setFBUsername(doc.get("email"));
-                    console.log(doc.get("email"));
-                });
-            })
-            .catch(function (error) {
-                console.log("Error getting documents: ", error);
-            });
-    };
+//   const getEmail = () => {
+//     db.collection("users")
+//       .where("username", "==", fbUsername)
+//       .get()
+//       .then(function (querySnapshot) {
+//         querySnapshot.forEach(function (doc) {
+//           setFBUsername(doc.get("email"));
+//           console.log(doc.get("email"));
+//         });
+//       })
+//       .catch(function (error) {
+//         console.log("Error getting documents: ", error);
+//       });
+//   };
 
-    return (
-        <div className="form-container">
-            <div className="login-card">
-                <form className="form" noValidate>
-                    <p className="form-heading">Welcome Back!</p>
-                    <input
-                        className="form-input"
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        onChange={(e) => {
-                            setUsername(e.target.value);
-                            setFBUsername(e.target.value);
-                        }}
-                    />
+  return (
+    <div className="form-container">
+      <div className="login-card">
+        <form className="form" noValidate>
+          <p className="form-heading">Welcome Back!</p>
+          <input
+            className="form-input"
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            //   setFBUsername(e.target.value);
+            }}
+          />
 
-                    <input
-                        className="form-input"
-                        type="text"
-                        name="password"
-                        placeholder="Password"
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
-                        onClick={getEmail}
-                    />
-                    <button className="form-input-btn" onClick={login} type="button">
-                        Log in
-                    </button>
-                    <p className="form-input-login">
-                        Not a member yet? Sign up{" "}
-                        <Link className="login-link" to="/register">
-                            here.
-                        </Link>
-                    </p>
-                </form>
-            </div>
-        </div>
-    );
+          <input
+            className="form-input"
+            type="text"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            // onClick={getEmail}
+          />
+          <button className="form-input-btn" onClick={login} type="button">
+            Log in
+          </button>
+          <p className="form-input-login">
+            Not a member yet? Sign up{" "}
+            <Link className="login-link" to="/register">
+              here.
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
