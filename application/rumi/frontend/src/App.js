@@ -24,47 +24,56 @@ import { AuthContext } from "./Helpers/AuthContext";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./App.css";
+import ReactGA from "react-ga";
+import { initGA, logPageView } from "./utils/analytics";
+ReactGA.initialize("G-JKVQRG8KYM");
 
 const style = { width: "100vw", height: "100vh" };
 function App() {
-    const [authState, setAuthState] = useState(false);
-    return (
-        <Router>
-            <div className="app">
-                <Scrollbars
-                    style={style} // This will activate auto hide
-                    autoHide
-                    // Hide delay in ms
-                    autoHideTimeout={2000}
-                    // Duration for hide animation in ms.
-                    autoHideDuration={200}
-                >
-                    <ToastContainer />
-                    <Navbar />
-                    <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/rooms" exact component={Rooms} />
-                        <Route path="/roommates" exact component={Roommates} />
-                        <Route path="/team" exact component={Team} />
-                        <Route path="/map" exact component={Map} />
-                        <ProtectedRoute path="/createpost" exact component={CreatePost} />
-                        <Route path="/login" exact component={Login} />
-                        <Route path="/register" exact component={Register} />
-                        <Route path="/post/:id" exact component={RoomDetails} />
-                        <Route path="/user/:id" exact component={RoommateDetails} />
-                        <Route path="/team/alex" exact component={Alex} />
-                        <Route path="/team/nakulan" exact component={Nakulan} />
-                        <Route path="/team/jasmine" exact component={Jasmine} />
-                        <Route path="/team/josh" exact component={Joshua} />
-                        <Route path="/team/anmol" exact component={Anmol} />
-                        <Route path="/team/alan" exact component={Alan} />
-                        <Route path="/team/rasul" exact component={Rasul} />
-                        <Route path="*" component={Error} />
-                    </Switch>
-                </Scrollbars>
-            </div>
-        </Router>
-    );
+  const [authState, setAuthState] = useState(false);
+
+  if (!window.GA_INITIALIZED) {
+    initGA();
+    window.GA_INITIALIZED = true;
+  }
+  logPageView();
+  return (
+    <Router>
+      <div className="app">
+        <Scrollbars
+          style={style} // This will activate auto hide
+          autoHide
+          // Hide delay in ms
+          autoHideTimeout={2000}
+          // Duration for hide animation in ms.
+          autoHideDuration={200}
+        >
+          <ToastContainer />
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/rooms" exact component={Rooms} />
+            <Route path="/roommates" exact component={Roommates} />
+            <Route path="/team" exact component={Team} />
+            <Route path="/map" exact component={Map} />
+            <ProtectedRoute path="/createpost" exact component={CreatePost} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <Route path="/post/:id" exact component={RoomDetails} />
+            <Route path="/user/:id" exact component={RoommateDetails} />
+            <Route path="/team/alex" exact component={Alex} />
+            <Route path="/team/nakulan" exact component={Nakulan} />
+            <Route path="/team/jasmine" exact component={Jasmine} />
+            <Route path="/team/josh" exact component={Joshua} />
+            <Route path="/team/anmol" exact component={Anmol} />
+            <Route path="/team/alan" exact component={Alan} />
+            <Route path="/team/rasul" exact component={Rasul} />
+            <Route path="*" component={Error} />
+          </Switch>
+        </Scrollbars>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
