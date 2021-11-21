@@ -12,37 +12,32 @@ class ChatListComponent extends React.Component {
                     <button variant="contained" fullWidth color="primary" onClick={this.newChat} className="chat-btn">
                         New Message
                     </button>
-                    <div>
+                    <ul id="chat-list">
                         {this.props.chats.map((_chat, _index) => {
                             return (
                                 <div key={_index}>
-                                    <div
+                                    <li
                                         onClick={() => this.selectChat(_index)}
-                                        className="chat-list-item"
-                                        selected={this.props.selectedChatIndex === _index}
+                                        className={`segmentsList${this.props.selectedChatIndex === _index ? " selected" : ""}`}
                                     >
                                         <div>
                                             <Avatar alt="Remy Sharp">
                                                 {_chat.users.filter((_user) => _user !== this.props.userEmail)[0].split("")[0]}
                                             </Avatar>
                                         </div>
-
                                         <div>
                                             <div>{_chat.users.filter((_user) => _user !== this.props.userEmail)[0]}</div>
-                                            <div>
-                                                {_chat.messages[_chat.messages.length - 1].message.substring(0, 25) + " ..."}
-                                            </div>
                                         </div>
                                         {_chat.receiverHasRead === false && !this.userIsSender(_chat) ? (
                                             <ListItemIcon>
                                                 <NotificationImportant className=""></NotificationImportant>
                                             </ListItemIcon>
                                         ) : null}
-                                    </div>
+                                    </li>
                                 </div>
                             );
                         })}
-                    </div>
+                    </ul>
                 </div>
             );
         } else {

@@ -11,7 +11,9 @@ import { useDetectOutsideClick } from "./useDetectOutsideClick";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { IoMdChatboxes } from "react-icons/io";
+import { RiQuestionAnswerLine } from "react-icons/ri";
+import { MdOutlineLogout } from "react-icons/md";
+import { BiUser } from "react-icons/bi";
 
 const Navbar = () => {
     let history = useHistory();
@@ -33,7 +35,7 @@ const Navbar = () => {
         Cookies.remove("token");
         Cookies.remove("csid");
     };
-
+    const style = { width: "30px", height: "30px", marginLeft: "10px", marginTop: "-5px" };
     return (
         <div>
             <div>
@@ -71,15 +73,22 @@ const Navbar = () => {
                                         <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>
                                             <ul>
                                                 <li>
-                                                    <Link to={`/chat`} className="nav-links">
-                                                        <IoMdChatboxes />
+                                                    <Link to={`/user/${Cookies.get("loggedUserid")}`} className="nav-links">
+                                                        <div className="menu-trigger-option">
+                                                            Dashboard
+                                                            <BiUser style={style} />
+                                                        </div>
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to={`/user/${Cookies.get("loggedUserid")}`} className="nav-links">
-                                                        Dashboard
+                                                    <Link to={`/chat`} className="nav-links">
+                                                        <div className="menu-trigger-option">
+                                                            Chat
+                                                            <RiQuestionAnswerLine style={style} />
+                                                        </div>
                                                     </Link>
                                                 </li>
+
                                                 <li>
                                                     <Link
                                                         to="/"
@@ -96,7 +105,10 @@ const Navbar = () => {
                                                         //     progress: 0,
                                                         // });
                                                     >
-                                                        Logout
+                                                        <div className="menu-trigger-option">
+                                                            Logout
+                                                            <MdOutlineLogout style={style} />
+                                                        </div>
                                                     </Link>
                                                 </li>
                                             </ul>

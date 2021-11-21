@@ -108,7 +108,11 @@
 .menu li {
     border-bottom: 1px solid #dddddd;
 }
-
+.menu-trigger-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .menu li a {
     text-decoration: none;
     padding: 18px 20px;

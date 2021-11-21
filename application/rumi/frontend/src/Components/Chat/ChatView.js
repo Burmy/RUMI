@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./styles";
-import { withStyles } from "@material-ui/core/styles";
+import { RiQuestionAnswerLine } from "react-icons/ri";
 
+const style = { width: "50%", height: "50%", marginLeft: "10px", marginTop: "-5px" };
 class ChatViewComponent extends React.Component {
     componentDidMount = () => {
         const container = document.getElementById("chatview-container");
@@ -14,14 +14,16 @@ class ChatViewComponent extends React.Component {
 
     render() {
         if (this.props.chat === undefined) {
-            return <div className="chat-view-container">heloooooooooooooooooo there will be some text here!!</div>;
+            return (
+                <div className="chat-view-container chat-view-container-empty">
+                    <RiQuestionAnswerLine style={style} />
+                </div>
+            );
         } else {
             return (
                 <div className="chat-view-container">
-                    <div className="">
-                        Your conversation with {this.props.chat.users.filter((_usr) => _usr !== this.props.user)[0]}
-                    </div>
-                    <div id="chatview-container" className="">
+                    <div className="chat-view-heading">{this.props.chat.users.filter((_usr) => _usr !== this.props.user)[0]}</div>
+                    <div id="chatview-container" className="msg">
                         {this.props.chat.messages.map((_msg, _index) => {
                             return (
                                 <div key={_index} className={_msg.sender === this.props.user ? "sent" : "received"}>
@@ -36,4 +38,4 @@ class ChatViewComponent extends React.Component {
     }
 }
 
-export default withStyles(styles)(ChatViewComponent);
+export default ChatViewComponent;

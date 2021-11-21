@@ -1,6 +1,5 @@
 import React from "react";
 import { FormControl, InputLabel, Input, Button, Paper, withStyles, CssBaseline, Typography } from "@material-ui/core";
-import styles from "./styles";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";

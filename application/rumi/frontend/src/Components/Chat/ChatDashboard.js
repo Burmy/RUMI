@@ -3,8 +3,6 @@ import NewChatComponent from "./NewChat";
 import ChatListComponent from "./ChatList";
 import ChatViewComponent from "./ChatView";
 import ChatTextBoxComponent from "./ChatTextBox";
-import styles from "./styles";
-import { Button, withStyles } from "@material-ui/core";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -157,4 +155,4 @@ class DashboardComponent extends React.Component {
     };
 }
 
-export default withStyles(styles)(DashboardComponent);
+export default DashboardComponent;
