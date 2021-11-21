@@ -25,7 +25,8 @@
         "react-tabs": "^3.2.3",
         "react-toastify": "^8.0.3",
         "web-vitals": "^1.1.2",
-        "yup": "^0.32.11"
+        "yup": "^0.32.11",
+        "react-ga": "^3.3.0"
     },
     "scripts": {
         "start": "HTTPS=true&&SSL_CRT_FILE=../../../credentials/HTTPS/localhost.pem&&SSL_KEY_FILE=../../../credentials/HTTPS/localhost-key.pem&&react-scripts start",
