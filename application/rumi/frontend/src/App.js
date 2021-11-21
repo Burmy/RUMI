@@ -54,6 +54,7 @@ function App() {
                         <Route path="/register" exact component={Register} />
 
                         <Route path="/chat" exact component={ChatDashboard} />
+                        <Route path="/chat/:id" exact component={ChatDashboard} />
 
                         <Route path="/post/:id" exact component={RoomDetails} />
                         <Route path="/user/:id" exact component={RoommateDetails} />

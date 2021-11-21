@@ -95,7 +95,7 @@ PostModel.search = (
 };
 
 PostModel.queryById = (id) => {
-  let baseSQL = `SELECT p.*, u.username 
+  let baseSQL = `SELECT p.*, u.username, u.email
     FROM post p  
     JOIN user u 
     ON p.creator_id = u.id 

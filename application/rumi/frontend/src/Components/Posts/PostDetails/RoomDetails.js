@@ -216,6 +216,9 @@ function RoomDetails() {
                                     </div>
                                 </div>
                                 <div>
+                                    <Link to={`/chat/${value.email}`}>Chat</Link>
+                                </div>
+                                <div>
                                     <h1>Map</h1>
                                     <MapContainer />
                                 </div>

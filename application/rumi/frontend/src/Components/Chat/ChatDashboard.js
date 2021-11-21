@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router";
 import NewChatComponent from "./NewChat";
 import ChatListComponent from "./ChatList";
 import ChatViewComponent from "./ChatView";
@@ -24,11 +25,18 @@ class DashboardComponent extends React.Component {
             email: null,
             friends: [],
             chats: [],
+            id: null
         };
     }
 
     render() {
         if (this.state.email) {
+            
+            const id = this.props.match.params.id;
+            if (id){
+                this.state.id = id;
+            }
+
             return (
                 <div className="chat-dashboard-container" id="dashboard-container">
                     <ChatListComponent
@@ -39,7 +47,7 @@ class DashboardComponent extends React.Component {
                         selectedChatIndex={this.state.selectedChat}
                         newChatBtnFn={this.newChatBtnClicked}
                     ></ChatListComponent>
-                    {this.state.newChatFormVisible ? null : (
+                    {this.state.id || this.state.newChatFormVisible ? null : (
                         <ChatViewComponent
                             user={this.state.email}
                             chat={this.state.chats[this.state.selectedChat]}
@@ -51,14 +59,15 @@ class DashboardComponent extends React.Component {
                             submitMessageFn={this.submitMessage}
                         ></ChatTextBoxComponent>
                     ) : null}
-                    {this.state.newChatFormVisible ? (
-                        <NewChatComponent goToChatFn={this.goToChat} newChatSubmitFn={this.newChatSubmit}></NewChatComponent>
+                    {this.state.newChatFormVisible || this.state.id ? (
+                        <NewChatComponent goToChatFn={this.goToChat} newChatSubmitFn={this.newChatSubmit} id = {this.state.id}></NewChatComponent>
                     ) : null}
                 </div>
             );
         } else {
             return <div>LOADING....</div>;
         }
+
     }
 
     submitMessage = (msg) => {
@@ -86,6 +95,7 @@ class DashboardComponent extends React.Component {
     newChatBtnClicked = () => this.setState({ newChatFormVisible: true, selectedChat: null });
 
     newChatSubmit = async (chatObj) => {
+        console.log([this.state.email, chatObj.sendTo])
         const docKey = this.buildDocKey(chatObj.sendTo);
         await firebase
             .firestore()
@@ -106,7 +116,9 @@ class DashboardComponent extends React.Component {
     };
 
     selectChat = async (chatIndex) => {
-        await this.setState({ selectedChat: chatIndex, newChatFormVisible: false });
+        window.history.replaceState({}, document.title, "/" + "chat");
+        this.props.match.params.id = null
+        await this.setState({ selectedChat: chatIndex, newChatFormVisible: false, id: null });
         this.messageRead();
     };
 
@@ -136,6 +148,8 @@ class DashboardComponent extends React.Component {
 
     componentWillMount = () => {
         firebase.auth().onAuthStateChanged(async (_usr) => {
+            console.log("componentWillMount")
+            console.log(_usr)
             if (!_usr) this.props.history.push("/login");
             else {
                 await firebase

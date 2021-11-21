@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { FormControl, InputLabel, Input, Button, Paper, withStyles, CssBaseline, Typography } from "@material-ui/core";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -14,6 +15,7 @@ class NewChatComponent extends React.Component {
     }
 
     render() {
+        this.state.username = this.props.id;
         return (
             <div className="">
                 <div className="login-card">
@@ -23,6 +25,7 @@ class NewChatComponent extends React.Component {
                             className="form-input"
                             type="text"
                             name="username"
+                            value={this.props.id}
                             placeholder="Enter Your Friend's Email"
                             onChange={(e) => this.userTyping("username", e)}
                             id="new-chat-username"
@@ -46,6 +49,8 @@ class NewChatComponent extends React.Component {
     }
 
     componentWillMount() {
+        console.log("NewChat")
+        console.log(firebase.auth().currentUser)
         if (!firebase.auth().currentUser) this.props.history.push("/login");
     }
 
@@ -70,6 +75,8 @@ class NewChatComponent extends React.Component {
         if (userExists) {
             const chatExists = await this.chatExists();
             chatExists ? this.goToChat() : this.createChat();
+        } else {
+            alert("this user doesn't exist.");
         }
     };
 
