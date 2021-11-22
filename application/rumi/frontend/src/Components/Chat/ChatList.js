@@ -1,9 +1,12 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
+// import Avatar from "@material-ui/core/Avatar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import NotificationImportant from "@material-ui/icons/NotificationImportant";
-import "./Chat.css";
+import Avatar from "react-avatar";
+import { VscBellDot } from "react-icons/vsc";
 
+import "./Chat.css";
+const stylenoti = { marginTop: "10px", width: "35px", height: "35px", color: "#1da699" };
 class ChatListComponent extends React.Component {
     render() {
         if (this.props.chats.length > 0) {
@@ -21,17 +24,23 @@ class ChatListComponent extends React.Component {
                                         className={`segmentsList${this.props.selectedChatIndex === _index ? " selected" : ""}`}
                                     >
                                         <div>
-                                            <Avatar alt="Remy Sharp">
-                                                {_chat.users.filter((_user) => _user !== this.props.userEmail)[0].split("")[0]}
-                                            </Avatar>
+                                            <Avatar
+                                                className="menu-profile"
+                                                name={
+                                                    _chat.users.filter((_user) => _user !== this.props.userEmail)[0].split("")[0]
+                                                }
+                                                round
+                                                size="60px"
+                                                color="white"
+                                            />
                                         </div>
                                         <div>
                                             <div>{_chat.users.filter((_user) => _user !== this.props.userEmail)[0]}</div>
                                         </div>
                                         {_chat.receiverHasRead === false && !this.userIsSender(_chat) ? (
-                                            <ListItemIcon>
-                                                <NotificationImportant className=""></NotificationImportant>
-                                            </ListItemIcon>
+                                            <div>
+                                                <VscBellDot style={stylenoti} />
+                                            </div>
                                         ) : null}
                                     </li>
                                 </div>

@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 import NewChatComponent from "./NewChat";
 import ChatListComponent from "./ChatList";
 import ChatViewComponent from "./ChatView";
-import ChatTextBoxComponent from "./ChatTextBox";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -25,15 +24,14 @@ class DashboardComponent extends React.Component {
             email: null,
             friends: [],
             chats: [],
-            id: null
+            id: null,
         };
     }
 
     render() {
         if (this.state.email) {
-            
             const id = this.props.match.params.id;
-            if (id){
+            if (id) {
                 this.state.id = id;
             }
 
@@ -51,23 +49,22 @@ class DashboardComponent extends React.Component {
                         <ChatViewComponent
                             user={this.state.email}
                             chat={this.state.chats[this.state.selectedChat]}
-                        ></ChatViewComponent>
-                    )}
-                    {this.state.selectedChat !== null && !this.state.newChatFormVisible ? (
-                        <ChatTextBoxComponent
                             userClickedInputFn={this.messageRead}
                             submitMessageFn={this.submitMessage}
-                        ></ChatTextBoxComponent>
-                    ) : null}
+                        ></ChatViewComponent>
+                    )}
                     {this.state.newChatFormVisible || this.state.id ? (
-                        <NewChatComponent goToChatFn={this.goToChat} newChatSubmitFn={this.newChatSubmit} id = {this.state.id}></NewChatComponent>
+                        <NewChatComponent
+                            goToChatFn={this.goToChat}
+                            newChatSubmitFn={this.newChatSubmit}
+                            id={this.state.id}
+                        ></NewChatComponent>
                     ) : null}
                 </div>
             );
         } else {
             return <div>LOADING....</div>;
         }
-
     }
 
     submitMessage = (msg) => {
@@ -95,7 +92,7 @@ class DashboardComponent extends React.Component {
     newChatBtnClicked = () => this.setState({ newChatFormVisible: true, selectedChat: null });
 
     newChatSubmit = async (chatObj) => {
-        console.log([this.state.email, chatObj.sendTo])
+        console.log([this.state.email, chatObj.sendTo]);
         const docKey = this.buildDocKey(chatObj.sendTo);
         await firebase
             .firestore()
@@ -117,7 +114,7 @@ class DashboardComponent extends React.Component {
 
     selectChat = async (chatIndex) => {
         window.history.replaceState({}, document.title, "/" + "chat");
-        this.props.match.params.id = null
+        this.props.match.params.id = null;
         await this.setState({ selectedChat: chatIndex, newChatFormVisible: false, id: null });
         this.messageRead();
     };
@@ -148,8 +145,8 @@ class DashboardComponent extends React.Component {
 
     componentWillMount = () => {
         firebase.auth().onAuthStateChanged(async (_usr) => {
-            console.log("componentWillMount")
-            console.log(_usr)
+            console.log("componentWillMount");
+            console.log(_usr);
             if (!_usr) this.props.history.push("/login");
             else {
                 await firebase

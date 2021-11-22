@@ -9,6 +9,7 @@ import Gender from "./CategoryLists/Gender";
 import RoommatePref from "./CategoryLists/RoommatePref";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
+import Avatar from "react-avatar";
 
 import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
@@ -186,35 +187,47 @@ function Roommates() {
                                                     history.push(`/user/${value.id}`);
                                                 }}
                                             >
-                                                <div className="user-card-caption">{value.username}</div>
-                                                <div className="user-card-desc">{value.description}</div>
-                                                <div className="user-card-desc2">Studies at {value.school}</div>
-                                                <div className="user-card-desc2">Was born on {value.birthday}</div>
-                                                <div className="post-desc-pref">
-                                                    {(() => {
-                                                        // eslint-disable-next-line eqeqeq
-                                                        if (value.pets == "1") {
-                                                            return (
-                                                                <div>
-                                                                    <MdOutlinePets style={style} />
-                                                                </div>
-                                                            );
-                                                        } else {
-                                                            return <></>;
-                                                        }
-                                                    })()}
-                                                    {(() => {
-                                                        // eslint-disable-next-line eqeqeq
-                                                        if (value.smoker == "1") {
-                                                            return (
-                                                                <div>
-                                                                    <FaSmoking style={style} />
-                                                                </div>
-                                                            );
-                                                        } else {
-                                                            return <></>;
-                                                        }
-                                                    })()}
+                                                <div className="user-card-info-profile-cont">
+                                                    <Avatar
+                                                        className="user-card-info-profile"
+                                                        name={value.username[0].split("")[0]}
+                                                        round
+                                                        size="180px"
+                                                        color="white"
+                                                    />
+                                                </div>
+
+                                                <div className="user-card-info-cont">
+                                                    <div className="user-card-caption">{value.username}</div>
+                                                    <div className="user-card-desc">{value.description}</div>
+                                                    <div className="user-card-desc2">Studies at {value.school}</div>
+                                                    <div className="user-card-desc2">Was born on {value.birthday}</div>
+                                                    <div className="post-desc-pref">
+                                                        {(() => {
+                                                            // eslint-disable-next-line eqeqeq
+                                                            if (value.pets == "1") {
+                                                                return (
+                                                                    <div>
+                                                                        <MdOutlinePets style={style} />
+                                                                    </div>
+                                                                );
+                                                            } else {
+                                                                return <></>;
+                                                            }
+                                                        })()}
+                                                        {(() => {
+                                                            // eslint-disable-next-line eqeqeq
+                                                            if (value.smoker == "1") {
+                                                                return (
+                                                                    <div>
+                                                                        <FaSmoking style={style} />
+                                                                    </div>
+                                                                );
+                                                            } else {
+                                                                return <></>;
+                                                            }
+                                                        })()}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

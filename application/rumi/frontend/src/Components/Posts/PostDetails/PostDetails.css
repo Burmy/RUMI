@@ -124,6 +124,7 @@
     padding-top: 50px;
     width: 100%;
     padding-bottom: 50px;
+    margin-top: 70px;
 }
 
 .user-info-plus-back {
@@ -145,8 +146,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px 50px 25px 50px;
+    padding: 100px 50px 25px 50px;
     font-size: 35px;
+}
+.user-info-profile {
+    position: absolute;
+    margin-top: -105px;
+    color: #1da699 !important;
 }
 
 .user-info-main-desc {

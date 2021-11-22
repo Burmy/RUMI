@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineCaretLeft } from "react-icons/ai";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-
+import Avatar from "react-avatar";
 function RoommateDetails() {
     let { id } = useParams();
     let history = useHistory();
@@ -144,6 +144,13 @@ function RoommateDetails() {
                                     </div>
                                     <div className="user-info-container">
                                         <div className="user-info-main">
+                                            <Avatar
+                                                className="user-info-profile"
+                                                name={value.username[0].split("")[0]}
+                                                round
+                                                size="180px"
+                                                color="white"
+                                            />
                                             <div>
                                                 {value.username} <span className="user-info-highlight">{value.last_name}</span>
                                             </div>

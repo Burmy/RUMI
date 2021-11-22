@@ -14,7 +14,7 @@ import "firebase/compat/firestore";
 import { RiQuestionAnswerLine } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
-
+import Avatar from "react-avatar";
 const Navbar = () => {
     let history = useHistory();
     let logged = Cookies.get("logged");
@@ -68,7 +68,13 @@ const Navbar = () => {
                                     <div className="menu-container">
                                         <button onClick={onClick} className="menu-trigger">
                                             {/* <span>{Cookies.get("username")}</span> */}
-                                            {/* <img src="https://i.redd.it/v0caqchbtn741.jpg" alt="User avatar" /> */}
+                                            <Avatar
+                                                className="menu-profile"
+                                                name={Cookies.get("username")[0].split("")[0]}
+                                                round
+                                                size="60px"
+                                                color="white"
+                                            />
                                         </button>
                                         <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>
                                             <ul>

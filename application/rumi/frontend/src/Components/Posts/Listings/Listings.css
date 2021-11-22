@@ -58,8 +58,8 @@
 }
 .user-card {
     position: relative;
-    width: 400px;
-    height: 250px;
+    width: 350px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     background: #ffffff;
@@ -139,9 +139,22 @@
 .user-card-info-container {
     display: flex;
     flex-direction: column;
-    padding: 30px;
     justify-content: center;
-    /* align-items: center; */
+}
+
+.user-card-info-profile-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1da698;
+    padding: 25px;
+}
+.user-card-info-profile {
+    color: #1da699 !important;
+}
+
+.user-card-info-cont {
+    padding: 30px;
 }
 .user-card-caption {
     font-size: 26px;
