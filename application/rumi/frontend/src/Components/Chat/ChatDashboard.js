@@ -6,7 +6,7 @@ import ChatViewComponent from "./ChatView";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-
+import ScaleLoader from "react-spinners/ScaleLoader";
 // I need to investigate why sometimes
 // two messages will send instead of just
 // one. I dont know if there are two instances
@@ -63,7 +63,12 @@ class DashboardComponent extends React.Component {
                 </div>
             );
         } else {
-            return <div>LOADING....</div>;
+            return (
+                <div className="loading">
+                    <ScaleLoader height={50} width={8} radius={0} margin={2} color="#1da699" speedMultiplier={1.7} />
+                    <div className="loading">Loading...</div>
+                </div>
+            );
         }
     }
 

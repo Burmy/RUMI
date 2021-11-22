@@ -16,7 +16,7 @@ import { BsPersonFill } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
-
+import ScaleLoader from "react-spinners/ScaleLoader";
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -37,10 +37,13 @@ function Roommates() {
     const [pet, setPet] = useState("");
     const [gender, setGender] = useState("");
 
+    const [loading, setLoading] = useState(false);
+
     let history = useHistory();
 
     useEffect(() => {
         async function getPosts() {
+            setLoading(true);
             Axios.get(
                 configData.SERVER_URL +
                     `users?search=${searchTerm}&major=${major}&school=${school}&smoker=${smoking}&pet=${pet}&gender=${gender}`
@@ -71,6 +74,9 @@ function Roommates() {
                         console.log("Error", error.message);
                     }
                     console.log(error.config);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
         getPosts();
@@ -106,136 +112,183 @@ function Roommates() {
             });
     };
     const style = { width: "32px", height: "32px" };
+
     return (
-        <div className="home">
-            <form className="search" onSubmit={submit}>
-                <Link className="search-icon" to="/rooms">
-                    <BsPersonFill />
-                </Link>
-                <input
-                    type="text"
-                    className="search-text"
-                    placeholder="Search a Roommate . . . "
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-                <input
-                    className="search-price"
-                    type="text"
-                    placeholder="Select School"
-                    value={searchSchool}
-                    onChange={(e) => setSearchSchool(e.target.value)}
-                />
-                <div className="filter-gender">
-                    <Major major={setSearchMajor} />
-                </div>
-                <input className="search-button" type="submit" value="Search" />
-            </form>
-            <div>{postCount}</div>
-            <div className="post-listings">
-                <div className="filter-toggle">
-                    <label className="collapse" for="_2">
-                        Filters
-                        <AiFillCaretRight
-                            style={{
-                                position: "absolute",
-                                top: "18px",
-                                right: "20px",
-                            }}
-                        />
-                    </label>
-                    <input id="_2" type="checkbox" />
+        <div>
+            {loading ? (
+                <div>
+                    <div className="home">
+                        <form className="search" onSubmit={submit}>
+                            <Link className="search-icon" to="/rooms">
+                                <BsPersonFill />
+                            </Link>
+                            <input
+                                type="text"
+                                className="search-text"
+                                placeholder="Search a Roommate . . . "
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            <input
+                                className="search-price"
+                                type="text"
+                                placeholder="Select School"
+                                value={searchSchool}
+                                onChange={(e) => setSearchSchool(e.target.value)}
+                            />
+                            <div className="filter-gender">
+                                <Major major={setSearchMajor} />
+                            </div>
+                            <input className="search-button" type="submit" value="Search" />
+                        </form>
 
-                    <div className="filter-container">
-                        <div className="filter-location">
-                            <div className="filter-heading">Select Gender</div>
-                            <Gender gender={setGender} />
-                        </div>
-
-                        <div className="">
-                            <div className="filter-heading">Select Preferences</div>
-                            <RoommatePref pet={setPet} smoking={setSmoking} />
+                        <div className="loading">
+                            <ScaleLoader
+                                className={loading}
+                                height={50}
+                                width={8}
+                                radius={0}
+                                margin={2}
+                                color="#1da699"
+                                speedMultiplier={1.7}
+                            />
+                            <div className="loading">Loading...</div>
                         </div>
                     </div>
                 </div>
-                <div className="post-container">
-                    {listOfPosts &&
-                        listOfPosts
-                            .slice(0)
-                            .reverse()
-                            .map((value, key) => {
-                                // value.created_date = new Date(value.created_date).toDateString();
-                                value.birthday = new Date(value.birthday).toDateString();
-                                return (
-                                    <div key={value.id}>
-                                        <div className="user-card">
-                                            {/* only admin can delete any users */}
-                                            {Cookies.get("token") && Cookies.get("admin") && (
-                                                <button
-                                                    className="post-delete-button"
-                                                    onClick={() => {
-                                                        deleteUser(value.id);
-                                                    }}
-                                                >
-                                                    Delete
-                                                </button>
-                                            )}
+            ) : (
+                <div className="home">
+                    <form className="search" onSubmit={submit}>
+                        <Link className="search-icon" to="/rooms">
+                            <BsPersonFill />
+                        </Link>
+                        <input
+                            type="text"
+                            className="search-text"
+                            placeholder="Search a Roommate . . . "
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                        <input
+                            className="search-price"
+                            type="text"
+                            placeholder="Select School"
+                            value={searchSchool}
+                            onChange={(e) => setSearchSchool(e.target.value)}
+                        />
+                        <div className="filter-gender">
+                            <Major major={setSearchMajor} />
+                        </div>
+                        <input className="search-button" type="submit" value="Search" />
+                    </form>
+                    <div>{postCount}</div>
 
-                                            <div
-                                                className="user-card-info-container"
-                                                onClick={() => {
-                                                    history.push(`/user/${value.id}`);
-                                                }}
-                                            >
-                                                <div className="user-card-info-profile-cont">
-                                                    <Avatar
-                                                        className="user-card-info-profile"
-                                                        name={value.username[0].split("")[0]}
-                                                        round
-                                                        size="180px"
-                                                        color="white"
-                                                    />
-                                                </div>
+                    <div className="post-listings">
+                        <div className="filter-toggle">
+                            <label className="collapse" for="_2">
+                                Filters
+                                <AiFillCaretRight
+                                    style={{
+                                        position: "absolute",
+                                        top: "18px",
+                                        right: "20px",
+                                    }}
+                                />
+                            </label>
+                            <input id="_2" type="checkbox" />
 
-                                                <div className="user-card-info-cont">
-                                                    <div className="user-card-caption">{value.username}</div>
-                                                    <div className="user-card-desc">{value.description}</div>
-                                                    <div className="user-card-desc2">Studies at {value.school}</div>
-                                                    <div className="user-card-desc2">Was born on {value.birthday}</div>
-                                                    <div className="post-desc-pref">
-                                                        {(() => {
-                                                            // eslint-disable-next-line eqeqeq
-                                                            if (value.pets == "1") {
-                                                                return (
-                                                                    <div>
-                                                                        <MdOutlinePets style={style} />
-                                                                    </div>
-                                                                );
-                                                            } else {
-                                                                return <></>;
-                                                            }
-                                                        })()}
-                                                        {(() => {
-                                                            // eslint-disable-next-line eqeqeq
-                                                            if (value.smoker == "1") {
-                                                                return (
-                                                                    <div>
-                                                                        <FaSmoking style={style} />
-                                                                    </div>
-                                                                );
-                                                            } else {
-                                                                return <></>;
-                                                            }
-                                                        })()}
+                            <div className="filter-container">
+                                <div className="filter-location">
+                                    <div className="filter-heading">Select Gender</div>
+                                    <Gender gender={setGender} />
+                                </div>
+
+                                <div className="">
+                                    <div className="filter-heading">Select Preferences</div>
+                                    <RoommatePref pet={setPet} smoking={setSmoking} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="post-container">
+                            {listOfPosts &&
+                                listOfPosts
+                                    .slice(0)
+                                    .reverse()
+                                    .map((value, key) => {
+                                        // value.created_date = new Date(value.created_date).toDateString();
+                                        value.birthday = new Date(value.birthday).toDateString();
+                                        return (
+                                            <div key={value.id}>
+                                                <div className="user-card">
+                                                    {/* only admin can delete any users */}
+                                                    {Cookies.get("token") && Cookies.get("admin") && (
+                                                        <button
+                                                            className="post-delete-button"
+                                                            onClick={() => {
+                                                                deleteUser(value.id);
+                                                            }}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    )}
+
+                                                    <div
+                                                        className="user-card-info-container"
+                                                        onClick={() => {
+                                                            history.push(`/user/${value.id}`);
+                                                        }}
+                                                    >
+                                                        <div className="user-card-info-profile-cont">
+                                                            <Avatar
+                                                                className="user-card-info-profile"
+                                                                name={value.username[0].split("")[0]}
+                                                                round
+                                                                size="180px"
+                                                                color="white"
+                                                            />
+                                                        </div>
+
+                                                        <div className="user-card-info-cont">
+                                                            <div className="user-card-caption">{value.username}</div>
+                                                            <div className="user-card-desc">{value.description}</div>
+                                                            <div className="user-card-desc2">Studies at {value.school}</div>
+                                                            <div className="user-card-desc2">Was born on {value.birthday}</div>
+                                                            <div className="post-desc-pref">
+                                                                {(() => {
+                                                                    // eslint-disable-next-line eqeqeq
+                                                                    if (value.pets == "1") {
+                                                                        return (
+                                                                            <div>
+                                                                                <MdOutlinePets style={style} />
+                                                                            </div>
+                                                                        );
+                                                                    } else {
+                                                                        return <></>;
+                                                                    }
+                                                                })()}
+                                                                {(() => {
+                                                                    // eslint-disable-next-line eqeqeq
+                                                                    if (value.smoker == "1") {
+                                                                        return (
+                                                                            <div>
+                                                                                <FaSmoking style={style} />
+                                                                            </div>
+                                                                        );
+                                                                    } else {
+                                                                        return <></>;
+                                                                    }
+                                                                })()}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                                        );
+                                    })}
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
