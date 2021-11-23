@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`favorite` (
   `saved_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `postid_idx` (`post_id` ASC) VISIBLE,
-  INDEX `userid_idx` (`saved_byfavorite` ASC) VISIBLE,
+  INDEX `userid_idx` (`saved_by` ASC) VISIBLE,
   CONSTRAINT `favoritepostid`
     FOREIGN KEY (`post_id`)
     REFERENCES `rumi-db2`.`post` (`id`)
