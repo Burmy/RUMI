@@ -8,10 +8,10 @@ router.get('/', function (req, res, next) {
   let post_id = req.query.post_id;
 
   CommentModel.search(
-    id,
-    creator_id,
-    post_id,
-  )
+      id,
+      creator_id,
+      post_id,
+    )
     .then((results) => {
       if (results && results.length) {
         res.send({
@@ -36,20 +36,26 @@ router.post("/", function (req, res, next) {
   let creator_id = req.body.creator_id;
 
   if (!text || !text.length) {
-    return res.status(400).send({ message: "Comment should not be null" });
+    return res.status(400).send({
+      message: "Comment should not be null"
+    });
   }
   if (!post_id || !post_id.length) {
-    return res.status(400).send({ message: "post_id should not be null" });
+    return res.status(400).send({
+      message: "post_id should not be null"
+    });
   }
   if (!creator_id || !creator_id.length) {
-    return res.status(400).send({ message: "creator_id should not be null" });
+    return res.status(400).send({
+      message: "creator_id should not be null"
+    });
   }
 
   return CommentModel.create(
-    text,
-    post_id,
-    creator_id
-  )
+      text,
+      post_id,
+      creator_id
+    )
     .then((results) => {
       if (results && results.affectedRows) {
         res.send({
@@ -63,7 +69,6 @@ router.post("/", function (req, res, next) {
       }
     })
     .catch((err) => next(err));
-
 });
 
 router.delete("/", function (req, res, next) {
@@ -71,7 +76,9 @@ router.delete("/", function (req, res, next) {
   CommentModel.delete(id)
     .then((isCommentDeleted) => {
       if (isCommentDeleted) {
-        res.send({ message: `Comment is deleted` });
+        res.send({
+          message: `Comment is deleted`
+        });
       } else {
         res.status(400).send({
           message: `id not found`,

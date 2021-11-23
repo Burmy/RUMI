@@ -165,23 +165,18 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `rumi-db2`.`favorite` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `post_id` INT NOT NULL,
-  `like` BIT(1) NULL,
-  `saved` BIT(1) NULL,
-  `match` BIT(1) NULL,
-  `creator_id` INT NOT NULL,
-  `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `deleted` BIT(1) NULL,
-  `deleted_date` DATETIME NULL,
+  `saved_by` INT NOT NULL,
+  `saved_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `postid_idx` (`post_id` ASC) VISIBLE,
-  INDEX `userid_idx` (`creator_id` ASC) VISIBLE,
+  INDEX `userid_idx` (`saved_by` ASC) VISIBLE,
   CONSTRAINT `favoritepostid`
     FOREIGN KEY (`post_id`)
     REFERENCES `rumi-db2`.`post` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `favoriteuserid`
-    FOREIGN KEY (`creator_id`)
+    FOREIGN KEY (`saved_by`)
     REFERENCES `rumi-db2`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
