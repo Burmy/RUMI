@@ -46,6 +46,8 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`user` (
   `deleted_date` DATETIME NULL,
   `admin` INT NULL,
   `activated` INT NULL,
+  `photo` varchar(2048) DEFAULT NULL,
+  `thumbnail` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
