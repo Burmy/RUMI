@@ -13,6 +13,7 @@ var listRouter = require("./routes/list");
 var filesRouter = require("./routes/files");
 var commentsRouter = require("./routes/comments");
 var messagesRouter = require("./routes/messages");
+var favoritesRouter = require("./routes/favorites");
 
 var sessions = require("express-session");
 var mysqlSession = require("express-mysql-session")(sessions);
@@ -69,6 +70,7 @@ app.use("/list", listRouter);
 app.use("/files", filesRouter);
 app.use("/comments", commentsRouter);
 app.use("/messages", messagesRouter);
+app.use("/favorites", favoritesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

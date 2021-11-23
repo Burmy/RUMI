@@ -1,10 +1,29 @@
 var express = require("express");
 var router = express.Router();
+var sharp = require("sharp");
+var multer = require("multer");
+var crypto = require("crypto");
 var UserModel = require("../models/users");
 var bcrypt = require("bcrypt");
 const { json } = require("express");
 var UserError = require("../helpers/error/UserError");
 var jwt = require("jsonwebtoken");
+
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/upload");
+  },
+  filename: function (req, file, cb) {
+    let fileExt = file.mimetype.split("/")[1];
+    let randomName = crypto.randomBytes(22).toString("hex");
+    cb(null, `${randomName}.${fileExt}`);
+  },
+});
+
+var uploader = multer({ storage: storage });
+
 
 router.get("/", function (req, res, next) {
   let id = req.query.id;
@@ -55,7 +74,7 @@ router.get("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.post("/registration", function (req, res, next) {
+router.post("/registration", uploader.single("photo"), function (req, res, next) {
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
@@ -66,6 +85,15 @@ router.post("/registration", function (req, res, next) {
   let smoker = req.body.smoker;
   let pets = req.body.pets;
 
+  if (!req.file) {
+    return res.status(400).send({ message: "Photo should not be null" });
+  }
+  
+  let photo = req.file.path;
+  let photoName = req.file.filename;
+  let thumbnail = `thumbnail-${photoName}`;
+  let destinationOfThumbnail = req.file.destination + "/" + thumbnail;
+
   if (!username || !username.length) {
     return res.status(400).send({ message: "username should not be null" });
   }
@@ -74,6 +102,9 @@ router.post("/registration", function (req, res, next) {
   }
   if (!password || !password.length) {
     return res.status(400).send({ message: "password should not be null" });
+  }
+  if (!photo || !photo.length) {
+    return res.status(400).send({ message: "Photo should not be null" });
   }
   if (!description || !description.length) {
     return res.status(400).send({ message: "Description should not be null" });
@@ -126,7 +157,11 @@ router.post("/registration", function (req, res, next) {
     .then((emailExists) => {
       if (emailExists) {
         throw new UserError("email exists", 400);
-      } else {
+      } else    
+    sharp(photo)
+      .resize(200)
+      .toFile(destinationOfThumbnail)
+      .then(() => {
         return UserModel.create(
           username,
           password,
@@ -136,16 +171,18 @@ router.post("/registration", function (req, res, next) {
           school,
           major,
           smoker,
-          pets
+          pets,
+          photoName,
+          thumbnail
         );
-      }
+      })
     })
     .then((createdUserId) => {
       if (createdUserId < 0) {
         res.status(500).send("Internal server error1");
       } else {
         return res.send({
-          message: "registration secceed!",
+          message: "registration succeeded!",
         });
       }
     })

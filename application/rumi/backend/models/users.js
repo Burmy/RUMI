@@ -81,10 +81,12 @@ UserModel.create = (
   school,
   major,
   smoker,
-  pets
+  pets,
+  photo,
+  thumbnail
 ) => {
   let baseSQL = `INSERT INTO user (
-      username,
+    username,
     password,
     email,
     description,
@@ -94,9 +96,11 @@ UserModel.create = (
     smoker,
     pets,
     deleted,
-    activated) 
+    activated,
+    photo,
+    thumbnail) 
     VALUES 
-    (?,?,?,?,?,?,?,?,?,0,1);`;
+    (?,?,?,?,?,?,?,?,?,0,1,?,?);`;
 
   return db
     .execute(baseSQL, [
@@ -109,6 +113,8 @@ UserModel.create = (
       major,
       parseInt(smoker),
       parseInt(pets),
+      photo,
+      thumbnail,
     ])
     .then(([results, fields]) => {
       if (results && results.affectedRows) {

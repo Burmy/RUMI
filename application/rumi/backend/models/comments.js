@@ -71,5 +71,3 @@ CommentModel.delete = (id) => {
 };
 
 module.exports = CommentModel;
-
-
