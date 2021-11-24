@@ -56,4 +56,21 @@ router.post("/", function (req, res, next) {
         .catch((err) => next(err));
 });
 
+router.delete("/", function (req, res, next) {
+    let id = req.body.id;
+    FavoriteModel.delete(id)
+        .then((isPostUnsaved) => {
+            if (isPostUnsaved) {
+                res.send({
+                    message: `Post is unsaved`
+                });
+            } else {
+                res.status(400).send({
+                    message: `id not found`,
+                });
+            }
+        })
+        .catch((err) => next(err));
+});
+
 module.exports = router;

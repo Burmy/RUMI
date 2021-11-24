@@ -11,7 +11,8 @@ FavoriteModel.search = (
     let baseSQL = `SELECT f.*, u.username
       FROM favorite f  
       JOIN user u 
-      ON f.saved_by = u.id`;
+      ON f.saved_by = u.id
+      WHERE f.unsaved = 0 and u.deleted = 0 and u.activated = 1 `;
 
     if (id) {
         baseSQL += ` AND f.id = ? `;
@@ -42,9 +43,9 @@ FavoriteModel.create = (
     saved_by
 ) => {
     let baseSQL = `INSERT INTO favorite 
-    (post_id, saved_by) 
+    (post_id, saved_by, unsaved) 
     VALUES 
-    (?,?);`;
+    (?,?,0);`;
 
     return db
         .execute(baseSQL, [
@@ -57,5 +58,14 @@ FavoriteModel.create = (
         .catch((err) => Promise.reject(err));
 };
 
+FavoriteModel.delete = (id) => {
+    let baseSQL = `UPDATE favorite SET unsaved = 1 WHERE id = ?;`;
+    return db
+        .execute(baseSQL, [id])
+        .then(([results, fields]) => {
+            return Promise.resolve(results && results.affectedRows);
+        })
+        .catch((err) => Promise.reject(err));
+};
 
 module.exports = FavoriteModel;
