@@ -5,6 +5,7 @@ var crypto = require("crypto");
 var router = express.Router();
 var PostModel = require("../models/posts");
 var PostError = require("../helpers/error/PostError");
+var { authentication } = require("../middleware/authetication");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -91,7 +92,8 @@ router.get("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.post("/", uploader.single("photo"), function (req, res, next) {
+router.post("/", authentication, uploader.single("photo"), function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
   let caption = req.body.caption;
   let description = req.body.description;
   let location = req.body.location;
