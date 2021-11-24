@@ -37,49 +37,61 @@ const Registeration = () => {
 
     const makeRequest = (values) => {
         let data = new FormData();
+        var photo = document.getElementById("profile-photo");
+        data.append("photo", photo.files[0]);
+        data.append("username", values.username);
+        data.append("email", values.email);
+        data.append("password", values.password);
+        data.append("description", values.description);
+        data.append("school", values.school);
+        data.append("major", values.major);
+        data.append("pets", values.pets);
+        data.append("smoker", values.smoker);
+        data.append("gender", values.gender);
 
-        data.append("photo", values.photo[0]);
-
-        console.log(values.photo, "values.photo");
+        console.log(values.username, "values.photo");
         console.log(data, "data");
         console.log(values, "values");
-        // Axios.post(configData.SERVER_URL + "users/registration", data)
-        //     .then((response) => {
-        //         console.log("IT WORKED");
-        //         console.log(data);
-        //         toast.success("Registered Successfully!", {
-        //             position: "top-right",
-        //             autoClose: 4000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             closeButton: false,
-        //             progress: 0,
-        //         });
-        //         history.push("/login");
-        //     })
-        //     .catch((error) => {
-        //         // Error
-        //         if (error.response) {
-        //             // The request was made and the server responded with a status code
-        //             // that falls out of the range of 2xx
-        //             console.log(data);
-        //             console.log(error.response.data);
-        //             console.log(error.response.status);
-        //             console.log(error.response.headers);
-        //         } else if (error.request) {
-        //             // The request was made but no response was received
-        //             // `error.request` is an instance of XMLHttpRequest in the
-        //             // browser and an instance of
-        //             // http.ClientRequest in node.js
-        //             console.log(error.request);
-        //         } else {
-        //             // Something happened in setting up the request that triggered an Error
-        //             console.log("Error", error.message);
-        //         }
-        //         console.log(error.config);
-        //     });
+
+        Axios.post(configData.SERVER_URL + "users/registration", data, {
+            headers: { "content-type": "multipart/form-data" },
+        })
+            .then(() => {
+                console.log("IT WORKED");
+                console.log(data);
+                toast.success("Registered Successfully!", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
+                history.push("/login");
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(data);
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the
+                    // browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
     };
 
     const handleNextStep = (newData, final = false) => {
@@ -104,7 +116,7 @@ const Registeration = () => {
         <StepThree next={handleNextStep} prev={handlePrevStep} data={data} />,
     ];
 
-    console.log("data", data);
+    // console.log("data", data);
 
     return <div className="App">{steps[currentStep]}</div>;
 };
@@ -368,7 +380,7 @@ const StepThree = (props) => {
     return (
         <div className="form-container">
             <Formik initialValues={props.data} onSubmit={handleSubmit}>
-                {(formProps) => (
+                {(formProps, values) => (
                     <Form
                         className="reg-form"
                         // autocomplete="off"
@@ -376,11 +388,15 @@ const StepThree = (props) => {
                         <div className="reg-card">
                             <p className="form-heading">Join Us!</p>
                             <input
+                                id="profile-photo"
                                 type="file"
                                 name="photo"
+                                accept="image/jpg,image/jpeg,image/png"
                                 onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
                             />
-
+                            <button type="button" onClick={() => props.prev(values)}>
+                                Back
+                            </button>
                             <button className="form-input-btn" type="submit">
                                 Submit
                             </button>
