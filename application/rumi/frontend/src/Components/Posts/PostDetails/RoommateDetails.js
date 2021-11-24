@@ -101,6 +101,7 @@ function RoommateDetails() {
             });
     };
 
+  
     const deleteComment = (commentid) => {
         const data = { id: commentid };
         Axios.delete(configData.SERVER_URL + `comments`, { data })
@@ -176,6 +177,19 @@ function RoommateDetails() {
                                         </ul>
                                         <div className="user-info-main-cont">
                                             Contact - {value.phone}, {value.email}
+                                        </div>
+                                        <div>
+                                        {Cookies.get("token") &&
+                                        Cookies.get("username") === value.username && (
+                                        <button
+                                          className="post-edit-button"
+                                         onClick={() => {
+                                            history.push('/edit')
+                                        }}
+                                        >
+                                        Edit
+                                        </button>
+                                        )}
                                         </div>
                                     </div>
                                 </div>

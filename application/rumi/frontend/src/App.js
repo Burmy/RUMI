@@ -27,6 +27,7 @@ import "./App.css";
 import ReactGA from "react-ga";
 import { initGA, logPageView } from "./utils/analytics";
 import ChatDashboard from "./Components/Chat/ChatDashboard";
+import EditProfile from "./Components/Posts/PostDetails/EditProfile";
 
 ReactGA.initialize("G-JKVQRG8KYM");
 
@@ -60,6 +61,7 @@ function App() {
                         <ProtectedRoute path="/createpost" exact component={CreatePost} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />
+                        <Route path="/edit" exact component={EditProfile} />
 
                         <Route path="/chat" exact component={ChatDashboard} />
                         <Route path="/chat/:id" exact component={ChatDashboard} />
