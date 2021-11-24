@@ -113,6 +113,34 @@ function Rooms() {
                 console.log(error.config);
             });
     };
+
+    const savePost = (saveid) => {
+        // const data = { post_id: saveid, saved_by: Cookies.get("loggedUserid") };
+
+        Axios.post(configData.SERVER_URL + "favorites", { post_id: saveid, saved_by: Cookies.get("loggedUserid") })
+            .then(() => {
+                console.log(saveid, "post_id");
+                console.log(Cookies.get("loggedUserid"), "saved_by");
+                console.log("saved");
+                // window.location.reload();
+            })
+            .catch((error) => {
+                // Error
+                console.log(saveid, "post_id");
+                console.log(Cookies.get("loggedUserid"), "saved_by");
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    };
+
     const style = { width: "32px", height: "32px" };
     return (
         <div>
@@ -251,6 +279,17 @@ function Rooms() {
                                                             }}
                                                         >
                                                             Delete
+                                                        </button>
+                                                    )}
+                                                    {Cookies.get("token") && !Cookies.get("admin") && (
+                                                        <button
+                                                            className="post-save-button"
+                                                            onClick={() => {
+                                                                savePost(value.id);
+                                                            }}
+                                                        >
+                                                            {value.id}
+                                                            Save
                                                         </button>
                                                     )}
                                                     <div

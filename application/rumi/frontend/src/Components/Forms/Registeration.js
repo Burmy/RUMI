@@ -15,6 +15,7 @@ import "firebase/compat/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import { useFormikContext } from "formik";
+import Avatar from "react-avatar-edit";
 
 const Registeration = () => {
     let history = useHistory();
@@ -31,6 +32,7 @@ const Registeration = () => {
         smoker: "",
         pets: "",
         photo: "",
+        acceptTerms: false,
     });
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -138,6 +140,7 @@ const stepOneValidationSchema = Yup.object({
     password2: Yup.string()
         .required("✖ You must enter a Password")
         .oneOf([Yup.ref("password"), null], "✖ Passwords must match"),
+    acceptTerms: Yup.bool().oneOf([true], "✖ You must accept our Terms & Conditions"),
 });
 
 const StepOne = (props) => {
@@ -239,11 +242,25 @@ const StepOne = (props) => {
 
                             <div className="check">
                                 <div>
-                                    <input type="checkbox" name="confirmAge" required />
+                                    <input
+                                        type="checkbox"
+                                        name="acceptTerms"
+                                        onChange={(e) => {
+                                            setFieldTouched("acceptTerms");
+                                            handleChange(e);
+                                        }}
+                                    />
                                     <label for="age">I accept I am 13+ years of age.</label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" name="confirmPolicy" required />
+                                    <input
+                                        type="checkbox"
+                                        name="acceptTerms"
+                                        onChange={(e) => {
+                                            setFieldTouched("acceptTerms");
+                                            handleChange(e);
+                                        }}
+                                    />
                                     <label for="policy">I have read and accept the</label>
                                     <a
                                         className="check-link"
@@ -256,6 +273,7 @@ const StepOne = (props) => {
                                     </a>
                                 </div>
                             </div>
+                            <ErrorMessage className="form-error" name="acceptTerms" component="span" />
 
                             <button className="form-input-btn" type="submit">
                                 Continue
@@ -277,8 +295,12 @@ const StepOne = (props) => {
 };
 
 const stepTwoValidationSchema = Yup.object({
-    description: Yup.string().required("✖ You must enter "),
+    description: Yup.string().required("✖ You must enter a Description"),
     school: Yup.string().required("✖ You must enter a School"),
+    gender: Yup.mixed().required("✖ Select an option"),
+    smoker: Yup.mixed().required("✖ Select an option"),
+    pets: Yup.mixed().required("✖ Select an option"),
+    major: Yup.mixed().required("✖ Select an option"),
 });
 
 const StepTwo = (props) => {
@@ -319,6 +341,7 @@ const StepTwo = (props) => {
                                 <option value="17">Law</option>
                                 <option value="18">Physical Science</option>
                             </Field>
+                            <ErrorMessage className="form-error" name="major" component="span" />
 
                             <div className="reg-check" role="group" aria-labelledby="my-radio-group">
                                 <Field type="radio" name="gender" value="M" id="gen1" />
@@ -336,6 +359,7 @@ const StepTwo = (props) => {
                                     Non-Binary
                                 </label>
                             </div>
+                            <ErrorMessage className="form-error" name="gender" component="span" />
 
                             <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                                 Do you Smoke?
@@ -348,6 +372,7 @@ const StepTwo = (props) => {
                                     No
                                 </label>
                             </div>
+                            <ErrorMessage className="form-error" name="smoker" component="span" />
 
                             <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                                 Have any Pets?
@@ -360,6 +385,7 @@ const StepTwo = (props) => {
                                     No
                                 </label>
                             </div>
+                            <ErrorMessage className="form-error" name="pets" component="span" />
 
                             <button className="form-input-btn" type="submit">
                                 Continue

@@ -72,7 +72,7 @@ function RoomDetails() {
             post_id: id,
             creator_id: Cookies.get("loggedUserid"),
         })
-            .then((response) => {
+            .then(() => {
                 window.location.reload(); //comments dont update untill page is reloaded
                 console.log(id, "post");
                 console.log(Cookies.get("loggedUserid"), "creator");

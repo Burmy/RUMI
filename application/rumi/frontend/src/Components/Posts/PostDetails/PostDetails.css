@@ -327,6 +327,28 @@ div[id^="message-"] {
     background: #eb3c1d;
 }
 
+.post-save-button {
+    padding: 11px 16px 9px 16px;
+    margin: 15px;
+    background: #c72306;
+    border: 2px solid #c72306;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+    z-index: 55;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+.post-save-button:hover {
+    border: 2px solid #eb3c1d;
+    background: #eb3c1d;
+}
+
 .comment-delete-button {
     padding: 8px 16px 6px 16px;
     margin: 15px;

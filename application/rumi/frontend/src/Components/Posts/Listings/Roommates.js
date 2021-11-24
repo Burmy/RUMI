@@ -245,6 +245,7 @@ function Roommates() {
                                                                 round
                                                                 size="180px"
                                                                 color="white"
+                                                                src="value.photo"
                                                             />
                                                         </div>
 
