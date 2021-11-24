@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
-import { useState } from "react";
+import { React, useState } from "react";
 import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
+import { useFormikContext } from "formik";
 
 const Registeration = () => {
     let history = useHistory();
@@ -29,48 +30,56 @@ const Registeration = () => {
         major: "",
         smoker: "",
         pets: "",
+        photo: "",
     });
 
     const [currentStep, setCurrentStep] = useState(0);
 
-    const makeRequest = (formData) => {
-        Axios.post(configData.SERVER_URL + "users/registration", formData)
-            .then((response) => {
-                console.log("IT WORKED");
-                console.log(formData);
-                toast.success("Registered Successfully!", {
-                    position: "top-right",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    closeButton: false,
-                    progress: 0,
-                });
-                history.push("/login");
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log(formData);
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the
-                    // browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log(error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
+    const makeRequest = (values) => {
+        let data = new FormData();
+
+        data.append("photo", values.photo[0]);
+
+        console.log(values.photo, "values.photo");
+        console.log(data, "data");
+        console.log(values, "values");
+        // Axios.post(configData.SERVER_URL + "users/registration", data)
+        //     .then((response) => {
+        //         console.log("IT WORKED");
+        //         console.log(data);
+        //         toast.success("Registered Successfully!", {
+        //             position: "top-right",
+        //             autoClose: 4000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             closeButton: false,
+        //             progress: 0,
+        //         });
+        //         history.push("/login");
+        //     })
+        //     .catch((error) => {
+        //         // Error
+        //         if (error.response) {
+        //             // The request was made and the server responded with a status code
+        //             // that falls out of the range of 2xx
+        //             console.log(data);
+        //             console.log(error.response.data);
+        //             console.log(error.response.status);
+        //             console.log(error.response.headers);
+        //         } else if (error.request) {
+        //             // The request was made but no response was received
+        //             // `error.request` is an instance of XMLHttpRequest in the
+        //             // browser and an instance of
+        //             // http.ClientRequest in node.js
+        //             console.log(error.request);
+        //         } else {
+        //             // Something happened in setting up the request that triggered an Error
+        //             console.log("Error", error.message);
+        //         }
+        //         console.log(error.config);
+        //     });
     };
 
     const handleNextStep = (newData, final = false) => {
@@ -298,7 +307,6 @@ const StepTwo = (props) => {
                                 <option value="17">Law</option>
                                 <option value="18">Physical Science</option>
                             </Field>
-                            <ErrorMessage className="form-error" name="major" component="span" />
 
                             <div className="reg-check" role="group" aria-labelledby="my-radio-group">
                                 <Field type="radio" name="gender" value="M" id="gen1" />
@@ -316,7 +324,6 @@ const StepTwo = (props) => {
                                     Non-Binary
                                 </label>
                             </div>
-                            <ErrorMessage className="form-error" name="gender" component="span" />
 
                             <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                                 Do you Smoke?
@@ -329,7 +336,6 @@ const StepTwo = (props) => {
                                     No
                                 </label>
                             </div>
-                            <ErrorMessage className="form-error" name="smoker" component="span" />
 
                             <div className="reg-check-pref" role="group" aria-labelledby="my-radio-group">
                                 Have any Pets?
@@ -342,11 +348,6 @@ const StepTwo = (props) => {
                                     No
                                 </label>
                             </div>
-                            <ErrorMessage className="form-error" name="pets" component="span" />
-
-                            {/* <button type="button" onClick={() => props.prev(values)}>
-                                Back
-                            </button> */}
 
                             <button className="form-input-btn" type="submit">
                                 Continue
@@ -364,19 +365,21 @@ const StepThree = (props) => {
     const handleSubmit = (values) => {
         props.next(values, true);
     };
-
-    const style = { marginBottom: "-4px" };
-
     return (
         <div className="form-container">
-            <Formik validationSchema={stepOneValidationSchema} initialValues={props.data} onSubmit={handleSubmit}>
-                {({ setFieldTouched, handleChange, values }) => (
+            <Formik initialValues={props.data} onSubmit={handleSubmit}>
+                {(formProps) => (
                     <Form
                         className="reg-form"
                         // autocomplete="off"
                     >
                         <div className="reg-card">
                             <p className="form-heading">Join Us!</p>
+                            <input
+                                type="file"
+                                name="photo"
+                                onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
+                            />
 
                             <button className="form-input-btn" type="submit">
                                 Submit

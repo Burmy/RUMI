@@ -1,99 +1,166 @@
-import React, { Component } from "react";
+import React from "react";
 import Axios from "axios";
 import "./CreatePost.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useState, useEffect } from "react";
+import ImageUpload from "image-upload-react";
 
-class CreatePost extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            file: null,
-        };
-        this.handleChange = this.handleChange.bind(this);
-    }
-    handleChange(event) {
-        if (event.target.files.length !== 0) {
-            this.setState({
-                file: URL.createObjectURL(event.target.files[0]),
+export const CreatePost = () => {
+    // const [imageSrc, setImageSrc] = useState();
+
+    // const handleImageSelect = (e) => {
+    //     setImageSrc(URL.createObjectURL(e.target.files[0]));
+    // };
+    const initialValues = {
+        caption: "",
+        description: "",
+        price: "",
+        location: "",
+        parking: "",
+        pet: "",
+        gender: "",
+        smoking: "",
+        photo: "",
+        longitude: "",
+        latitude: "",
+    };
+    const onSubmit = (values) => {
+        let data = new FormData();
+        var photo = document.getElementById("photo");
+        data.append("photo", photo.files[0]);
+        data.append("caption", values.caption);
+        data.append("description", values.description);
+        data.append("price", values.price);
+        data.append("latitude", values.latitude);
+        data.append("longitude", values.longitude);
+        data.append("location", values.location);
+        data.append("parking", values.parking);
+        data.append("pet", values.pet);
+        data.append("smoking", values.smoking);
+        data.append("gender", values.gender);
+        data.append("creator_id", Cookies.get("loggedUserid"));
+
+        Axios.post(configData.SERVER_URL + "posts/", data, {
+            headers: { "content-type": "multipart/form-data" },
+        })
+            .then(() => {
+                console.log("IT WORKED");
+                console.log(data);
+                toast.success("Posted Successfully!", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
+                // this.props.history.push("/post/" + data.data.id);
+            })
+            .catch((error) => {
+                // Error
+                toast.error("You must fill all the fields to continue.", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
+                if (error.response) {
+                    console.log(data);
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
             });
-        } else {
-            this.setState({
-                file: URL.revokeObjectURL(event.target.files[0]),
-            });
-        }
-    }
-    render() {
-        var caption;
-        var description;
-        var price;
-        var latitude;
-        var longitude;
-        return (
-            <div className="form-container">
-                <div className="upload-card">
-                    <form>
+    };
+
+    const validationSchema = Yup.object().shape({
+        caption: Yup.string().required("✖ You must create a Caption"),
+        description: Yup.string()
+            .min(3, "✖ Description must be at least 3 characters")
+            .required("✖ You must create a Description"),
+        photo: Yup.mixed().required("✖ A photo is required"),
+    });
+
+    return (
+        <div className="form-container">
+            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                {(formProps) => (
+                    <Form className="upload-card">
                         <p className="form-heading">Post</p>
 
                         <div className="upload-container">
                             <div className="upload-image">
+                                <ErrorMessage className="form-error" name="photo" component="span" />
                                 <label htmlFor="upload">Upload your Image:</label>
-                                <input
+                                {/* <input
                                     type="file"
                                     id="photo"
                                     accept="image/jpg,image/jpeg,image/png"
-                                    onChange={this.handleChange}
+                                    onChange={onSelectFile}
                                     autoComplete="off"
                                 />
-                                <img src={this.state.file} id="imgPreview" />
+                                <img src={this.state.file} id="imgPreview" /> */}
+
+                                <input
+                                    id="photo"
+                                    type="file"
+                                    name="photo"
+                                    accept="image/jpg,image/jpeg,image/png"
+                                    onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
+                                />
+                                {/* <ImageUpload
+                                    id="photo"
+                                    name="photo"
+                                    // onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
+                                    handleImageSelect={(event) => setImageSrc(URL.createObjectURL(event.target.files[0]))}
+                                    imageSrc={imageSrc}
+                                    setImageSrc={setImageSrc}
+                                    defaultDeleteIconSize={60}
+                                    defaultDeleteIconColor="#222"
+                                    deleteIcon={<div>Delete</div>}
+                                    style={{
+                                        width: 700,
+                                        height: 500,
+                                        background: "gold",
+                                    }}
+                                /> */}
                             </div>
 
                             <div className="upload-info">
-                                <input
+                                <Field className="form-input" name="caption" placeholder="Enter a Caption" />
+                                <ErrorMessage className="form-error" name="caption" component="span" />
+
+                                <Field
+                                    id="textarea"
+                                    component="textarea"
                                     className="form-input"
-                                    value={caption}
-                                    name="caption"
-                                    placeholder="Enter Your Caption"
-                                    onChange={(word) => {
-                                        caption = word.target.value;
-                                    }}
-                                    autoComplete="off"
-                                />
-                                <textarea
-                                    id="textarea-post"
-                                    className="form-input"
-                                    value={description}
-                                    onChange={(des) => {
-                                        description = des.target.value;
-                                    }}
+                                    type="text"
                                     name="description"
-                                    placeholder="Enter Your Description"
+                                    placeholder="Enter a Description"
                                 />
+                                <ErrorMessage className="form-error" name="description" component="span" />
 
                                 <div className="upload-info-price">
-                                    <input
-                                        className="form-input"
-                                        type="number"
-                                        value={price}
-                                        onChange={(money) => {
-                                            price = money.target.value;
-                                        }}
-                                        name="price"
-                                        placeholder="Enter Your Price($)"
-                                        autoComplete="off"
-                                    />
+                                    <Field className="form-input" type="number" name="price" placeholder="Enter Price($)" />
 
-                                    <select
-                                        className="form-input-select-create"
-                                        defaultValue={"DEFAULT"}
-                                        name="location"
-                                        id="location"
-                                    >
-                                        <option value="DEFAULT" disabled>
-                                            Select a Location
-                                        </option>
+                                    <Field component="select" className="form-input-select-reg" name="location">
+                                        <option value="0">Select a Location</option>
                                         <option value="1">Daly City</option>
                                         <option value="2">San Francisco</option>
                                         <option value="3">South San Francisco</option>
@@ -102,30 +169,26 @@ class CreatePost extends Component {
                                         <option value="6">Alameda</option>
                                         <option value="7">San Mateo</option>
                                         <option value="8">San Leandro</option>
-                                    </select>
+                                    </Field>
                                 </div>
 
                                 <div className="upload-info-pref">
                                     <div>
                                         <div className="upload-info-pref-heading">Parking Available?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="p1" name="park" value="1" />
-                                            <label htmlFor="p1" required>
-                                                Yes
-                                            </label>
-                                            <input type="radio" id="p2" name="park" value="0" />
-                                            <label htmlFor="p2" required>
-                                                No
-                                            </label>
+                                            <Field type="radio" id="p1" name="parking" value="1" />
+                                            <label htmlFor="p1">Yes</label>
+                                            <Field type="radio" id="p2" name="parking" value="0" />
+                                            <label htmlFor="p2">No</label>
                                         </div>
                                     </div>
 
                                     <div>
                                         <div className="upload-info-pref-heading">Pets Allowed?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="pe1" name="pet" value="1" required />
+                                            <Field type="radio" id="pe1" name="pet" value="1" />
                                             <label htmlFor="pe1">Yes</label>
-                                            <input type="radio" id="pe2" name="pet" value="0" required />
+                                            <Field type="radio" id="pe2" name="pet" value="0" />
                                             <label htmlFor="pe2">No</label>
                                         </div>
                                     </div>
@@ -133,9 +196,9 @@ class CreatePost extends Component {
                                     <div>
                                         <div className="upload-info-pref-heading">Smoking Allowed?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="s1" name="smoke" value="1" required />
+                                            <Field type="radio" id="s1" name="smoking" value="1" />
                                             <label htmlFor="s1">Yes</label>
-                                            <input type="radio" id="s2" name="smoke" value="0" required />
+                                            <Field type="radio" id="s2" name="smoking" value="0" />
                                             <label htmlFor="s2">No</label>
                                         </div>
                                     </div>
@@ -143,125 +206,30 @@ class CreatePost extends Component {
                                     <div>
                                         <div className="upload-info-pref-heading">Gender Specific?</div>
                                         <div className="upload-info-pref-values">
-                                            <input type="radio" id="g1" name="gender" value="M" required />
+                                            <Field type="radio" id="g1" name="gender" value="M" />
                                             <label htmlFor="g1">Male</label>
-                                            <input type="radio" id="g2" name="gender" value="F" required />
+                                            <Field type="radio" id="g2" name="gender" value="F" />
                                             <label htmlFor="g2">Female</label>
-                                            <input type="radio" id="g3" name="gender" value="N" required />
+                                            <Field type="radio" id="g3" name="gender" value="N" />
                                             <label htmlFor="g3">Non-Binary</label>
-                                            <input type="radio" id="g4" name="gender" value=" " required />
+                                            <Field type="radio" id="g4" name="gender" value=" " />
                                             <label htmlFor="g4">No Preference</label>
                                         </div>
                                     </div>
                                 </div>
-                                <input
-                                    className="form-input"
-                                    value={latitude}
-                                    name="lat"
-                                    placeholder="TEMP LAT"
-                                    onChange={(lat) => {
-                                        latitude = lat.target.value;
-                                    }}
-                                />
-                                <input
-                                    className="form-input"
-                                    value={longitude}
-                                    name="long"
-                                    placeholder="TEMP LONG"
-                                    onChange={(long) => {
-                                        longitude = long.target.value;
-                                    }}
-                                />
+                                <Field className="form-input" name="longitude" placeholder="TEMP long" />
+                                <Field className="form-input" name="latitude" placeholder="TEMP lat" />
                             </div>
                         </div>
-                    </form>
-                    <div>
-                        <button
-                            type="submit"
-                            className="form-input-btn"
-                            onClick={() => {
-                                if (
-                                    !caption ||
-                                    !caption.length ||
-                                    !description ||
-                                    !description.length ||
-                                    !price ||
-                                    !price.length ||
-                                    !latitude ||
-                                    !latitude.length ||
-                                    !longitude ||
-                                    !longitude.length
-                                ) {
-                                    toast.error("You must fill the form to continue.", {
-                                        position: "top-right",
-                                        autoClose: 4000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: true,
-                                        draggable: true,
-                                        closeButton: false,
-                                        progress: 0,
-                                    });
-                                } else {
-                                    var photo = document.getElementById("photo");
-                                    var form = new FormData();
-                                    form.append("caption", caption);
-                                    form.append("description", description);
-                                    form.append("price", price);
-                                    form.append("location", document.getElementById("location").value);
-                                    form.append("parking", document.querySelector('input[name="park"]:checked').value);
-                                    form.append("pet", document.querySelector('input[name="pet"]:checked').value);
-                                    form.append("smoking", document.querySelector('input[name="smoke"]:checked').value);
-                                    form.append("gender", document.querySelector('input[name="gender"]:checked').value);
-                                    form.append("creator_id", Cookies.get("loggedUserid"));
-                                    form.append("photo", photo.files[0]);
-                                    form.append("latitude", latitude);
-                                    form.append("longitude", longitude);
 
-                                    console.log(
-                                        form.getAll("caption"),
-                                        form.getAll("description"),
-                                        form.getAll("price"),
-                                        form.getAll("location"),
-                                        form.getAll("parking"),
-                                        form.getAll("pet"),
-                                        form.getAll("smoking"),
-                                        form.getAll("gender"),
-                                        form.getAll("creator_id"),
-                                        form.getAll("photo"),
-
-                                        form.getAll("latitude"),
-                                        form.getAll("longitude")
-                                    );
-                                    Axios.post(configData.SERVER_URL + "posts/", form, {
-                                        headers: { "content-type": "multipart/form-data" },
-                                    })
-                                        .then((result) => {
-                                            console.log(result);
-                                            toast.success("Posted Successfully!", {
-                                                position: "top-right",
-                                                autoClose: 4000,
-                                                hideProgressBar: false,
-                                                closeOnClick: true,
-                                                pauseOnHover: true,
-                                                draggable: true,
-                                                closeButton: false,
-                                                progress: 0,
-                                            });
-                                            this.props.history.push("/post/" + result.data.id);
-                                        })
-                                        .catch((error) => {
-                                            console.log(error.response);
-                                        });
-                                }
-                            }}
-                        >
+                        <button type="submit" className="form-input-btn">
                             Submit
                         </button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+                    </Form>
+                )}
+            </Formik>
+        </div>
+    );
+};
+
 export default CreatePost;
