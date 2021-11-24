@@ -55,8 +55,10 @@ router.get("/", function (req, res, next) {
   let gender = req.query.gender;
   let page = req.query.page;
   let size = req.query.size;
+  let photo = req.query.photo;
+  let thumbnail = req.query.thumbnail;
 
-  UserModel.search(searchTerm, major, school, pet, smoker, gender, page, size)
+  UserModel.search(searchTerm, major, school, pet, smoker, gender, page, size, photo, thumbnail)
     .then((results) => {
       if (results && results.length) {
         res.send({
