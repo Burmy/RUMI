@@ -15,7 +15,6 @@ import "firebase/compat/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import { useFormikContext } from "formik";
-import Avatar from "react-avatar-edit";
 
 const Registeration = () => {
     let history = useHistory();
@@ -250,18 +249,7 @@ const StepOne = (props) => {
                                             handleChange(e);
                                         }}
                                     />
-                                    <label for="age">I accept I am 13+ years of age.</label>
-                                </div>
-                                <div>
-                                    <input
-                                        type="checkbox"
-                                        name="acceptTerms"
-                                        onChange={(e) => {
-                                            setFieldTouched("acceptTerms");
-                                            handleChange(e);
-                                        }}
-                                    />
-                                    <label for="policy">I have read and accept the</label>
+                                    <label for="policy">I accept I am 13+ years of age and I have read and accept the</label>
                                     <a
                                         className="check-link"
                                         href="https://www.termsandcondiitionssample.com/live.php?token=O1d5yb5KfKXEwT534XqbW15fmR2jcZBq"

@@ -243,9 +243,9 @@ function Roommates() {
                                                                 className="user-card-info-profile"
                                                                 name={value.username[0].split("")[0]}
                                                                 round
-                                                                size="180px"
+                                                                size="200px"
                                                                 color="white"
-                                                                src="value.photo"
+                                                                src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                                             />
                                                         </div>
 

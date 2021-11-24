@@ -15,6 +15,7 @@ import { RiQuestionAnswerLine } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import Avatar from "react-avatar";
+// import configData from "../../../Configs/config.json";
 const Navbar = () => {
     let history = useHistory();
     let logged = Cookies.get("logged");
@@ -74,6 +75,7 @@ const Navbar = () => {
                                                 round
                                                 size="60px"
                                                 color="white"
+                                                // src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                             />
                                         </button>
                                         <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>

@@ -171,10 +171,11 @@ function RoommateDetails() {
                                                     className="user-info-profile"
                                                     name={value.username[0].split("")[0]}
                                                     round
-                                                    size="180px"
+                                                    size="240px"
                                                     color="white"
+                                                    src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                                 />
-                                                <div>
+                                                <div className="user-info-main-main">
                                                     {value.username}{" "}
                                                     <span className="user-info-highlight">{value.last_name}</span>
                                                 </div>
