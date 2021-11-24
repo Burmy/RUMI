@@ -10,6 +10,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Avatar from "react-avatar";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { GetFav } from "./GetFav";
 
 function RoommateDetails() {
     let { id } = useParams();
@@ -20,6 +21,10 @@ function RoommateDetails() {
 
     const [userComments, setUserComments] = useState([]);
     const [commentsCount, setCommentsCount] = useState([]);
+
+    const [userFav, setUserFav] = useState([]);
+    const [favCount, setFavCount] = useState([]);
+
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -70,6 +75,26 @@ function RoommateDetails() {
                 console.log(response.data.results);
                 setUserComments(response.data.results);
                 setCommentsCount(response.data.message);
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+
+        Axios.get(configData.SERVER_URL + `favorites?saved_by=${id}`)
+            .then((response) => {
+                console.log(response.data.results);
+                setUserFav(response.data.results);
+                setFavCount(response.data.message);
             })
             .catch((error) => {
                 // Error
@@ -210,6 +235,7 @@ function RoommateDetails() {
                                             <TabList>
                                                 <Tab>Posts</Tab>
                                                 <Tab>Comments</Tab>
+                                                <Tab>Favorites</Tab>
                                             </TabList>
 
                                             <TabPanel>
@@ -326,6 +352,23 @@ function RoommateDetails() {
                                                                   )
                                                               )
                                                         : null}
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div>{favCount}</div>
+                                                <div className="user-info-container-posts">
+                                                    {userFav &&
+                                                        userFav
+                                                            .slice(0)
+                                                            .reverse()
+                                                            .map((value, key) => {
+                                                                value.created_date = new Date(value.created_date).toDateString();
+                                                                return (
+                                                                    <div key={value.id}>
+                                                                        <GetFav key={key} id={value.post_id} />
+                                                                    </div>
+                                                                );
+                                                            })}
                                                 </div>
                                             </TabPanel>
                                         </Tabs>

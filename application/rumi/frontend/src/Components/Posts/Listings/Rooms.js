@@ -117,9 +117,7 @@ function Rooms() {
     const savePost = (saveid) => {
         const data = { post_id: saveid, saved_by: Cookies.get("loggedUserid") };
 
-        Axios.post(configData.SERVER_URL + "favorites", data, {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
+        Axios.post(configData.SERVER_URL + "favorites", data)
             .then(() => {
                 console.log(saveid, "post_id");
                 console.log(Cookies.get("loggedUserid"), "saved_by");
