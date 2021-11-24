@@ -20,13 +20,16 @@ UserModel.search = (
   smoker,
   gender,
   page,
-  size
+  size,
+  photo,
+  thumbnail
 ) => {
   parameters = [];
 
   let baseSQL = `SELECT id, username, last_name, first_name, 
     email, phone, description, gender, birthday, school, major,
-    smoker, pets, language, interests, hobbies, admin
+    smoker, pets, language, interests, hobbies, admin, photo,
+    thumbnail
     FROM user 
     WHERE 1=1 and activated = 1 and deleted = 0 `;
 
@@ -55,6 +58,14 @@ UserModel.search = (
   if (gender) {
     baseSQL += ` AND gender = ? `;
     parameters.push(gender);
+  }
+  if (photo) {
+    baseSQL += ` AND photo = ? `;
+    parameters.push(photo);
+  }
+  if (thumbnail) {
+    baseSQL += ` AND thumbnail = ? `;
+    parameters.push(thumbnail);
   }
   if (page && size && size < 200) {
     baseSQL += ` LIMIT ?, ? `;
