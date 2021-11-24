@@ -27,7 +27,6 @@ import "./App.css";
 import ReactGA from "react-ga";
 import { initGA, logPageView } from "./utils/analytics";
 import ChatDashboard from "./Components/Chat/ChatDashboard";
-import Axios from "axios";
 
 ReactGA.initialize("G-JKVQRG8KYM");
 
@@ -39,7 +38,6 @@ function App() {
     }
     logPageView();
     const [authState, setAuthState] = useState(false);
-    Axios.defaults.withCredentials = true;
     return (
         <Router>
             <div className="app">
