@@ -34,12 +34,12 @@ router.post("/", function (req, res, next) {
     let post_id = req.body.post_id;
     let saved_by = req.body.saved_by;
 
-    if (!post_id || !post_id.length) {
+    if (!post_id) {
         return res.status(400).send({
             message: "post_id should not be null"
         });
     }
-    if (!saved_by || !saved_by.length) {
+    if (!saved_by) {
         return res.status(400).send({
             message: "saved_by should not be null"
         });
