@@ -11,7 +11,67 @@ UserModel.getById = (id) => {
     })
     .catch((err) => Promise.reject(err));
 };
+UserModel.changeData = (username,
+  password,
+  email,
+  description,
+  gender,
+  school,
+  major,
+  smoker,
+  pets) =>{
+  console.log(username);
+let baseSQL= `SELECT email FROM user WHERE username=?;`;
+let addSQL = [];
+let startSQL = "UPDATE user SET ";
+let endSql = "WHERE username=?;";
+if(username !=null){
 
+addSQL.push("username='"+username+"' ");
+}
+if(email !=null){
+
+addSQL.push("email='"+email+"' ");
+}
+if(password !=null){
+
+addSQL.push("password='"+password+"' ");
+}
+if(description !=null){
+
+addSQL.push("description='"+description+"' ");
+}
+if(gender !=null){
+
+addSQL.push("gender='"+gender+"' ");
+}
+if(school !=null){
+
+addSQL.push("school='"+school+"' ");
+}
+if(major !=null){
+
+addSQL.push("major='"+major+"' ");
+}
+if(smoker !=null){
+
+addSQL.push("smoker='"+smoker+"' ");
+}
+if(pets !=null){
+ 
+addSQL.push("pets='"+pets+"' ");
+}
+let finalsql= startSQL;
+for(i=0;i<addSQL.length;i++){
+finalsql= finalsql+addSQL[i];
+}
+finalsql=finalsql+endSql;
+return db.execute(finalsql,[username])
+.then(([results,fields])=>{
+  return Promise.resolve(results);
+})
+.catch((err) => Promise.reject(err));
+};
 UserModel.search = (
   searchTerm,
   major,

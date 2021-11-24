@@ -297,5 +297,29 @@ router.delete("/", function (req, res, next) {
     })
     .catch((err) => next(err));
 });
+router.post('/update', function(req,res,next){
+  let username = req.body.username;
+  let email = req.body.email;
+  let password = req.body.password;
+  let description = req.body.description;
+  let gender = req.body.gender;
+  let school = req.body.school;
+  let major = req.body.major;
+  let smoker = req.body.smoker;
+  let pets = req.body.pets;
+
+UserModel.changeData(
+  username,
+  password,
+  email,
+  description,
+  gender,
+  school,
+  major,
+  smoker,
+  pets
+);
+
+})
 
 module.exports = router;
