@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage, useField } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
@@ -14,7 +14,6 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
-import { useFormikContext } from "formik";
 
 const Registeration = () => {
     let history = useHistory();
@@ -117,9 +116,7 @@ const Registeration = () => {
         <StepThree next={handleNextStep} prev={handlePrevStep} data={data} />,
     ];
 
-    // console.log("data", data);
-
-    return <div className="App">{steps[currentStep]}</div>;
+    return <div>{steps[currentStep]}</div>;
 };
 
 const stepOneValidationSchema = Yup.object({
@@ -149,32 +146,32 @@ const StepOne = (props) => {
 
     const handleSubmit = (values) => {
         props.next(values);
-        // createUserWithEmailAndPassword(auth, fireEmail, firePass).then(() => {
-        //     const userObj = {
-        //         email: fireEmail,
-        //         username: fireUser,
-        //         friends: [],
-        //         messages: [],
-        //     };
-        //     firebase
-        //         .firestore()
-        //         .collection("users")
-        //         .doc(fireEmail)
-        //         .set(userObj)
-        //         .catch((error) => {
-        //             // Error
-        //             if (error.response) {
-        //                 console.log(error.response.data);
-        //                 console.log(error.response.status);
-        //                 console.log(error.response.headers);
-        //             } else if (error.request) {
-        //                 console.log(error.request);
-        //             } else {
-        //                 console.log("Error", error.message);
-        //             }
-        //             console.log(error.config);
-        //         });
-        // });
+        createUserWithEmailAndPassword(auth, fireEmail, firePass).then(() => {
+            const userObj = {
+                email: fireEmail,
+                username: fireUser,
+                friends: [],
+                messages: [],
+            };
+            firebase
+                .firestore()
+                .collection("users")
+                .doc(fireEmail)
+                .set(userObj)
+                .catch((error) => {
+                    // Error
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
+                });
+        });
     };
 
     const style = { marginBottom: "-4px" };
@@ -391,6 +388,7 @@ const StepThree = (props) => {
     const handleSubmit = (values) => {
         props.next(values, true);
     };
+    const style = { marginBottom: "-4px" };
     return (
         <div className="form-container">
             <Formik initialValues={props.data} onSubmit={handleSubmit}>
@@ -399,7 +397,7 @@ const StepThree = (props) => {
                         className="reg-form"
                         // autocomplete="off"
                     >
-                        <div className="reg-card">
+                        <div className="reg-card-upload">
                             <p className="form-heading">Join Us!</p>
                             <input
                                 id="profile-photo"
@@ -408,12 +406,18 @@ const StepThree = (props) => {
                                 accept="image/jpg,image/jpeg,image/png"
                                 onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
                             />
-                            <button type="button" onClick={() => props.prev(values)}>
-                                Back
-                            </button>
-                            <button className="form-input-btn" type="submit">
-                                Submit
-                            </button>
+
+                            <div className="step-container">
+                                <button className="form-input-btn" type="submit" onClick={() => props.prev(values)}>
+                                    <AiOutlineCaretLeft style={style} />
+                                    Back
+                                </button>
+
+                                <button className="form-input-btn" type="submit">
+                                    Submit
+                                    <AiOutlineCaretRight style={style} />
+                                </button>
+                            </div>
                         </div>
                     </Form>
                 )}

@@ -61,7 +61,7 @@ export const CreatePost = () => {
                     closeButton: false,
                     progress: 0,
                 });
-                // this.props.history.push("/post/" + data.data.id);
+                this.props.history.push("/post/" + data.data.id);
             })
             .catch((error) => {
                 // Error
@@ -98,7 +98,7 @@ export const CreatePost = () => {
     });
 
     return (
-        <div className="form-container">
+        <div className="form-container-upload">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 {(formProps) => (
                     <Form className="upload-card">

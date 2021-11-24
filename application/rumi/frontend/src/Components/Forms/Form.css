@@ -1,9 +1,11 @@
 .form-container {
-    text-align: center;
-    background-image: url(./waves.svg);
-    background-position: 100% 100%;
-    background-repeat: no-repeat;
+    background: url(./waves.svg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
+
+    max-height: 100%;
     max-width: 100vw;
     position: relative;
     padding-bottom: 50px;
@@ -24,6 +26,17 @@
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     padding: 30px;
     margin: 0 30px 0 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.reg-card-upload {
+    width: 600px;
+    background: #ffffff;
+    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
+    padding: 30px;
+    margin: 0 30px 500px 20px;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -100,6 +113,11 @@
     font-size: 20px;
     padding: 15px;
 }
+.step-container {
+    display: flex;
+    justify-content: center;
+}
+
 option:disabled {
     color: #868484;
 }
