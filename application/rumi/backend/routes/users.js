@@ -8,8 +8,7 @@ var bcrypt = require("bcrypt");
 const { json } = require("express");
 var UserError = require("../helpers/error/UserError");
 var jwt = require("jsonwebtoken");
-
-
+const { authentication } = require("../middleware/authetication");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -285,8 +284,20 @@ router.post("/logout", (req, res, next) => {
   });
 });
 
-router.delete("/", function (req, res, next) {
+router.delete("/", authentication, function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
+  let isAdmin = req.headers.admin;
+
   let id = req.body.id;
+
+  if (!id) {
+    return res.status(400).send({ message: "ID should not be null" });
+  }
+
+  if (!isAdmin && id != loginUserId) {
+    return res.status(401).send({ message: "Yon have no privilege to delete this user."});
+  }
+
   UserModel.delete(id)
     .then((isUserDeleted) => {
       if (isUserDeleted) {
