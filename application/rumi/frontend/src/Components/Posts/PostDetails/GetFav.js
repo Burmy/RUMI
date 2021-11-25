@@ -29,7 +29,7 @@ export const GetFav = ({ id }) => {
     }, [id]);
 
     const unsavePost = (saveid) => {
-        const data = { post_id: saveid, saved_by: Cookies.get("loggedUserid") };
+        const data = { post_id: saveid };
 
         Axios.delete(configData.SERVER_URL + "favorites", data)
             .then(() => {

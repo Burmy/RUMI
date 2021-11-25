@@ -100,16 +100,32 @@ ul {
     display: flex;
     flex-direction: column;
 }
+
+/* .msg-date-sent {
+    font-size: 18px;
+    color: #000000;
+    position: absolute;
+    display: flex;
+    margin-top: 50px;
+}
+
+.msg-date-received {
+    font-size: 20px;
+    color: #000000;
+} */
 .sent {
+    display: flex;
     text-align: end;
     padding: 15px 20px;
     background: #1da699;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    margin: 0 20px 15px 0;
+    margin: 0 20px 45px 0;
     color: #ffffff;
     border-radius: 10px 10px 0px 10px;
     float: right;
     align-self: flex-end;
+    position: relative;
+    justify-content: flex-end;
 }
 .received {
     align-self: flex-start;

@@ -4,10 +4,32 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import NotificationImportant from "@material-ui/icons/NotificationImportant";
 import Avatar from "react-avatar";
 import { VscBellDot } from "react-icons/vsc";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./Chat.css";
 const stylenoti = { marginTop: "10px", width: "35px", height: "35px", color: "#1da699" };
+
 class ChatListComponent extends React.Component {
+    // constructor(props) {
+    //     super(props);
+
+    //     this.notify = this.notify.bind(this);
+    // }
+    // notify() {
+    //     console.log("call notify");
+    //     toast.success("you just got a message!", {
+    //         position: "top-right",
+    //         autoClose: 4000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         closeButton: false,
+    //         progress: 0,
+    //     });
+    // }
+
     render() {
         if (this.props.chats.length > 0) {
             return (
@@ -40,6 +62,8 @@ class ChatListComponent extends React.Component {
                                         {_chat.receiverHasRead === false && !this.userIsSender(_chat) ? (
                                             <div>
                                                 <VscBellDot style={stylenoti} />
+                                                {/* {this.notify()}
+                                                {<ToastContainer />} */}
                                             </div>
                                         ) : null}
                                     </li>
