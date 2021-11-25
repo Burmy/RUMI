@@ -94,6 +94,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/", authentication, uploader.single("photo"), function (req, res, next) {
   let loginUserId = req.headers.loginUserId;
+  let isAdmin = req.headers.admin;
   let caption = req.body.caption;
   let description = req.body.description;
   let location = req.body.location;
@@ -152,6 +153,10 @@ router.post("/", authentication, uploader.single("photo"), function (req, res, n
     return res.status(400).send({ message: "gender should not be null" });
   }
 
+  if (!isAdmin && creator_id != loginUserId) {
+    return res.status(401).send({ message: "Yon have no privilege to create this post."});
+  }
+
   sharp(photo)
     .resize(200)
     .toFile(destinationOfThumbnail)
@@ -187,8 +192,19 @@ router.post("/", authentication, uploader.single("photo"), function (req, res, n
     .catch((err) => next(err));
 });
 
-router.delete("/", function (req, res, next) {
+router.delete("/", authentication, function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
+  let isAdmin = req.headers.admin;
   let id = req.body.id;
+
+  if (!id) {
+    return res.status(400).send({ message: "ID should not be null" });
+  }
+
+  if (!isAdmin && id != loginUserId) {
+    return res.status(401).send({ message: "Yon have no privilege to delete this post."});
+  }
+
   PostModel.delete(id)
     .then((isPostDeleted) => {
       if (isPostDeleted) {
