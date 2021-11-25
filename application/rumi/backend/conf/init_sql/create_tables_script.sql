@@ -169,6 +169,7 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`favorite` (
   `post_id` INT NOT NULL,
   `saved_by` INT NOT NULL,
   `saved_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `unsaved` int NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `postid_idx` (`post_id` ASC) VISIBLE,
   INDEX `userid_idx` (`saved_by` ASC) VISIBLE,
@@ -213,33 +214,39 @@ CREATE TABLE IF NOT EXISTS `rumi-db2`.`review` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `rumi-db2`.`notification`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rumi-db2`.`notification` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(2048) NOT NULL,
-  `from` CHAR(255) NULL,
-  `from_id` INT NULL,
-  `to_id` INT NOT NULL,
-  `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `deleted` BIT(1) NULL,
-  `deleted_date` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fromid_idx` (`from_id` ASC) VISIBLE,
-  INDEX `toid_idx` (`to_id` ASC) VISIBLE,
-  CONSTRAINT `notifromid`
-    FOREIGN KEY (`from_id`)
-    REFERENCES `rumi-db2`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `notitoid`
-    FOREIGN KEY (`to_id`)
-    REFERENCES `rumi-db2`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- -- -----------------------------------------------------
+-- -- Table `rumi-db2`.`notification`
+-- -- -----------------------------------------------------
+-- CREATE TABLE `notification` (
+--   `id` int NOT NULL AUTO_INCREMENT,
+--   `text` varchar(2048) NOT NULL,
+--   `from_id` int DEFAULT NULL,
+--   `to_id` int NOT NULL,
+--   `post_id` int NOT NULL,
+--   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+--   `deleted` bit(1) DEFAULT NULL,
+--   `deleted_date` datetime DEFAULT NULL,
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY `id_UNIQUE` (`id`),
+--   KEY `fromid_idx` (`from_id`),
+--   KEY `toid_idx` (`to_id`),
+--   KEY `postid_idx` (`post_id`),
+--     CONSTRAINT `notifromid` 
+--       FOREIGN KEY (`from_id`) 
+--       REFERENCES `user` (`id`)
+--       ON DELETE NO ACTION
+--       ON UPDATE NO ACTION,
+--     CONSTRAINT `notitoid` 
+--       FOREIGN KEY (`to_id`) 
+--       REFERENCES `user` (`id`)
+--       ON DELETE NO ACTION
+--       ON UPDATE NO ACTION,
+--     CONSTRAINT `notipostid` 
+--       FOREIGN KEY (`post_id`) 
+--       REFERENCES `post` (`id`)
+--       ON DELETE NO ACTION
+--       ON UPDATE NO ACTION)
+-- ENGINE = InnoDB
 
 
 -- -----------------------------------------------------
