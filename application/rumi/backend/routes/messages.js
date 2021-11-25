@@ -1,8 +1,11 @@
 var express = require("express");
+const { authentication } = require("../middleware/authetication");
 var router = express.Router();
 var MessageModel = require("../models/messages");
 
-router.get("/", function (req, res, next) {
+router.get("/", authentication, function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
+  let isAdmin = req.headers.admin;
   let from_id = req.query.from_id;
   let to_id = req.query.to_id;
 
@@ -11,6 +14,12 @@ router.get("/", function (req, res, next) {
   }
   if (!to_id || !to_id.length) {
     return res.status(400).send({ message: "to_id should not be null" });
+  }
+
+  if (!isAdmin && (from_id != loginUserId || to_id != loginUserId)) {
+    return res
+      .status(401)
+      .send({ message: "Yon have no privilege to create this comment." });
   }
 
   MessageModel.search(from_id, to_id)
@@ -31,12 +40,19 @@ router.get("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-
-router.get("/unread", function (req, res, next) {
+router.get("/unread", authentication, function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
+  let isAdmin = req.headers.admin;
   let to_id = req.query.to_id;
 
   if (!to_id || !to_id.length) {
     return res.status(400).send({ message: "to_id should not be null" });
+  }
+
+  if (!isAdmin && (from_id != loginUserId || to_id != loginUserId)) {
+    return res
+      .status(401)
+      .send({ message: "Yon have no privilege to create this comment." });
   }
 
   MessageModel.searchUnread(to_id)
@@ -57,7 +73,9 @@ router.get("/unread", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.post("/", function (req, res, next) {
+router.post("/", authentication, function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
+  let isAdmin = req.headers.admin;
   let text = req.body.text;
   let from_id = req.body.from_id;
   let to_id = req.body.to_id;
@@ -70,6 +88,12 @@ router.post("/", function (req, res, next) {
   }
   if (!to_id || !to_id.length) {
     return res.status(400).send({ message: "to_id should not be null" });
+  }
+
+  if (!isAdmin && to_id != loginUserId) {
+    return res
+      .status(401)
+      .send({ message: "Yon have no privilege to create this comment." });
   }
 
   return MessageModel.create(text, from_id, to_id)
