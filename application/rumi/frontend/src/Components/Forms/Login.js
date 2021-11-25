@@ -48,12 +48,12 @@ const Login = () => {
         window.location.reload();
       })
       .catch((error) => {
+          console.log("oh nononoon")
         // Error
         if (error.response) {
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
-          alert(error.response.data.err_message);
         } else if (error.request) {
           console.log(error.request);
         } else {
