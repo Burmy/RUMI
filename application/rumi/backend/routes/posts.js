@@ -92,105 +92,114 @@ router.get("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.post("/", authentication, uploader.single("photo"), function (req, res, next) {
-  let loginUserId = req.headers.loginUserId;
-  let isAdmin = req.headers.admin;
-  let caption = req.body.caption;
-  let description = req.body.description;
-  let location = req.body.location;
-  let price = req.body.price;
-  let parking = req.body.parking;
-  let pet = req.body.pet;
-  let smoking = req.body.smoking;
-  let gender = req.body.gender;
-  let creator_id = req.body.creator_id;
-  let latitude = req.body.latitude;
-  let longitude = req.body.longitude;
+router.post(
+  "/",
+  authentication,
+  uploader.single("photo"),
+  function (req, res, next) {
+    let loginUserId = req.headers.loginUserId;
+    let isAdmin = req.headers.admin;
+    let caption = req.body.caption;
+    let description = req.body.description;
+    let location = req.body.location;
+    let price = req.body.price;
+    let parking = req.body.parking;
+    let pet = req.body.pet;
+    let smoking = req.body.smoking;
+    let gender = req.body.gender;
+    let creator_id = req.body.creator_id;
+    let latitude = req.body.latitude;
+    let longitude = req.body.longitude;
 
-  if (!req.file) {
-    return res.status(400).send({ message: "Photo should not be null" });
-  }
+    if (!req.file) {
+      return res.status(400).send({ message: "Photo should not be null" });
+    }
 
-  let photo = req.file.path;
-  let photoName = req.file.filename;
-  let thumbnail = `thumbnail-${photoName}`;
-  let destinationOfThumbnail = req.file.destination + "/" + thumbnail;
+    let photo = req.file.path;
+    let photoName = req.file.filename;
+    let thumbnail = `thumbnail-${photoName}`;
+    let destinationOfThumbnail = req.file.destination + "/" + thumbnail;
 
-  if (!caption || !caption.length) {
-    return res.status(400).send({ message: "Caption should not be null" });
-  }
-  if (!description || !description.length) {
-    return res.status(400).send({ message: "Description should not be null" });
-  }
-  if (!latitude || !latitude.length) {
-    return res.status(400).send({ message: "Latitude should not be null" });
-  }
-  if (!longitude || !longitude.length) {
-    return res.status(400).send({ message: "Longitude should not be null" });
-  }
-  if (!location || !location.length) {
-    return res.status(400).send({ message: "Location should not be null" });
-  }
-  if (!price || !price.length) {
-    return res.status(400).send({ message: "Price should not be null" });
-  }
-  if (!creator_id || !creator_id.length) {
-    return res.status(400).send({ message: "Creator_id should not be null" });
-  }
-  if (!photo || !photo.length) {
-    return res.status(400).send({ message: "Photo should not be null" });
-  }
-  if (!parking || !parking.length) {
-    return res.status(400).send({ message: "parking should not be null" });
-  }
-  if (!pet || !pet.length) {
-    return res.status(400).send({ message: "pet should not be null" });
-  }
-  if (!smoking || !smoking.length) {
-    return res.status(400).send({ message: "smoking should not be null" });
-  }
-  if (!gender || !gender.length) {
-    return res.status(400).send({ message: "gender should not be null" });
-  }
+    if (!caption || !caption.length) {
+      return res.status(400).send({ message: "Caption should not be null" });
+    }
+    if (!description || !description.length) {
+      return res
+        .status(400)
+        .send({ message: "Description should not be null" });
+    }
+    if (!latitude || !latitude.length) {
+      return res.status(400).send({ message: "Latitude should not be null" });
+    }
+    if (!longitude || !longitude.length) {
+      return res.status(400).send({ message: "Longitude should not be null" });
+    }
+    if (!location || !location.length) {
+      return res.status(400).send({ message: "Location should not be null" });
+    }
+    if (!price || !price.length) {
+      return res.status(400).send({ message: "Price should not be null" });
+    }
+    if (!creator_id || !creator_id.length) {
+      return res.status(400).send({ message: "Creator_id should not be null" });
+    }
+    if (!photo || !photo.length) {
+      return res.status(400).send({ message: "Photo should not be null" });
+    }
+    if (!parking || !parking.length) {
+      return res.status(400).send({ message: "parking should not be null" });
+    }
+    if (!pet || !pet.length) {
+      return res.status(400).send({ message: "pet should not be null" });
+    }
+    if (!smoking || !smoking.length) {
+      return res.status(400).send({ message: "smoking should not be null" });
+    }
+    if (!gender || !gender.length) {
+      return res.status(400).send({ message: "gender should not be null" });
+    }
 
-  if (!isAdmin && creator_id != loginUserId) {
-    return res.status(401).send({ message: "Yon have no privilege to create this post."});
-  }
+    if (!isAdmin && creator_id != loginUserId) {
+      return res
+        .status(401)
+        .send({ message: "Yon have no privilege to create this post." });
+    }
 
-  sharp(photo)
-    .resize(200)
-    .toFile(destinationOfThumbnail)
-    .then(() => {
-      return PostModel.create(
-        caption,
-        description,
-        photoName,
-        thumbnail,
-        location,
-        price,
-        parking,
-        pet,
-        smoking,
-        gender,
-        creator_id,
-        latitude,
-        longitude
-      );
-    })
-    .then((results) => {
-      if (results && results.affectedRows) {
-        res.send({
-          id: results.insertId,
-          message: `Post is created`,
-        });
-      } else {
-        res.status(400).send({
-          message: `Failed`,
-        });
-      }
-    })
-    .catch((err) => next(err));
-});
+    sharp(photo)
+      .resize(200)
+      .toFile(destinationOfThumbnail)
+      .then(() => {
+        return PostModel.create(
+          caption,
+          description,
+          photoName,
+          thumbnail,
+          location,
+          price,
+          parking,
+          pet,
+          smoking,
+          gender,
+          creator_id,
+          latitude,
+          longitude
+        );
+      })
+      .then((results) => {
+        if (results && results.affectedRows) {
+          res.send({
+            id: results.insertId,
+            message: `Post is created`,
+          });
+        } else {
+          res.status(400).send({
+            message: `Failed`,
+          });
+        }
+      })
+      .catch((err) => next(err));
+  }
+);
 
 router.delete("/", authentication, function (req, res, next) {
   let loginUserId = req.headers.loginUserId;
@@ -201,17 +210,30 @@ router.delete("/", authentication, function (req, res, next) {
     return res.status(400).send({ message: "ID should not be null" });
   }
 
-  if (!isAdmin && id != loginUserId) {
-    return res.status(401).send({ message: "Yon have no privilege to delete this post."});
-  }
+  PostModel.queryById(id)
+    .then((results) => {
+      if (!results.length) {
+        return res.status(400).send({
+          message: `post not found`,
+        });
+      }
+      return results[0].creator_id;
+    })
+    .then((creator_id) => {
+      if (!isAdmin && creator_id != loginUserId) {
+        return res
+          .status(401)
+          .send({ message: "Yon have no privilege to delete this post." });
+      }
 
-  PostModel.delete(id)
+      return PostModel.delete(id);
+    })
     .then((isPostDeleted) => {
       if (isPostDeleted) {
-        res.send({ message: `Post is deleted` });
+        return res.send({ message: `Post is deleted` });
       } else {
-        res.status(400).send({
-          message: `id not found`,
+        return res.status(400).send({
+          message: `post not found`,
         });
       }
     })
