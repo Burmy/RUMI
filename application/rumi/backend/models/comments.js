@@ -1,7 +1,6 @@
 var db = require("../conf/database");
 const CommentModel = {};
 
-
 CommentModel.search = (id, creator_id, post_id) => {
   parameters = [];
 

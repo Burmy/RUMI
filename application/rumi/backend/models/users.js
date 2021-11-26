@@ -157,7 +157,8 @@ UserModel.emailExists = (email) => {
 
 UserModel.authenticate = (username, password) => {
   let result = {};
-  let baseSQL = "SELECT id, username, password, admin, email FROM user WHERE username = ?";
+  let baseSQL =
+    "SELECT id, username, password, admin, email FROM user WHERE username = ?";
   return db
     .execute(baseSQL, [username])
     .then(([results, fields]) => {
@@ -181,8 +182,8 @@ UserModel.authenticate = (username, password) => {
 };
 
 UserModel.update = (id) => {
-  let baseSQL = `UPDATE user SET(`
-  
+  let baseSQL = `UPDATE user SET(`;
+
   if (username) {
     baseSQL += `username = ?`;
     parameters.push(username);

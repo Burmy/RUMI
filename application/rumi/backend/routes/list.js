@@ -1,10 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 var ListModel = require("../models/list");
 
 /* GET list. */
-// TODO Converted to an async function.
-router.get('/', function(req, res, next) {
+router.get("/", function (req, res, next) {
   let category = req.query.category;
 
   ListModel.query(category)

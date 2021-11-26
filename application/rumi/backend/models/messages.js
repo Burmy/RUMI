@@ -35,7 +35,7 @@ MessageModel.searchUnread = (to_id) => {
       return Promise.resolve(results);
     })
     .catch((err) => Promise.reject(err));
-}
+};
 
 MessageModel.create = (text, from_id, to_id) => {
   let baseSQL = `INSERT INTO message 

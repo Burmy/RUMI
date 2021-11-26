@@ -35,7 +35,7 @@ authentication.authentication = function (req, res, next) {
         if (results && results[0].admin) {
           req.headers.admin = 1;
         }
-         next();
+        next();
       })
       .catch((err) => next(err));
   }

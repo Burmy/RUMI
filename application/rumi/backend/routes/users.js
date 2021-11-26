@@ -23,7 +23,6 @@ var storage = multer.diskStorage({
 
 var uploader = multer({ storage: storage });
 
-
 router.get("/", function (req, res, next) {
   let id = req.query.id;
   if (id) {
@@ -57,7 +56,18 @@ router.get("/", function (req, res, next) {
   let photo = req.query.photo;
   let thumbnail = req.query.thumbnail;
 
-  UserModel.search(searchTerm, major, school, pet, smoker, gender, page, size, photo, thumbnail)
+  UserModel.search(
+    searchTerm,
+    major,
+    school,
+    pet,
+    smoker,
+    gender,
+    page,
+    size,
+    photo,
+    thumbnail
+  )
     .then((results) => {
       if (results && results.length) {
         res.send({
@@ -75,126 +85,132 @@ router.get("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.post("/registration", uploader.single("photo"), function (req, res, next) {
-  let username = req.body.username;
-  let email = req.body.email;
-  let password = req.body.password;
-  let description = req.body.description;
-  let gender = req.body.gender;
-  let school = req.body.school;
-  let major = req.body.major;
-  let smoker = req.body.smoker;
-  let pets = req.body.pets;
+router.post(
+  "/registration",
+  uploader.single("photo"),
+  function (req, res, next) {
+    let username = req.body.username;
+    let email = req.body.email;
+    let password = req.body.password;
+    let description = req.body.description;
+    let gender = req.body.gender;
+    let school = req.body.school;
+    let major = req.body.major;
+    let smoker = req.body.smoker;
+    let pets = req.body.pets;
 
-  if (!req.file) {
-    return res.status(400).send({ message: "Photo should not be null" });
-  }
-  
-  let photo = req.file.path;
-  let photoName = req.file.filename;
-  let thumbnail = `thumbnail-${photoName}`;
-  let destinationOfThumbnail = req.file.destination + "/" + thumbnail;
+    if (!req.file) {
+      return res.status(400).send({ message: "Photo should not be null" });
+    }
 
-  if (!username || !username.length) {
-    return res.status(400).send({ message: "username should not be null" });
-  }
-  if (!email || !email.length) {
-    return res.status(400).send({ message: "email should not be null" });
-  }
-  if (!password || !password.length) {
-    return res.status(400).send({ message: "password should not be null" });
-  }
-  if (!photo || !photo.length) {
-    return res.status(400).send({ message: "Photo should not be null" });
-  }
-  if (!description || !description.length) {
-    return res.status(400).send({ message: "Description should not be null" });
-  }
-  if (!gender || !gender.length) {
-    return res.status(400).send({ message: "gender should not be null" });
-  }
-  if (!school || !school.length) {
-    return res.status(400).send({ message: "school should not be null" });
-  }
-  if (!major || !major.length) {
-    return res.status(400).send({ message: "major should not be null" });
-  }
-  if (!smoker || !smoker.length) {
-    return res.status(400).send({ message: "smoker should not be null" });
-  }
-  if (!pets || !pets.length) {
-    return res.status(400).send({ message: "pets should not be null" });
-  }
+    let photo = req.file.path;
+    let photoName = req.file.filename;
+    let thumbnail = `thumbnail-${photoName}`;
+    let destinationOfThumbnail = req.file.destination + "/" + thumbnail;
 
-  let emailRegex =
-    "^w{1,63}@[a-zA-Z0-9]{2,63}.[a-zA-Z]{2,63}(.[a-zA-Z]{2,63})?$";
-  var eight = password.length >= 8;
-  var upper = /^[A-Z].*/.test(password);
-  var number = /.*\d.*/.test(password);
-  var special = /.*[/*\-+!@#$^&].*/.test(password);
+    if (!username || !username.length) {
+      return res.status(400).send({ message: "username should not be null" });
+    }
+    if (!email || !email.length) {
+      return res.status(400).send({ message: "email should not be null" });
+    }
+    if (!password || !password.length) {
+      return res.status(400).send({ message: "password should not be null" });
+    }
+    if (!photo || !photo.length) {
+      return res.status(400).send({ message: "Photo should not be null" });
+    }
+    if (!description || !description.length) {
+      return res
+        .status(400)
+        .send({ message: "Description should not be null" });
+    }
+    if (!gender || !gender.length) {
+      return res.status(400).send({ message: "gender should not be null" });
+    }
+    if (!school || !school.length) {
+      return res.status(400).send({ message: "school should not be null" });
+    }
+    if (!major || !major.length) {
+      return res.status(400).send({ message: "major should not be null" });
+    }
+    if (!smoker || !smoker.length) {
+      return res.status(400).send({ message: "smoker should not be null" });
+    }
+    if (!pets || !pets.length) {
+      return res.status(400).send({ message: "pets should not be null" });
+    }
 
-  if (
-    username == null ||
-    !/^[a-zA-Z].*/.test(username) ||
-    username.length < 3
-  ) {
-    next("invalid username");
-  } else if (
-    !/^\w{1,63}@[a-zA-Z0-9]{2,63}\.[a-zA-Z]{2,63}(\.[a-zA-Z]{2,63})?$/.test(
-      email
-    )
-  ) {
-    next("invalid email");
-  }
+    let emailRegex =
+      "^w{1,63}@[a-zA-Z0-9]{2,63}.[a-zA-Z]{2,63}(.[a-zA-Z]{2,63})?$";
+    var eight = password.length >= 8;
+    var upper = /^[A-Z].*/.test(password);
+    var number = /.*\d.*/.test(password);
+    var special = /.*[/*\-+!@#$^&].*/.test(password);
 
-  UserModel.usernameExists(username)
-    .then((usernameExists) => {
-      if (usernameExists) {
-        throw new UserError("username exists", 400);
-      } else {
-        return UserModel.emailExists(email);
-      }
-    })
-    .then((emailExists) => {
-      if (emailExists) {
-        throw new UserError("email exists", 400);
-      } else    
-    sharp(photo)
-      .resize(200)
-      .toFile(destinationOfThumbnail)
-      .then(() => {
-        return UserModel.create(
-          username,
-          password,
-          email,
-          description,
-          gender,
-          school,
-          major,
-          smoker,
-          pets,
-          photoName,
-          thumbnail
-        );
+    if (
+      username == null ||
+      !/^[a-zA-Z].*/.test(username) ||
+      username.length < 3
+    ) {
+      next("invalid username");
+    } else if (
+      !/^\w{1,63}@[a-zA-Z0-9]{2,63}\.[a-zA-Z]{2,63}(\.[a-zA-Z]{2,63})?$/.test(
+        email
+      )
+    ) {
+      next("invalid email");
+    }
+
+    UserModel.usernameExists(username)
+      .then((usernameExists) => {
+        if (usernameExists) {
+          throw new UserError("username exists", 400);
+        } else {
+          return UserModel.emailExists(email);
+        }
       })
-    })
-    .then((createdUserId) => {
-      if (createdUserId < 0) {
-        res.status(500).send("Internal server error1");
-      } else {
-        return res.send({
-          message: "registration succeeded!",
-        });
-      }
-    })
-    .catch((err) => {
-      if (err instanceof UserError) {
-        res.status(400).send(err.getMessage());
-      } else {
-        next(err);
-      }
-    });
-});
+      .then((emailExists) => {
+        if (emailExists) {
+          throw new UserError("email exists", 400);
+        } else
+          sharp(photo)
+            .resize(200)
+            .toFile(destinationOfThumbnail)
+            .then(() => {
+              return UserModel.create(
+                username,
+                password,
+                email,
+                description,
+                gender,
+                school,
+                major,
+                smoker,
+                pets,
+                photoName,
+                thumbnail
+              );
+            });
+      })
+      .then((createdUserId) => {
+        if (createdUserId < 0) {
+          res.status(500).send("Internal server error1");
+        } else {
+          return res.send({
+            message: "registration succeeded!",
+          });
+        }
+      })
+      .catch((err) => {
+        if (err instanceof UserError) {
+          res.status(400).send(err.getMessage());
+        } else {
+          next(err);
+        }
+      });
+  }
+);
 
 router.post("/login", function (req, res, next) {
   let username = req.body.username;
@@ -230,7 +246,7 @@ router.post("/login", function (req, res, next) {
         }
         res.send({
           message: `${username} is logged in`,
-          result: result ,
+          result: result,
         });
       } else {
         throw new UserError("invalid username/password", 400);
@@ -295,7 +311,9 @@ router.delete("/", authentication, function (req, res, next) {
   }
 
   if (!isAdmin && id != loginUserId) {
-    return res.status(401).send({ message: "Yon have no privilege to delete this user."});
+    return res
+      .status(401)
+      .send({ message: "Yon have no privilege to delete this user." });
   }
 
   UserModel.delete(id)
