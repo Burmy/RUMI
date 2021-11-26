@@ -48,9 +48,9 @@ export const CreatePost = ({ history }) => {
         Axios.post(configData.SERVER_URL + "posts/", data, {
             headers: { "content-type": "multipart/form-data" },
         })
-            .then(() => {
+            .then((response) => {
                 console.log("IT WORKED");
-                console.log(data);
+                console.log(response);
                 toast.success("Posted Successfully!", {
                     position: "top-right",
                     autoClose: 4000,
