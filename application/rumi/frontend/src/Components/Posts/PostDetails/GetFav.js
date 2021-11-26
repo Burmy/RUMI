@@ -33,20 +33,17 @@ export const GetFav = ({ id }) => {
 
     const savestyle = { width: "40px", height: "40px" };
 
-    const unsavePost = (favid) => {
-        const data = { id: favid };
+    const unsavePost = (unsaveid) => {
+        const data = { post_id: unsaveid };
+        console.log(unsaveid, "favid");
 
         Axios.delete(configData.SERVER_URL + "favorites", data)
             .then(() => {
-                console.log(favid, "favid");
-                console.log(Cookies.get("loggedUserid"), "saved_by");
                 console.log("unsaved");
                 window.location.reload();
             })
             .catch((error) => {
                 // Error
-                console.log(favid, "favid");
-                console.log(Cookies.get("loggedUserid"), "saved_by");
                 if (error.response) {
                     console.log(error.response.data);
                     console.log(error.response.status);
@@ -81,17 +78,14 @@ export const GetFav = ({ id }) => {
                                     />
 
                                     <div className="post-price-container">
-                                        <div className="post-price">
-                                            ${value.price}
-                                            {value.favorite_id}
-                                        </div>
+                                        <div className="post-price">${value.price}</div>
                                     </div>
 
                                     {Cookies.get("token") && !Cookies.get("admin") && (
                                         <div className="post-save-button">
                                             <BsStarFill
                                                 onClick={() => {
-                                                    unsavePost(value.favorite_id);
+                                                    unsavePost(value.id);
                                                 }}
                                                 style={savestyle}
                                             />
