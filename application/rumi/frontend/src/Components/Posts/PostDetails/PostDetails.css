@@ -307,38 +307,68 @@ div[id^="message-"] {
     flex-wrap: wrap;
 }
 .post-delete-button {
-    padding: 11px 16px 9px 16px;
+    padding: 2px 30px 6px 30px;
     margin: 15px;
-    background: #c72306;
-    border: 2px solid #c72306;
-    color: #ffffff;
-    text-align: center;
+    background: #ffffff;
+    border: 2px solid #ffffff;
     cursor: pointer;
-    font-size: 22px;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    font-family: "Josefin Sans", sans-serif;
     transition: 0.14s ease;
     z-index: 55;
     right: 0;
     top: 0;
     position: absolute;
 }
-.post-delete-button:hover {
+
+.user-delete-button {
+    padding: 4px 15px 8px 15px;
+    margin: 10px;
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    transition: 0.14s ease;
+    z-index: 55;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+
+.comment-delete-button {
+    padding: 3px 25px 7px 25px;
+    margin: 15px;
+    background: #ffffff;
+    border: 2px solid #eb3c1d;
+    cursor: pointer;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    transition: 0.14s ease;
+    z-index: 55;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.post-delete-button:hover,
+.user-delete-button:hover,
+.comment-delete-button:hover {
     border: 2px solid #eb3c1d;
     background: #eb3c1d;
 }
 
+.export-btn path {
+    stroke-width: 2;
+    stroke: #eb3c1d;
+}
+
+.export-btn:hover path {
+    stroke-width: 2.6;
+    stroke: #ffffff;
+}
+
 .post-save-button {
-    padding: 11px 16px 9px 16px;
-    margin: 15px;
-    background: #c72306;
-    border: 2px solid #c72306;
-    color: #ffffff;
-    text-align: center;
+    color: #ebcc1d;
+    margin: 20px;
     cursor: pointer;
-    font-size: 22px;
-    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    font-family: "Josefin Sans", sans-serif;
     transition: 0.14s ease;
     z-index: 55;
     right: 0;
@@ -346,30 +376,8 @@ div[id^="message-"] {
     position: absolute;
 }
 .post-save-button:hover {
-    border: 2px solid #eb3c1d;
-    background: #eb3c1d;
-}
-
-.comment-delete-button {
-    padding: 8px 16px 6px 16px;
-    margin: 15px;
-    background: #c72306;
-    border: 2px solid #c72306;
-    color: #ffffff;
-    text-align: center;
-    cursor: pointer;
-    font-size: 22px;
-    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
-    font-family: "Josefin Sans", sans-serif;
-    transition: 0.14s ease;
-    z-index: 55;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-}
-.comment-delete-button:hover {
-    border: 2px solid #eb3c1d;
-    background: #eb3c1d;
+    color: #fcde38;
+    transform: scale(1.2);
 }
 
 .react-tabs__tab-list {

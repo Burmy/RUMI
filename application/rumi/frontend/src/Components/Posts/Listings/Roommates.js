@@ -17,6 +17,8 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import UseAnimations from "react-useanimations";
+import trash2 from "react-useanimations/lib/trash2";
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -222,14 +224,18 @@ function Roommates() {
                                                 <div className="user-card">
                                                     {/* only admin can delete any users */}
                                                     {Cookies.get("token") && Cookies.get("admin") && (
-                                                        <button
-                                                            className="post-delete-button"
-                                                            onClick={() => {
-                                                                deleteUser(value.id);
-                                                            }}
-                                                        >
-                                                            Delete
-                                                        </button>
+                                                        <div className="export-btn">
+                                                            <div className="export-btn">
+                                                                <UseAnimations
+                                                                    animation={trash2}
+                                                                    size={35}
+                                                                    className="user-delete-button"
+                                                                    onClick={() => {
+                                                                        deleteUser(value.id);
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     )}
 
                                                     <div

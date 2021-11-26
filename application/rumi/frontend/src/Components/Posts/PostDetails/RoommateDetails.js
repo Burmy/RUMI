@@ -11,6 +11,8 @@ import "react-tabs/style/react-tabs.css";
 import Avatar from "react-avatar";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { GetFav } from "./GetFav";
+import UseAnimations from "react-useanimations";
+import trash2 from "react-useanimations/lib/trash2";
 
 function RoommateDetails() {
     let { id } = useParams();
@@ -268,14 +270,16 @@ function RoommateDetails() {
                                                                             {/* only logged in user can delete their posts */}
                                                                             {Cookies.get("token") &&
                                                                                 Cookies.get("username") === value.username && (
-                                                                                    <button
-                                                                                        className="post-delete-button"
-                                                                                        onClick={() => {
-                                                                                            deletePost(value.id);
-                                                                                        }}
-                                                                                    >
-                                                                                        Delete
-                                                                                    </button>
+                                                                                    <div className="export-btn">
+                                                                                        <UseAnimations
+                                                                                            animation={trash2}
+                                                                                            size={35}
+                                                                                            className="post-delete-button"
+                                                                                            onClick={() => {
+                                                                                                deletePost(value.id);
+                                                                                            }}
+                                                                                        />
+                                                                                    </div>
                                                                                 )}
                                                                             <div
                                                                                 className="post-info-container"
@@ -338,14 +342,16 @@ function RoommateDetails() {
                                                                               </div>
                                                                               {Cookies.get("token") &&
                                                                                   Cookies.get("username") === value.username && (
-                                                                                      <button
-                                                                                          className="comment-delete-button"
-                                                                                          onClick={() => {
-                                                                                              deleteComment(comment.id);
-                                                                                          }}
-                                                                                      >
-                                                                                          Delete
-                                                                                      </button>
+                                                                                      <div className="export-btn">
+                                                                                          <UseAnimations
+                                                                                              animation={trash2}
+                                                                                              size={35}
+                                                                                              className="comment-delete-button"
+                                                                                              onClick={() => {
+                                                                                                  deleteComment(comment.id);
+                                                                                              }}
+                                                                                          />
+                                                                                      </div>
                                                                                   )}
                                                                           </div>
                                                                       )

@@ -8,6 +8,8 @@ import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
@@ -15,8 +17,10 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
 import { MdOutlinePets } from "react-icons/md";
-
+import { BsStarFill } from "react-icons/bs";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import UseAnimations from "react-useanimations";
+import trash2 from "react-useanimations/lib/trash2";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -122,7 +126,18 @@ function Rooms() {
                 console.log(saveid, "post_id");
                 console.log(Cookies.get("loggedUserid"), "saved_by");
                 console.log("saved");
-                // window.location.reload();
+            })
+            .then(() => {
+                toast.success(`Post Saved!`, {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
             })
             .catch((error) => {
                 // Error
@@ -142,6 +157,7 @@ function Rooms() {
     };
 
     const style = { width: "32px", height: "32px" };
+    const savestyle = { width: "40px", height: "40px" };
     return (
         <div>
             {loading ? (
@@ -272,25 +288,26 @@ function Rooms() {
                                                     </div>
                                                     {/* only admin can delete any posts */}
                                                     {Cookies.get("token") && Cookies.get("admin") && (
-                                                        <button
-                                                            className="post-delete-button"
-                                                            onClick={() => {
-                                                                deletePost(value.id);
-                                                            }}
-                                                        >
-                                                            Delete
-                                                        </button>
+                                                        <div className="export-btn">
+                                                            <UseAnimations
+                                                                animation={trash2}
+                                                                size={35}
+                                                                className="post-delete-button"
+                                                                onClick={() => {
+                                                                    deletePost(value.id);
+                                                                }}
+                                                            />
+                                                        </div>
                                                     )}
                                                     {Cookies.get("token") && !Cookies.get("admin") && (
-                                                        <button
-                                                            className="post-save-button"
-                                                            onClick={() => {
-                                                                savePost(value.id);
-                                                            }}
-                                                        >
-                                                            {value.id}
-                                                            Save
-                                                        </button>
+                                                        <div className="post-save-button">
+                                                            <BsStarFill
+                                                                onClick={() => {
+                                                                    savePost(value.id);
+                                                                }}
+                                                                style={savestyle}
+                                                            />
+                                                        </div>
                                                     )}
                                                     <div
                                                         className="post-info-container"

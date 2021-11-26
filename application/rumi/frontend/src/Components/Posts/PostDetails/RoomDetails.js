@@ -9,7 +9,8 @@ import Cookies from "js-cookie";
 import { AiOutlineCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
 import { AiOutlineCaretLeft } from "react-icons/ai";
-
+import UseAnimations from "react-useanimations";
+import trash2 from "react-useanimations/lib/trash2";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 function RoomDetails() {
@@ -191,14 +192,16 @@ function RoomDetails() {
                                                                           </div>
                                                                           <div className="comment-text">- {comment.text}</div>
                                                                           {Cookies.get("token") && Cookies.get("admin") && (
-                                                                              <button
-                                                                                  className="comment-delete-button"
-                                                                                  onClick={() => {
-                                                                                      deleteComment(comment.id);
-                                                                                  }}
-                                                                              >
-                                                                                  Delete
-                                                                              </button>
+                                                                              <div className="export-btn">
+                                                                                  <UseAnimations
+                                                                                      animation={trash2}
+                                                                                      size={35}
+                                                                                      className="comment-delete-button"
+                                                                                      onClick={() => {
+                                                                                          deleteComment(comment.id);
+                                                                                      }}
+                                                                                  />
+                                                                              </div>
                                                                           )}
                                                                       </div>
                                                                   )
@@ -239,7 +242,6 @@ function RoomDetails() {
                                             <div>
                                                 Posted by: <Link to={`/user/${value.creator_id}`}>{value.username}</Link>
                                             </div>
-
                                             <Link className="offer-button" to={`/chat/${value.email}`}>
                                                 Offer
                                             </Link>
