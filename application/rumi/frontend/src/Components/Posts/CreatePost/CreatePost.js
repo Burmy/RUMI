@@ -8,8 +8,11 @@ import Cookies from "js-cookie";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState, useEffect } from "react";
+import ImageUpload from "image-upload-react";
 
-export const CreatePost = ({ history }) => {
+export const CreatePost = () => {
+    // const [imageSrc, setImageSrc] = useState();
+
     // const handleImageSelect = (e) => {
     //     setImageSrc(URL.createObjectURL(e.target.files[0]));
     // };
@@ -45,9 +48,9 @@ export const CreatePost = ({ history }) => {
         Axios.post(configData.SERVER_URL + "posts/", data, {
             headers: { "content-type": "multipart/form-data" },
         })
-            .then((response) => {
+            .then(() => {
                 console.log("IT WORKED");
-                console.log(response);
+                console.log(data);
                 toast.success("Posted Successfully!", {
                     position: "top-right",
                     autoClose: 4000,
@@ -58,7 +61,7 @@ export const CreatePost = ({ history }) => {
                     closeButton: false,
                     progress: 0,
                 });
-                history.push("/post/" + response.data.id);
+                this.props.history.push("/post/" + data.data.id);
             })
             .catch((error) => {
                 // Error
@@ -94,12 +97,6 @@ export const CreatePost = ({ history }) => {
         photo: Yup.mixed().required("✖ A photo is required"),
     });
 
-    const [imageSrc, setImageSrc] = useState('');
-
-    const onChangePicture = e => {
-        setImageSrc(URL.createObjectURL(e.target.files[0]));
-      };
-
     return (
         <div className="form-container">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
@@ -117,15 +114,15 @@ export const CreatePost = ({ history }) => {
                                     accept="image/jpg,image/jpeg,image/png"
                                     onChange={onSelectFile}
                                     autoComplete="off"
-                                />*/
-                                }
-                                <img src={imageSrc} id="imgPreview" /> 
+                                />
+                                <img src={this.state.file} id="imgPreview" /> */}
+
                                 <input
                                     id="photo"
                                     type="file"
                                     name="photo"
                                     accept="image/jpg,image/jpeg,image/png"
-                                    onChange={(event) => {formProps.setFieldValue("photo", event.target.files[0]);onChangePicture(event)}}
+                                    onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
                                 />
                                 {/* <ImageUpload
                                     id="photo"
