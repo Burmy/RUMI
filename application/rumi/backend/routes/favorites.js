@@ -72,24 +72,35 @@ router.post("/", authentication, function (req, res, next) {
 router.delete("/", authentication, function (req, res, next) {
     let loginUserId = req.headers.loginUserId;
     let isAdmin = req.headers.admin;
-    let id = req.body.id;
+    let post_id = req.body.post_id;
 
-    if (!id) {
-        return res.status(400).send({ message: "id should not be null" });
+    if (!post_id) {
+        return res.status(400).send({ message: "post_id should not be null" });
     }
 
-    if (!isAdmin && saved_by != loginUserId) {
-        return res.status(401).send({ message: "Yon have no privilege to delete this user." });
-    }
-
-    FavoriteModel.delete(id)
-        .then((isPostUnsaved) => {
-            if (isPostUnsaved) {
-                res.send({
-                    message: `Post is unsaved`,
+    FavoriteModel.search(null, post_id, null)
+        .then((results) => {
+            if (!results.length) {
+                return res.send({
+                    message: `Post is unsaved (0)`,
                 });
             } else {
-                res.status(400).send({
+                return results[0].saved_by;
+            }
+        })
+        .then((saved_by) => {
+            if (!isAdmin && saved_by != loginUserId) {
+                return res.status(401).send({ message: "Yon have no privilege to delete this user." });
+            }
+            return FavoriteModel.delete(post_id);
+        })
+        .then((isPostUnsaved) => {
+            if (isPostUnsaved) {
+                return res.send({
+                    message: `Post is unsaved (1)`,
+                });
+            } else {
+                return res.status(400).send({
                     message: `id not found`,
                 });
             }

@@ -58,10 +58,10 @@ FavoriteModel.create = (
         .catch((err) => Promise.reject(err));
 };
 
-FavoriteModel.delete = (id) => {
-    let baseSQL = `UPDATE favorite SET unsaved = 1 WHERE id = ?;`;
+FavoriteModel.delete = (post_id) => {
+    let baseSQL = `UPDATE favorite SET unsaved = 1 WHERE post_id = ?;`;
     return db
-        .execute(baseSQL, [id])
+        .execute(baseSQL, [post_id])
         .then(([results, fields]) => {
             return Promise.resolve(results && results.affectedRows);
         })
