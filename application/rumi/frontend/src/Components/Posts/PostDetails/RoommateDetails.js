@@ -13,7 +13,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { GetFav } from "./GetFav";
 import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
 import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
-
+import { Link } from "react-router-dom";
 function RoommateDetails() {
     let { id } = useParams();
     let history = useHistory();
@@ -165,25 +165,40 @@ function RoommateDetails() {
                                                 <div className="user-info-main-desc">{value.description}</div>
                                             </div>
                                             <ul className="user-info-sub">
-                                                <li>
-                                                    {value.first_name} goes to{" "}
-                                                    <span className="user-info-highlight">{value.school}</span>.
+                                                <li className="user-info-sub-sub">
+                                                    Goes to <span className="user-info-highlight">{value.school}</span>.
                                                 </li>
-                                                <li>
-                                                    {value.first_name} speaks{" "}
-                                                    <span className="user-info-highlight">{value.language}</span>.
-                                                </li>
-                                                <li>
-                                                    {value.first_name} is interested in{" "}
-                                                    <span className="user-info-highlight">{value.interests}</span>.
-                                                </li>
-                                                <li>
-                                                    {value.first_name} loves{" "}
-                                                    <span className="user-info-highlight">{value.hobbies}</span>.
-                                                </li>
+                                                <div className="user-filter-pref">
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.pets == "1") {
+                                                            return (
+                                                                <li className="user-info-sub-sub">
+                                                                    Has a <span className="user-info-highlight">Pet</span>.
+                                                                </li>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.smoker == "1") {
+                                                            return (
+                                                                <li className="user-info-sub-sub">
+                                                                    Is a <span className="user-info-highlight">Smoker</span>.
+                                                                </li>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                </div>
                                             </ul>
                                             <div className="user-info-main-cont">
-                                                Contact - {value.phone}, {value.email}
+                                                <Link className="offer-button" to={`/chat/${value.email}`}>
+                                                    Contact
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +208,9 @@ function RoommateDetails() {
                                             <TabList>
                                                 <Tab>Posts</Tab>
                                                 <Tab>Comments</Tab>
-                                                <Tab>Favorites</Tab>
+                                                {Cookies.get("token") && Cookies.get("username") === value.username && (
+                                                    <Tab>Favorites</Tab>
+                                                )}
                                             </TabList>
 
                                             <TabPanel>
@@ -240,12 +257,6 @@ function RoommateDetails() {
                                                                                 <div className="post-desc">
                                                                                     {value.description}
                                                                                 </div>
-                                                                                {/* <div className="post-desc-pref">
-                                                                        <div className="">{value.parking}park</div>
-                                                                        <div className="">{value.pet}pet</div>
-                                                                        <div className="">{value.smoking}smoke</div>
-                                                                    </div> */}
-
                                                                                 <div className="post-date">
                                                                                     {value.created_date}
                                                                                 </div>
@@ -298,23 +309,27 @@ function RoommateDetails() {
                                                         : null}
                                                 </div>
                                             </TabPanel>
-                                            <TabPanel>
-                                                <div>{favCount}</div>
-                                                <div className="user-info-container-posts">
-                                                    {userFav &&
-                                                        userFav
-                                                            .slice(0)
-                                                            .reverse()
-                                                            .map((value, key) => {
-                                                                value.created_date = new Date(value.created_date).toDateString();
-                                                                return (
-                                                                    <div key={value.id}>
-                                                                        <GetFav key={key} id={value.post_id} />
-                                                                    </div>
-                                                                );
-                                                            })}
-                                                </div>
-                                            </TabPanel>
+                                            {Cookies.get("token") && Cookies.get("username") === value.username && (
+                                                <TabPanel>
+                                                    <div>{favCount}</div>
+                                                    <div className="user-info-container-posts">
+                                                        {userFav &&
+                                                            userFav
+                                                                .slice(0)
+                                                                .reverse()
+                                                                .map((value, key) => {
+                                                                    value.created_date = new Date(
+                                                                        value.created_date
+                                                                    ).toDateString();
+                                                                    return (
+                                                                        <div key={value.id}>
+                                                                            <GetFav key={key} id={value.post_id} />
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                    </div>
+                                                </TabPanel>
+                                            )}
                                         </Tabs>
                                     </div>
                                 </div>

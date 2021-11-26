@@ -223,8 +223,6 @@ function Roommates() {
                                                         <div className="user-card-info-cont">
                                                             <div className="user-card-caption">{value.username}</div>
                                                             <div className="user-card-desc">{value.description}</div>
-                                                            <div className="user-card-desc2">Studies at {value.school}</div>
-                                                            <div className="user-card-desc2">Was born on {value.birthday}</div>
                                                             <div className="post-desc-pref">
                                                                 {(() => {
                                                                     // eslint-disable-next-line eqeqeq

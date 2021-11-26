@@ -172,17 +172,25 @@
     align-items: flex-start;
     color: #696666;
 }
-.user-info-sub > li {
+.user-info-sub-sub {
     padding: 10px;
+}
+
+.user-filter-pref {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 5px;
+    align-items: flex-start;
 }
 
 .user-info-highlight {
     color: #1da699;
 }
 .user-info-main-cont {
-    font-size: 25px;
-    color: #696666;
     padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 /* Comments */

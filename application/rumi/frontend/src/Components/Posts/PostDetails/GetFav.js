@@ -33,19 +33,19 @@ export const GetFav = ({ id }) => {
 
     const savestyle = { width: "40px", height: "40px" };
 
-    const unsavePost = (id) => {
-        const data = { post_id: id };
+    const unsavePost = (favid) => {
+        const data = { id: favid };
 
         Axios.delete(configData.SERVER_URL + "favorites", data)
             .then(() => {
-                console.log(id, "post_id");
+                console.log(favid, "favid");
                 console.log(Cookies.get("loggedUserid"), "saved_by");
                 console.log("unsaved");
                 window.location.reload();
             })
             .catch((error) => {
                 // Error
-                console.log(id, "post_id");
+                console.log(favid, "favid");
                 console.log(Cookies.get("loggedUserid"), "saved_by");
                 if (error.response) {
                     console.log(error.response.data);
@@ -81,14 +81,17 @@ export const GetFav = ({ id }) => {
                                     />
 
                                     <div className="post-price-container">
-                                        <div className="post-price">${value.price}</div>
+                                        <div className="post-price">
+                                            ${value.price}
+                                            {value.favorite_id}
+                                        </div>
                                     </div>
 
                                     {Cookies.get("token") && !Cookies.get("admin") && (
                                         <div className="post-save-button">
                                             <BsStarFill
                                                 onClick={() => {
-                                                    unsavePost(id);
+                                                    unsavePost(value.favorite_id);
                                                 }}
                                                 style={savestyle}
                                             />
