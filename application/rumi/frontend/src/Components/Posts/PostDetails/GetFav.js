@@ -37,7 +37,7 @@ export const GetFav = ({ id }) => {
         const data = { post_id: unsaveid };
         console.log(unsaveid, "favid");
 
-        Axios.delete(configData.SERVER_URL + "favorites", data)
+        Axios.delete(configData.SERVER_URL + "favorites", {data})
             .then(() => {
                 console.log("unsaved");
                 window.location.reload();
