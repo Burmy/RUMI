@@ -18,11 +18,11 @@ PostModel.search = (
 ) => {
   parameters = [];
 
-  let baseSQL = `SELECT p.*, u.username
+  let baseSQL = `SELECT p.*, u.username, (SELECT f.id FROM favorite f WHERE f.post_id = p.id AND f.unsaved = 0 LIMIT 1) AS favorite_id
     FROM post p 
     JOIN user u
     ON p.creator_id = u.id
-    WHERE p.deleted = 0 and u.deleted = 0 and u.activated = 1 `;
+    WHERE p.deleted = 0 and u.deleted = 0 and u.activated = 1`;
 
   if (searchTerm) {
     baseSQL += ` AND (p.caption like ? OR p.description like ?) `;
@@ -122,7 +122,7 @@ PostModel.create = (
   gender,
   creator_id,
   latitude,
-  longitude,
+  longitude
 ) => {
   let baseSQL = `INSERT INTO post 
   (caption, description, photo, thumbnail, location, price, parking, pet, smoking, gender, creator_id, deleted, latitude, longitude) 
