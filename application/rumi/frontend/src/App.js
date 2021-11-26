@@ -1,9 +1,8 @@
-import { useState, React } from "react";
+import { React } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Team from "./Components/Team/Team";
 import Home from "./Components/Home/Home";
-import Map from "./Components/Map/Map";
 import Rooms from "./Components/Posts/Listings/Rooms";
 import Roommates from "./Components/Posts/Listings/Roommates";
 import RoomDetails from "./Components/Posts/PostDetails/RoomDetails";
@@ -20,7 +19,6 @@ import Anmol from "./Components/Team/TeamMembers/anmol";
 import Alan from "./Components/Team/TeamMembers/alan";
 import Rasul from "./Components/Team/TeamMembers/rasul";
 import { ToastContainer } from "react-toastify";
-import { AuthContext } from "./Helpers/AuthContext";
 import ProtectedRoute from "./Helpers/ProtectedRoute";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./App.css";
@@ -38,7 +36,6 @@ function App() {
         window.GA_INITIALIZED = true;
     }
     logPageView();
-    const [authState, setAuthState] = useState(false);
     Axios.defaults.withCredentials = true;
     return (
         <Router>
@@ -58,7 +55,6 @@ function App() {
                         <Route path="/rooms" exact component={Rooms} />
                         <Route path="/roommates" exact component={Roommates} />
                         <Route path="/team" exact component={Team} />
-                        <Route path="/map" exact component={Map} />
                         <ProtectedRoute path="/createpost" exact component={CreatePost} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />

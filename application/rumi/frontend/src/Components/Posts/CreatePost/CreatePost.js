@@ -98,7 +98,7 @@ export const CreatePost = () => {
     });
 
     return (
-        <div className="form-container-upload">
+        <div className="form-container">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 {(formProps) => (
                     <Form className="upload-card">

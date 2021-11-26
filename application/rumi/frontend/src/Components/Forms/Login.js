@@ -6,15 +6,14 @@ import Cookies from "js-cookie";
 import Axios from "axios";
 import "./Form.css";
 import configData from "../../Configs/config.json";
-import { collection, addDoc } from "firebase/firestore";
-import { db, auth } from "../Chat/Firebase";
+import { auth } from "../Chat/Firebase";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
     const [username, setUsername] = useState("");
-    const [fbUsername, setFBUsername] = useState("");
+
     const [password, setPassword] = useState("");
 
     let history = useHistory();
@@ -28,16 +27,6 @@ const Login = () => {
         Axios.post(configData.SERVER_URL + "users/login", data)
             .then((response) => {
                 console.log("logged in sql db");
-                // toast.success("Logged In!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
                 email = response.data.result.email;
                 localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
                 return signInWithEmailAndPassword(auth, email, password);
@@ -73,21 +62,6 @@ const Login = () => {
             });
     };
 
-    //   const getEmail = () => {
-    //     db.collection("users")
-    //       .where("username", "==", fbUsername)
-    //       .get()
-    //       .then(function (querySnapshot) {
-    //         querySnapshot.forEach(function (doc) {
-    //           setFBUsername(doc.get("email"));
-    //           console.log(doc.get("email"));
-    //         });
-    //       })
-    //       .catch(function (error) {
-    //         console.log("Error getting documents: ", error);
-    //       });
-    //   };
-
     return (
         <div className="form-container">
             <div className="login-card">
@@ -100,7 +74,6 @@ const Login = () => {
                         placeholder="Username"
                         onChange={(e) => {
                             setUsername(e.target.value);
-                            //   setFBUsername(e.target.value);
                         }}
                     />
 
@@ -112,7 +85,6 @@ const Login = () => {
                         onChange={(e) => {
                             setPassword(e.target.value);
                         }}
-                        // onClick={getEmail}
                     />
                     <button className="form-input-btn" onClick={login} type="button">
                         Log in

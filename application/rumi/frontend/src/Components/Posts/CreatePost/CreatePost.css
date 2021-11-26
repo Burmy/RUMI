@@ -1,16 +1,3 @@
-.form-container-upload {
-    background: url(../../Forms/waves.svg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    max-width: 100vw;
-    position: relative;
-    padding-bottom: 50px;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-}
 .upload-card {
     width: 80%;
     background: #ffffff;
