@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { useState, useEffect } from "react";
 import ImageUpload from "image-upload-react";
 
-export const CreatePost = () => {
+export const CreatePost = ({ history }) => {
     // const [imageSrc, setImageSrc] = useState();
 
     // const handleImageSelect = (e) => {
@@ -61,7 +61,7 @@ export const CreatePost = () => {
                     closeButton: false,
                     progress: 0,
                 });
-                this.props.history.push("/post/" + data.data.id);
+                history.push("/post/" + response.data.id);
             })
             .catch((error) => {
                 // Error
