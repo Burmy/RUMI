@@ -9,9 +9,8 @@ import Cookies from "js-cookie";
 import { AiOutlineCaretRight } from "react-icons/ai";
 import configData from "../../../Configs/config.json";
 import { AiOutlineCaretLeft } from "react-icons/ai";
-import UseAnimations from "react-useanimations";
-import trash2 from "react-useanimations/lib/trash2";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
 
 function RoomDetails() {
     let history = useHistory();
@@ -98,39 +97,6 @@ function RoomDetails() {
             });
     };
 
-    const deleteComment = (commentid) => {
-        const data = { id: commentid };
-        Axios.delete(configData.SERVER_URL + `comments`, { data })
-            .then(() => {
-                console.log("deleted");
-                // history.push("/");
-                window.location.reload();
-                // toast.success("Post Deleted!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
-
     const style = { width: "37px", height: "37px" };
     return (
         <div>
@@ -192,16 +158,7 @@ function RoomDetails() {
                                                                           </div>
                                                                           <div className="comment-text">- {comment.text}</div>
                                                                           {Cookies.get("token") && Cookies.get("admin") && (
-                                                                              <div className="export-btn">
-                                                                                  <UseAnimations
-                                                                                      animation={trash2}
-                                                                                      size={35}
-                                                                                      className="comment-delete-button"
-                                                                                      onClick={() => {
-                                                                                          deleteComment(comment.id);
-                                                                                      }}
-                                                                                  />
-                                                                              </div>
+                                                                              <DeleteComment commentid={comment.id} />
                                                                           )}
                                                                       </div>
                                                                   )

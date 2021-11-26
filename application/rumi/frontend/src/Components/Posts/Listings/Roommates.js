@@ -17,8 +17,8 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import UseAnimations from "react-useanimations";
-import trash2 from "react-useanimations/lib/trash2";
+import { DeleteUser } from "../Delete-Edit-Save/DeleteUser";
+
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -91,28 +91,6 @@ function Roommates() {
         setMajor(searchMajor);
     };
 
-    /* only admin can delete any users */
-    const deleteUser = (userid) => {
-        const data = { id: userid };
-        Axios.delete(configData.SERVER_URL + `users`, { data })
-            .then(() => {
-                console.log("deleted");
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
     const style = { width: "32px", height: "32px" };
 
     return (
@@ -223,20 +201,7 @@ function Roommates() {
                                             <div key={value.id}>
                                                 <div className="user-card">
                                                     {/* only admin can delete any users */}
-                                                    {Cookies.get("token") && Cookies.get("admin") && (
-                                                        <div className="export-btn">
-                                                            <div className="export-btn">
-                                                                <UseAnimations
-                                                                    animation={trash2}
-                                                                    size={35}
-                                                                    className="user-delete-button"
-                                                                    onClick={() => {
-                                                                        deleteUser(value.id);
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    )}
+                                                    {Cookies.get("token") && Cookies.get("admin") && <DeleteUser id={value.id} />}
 
                                                     <div
                                                         className="user-card-info-container"

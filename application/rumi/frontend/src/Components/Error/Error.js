@@ -6,7 +6,7 @@ const Error = () => {
         <div>
             <h1>Page Not Found :/</h1>
             <h3>
-                Go to the Home Page: <Link to="/"> Home Page</Link>
+                Go to the <Link to="/"> Home Page</Link>
             </h3>
         </div>
     );

@@ -8,8 +8,6 @@ import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
@@ -17,10 +15,9 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
 import { MdOutlinePets } from "react-icons/md";
-import { BsStarFill } from "react-icons/bs";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import UseAnimations from "react-useanimations";
-import trash2 from "react-useanimations/lib/trash2";
+import { SaveRoom } from "../Delete-Edit-Save/SaveRoom";
+import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -94,70 +91,7 @@ function Rooms() {
         setStartPrice(price1);
         setEndPrice(price2);
     };
-
-    /* only admin can delete any posts */
-    const deletePost = (postid) => {
-        const data = { id: postid };
-        Axios.delete(configData.SERVER_URL + `posts`, { data })
-            .then(() => {
-                console.log("deleted");
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
-
-    const savePost = (saveid) => {
-        const data = { post_id: saveid, saved_by: Cookies.get("loggedUserid") };
-
-        Axios.post(configData.SERVER_URL + "favorites", data)
-            .then(() => {
-                console.log(saveid, "post_id");
-                console.log(Cookies.get("loggedUserid"), "saved_by");
-                console.log("saved");
-            })
-            .then(() => {
-                toast.success(`Post Saved!`, {
-                    position: "top-right",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    closeButton: false,
-                    progress: 0,
-                });
-            })
-            .catch((error) => {
-                // Error
-                console.log(saveid, "post_id");
-                console.log(Cookies.get("loggedUserid"), "saved_by");
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
-
     const style = { width: "32px", height: "32px" };
-    const savestyle = { width: "40px", height: "40px" };
     return (
         <div>
             {loading ? (
@@ -287,28 +221,8 @@ function Rooms() {
                                                         <div className="post-price">${value.price}</div>
                                                     </div>
                                                     {/* only admin can delete any posts */}
-                                                    {Cookies.get("token") && Cookies.get("admin") && (
-                                                        <div className="export-btn">
-                                                            <UseAnimations
-                                                                animation={trash2}
-                                                                size={35}
-                                                                className="post-delete-button"
-                                                                onClick={() => {
-                                                                    deletePost(value.id);
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    )}
-                                                    {Cookies.get("token") && !Cookies.get("admin") && (
-                                                        <div className="post-save-button">
-                                                            <BsStarFill
-                                                                onClick={() => {
-                                                                    savePost(value.id);
-                                                                }}
-                                                                style={savestyle}
-                                                            />
-                                                        </div>
-                                                    )}
+                                                    {Cookies.get("token") && Cookies.get("admin") && <DeleteRoom id={value.id} />}
+                                                    {Cookies.get("token") && !Cookies.get("admin") && <SaveRoom id={value.id} />}
                                                     <div
                                                         className="post-info-container"
                                                         onClick={() => {

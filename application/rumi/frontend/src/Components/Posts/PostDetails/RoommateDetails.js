@@ -11,8 +11,8 @@ import "react-tabs/style/react-tabs.css";
 import Avatar from "react-avatar";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { GetFav } from "./GetFav";
-import UseAnimations from "react-useanimations";
-import trash2 from "react-useanimations/lib/trash2";
+import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
+import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 
 function RoommateDetails() {
     let { id } = useParams();
@@ -112,50 +112,6 @@ function RoommateDetails() {
                 console.log(error.config);
             });
     }, [id]);
-
-    const deletePost = (postid) => {
-        const data = { id: postid };
-        Axios.delete(configData.SERVER_URL + `posts`, { data })
-            .then(() => {
-                console.log("deleted");
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
-
-    const deleteComment = (commentid) => {
-        const data = { id: commentid };
-        Axios.delete(configData.SERVER_URL + `comments`, { data })
-            .then(() => {
-                console.log("deleted");
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Error
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log("Error", error.message);
-                }
-                console.log(error.config);
-            });
-    };
 
     const style = { width: "37px", height: "37px" };
     return (
@@ -270,16 +226,7 @@ function RoommateDetails() {
                                                                             {/* only logged in user can delete their posts */}
                                                                             {Cookies.get("token") &&
                                                                                 Cookies.get("username") === value.username && (
-                                                                                    <div className="export-btn">
-                                                                                        <UseAnimations
-                                                                                            animation={trash2}
-                                                                                            size={35}
-                                                                                            className="post-delete-button"
-                                                                                            onClick={() => {
-                                                                                                deletePost(value.id);
-                                                                                            }}
-                                                                                        />
-                                                                                    </div>
+                                                                                    <DeleteRoom id={value.id} />
                                                                                 )}
                                                                             <div
                                                                                 className="post-info-container"
@@ -342,16 +289,7 @@ function RoommateDetails() {
                                                                               </div>
                                                                               {Cookies.get("token") &&
                                                                                   Cookies.get("username") === value.username && (
-                                                                                      <div className="export-btn">
-                                                                                          <UseAnimations
-                                                                                              animation={trash2}
-                                                                                              size={35}
-                                                                                              className="comment-delete-button"
-                                                                                              onClick={() => {
-                                                                                                  deleteComment(comment.id);
-                                                                                              }}
-                                                                                          />
-                                                                                      </div>
+                                                                                      <DeleteComment commentid={comment.id} />
                                                                                   )}
                                                                           </div>
                                                                       )
