@@ -2,10 +2,13 @@ import { React, useEffect, useState } from "react";
 import Axios from "axios";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
+import { BsStarFill } from "react-icons/bs";
+
 export const GetFav = ({ id }) => {
     const [userFav, setUserFav] = useState([]);
     const [favCount, setFavCount] = useState([]);
-
+    let history = useHistory();
     useEffect(() => {
         Axios.get(configData.SERVER_URL + `posts?id=${id}`)
             .then((response) => {
@@ -28,19 +31,21 @@ export const GetFav = ({ id }) => {
             });
     }, [id]);
 
-    const unsavePost = (saveid) => {
-        const data = { post_id: saveid };
+    const savestyle = { width: "40px", height: "40px" };
+
+    const unsavePost = (id) => {
+        const data = { post_id: id };
 
         Axios.delete(configData.SERVER_URL + "favorites", data)
             .then(() => {
-                console.log(saveid, "post_id");
+                console.log(id, "post_id");
                 console.log(Cookies.get("loggedUserid"), "saved_by");
                 console.log("unsaved");
                 window.location.reload();
             })
             .catch((error) => {
                 // Error
-                console.log(saveid, "post_id");
+                console.log(id, "post_id");
                 console.log(Cookies.get("loggedUserid"), "saved_by");
                 if (error.response) {
                     console.log(error.response.data);
@@ -71,7 +76,7 @@ export const GetFav = ({ id }) => {
                                         src={configData.SERVER_URL + `files/download?name=${value.photo}`}
                                         alt="Missing"
                                         onClick={() => {
-                                            // history.push(`/post/${value.id}`);
+                                            history.push(`/post/${value.id}`);
                                         }}
                                     />
 
@@ -80,15 +85,14 @@ export const GetFav = ({ id }) => {
                                     </div>
 
                                     {Cookies.get("token") && !Cookies.get("admin") && (
-                                        <button
-                                            className="post-save-button"
-                                            onClick={() => {
-                                                unsavePost(value.id);
-                                            }}
-                                        >
-                                            {value.id}
-                                            UnSave
-                                        </button>
+                                        <div className="post-save-button">
+                                            <BsStarFill
+                                                onClick={() => {
+                                                    unsavePost(id);
+                                                }}
+                                                style={savestyle}
+                                            />
+                                        </div>
                                     )}
                                     <div
                                         className="post-info-container"

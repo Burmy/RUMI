@@ -10,21 +10,9 @@ router.get("/", authentication, function (req, res, next) {
     let post_id = req.query.post_id;
     let saved_by = req.query.saved_by;
 
-<<<<<<< HEAD
-    if (!id || !post_id || !saved_by) {
-        return res.status(400).send({ message: "id/post_id/save_id should not be null" });
-    }
-
     if (!isAdmin && saved_by != loginUserId) {
         return res.status(401).send({ message: "Yon have no privilege to delete this user." });
     }
-=======
-  if (!isAdmin && saved_by != loginUserId) {
-    return res
-      .status(401)
-      .send({ message: "Yon have no privilege to delete this user." });
-  }
->>>>>>> master
 
     FavoriteModel.search(id, post_id, saved_by)
         .then((results) => {
