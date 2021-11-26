@@ -385,6 +385,10 @@ const StepTwo = (props) => {
 };
 
 const StepThree = (props) => {
+    const [imageSrc, setImageSrc] = useState('');
+    const onChangePicture = e => {
+        setImageSrc(URL.createObjectURL(e.target.files[0]));
+      };
     const handleSubmit = (values) => {
         props.next(values, true);
     };
@@ -399,12 +403,13 @@ const StepThree = (props) => {
                     >
                         <div className="reg-card-upload">
                             <p className="form-heading">Join Us!</p>
+                            <img src={imageSrc} id="imgPreview" /> 
                             <input
                                 id="profile-photo"
                                 type="file"
                                 name="photo"
                                 accept="image/jpg,image/jpeg,image/png"
-                                onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
+                                onChange={(event) => {formProps.setFieldValue("photo", event.target.files[0]); onChangePicture(event)}}
                             />
 
                             <div className="step-container">
