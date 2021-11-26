@@ -79,12 +79,19 @@ router.delete("/", authentication, function (req, res, next) {
   if (!id) {
     return res.status(400).send({ message: "id should not be null" });
   }
-  if (!isAdmin && id != loginUserId) {
-    return res
-      .status(401)
-      .send({ message: "Yon have no privilege to delete this comment." });
-  }
-  CommentModel.delete(id)
+
+  CommentModel.search(id, null, null)
+    .then((results) => {
+      return results[0].creator_id;
+    })
+    .then((creator_id) => {
+      if (!isAdmin && creator_id != loginUserId) {
+        return res
+          .status(401)
+          .send({ message: "Yon have no privilege to delete this comment." });
+      }
+      return CommentModel.delete(id);
+    })
     .then((isCommentDeleted) => {
       if (isCommentDeleted) {
         res.send({

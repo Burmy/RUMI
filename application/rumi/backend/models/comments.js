@@ -1,11 +1,8 @@
 var db = require("../conf/database");
 const CommentModel = {};
 
-CommentModel.search = (
-  id,
-  creator_id,
-  post_id,
-) => {
+
+CommentModel.search = (id, creator_id, post_id) => {
   parameters = [];
 
   let baseSQL = `SELECT c.*, u.username
@@ -37,11 +34,7 @@ CommentModel.search = (
     .catch((err) => Promise.reject(err));
 };
 
-CommentModel.create = (
-  text,
-  post_id,
-  creator_id
-) => {
+CommentModel.create = (text, post_id, creator_id) => {
   let baseSQL = `INSERT INTO comment 
   (text, post_id, creator_id, deleted) 
   VALUES 
@@ -49,11 +42,7 @@ CommentModel.create = (
   // should have indentation (by alan)
 
   return db
-    .execute(baseSQL, [
-      text,
-      post_id,
-      creator_id
-    ])
+    .execute(baseSQL, [text, post_id, creator_id])
     .then(([results, fields]) => {
       return Promise.resolve(results);
     })
