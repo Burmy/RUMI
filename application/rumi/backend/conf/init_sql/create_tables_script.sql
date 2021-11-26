@@ -217,36 +217,36 @@ ENGINE = InnoDB;
 -- -- -----------------------------------------------------
 -- -- Table `rumi-db2`.`notification`
 -- -- -----------------------------------------------------
--- CREATE TABLE `notification` (
---   `id` int NOT NULL AUTO_INCREMENT,
---   `text` varchar(2048) NOT NULL,
---   `from_id` int DEFAULT NULL,
---   `to_id` int NOT NULL,
---   `post_id` int NOT NULL,
---   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
---   `deleted` bit(1) DEFAULT NULL,
---   `deleted_date` datetime DEFAULT NULL,
---   PRIMARY KEY (`id`),
---   UNIQUE KEY `id_UNIQUE` (`id`),
---   KEY `fromid_idx` (`from_id`),
---   KEY `toid_idx` (`to_id`),
---   KEY `postid_idx` (`post_id`),
---     CONSTRAINT `notifromid` 
---       FOREIGN KEY (`from_id`) 
---       REFERENCES `user` (`id`)
---       ON DELETE NO ACTION
---       ON UPDATE NO ACTION,
---     CONSTRAINT `notitoid` 
---       FOREIGN KEY (`to_id`) 
---       REFERENCES `user` (`id`)
---       ON DELETE NO ACTION
---       ON UPDATE NO ACTION,
---     CONSTRAINT `notipostid` 
---       FOREIGN KEY (`post_id`) 
---       REFERENCES `post` (`id`)
---       ON DELETE NO ACTION
---       ON UPDATE NO ACTION)
--- ENGINE = InnoDB
+CREATE TABLE `notification` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `text` varchar(2048) NOT NULL,
+  `from_id` int DEFAULT NULL,
+  `to_id` int NOT NULL,
+  `post_id` int NOT NULL,
+  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `deleted` bit(1) DEFAULT NULL,
+  `deleted_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `fromid_idx` (`from_id`),
+  KEY `toid_idx` (`to_id`),
+  KEY `postid_idx` (`post_id`),
+    CONSTRAINT `notifromid` 
+      FOREIGN KEY (`from_id`) 
+      REFERENCES `user` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+    CONSTRAINT `notitoid` 
+      FOREIGN KEY (`to_id`) 
+      REFERENCES `user` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+    CONSTRAINT `notipostid` 
+      FOREIGN KEY (`post_id`) 
+      REFERENCES `post` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION)
+ENGINE = InnoDB
 
 
 -- -----------------------------------------------------
