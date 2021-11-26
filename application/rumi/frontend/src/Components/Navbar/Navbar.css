@@ -38,6 +38,11 @@
     display: flex;
     align-items: center;
 }
+
+.resp-nav-links2 {
+    display: flex;
+    align-items: center;
+}
 .menu-container {
     position: relative;
     display: flex;
@@ -121,7 +126,7 @@
     display: block;
     text-align: center !important;
 }
-/* @media only screen and (max-width: 1033px) {
+@media only screen and (max-width: 768px) {
     .navbar {
         padding: 19px 30px 22px 30px;
     }
@@ -129,22 +134,20 @@
         display: flex;
         justify-content: flex-end;
     }
-    .hamburger {
+    #nav {
         display: block;
     }
-    .nav-links {
+    #resp-nav-links {
         display: none;
-        position: absolute;
-        overflow: hidden;
-        width: 100%;
-        list-style-type: none;
-        margin-top: 0;
-        padding-left: 0;
     }
-    .resp-nav-links {
-        display: none;
+    .resp-nav-links2 {
+        margin-right: -20px;
+        margin-top: 15px;
     }
     .show {
         display: block;
     }
-} */
+    .nav-links {
+        margin: 8px 30px 8px 30px;
+    }
+}

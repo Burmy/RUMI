@@ -10,11 +10,11 @@ import { auth } from "../Chat/Firebase";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
     const [username, setUsername] = useState("");
-
     const [password, setPassword] = useState("");
+    const [isShowPassword, setIsShowPassword] = useState(false);
 
     let history = useHistory();
 
@@ -77,15 +77,20 @@ const Login = () => {
                         }}
                     />
 
-                    <input
-                        className="form-input"
-                        type="text"
-                        name="password"
-                        placeholder="Password"
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
-                    />
+                    <div className="pass-cont">
+                        <input
+                            className="form-input"
+                            type={isShowPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                        />
+                        <div className="icon-container" onClick={() => setIsShowPassword(!isShowPassword)}>
+                            {isShowPassword ? <FaEye /> : <FaEyeSlash />}
+                        </div>
+                    </div>
                     <button className="form-input-btn" onClick={login} type="button">
                         Log in
                     </button>

@@ -102,13 +102,14 @@ export const CreatePost = ({ history }) => {
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 {(formProps) => (
                     <Form className="upload-card">
-                        <p className="form-heading">Post</p>
+                        <div className="reg-form">
+                            <p className="form-heading">Post</p>
 
-                        <div className="upload-container">
-                            <div className="upload-image">
-                                <ErrorMessage className="form-error" name="photo" component="span" />
-                                <label htmlFor="upload">Upload your Image:</label>
-                                {/* <input
+                            <div className="upload-container">
+                                <div className="upload-image">
+                                    <ErrorMessage className="form-error" name="photo" component="span" />
+                                    <label htmlFor="upload">Upload your Image:</label>
+                                    {/* <input
                                     type="file"
                                     id="photo"
                                     accept="image/jpg,image/jpeg,image/png"
@@ -117,14 +118,14 @@ export const CreatePost = ({ history }) => {
                                 />
                                 <img src={this.state.file} id="imgPreview" /> */}
 
-                                <input
-                                    id="photo"
-                                    type="file"
-                                    name="photo"
-                                    accept="image/jpg,image/jpeg,image/png"
-                                    onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
-                                />
-                                {/* <ImageUpload
+                                    <input
+                                        id="photo"
+                                        type="file"
+                                        name="photo"
+                                        accept="image/jpg,image/jpeg,image/png"
+                                        onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
+                                    />
+                                    {/* <ImageUpload
                                     id="photo"
                                     name="photo"
                                     // onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
@@ -140,91 +141,92 @@ export const CreatePost = ({ history }) => {
                                         background: "gold",
                                     }}
                                 /> */}
-                            </div>
-
-                            <div className="upload-info">
-                                <Field className="form-input" name="caption" placeholder="Enter a Caption" />
-                                <ErrorMessage className="form-error" name="caption" component="span" />
-
-                                <Field
-                                    id="textarea"
-                                    component="textarea"
-                                    className="form-input"
-                                    type="text"
-                                    name="description"
-                                    placeholder="Enter a Description"
-                                />
-                                <ErrorMessage className="form-error" name="description" component="span" />
-
-                                <div className="upload-info-price">
-                                    <Field className="form-input" type="number" name="price" placeholder="Enter Price($)" />
-
-                                    <Field component="select" className="form-input-select-reg" name="location">
-                                        <option value="0">Select a Location</option>
-                                        <option value="1">Daly City</option>
-                                        <option value="2">San Francisco</option>
-                                        <option value="3">South San Francisco</option>
-                                        <option value="4">Berkeley</option>
-                                        <option value="5">Oakland</option>
-                                        <option value="6">Alameda</option>
-                                        <option value="7">San Mateo</option>
-                                        <option value="8">San Leandro</option>
-                                    </Field>
                                 </div>
 
-                                <div className="upload-info-pref">
-                                    <div>
-                                        <div className="upload-info-pref-heading">Parking Available?</div>
-                                        <div className="upload-info-pref-values">
-                                            <Field type="radio" id="p1" name="parking" value="1" />
-                                            <label htmlFor="p1">Yes</label>
-                                            <Field type="radio" id="p2" name="parking" value="0" />
-                                            <label htmlFor="p2">No</label>
-                                        </div>
+                                <div className="upload-info">
+                                    <Field className="form-input" name="caption" placeholder="Enter a Caption" />
+                                    <ErrorMessage className="form-error" name="caption" component="span" />
+
+                                    <Field
+                                        id="textarea"
+                                        component="textarea"
+                                        className="form-input"
+                                        type="text"
+                                        name="description"
+                                        placeholder="Enter a Description"
+                                    />
+                                    <ErrorMessage className="form-error" name="description" component="span" />
+
+                                    <div className="upload-info-price">
+                                        <Field className="form-input" type="number" name="price" placeholder="Enter Price($)" />
+
+                                        <Field component="select" className="form-input-select-reg" name="location">
+                                            <option value="0">Select a Location</option>
+                                            <option value="1">Daly City</option>
+                                            <option value="2">San Francisco</option>
+                                            <option value="3">South San Francisco</option>
+                                            <option value="4">Berkeley</option>
+                                            <option value="5">Oakland</option>
+                                            <option value="6">Alameda</option>
+                                            <option value="7">San Mateo</option>
+                                            <option value="8">San Leandro</option>
+                                        </Field>
                                     </div>
 
-                                    <div>
-                                        <div className="upload-info-pref-heading">Pets Allowed?</div>
-                                        <div className="upload-info-pref-values">
-                                            <Field type="radio" id="pe1" name="pet" value="1" />
-                                            <label htmlFor="pe1">Yes</label>
-                                            <Field type="radio" id="pe2" name="pet" value="0" />
-                                            <label htmlFor="pe2">No</label>
+                                    <div className="upload-info-pref">
+                                        <div>
+                                            <div className="upload-info-pref-heading">Parking Available?</div>
+                                            <div className="upload-info-pref-values">
+                                                <Field type="radio" id="p1" name="parking" value="1" />
+                                                <label htmlFor="p1">Yes</label>
+                                                <Field type="radio" id="p2" name="parking" value="0" />
+                                                <label htmlFor="p2">No</label>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div>
-                                        <div className="upload-info-pref-heading">Smoking Allowed?</div>
-                                        <div className="upload-info-pref-values">
-                                            <Field type="radio" id="s1" name="smoking" value="1" />
-                                            <label htmlFor="s1">Yes</label>
-                                            <Field type="radio" id="s2" name="smoking" value="0" />
-                                            <label htmlFor="s2">No</label>
+                                        <div>
+                                            <div className="upload-info-pref-heading">Pets Allowed?</div>
+                                            <div className="upload-info-pref-values">
+                                                <Field type="radio" id="pe1" name="pet" value="1" />
+                                                <label htmlFor="pe1">Yes</label>
+                                                <Field type="radio" id="pe2" name="pet" value="0" />
+                                                <label htmlFor="pe2">No</label>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div>
-                                        <div className="upload-info-pref-heading">Gender Specific?</div>
-                                        <div className="upload-info-pref-values">
-                                            <Field type="radio" id="g1" name="gender" value="M" />
-                                            <label htmlFor="g1">Male</label>
-                                            <Field type="radio" id="g2" name="gender" value="F" />
-                                            <label htmlFor="g2">Female</label>
-                                            <Field type="radio" id="g3" name="gender" value="N" />
-                                            <label htmlFor="g3">Non-Binary</label>
-                                            <Field type="radio" id="g4" name="gender" value=" " />
-                                            <label htmlFor="g4">No Preference</label>
+                                        <div>
+                                            <div className="upload-info-pref-heading">Smoking Allowed?</div>
+                                            <div className="upload-info-pref-values">
+                                                <Field type="radio" id="s1" name="smoking" value="1" />
+                                                <label htmlFor="s1">Yes</label>
+                                                <Field type="radio" id="s2" name="smoking" value="0" />
+                                                <label htmlFor="s2">No</label>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div className="upload-info-pref-heading">Gender Specific?</div>
+                                            <div className="upload-info-pref-values">
+                                                <Field type="radio" id="g1" name="gender" value="M" />
+                                                <label htmlFor="g1">Male</label>
+                                                <Field type="radio" id="g2" name="gender" value="F" />
+                                                <label htmlFor="g2">Female</label>
+                                                <Field type="radio" id="g3" name="gender" value="N" />
+                                                <label htmlFor="g3">Non-Binary</label>
+                                                <Field type="radio" id="g4" name="gender" value=" " />
+                                                <label htmlFor="g4">No Preference</label>
+                                            </div>
                                         </div>
                                     </div>
+                                    <Field className="form-input" name="longitude" placeholder="TEMP long" />
+                                    <Field className="form-input" name="latitude" placeholder="TEMP lat" />
                                 </div>
-                                <Field className="form-input" name="longitude" placeholder="TEMP long" />
-                                <Field className="form-input" name="latitude" placeholder="TEMP lat" />
                             </div>
+
+                            <button type="submit" className="form-input-btn">
+                                Submit
+                            </button>
                         </div>
-
-                        <button type="submit" className="form-input-btn">
-                            Submit
-                        </button>
                     </Form>
                 )}
             </Formik>

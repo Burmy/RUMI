@@ -1,4 +1,4 @@
-import { React, useRef, useState } from "react";
+import { React, useRef } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -42,7 +42,7 @@ const Navbar = () => {
             <div>
                 <div className="demo-only">SFSU Software Engineering Project CSC 648-848, Fall 2021. For Demonstration Only</div>
                 <div className="navbar">
-                    <div className="resp-nav-links">
+                    <div id="resp-nav-links">
                         <Link className="nav-links" to="/">
                             Home
                         </Link>
@@ -56,13 +56,13 @@ const Navbar = () => {
                             RUMI
                         </Link>
                     </div>
-                    <div className="resp-nav-links">
+                    <div className="resp-nav-links2">
                         {logged ? (
                             <>
-                                <Link className="nav-links" to="/createpost">
+                                <Link id="resp-nav-links" className="nav-links" to="/createpost">
                                     Create
                                 </Link>
-                                <div className="nav-links">
+                                <div id="nav" className="nav-links">
                                     <div className="menu-container">
                                         <button onClick={onClick} className="menu-trigger">
                                             {/* <span>{Cookies.get("username")}</span> */}
@@ -95,21 +95,7 @@ const Navbar = () => {
                                                 </li>
 
                                                 <li>
-                                                    <Link
-                                                        to="/"
-                                                        className="nav-links"
-                                                        onClick={logout}
-                                                        // toast.success("Logged Out!", {
-                                                        //     position: "top-right",
-                                                        //     autoClose: 4000,
-                                                        //     hideProgressBar: false,
-                                                        //     closeOnClick: true,
-                                                        //     pauseOnHover: true,
-                                                        //     draggable: true,
-                                                        //     closeButton: false,
-                                                        //     progress: 0,
-                                                        // });
-                                                    >
+                                                    <Link to="/" className="nav-links" onClick={logout}>
                                                         <div className="menu-trigger-option">
                                                             Logout
                                                             <MdOutlineLogout style={style} />
@@ -131,10 +117,6 @@ const Navbar = () => {
                                 </Link>
                             </>
                         )}
-                    </div>
-
-                    <div className="hamburger">
-                        <HiOutlineMenuAlt3 />
                     </div>
                 </div>
             </div>

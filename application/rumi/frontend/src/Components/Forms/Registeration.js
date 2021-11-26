@@ -7,6 +7,7 @@ import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import configData from "../../Configs/config.json";
 import { collection, addDoc } from "firebase/firestore";
 import { db, auth } from "../Chat/Firebase";
@@ -143,6 +144,8 @@ const StepOne = (props) => {
     const [fireUser, setFireUser] = useState("");
     const [fireEmail, setFireEmail] = useState("");
     const [firePass, setFirePass] = useState("");
+    const [isShowPassword, setIsShowPassword] = useState(false);
+    const [isShowPassword2, setIsShowPassword2] = useState(false);
 
     const handleSubmit = (values) => {
         props.next(values);
@@ -181,10 +184,10 @@ const StepOne = (props) => {
             <Formik validationSchema={stepOneValidationSchema} initialValues={props.data} onSubmit={handleSubmit}>
                 {({ setFieldTouched, handleChange, values }) => (
                     <Form
-                        className="reg-form"
+                        className="reg-card"
                         // autocomplete="off"
                     >
-                        <div className="reg-card">
+                        <div className="reg-form">
                             <p className="form-heading">Join Us!</p>
 
                             <Field
@@ -210,30 +213,39 @@ const StepOne = (props) => {
                                 value={setFireEmail(values.email)}
                             />
                             <ErrorMessage className="form-error" name="email" component="span" />
+                            <div className="pass-cont">
+                                <Field
+                                    className="form-input"
+                                    type={isShowPassword ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Enter Password"
+                                    onChange={(e) => {
+                                        setFieldTouched("password");
+                                        handleChange(e);
+                                    }}
+                                    value={setFirePass(values.password)}
+                                />
+                                <div className="icon-container" onClick={() => setIsShowPassword(!isShowPassword)}>
+                                    {isShowPassword ? <FaEye /> : <FaEyeSlash />}
+                                </div>
+                            </div>
 
-                            <Field
-                                className="form-input"
-                                type="text"
-                                name="password"
-                                placeholder="Enter Password"
-                                onChange={(e) => {
-                                    setFieldTouched("password");
-                                    handleChange(e);
-                                }}
-                                value={setFirePass(values.password)}
-                            />
                             <ErrorMessage className="form-error" name="password" component="span" />
-
-                            <Field
-                                className="form-input"
-                                type="text"
-                                name="password2"
-                                placeholder="Confirm Password"
-                                onChange={(e) => {
-                                    setFieldTouched("password2");
-                                    handleChange(e);
-                                }}
-                            />
+                            <div className="pass-cont">
+                                <Field
+                                    className="form-input"
+                                    type={isShowPassword2 ? "text" : "password"}
+                                    name="password2"
+                                    placeholder="Confirm Password"
+                                    onChange={(e) => {
+                                        setFieldTouched("password2");
+                                        handleChange(e);
+                                    }}
+                                />
+                                <div className="icon-container" onClick={() => setIsShowPassword2(!isShowPassword2)}>
+                                    {isShowPassword2 ? <FaEye /> : <FaEyeSlash />}
+                                </div>
+                            </div>
                             <ErrorMessage className="form-error" name="password2" component="span" />
 
                             <div className="check">
@@ -297,8 +309,8 @@ const StepTwo = (props) => {
         <div className="form-container">
             <Formik validationSchema={stepTwoValidationSchema} initialValues={props.data} onSubmit={handleSubmit}>
                 {({ values }) => (
-                    <Form className="reg-form">
-                        <div className="reg-card">
+                    <Form className="reg-card">
+                        <div className="reg-form">
                             <p className="form-heading">Tell us about yourself!</p>
                             <Field
                                 id="textarea"
@@ -394,10 +406,10 @@ const StepThree = (props) => {
             <Formik initialValues={props.data} onSubmit={handleSubmit}>
                 {(formProps, values) => (
                     <Form
-                        className="reg-form"
+                        className="reg-card-upload"
                         // autocomplete="off"
                     >
-                        <div className="reg-card-upload">
+                        <div className="reg-form">
                             <p className="form-heading">Join Us!</p>
                             <input
                                 id="profile-photo"

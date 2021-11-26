@@ -76,6 +76,7 @@
     .right-half {
         width: 100%;
         height: 80%;
+        padding-bottom: 100px;
     }
     .find {
         display: flex;
@@ -91,13 +92,23 @@
 }
 
 @media only screen and (max-width: 450px) {
+    .right-half {
+        padding-top: 50px;
+    }
     .find {
         flex-direction: column;
+        padding-top: 30px;
     }
     .find-room,
     .find-roommate {
         width: 50vw;
         height: 15vh;
         margin: 20px;
+    }
+    .sub-heading {
+        font-size: 25px;
+        padding: 0 40px;
+        color: #696666;
+        line-height: 40px;
     }
 }
