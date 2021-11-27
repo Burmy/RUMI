@@ -107,6 +107,23 @@ function Rooms() {
                         <input id="_2" type="checkbox" />
 
                         <div className="filter-container">
+                            <div className="search-text-price-resp">
+                                <div className="filter-heading">Select Price</div>
+                                <input
+                                    className="search-price"
+                                    type="number"
+                                    placeholder="Start Price ($)"
+                                    value={price1}
+                                    onChange={(e) => setPrice1(e.target.value)}
+                                />
+                                <input
+                                    className="search-price"
+                                    type="number"
+                                    placeholder="End Price ($)"
+                                    value={price2}
+                                    onChange={(e) => setPrice2(e.target.value)}
+                                />
+                            </div>
                             <div className="filter-location">
                                 <div className="filter-heading">Select Location</div>
                                 <Location location={setLocation} />
@@ -129,20 +146,22 @@ function Rooms() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <input
-                        className="search-price"
-                        type="number"
-                        placeholder="Start Price ($)"
-                        value={price1}
-                        onChange={(e) => setPrice1(e.target.value)}
-                    />
-                    <input
-                        className="search-price"
-                        type="number"
-                        placeholder="End Price ($)"
-                        value={price2}
-                        onChange={(e) => setPrice2(e.target.value)}
-                    />
+                    <div className="search-text-price">
+                        <input
+                            className="search-price"
+                            type="number"
+                            placeholder="Start Price ($)"
+                            value={price1}
+                            onChange={(e) => setPrice1(e.target.value)}
+                        />
+                        <input
+                            className="search-price"
+                            type="number"
+                            placeholder="End Price ($)"
+                            value={price2}
+                            onChange={(e) => setPrice2(e.target.value)}
+                        />
+                    </div>
                     <input className="search-button" type="submit" value="Search" />
                 </form>
 

@@ -95,7 +95,7 @@ function Roommates() {
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
-                <Link data-tip="Look for Roomms" className="search-icon" to="/rooms">
+                <Link data-tip="Look for Rooms" className="search-icon" to="/rooms">
                     <BsPersonFill />
                 </Link>
                 <div className="filter-toggle">
@@ -105,6 +105,18 @@ function Roommates() {
                     <input id="_2" type="checkbox" />
 
                     <div className="filter-container">
+                        <div className="search-text-price-resp">
+                            <input
+                                className="search-price"
+                                type="text"
+                                placeholder="Select School"
+                                value={searchSchool}
+                                onChange={(e) => setSearchSchool(e.target.value)}
+                            />
+                            <div className="filter-gender">
+                                <Major major={setSearchMajor} />
+                            </div>
+                        </div>
                         <div className="filter-location">
                             <div className="filter-heading">Select Gender</div>
                             <Gender gender={setGender} />
@@ -124,15 +136,17 @@ function Roommates() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <input
-                    className="search-price"
-                    type="text"
-                    placeholder="Select School"
-                    value={searchSchool}
-                    onChange={(e) => setSearchSchool(e.target.value)}
-                />
-                <div className="filter-gender">
-                    <Major major={setSearchMajor} />
+                <div className="search-text-price">
+                    <input
+                        className="search-price"
+                        type="text"
+                        placeholder="Select School"
+                        value={searchSchool}
+                        onChange={(e) => setSearchSchool(e.target.value)}
+                    />
+                    <div className="filter-gender">
+                        <Major major={setSearchMajor} />
+                    </div>
                 </div>
                 <input className="search-button" type="submit" value="Search" />
             </form>

@@ -226,7 +226,7 @@
     border: 2px solid #ffffff;
     background: #ffffff;
     margin: 15px 1px 15px 1px;
-    width: 10%;
+    width: 100%;
     padding: 20px 25px;
     font-size: 18px;
     font-family: "Josefin Sans", sans-serif;
@@ -281,7 +281,7 @@
     background: #ffffff;
     cursor: pointer;
     font-size: 20px;
-    width: 9.5vw;
+    width: 180px;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     transition: 0.14s ease;
     border: 2px solid #69666617;
@@ -295,7 +295,7 @@
 .filter-label label span {
     color: #696666;
     text-align: center;
-    padding: 20px 0px;
+    padding: 20px 5px;
     display: block;
     cursor: pointer;
 }
@@ -347,4 +347,27 @@
     border-radius: 0 !important;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
     font-family: "Josefin Sans", sans-serif !important;
+}
+.search-text-price {
+    display: flex;
+}
+.search-text-price-resp {
+    display: none;
+}
+@media only screen and (max-width: 768px) {
+    .search-text {
+        width: 100%;
+    }
+    .search-text-price {
+        display: none;
+    }
+    .search-text-price-resp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .search-price {
+        width: 70%;
+    }
 }
