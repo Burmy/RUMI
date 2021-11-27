@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import configData from "../../../Configs/config.json";
+
 import { Link, useHistory } from "react-router-dom";
+import Cookies from 'js-cookie';
 const EditProfile = () => {
 
     let history = useHistory();
@@ -26,9 +29,14 @@ const EditProfile = () => {
         const[major,setMajor] = React.useState('');
         const[smoker,setSmoker] = React.useState('');
         const[pets,setPets] = React.useState('');
+       // const[originalUsername,getOriginalUsername] = React.useState('');
+        const originalUsername=Cookies.get('username');
+        // const handleOriginalUseraname = (e) =>{
+        //   getOriginalUsername(e.target.value);
+        // }
         const handleUsername = (e) =>{
         
-            setUsername(e.target.value);
+            setUsername(Cookies.get("username"));
             }
         const handlePassword = (e)=>{
         setPassword(e.target.value);
@@ -59,12 +67,15 @@ const EditProfile = () => {
         email:email,
         password: password,
         description: description,
-          
-            
+        gender: gender,
+        school: school,
+        major: major,
+        smoker: smoker,
+        pets: pets,   
+        originalUsername:originalUsername,    
           };
         const handlePost = () => {
-          const json = JSON.stringify(data)
-            axios.post('/api/postListing', json)
+            axios.post(configData.SERVER_URL + "users/update", data)
            // .then(document.write(json));
         .then((response) =>{
         alert(response.data);
@@ -77,31 +88,31 @@ const EditProfile = () => {
           <h1>Edit Details</h1>
           <form>
           <label>Username </label>
-          <input value = {username} onChange={handleUsername}/>
+          <input value ={username} defaultValue={null} onChange={handleUsername}/>
           <br/>
           <label>Email </label>
-          <input value = {email} onChange={handleEmail}/>
+          <input value = {email} defaultValue={null}  onChange={handleEmail}/>
           <br/>
           <label>Password </label>
-          <input value = {password} onChange={handlePassword}/>
+          <input value = {password} defaultValue={null}  onChange={handlePassword}/>
           <br/>
           <label>Description </label>
-          <input value = {description} onChange={handleDescription}/>
+          <input value = {description} defaultValue={null}  onChange={handleDescription}/>
           <br/>
           <label>gender </label>
-          <input value = {gender} onChange={handleGender}/>
+          <input value = {gender}  defaultValue={null} onChange={handleGender}/>
           <br/>
           <label>school </label>
-          <input value = {school} onChange={handleSchool}/>
+          <input value = {school}  defaultValue={null} onChange={handleSchool}/>
           <br/>
           <label>major </label>
-          <input value = {major} onChange={handleMajor}/>
+          <input value = {major} defaultValue={null}  onChange={handleMajor}/>
           <br/>
           <label>smoker </label>
-          <input value = {smoker} onChange={handleSmoker}/>
+          <input value = {smoker}  defaultValue={null} onChange={handleSmoker}/>
           <br/>
           <label>pets </label>
-          <input value = {pets} onChange={handlePets}/>
+          <input value = {pets} defaultValue={null}  onChange={handlePets}/>
           <br/>
           <button onClick={history.goBack}>Cancel</button>
           <button onClick={handlePost}>Save</button>

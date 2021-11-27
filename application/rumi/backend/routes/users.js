@@ -307,6 +307,8 @@ router.post('/update', function(req,res,next){
   let major = req.body.major;
   let smoker = req.body.smoker;
   let pets = req.body.pets;
+  let originalUsername=req.body.originalUsername;
+
 
 UserModel.changeData(
   username,
@@ -317,7 +319,8 @@ UserModel.changeData(
   school,
   major,
   smoker,
-  pets
+  pets,
+  originalUsername
 );
 
 })
