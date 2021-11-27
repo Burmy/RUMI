@@ -298,7 +298,6 @@ router.delete("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 router.post('/update', function(req,res,next){
-  let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
   let description = req.body.description;
@@ -311,7 +310,6 @@ router.post('/update', function(req,res,next){
 
 
 UserModel.changeData(
-  username,
   password,
   email,
   description,

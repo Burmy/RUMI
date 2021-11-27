@@ -20,7 +20,7 @@ const EditProfile = () => {
         };
     
         //const[email,setEmail] = React.useState('');
-        const[username,setUsername] = React.useState('');
+        //const[username,setUsername] = React.useState('');
         const[password,setPassword] = React.useState('');
         const[email,setEmail] = React.useState('');
         const[description,setDescription] =React.useState('');
@@ -34,10 +34,10 @@ const EditProfile = () => {
         // const handleOriginalUseraname = (e) =>{
         //   getOriginalUsername(e.target.value);
         // }
-        const handleUsername = (e) =>{
+        // const handleUsername = (e) =>{
         
-            setUsername(Cookies.get("username"));
-            }
+        //     setUsername(Cookies.get("username"));
+        //     }
         const handlePassword = (e)=>{
         setPassword(e.target.value);
         }
@@ -63,7 +63,6 @@ const EditProfile = () => {
             setPets(e.target.value);
         }
         const data= {
-        username:username,
         email:email,
         password: password,
         description: description,
@@ -87,9 +86,8 @@ const EditProfile = () => {
         <div>
           <h1>Edit Details</h1>
           <form>
-          <label>Username </label>
-          <input value ={username} defaultValue={null} onChange={handleUsername}/>
-          <br/>
+          <label>Set new data for {originalUsername} </label>
+         
           <label>Email </label>
           <input value = {email} defaultValue={null}  onChange={handleEmail}/>
           <br/>
