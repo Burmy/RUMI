@@ -15,9 +15,9 @@ import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
 import { MdOutlinePets } from "react-icons/md";
-import ScaleLoader from "react-spinners/ScaleLoader";
 import { SaveRoom } from "../Delete-Edit-Save/SaveRoom";
 import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
+import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -41,18 +41,19 @@ function Rooms() {
     const [pet, setPet] = useState("");
     const [gender, setGender] = useState("");
 
-    const [loading, setLoading] = useState(false);
+    const [loader, showLoader, hideLoader] = useFullPageLoader();
 
     let history = useHistory();
 
     useEffect(() => {
         async function getPosts() {
-            setLoading(true);
+            showLoader();
             Axios.get(
                 configData.SERVER_URL +
                     `posts?search=${searchTerm}&location=${location}&pricefrom=${startPrice}&priceto=${endPrice}&parking=${parking}&smoking=${smoking}&pet=${pet}&gender=${gender}`
             )
                 .then((response) => {
+                    hideLoader();
                     console.log(response.data.results);
                     console.log(response.data);
                     setPostCount(response.data.message);
@@ -77,12 +78,10 @@ function Rooms() {
                         console.log("Error", error.message);
                     }
                     console.log(error.config);
-                })
-                .finally(() => {
-                    setLoading(false);
                 });
         }
         getPosts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm, location, startPrice, endPrice, parking, smoking, pet, gender]);
 
     const submit = (e) => {
@@ -94,190 +93,146 @@ function Rooms() {
     const style = { width: "32px", height: "32px" };
     return (
         <div>
-            {loading ? (
-                <div>
-                    <div className="home">
-                        <form className="search" onSubmit={submit}>
-                            <Link className="search-icon" to="/roommates">
-                                <ImHome />
-                            </Link>
-                            <input
-                                type="text"
-                                className="search-text"
-                                placeholder="Search a Room . . . "
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                            <input
-                                className="search-price"
-                                type="number"
-                                placeholder="Start Price ($)"
-                                value={price1}
-                                onChange={(e) => setPrice1(e.target.value)}
-                            />
-                            <input
-                                className="search-price"
-                                type="number"
-                                placeholder="End Price ($)"
-                                value={price2}
-                                onChange={(e) => setPrice2(e.target.value)}
-                            />
-                            <input className="search-button" type="submit" value="Search" />
-                        </form>
+            <div className="home">
+                <form className="search" onSubmit={submit}>
+                    <Link className="search-icon" to="/roommates">
+                        <ImHome />
+                    </Link>
+                    <input
+                        type="text"
+                        className="search-text"
+                        placeholder="Search a Room . . . "
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <input
+                        className="search-price"
+                        type="number"
+                        placeholder="Start Price ($)"
+                        value={price1}
+                        onChange={(e) => setPrice1(e.target.value)}
+                    />
+                    <input
+                        className="search-price"
+                        type="number"
+                        placeholder="End Price ($)"
+                        value={price2}
+                        onChange={(e) => setPrice2(e.target.value)}
+                    />
+                    <input className="search-button" type="submit" value="Search" />
+                </form>
 
-                        <div className="loading">
-                            <ScaleLoader
-                                className={loading}
-                                height={50}
-                                width={8}
-                                radius={0}
-                                margin={2}
-                                color="#1da699"
-                                speedMultiplier={1.7}
+                <div>{postCount}</div>
+
+                <div className="post-listings">
+                    <div className="filter-toggle">
+                        <label className="collapse" for="_1">
+                            Filters
+                            <AiFillCaretRight
+                                style={{
+                                    position: "absolute",
+                                    top: "18px",
+                                    right: "20px",
+                                }}
                             />
-                            <div className="loading">Loading...</div>
-                        </div>
-                    </div>
-                </div>
-            ) : (
-                <div className="home">
-                    <form className="search" onSubmit={submit}>
-                        <Link className="search-icon" to="/roommates">
-                            <ImHome />
-                        </Link>
-                        <input
-                            type="text"
-                            className="search-text"
-                            placeholder="Search a Room . . . "
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                        <input
-                            className="search-price"
-                            type="number"
-                            placeholder="Start Price ($)"
-                            value={price1}
-                            onChange={(e) => setPrice1(e.target.value)}
-                        />
-                        <input
-                            className="search-price"
-                            type="number"
-                            placeholder="End Price ($)"
-                            value={price2}
-                            onChange={(e) => setPrice2(e.target.value)}
-                        />
-                        <input className="search-button" type="submit" value="Search" />
-                    </form>
-                    <div>{postCount}</div>
-                    <div className="post-listings">
-                        <div className="filter-toggle">
-                            <label className="collapse" for="_1">
-                                Filters
-                                <AiFillCaretRight
-                                    style={{
-                                        position: "absolute",
-                                        top: "18px",
-                                        right: "20px",
-                                    }}
-                                />
-                            </label>
-                            <input id="_1" type="checkbox" />
-                            <div className="filter-container">
-                                <div className="filter-location">
-                                    <div className="filter-heading">Select Location</div>
-                                    <Location location={setLocation} />
-                                </div>
-                                <div className="filter-location">
-                                    <div className="filter-heading">Select Gender</div>
-                                    <Gender gender={setGender} />
-                                </div>
-                                <div className="">
-                                    <div className="filter-heading">Select Preferences</div>
-                                    <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
-                                </div>
+                        </label>
+                        <input id="_1" type="checkbox" />
+                        <div className="filter-container">
+                            <div className="filter-location">
+                                <div className="filter-heading">Select Location</div>
+                                <Location location={setLocation} />
+                            </div>
+                            <div className="filter-location">
+                                <div className="filter-heading">Select Gender</div>
+                                <Gender gender={setGender} />
+                            </div>
+                            <div className="">
+                                <div className="filter-heading">Select Preferences</div>
+                                <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
                             </div>
                         </div>
+                    </div>
 
-                        <div className="post-container">
-                            {listOfPosts &&
-                                listOfPosts
-                                    .slice(0)
-                                    .reverse()
-                                    .map((value, key) => {
-                                        value.created_date = new Date(value.created_date).toDateString();
-                                        return (
-                                            <div key={value.id} className="post-card">
-                                                <img
-                                                    className="post-image"
-                                                    src={configData.SERVER_URL + `files/download?name=${value.photo}`}
-                                                    alt="Missing"
-                                                    onClick={() => {
-                                                        history.push(`/post/${value.id}`);
-                                                    }}
-                                                />
+                    <div className="post-container">
+                        {loader}
+                        {listOfPosts &&
+                            listOfPosts
+                                .slice(0)
+                                .reverse()
+                                .map((value, key) => {
+                                    value.created_date = new Date(value.created_date).toDateString();
+                                    return (
+                                        <div key={value.id} className="post-card">
+                                            <img
+                                                className="post-image"
+                                                src={configData.SERVER_URL + `files/download?name=${value.photo}`}
+                                                alt="Missing"
+                                                onClick={() => {
+                                                    history.push(`/post/${value.id}`);
+                                                }}
+                                            />
 
-                                                <div className="post-price-container">
-                                                    <div className="post-price">${value.price}</div>
-                                                </div>
-                                                {/* only admin can delete any posts */}
-                                                {Cookies.get("token") && Cookies.get("admin") && <DeleteRoom id={value.id} />}
-                                                {Cookies.get("token") && !Cookies.get("admin") && <SaveRoom id={value.id} />}
-                                                <div
-                                                    className="post-info-container"
-                                                    onClick={() => {
-                                                        history.push(`/post/${value.id}`);
-                                                    }}
-                                                >
-                                                    <div className="post-caption">{value.caption}</div>
-                                                    <div className="post-desc">{value.description}</div>
-                                                    <div className="post-desc-pref">
-                                                        {(() => {
-                                                            // eslint-disable-next-line eqeqeq
-                                                            if (value.parking == "1") {
-                                                                return (
-                                                                    <div>
-                                                                        <RiParkingBoxLine style={style} />
-                                                                    </div>
-                                                                );
-                                                            } else {
-                                                                return <></>;
-                                                            }
-                                                        })()}
-                                                        {(() => {
-                                                            // eslint-disable-next-line eqeqeq
-                                                            if (value.pet == "1") {
-                                                                return (
-                                                                    <div>
-                                                                        <MdOutlinePets style={style} />
-                                                                    </div>
-                                                                );
-                                                            } else {
-                                                                return <></>;
-                                                            }
-                                                        })()}
-                                                        {(() => {
-                                                            // eslint-disable-next-line eqeqeq
-                                                            if (value.smoking == "1") {
-                                                                return (
-                                                                    <div>
-                                                                        <FaSmoking style={style} />
-                                                                    </div>
-                                                                );
-                                                            } else {
-                                                                return <></>;
-                                                            }
-                                                        })()}
-                                                    </div>
-
-                                                    <div className="post-date">{value.created_date}</div>
-                                                </div>
+                                            <div className="post-price-container">
+                                                <div className="post-price">${value.price}</div>
                                             </div>
-                                        );
-                                    })}
-                        </div>
+                                            {/* only admin can delete any posts */}
+                                            {Cookies.get("token") && Cookies.get("admin") && <DeleteRoom id={value.id} />}
+                                            {Cookies.get("token") && !Cookies.get("admin") && <SaveRoom id={value.id} />}
+                                            <div
+                                                className="post-info-container"
+                                                onClick={() => {
+                                                    history.push(`/post/${value.id}`);
+                                                }}
+                                            >
+                                                <div className="post-caption">{value.caption}</div>
+                                                <div className="post-desc">{value.description}</div>
+                                                <div className="post-desc-pref">
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.parking == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <RiParkingBoxLine style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.pet == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <MdOutlinePets style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                    {(() => {
+                                                        // eslint-disable-next-line eqeqeq
+                                                        if (value.smoking == "1") {
+                                                            return (
+                                                                <div>
+                                                                    <FaSmoking style={style} />
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            return <></>;
+                                                        }
+                                                    })()}
+                                                </div>
+
+                                                <div className="post-date">{value.created_date}</div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                     </div>
                 </div>
-            )}
+            </div>
         </div>
     );
 }

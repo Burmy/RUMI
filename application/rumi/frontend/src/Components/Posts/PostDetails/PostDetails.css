@@ -2,6 +2,18 @@
     display: flex;
     justify-content: center;
     padding-top: 50px;
+    position: relative;
+}
+
+.roommate-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.roommate-loading {
+    padding-top: 50px;
+    padding-right: 120px;
 }
 
 .room-detail-container {
@@ -129,7 +141,7 @@
 
 .user-info-plus-back {
     display: flex;
-    margin-left: -45px;
+    margin-left: -150px;
 }
 .user-info-container {
     width: 70vw;
@@ -313,6 +325,7 @@ div[id^="message-"] {
     text-align: center;
     padding: 0 15px 0 15px;
     flex-wrap: wrap;
+    margin-left: -90px;
 }
 .post-delete-button {
     padding: 2px 30px 6px 30px;

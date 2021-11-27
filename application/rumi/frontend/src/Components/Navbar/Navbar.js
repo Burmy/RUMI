@@ -1,7 +1,6 @@
 import { React, useRef } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
 // import { useAuth } from "../../Helpers/AuthContext";
 import Cookies from "js-cookie";
 // import { toast } from "react-toastify";
