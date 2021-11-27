@@ -46,20 +46,23 @@ export default class Gender extends Component {
                             boxShadow: "none",
                             width: 300,
                             height: 60,
-                            border: "2px solid #f1f5f9",
+                            border: "2px solid #0000002c",
                             borderColor: "#1da699",
+                            cursor: "pointer",
+                            boxShadow: "5px 5px 24px 5px rgba(0, 0, 0, 0.06)",
                             "&:hover": {
                                 borderColor: "#1da699",
                             },
                         }),
                         menu: (provided, state) => ({
                             ...provided,
-                            border: "none",
+                            border: "2px solid #f1f5f9",
                             boxShadow: "none",
                         }),
                         option: (provided, state) => ({
                             ...provided,
                             padding: 20,
+                            cursor: "pointer",
                         }),
                     }}
                 />

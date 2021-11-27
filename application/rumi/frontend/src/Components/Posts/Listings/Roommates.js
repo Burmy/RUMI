@@ -18,6 +18,9 @@ import { MdOutlinePets } from "react-icons/md";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import { DeleteUser } from "../Delete-Edit-Save/DeleteUser";
 import { BsFilter } from "react-icons/bs";
+import UseAnimations from "react-useanimations";
+import menu4 from "react-useanimations/lib/menu4";
+
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -41,7 +44,7 @@ function Roommates() {
     const [loader, showLoader, hideLoader] = useFullPageLoader();
 
     let history = useHistory();
-    const filterstyle = { marginBottom: "-12px" };
+
     useEffect(() => {
         async function getPosts() {
             showLoader();
@@ -91,16 +94,38 @@ function Roommates() {
     };
 
     const style = { width: "32px", height: "32px" };
+    const iconstyle = {
+        padding: "9px 16px 0px 16px",
+        width: "42px",
+        height: "42px",
+    };
 
     return (
         <div className="home">
+            <Link data-tip="Look for Rooms" className="search-icon-resp" to="/rooms">
+                <lord-icon
+                    src="https://cdn.lordicon.com/dxjqoygy.json"
+                    trigger="hover"
+                    colors="primary:#ffffff,secondary:#ffffff"
+                    stroke="100"
+                    scale="50"
+                    style={iconstyle}
+                ></lord-icon>
+            </Link>
             <form className="search" onSubmit={submit}>
                 <Link data-tip="Look for Rooms" className="search-icon" to="/rooms">
-                    <BsPersonFill />
+                    <lord-icon
+                        src="https://cdn.lordicon.com/dxjqoygy.json"
+                        trigger="hover"
+                        colors="primary:#ffffff,secondary:#ffffff"
+                        stroke="100"
+                        scale="50"
+                        style={iconstyle}
+                    ></lord-icon>
                 </Link>
                 <div className="filter-toggle">
                     <label className="collapse" data-tip="Filters" for="_2">
-                        <BsFilter style={filterstyle} />
+                        <UseAnimations animation={menu4} size={45} className="filter-icon" />
                     </label>
                     <input id="_2" type="checkbox" />
 

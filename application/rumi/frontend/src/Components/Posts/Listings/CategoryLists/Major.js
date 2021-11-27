@@ -71,12 +71,13 @@ export default class Major extends Component {
                         }),
                         menu: (provided, state) => ({
                             ...provided,
-                            border: "none",
+                            border: "2px solid #f1f5f9",
                             boxShadow: "none",
                         }),
                         option: (provided, state) => ({
                             ...provided,
                             padding: 20,
+                            cursor: "pointer",
                         }),
                     }}
                 />

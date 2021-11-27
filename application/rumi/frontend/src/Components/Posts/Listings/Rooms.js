@@ -10,7 +10,6 @@ import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
 import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
-import { ImHome } from "react-icons/im";
 import { BsFilter } from "react-icons/bs";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
@@ -18,6 +17,8 @@ import { MdOutlinePets } from "react-icons/md";
 import { SaveRoom } from "../Delete-Edit-Save/SaveRoom";
 import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
+import UseAnimations from "react-useanimations";
+import menu4 from "react-useanimations/lib/menu4";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -91,18 +92,37 @@ function Rooms() {
         setEndPrice(price2);
     };
     const style = { width: "32px", height: "32px" };
-    const filterstyle = { marginBottom: "-12px" };
+    const iconstyle = {
+        padding: "9px 16px 0px 16px",
+        width: "42px",
+        height: "42px",
+    };
     return (
         <div>
             <div className="home">
+                <Link data-tip="Look for Roommates" className="search-icon-resp" to="/roommates">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/gmzxduhd.json"
+                        trigger="hover"
+                        colors="primary:#ffffff,secondary:#ffffff"
+                        stroke="100"
+                        style={iconstyle}
+                    ></lord-icon>
+                </Link>
                 <form className="search" onSubmit={submit}>
                     <Link data-tip="Look for Roommates" className="search-icon" to="/roommates">
-                        <ImHome />
+                        <lord-icon
+                            src="https://cdn.lordicon.com/gmzxduhd.json"
+                            trigger="hover"
+                            colors="primary:#ffffff,secondary:#ffffff"
+                            stroke="100"
+                            style={iconstyle}
+                        ></lord-icon>
                     </Link>
 
                     <div className="filter-toggle">
                         <label className="collapse" data-tip="Filters" for="_2">
-                            <BsFilter style={filterstyle} />
+                            <UseAnimations animation={menu4} size={45} className="filter-icon" />
                         </label>
                         <input id="_2" type="checkbox" />
 
@@ -139,6 +159,7 @@ function Rooms() {
                         </div>
                     </div>
                     <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
+
                     <input
                         type="text"
                         className="search-text"
