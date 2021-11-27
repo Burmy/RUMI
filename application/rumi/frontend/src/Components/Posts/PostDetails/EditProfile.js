@@ -87,7 +87,7 @@ const EditProfile = () => {
           <h1>Edit Details</h1>
           <form>
           <label>Set new data for {originalUsername} </label>
-         
+         <br/>
           <label>Email </label>
           <input value = {email} defaultValue={null}  onChange={handleEmail}/>
           <br/>
