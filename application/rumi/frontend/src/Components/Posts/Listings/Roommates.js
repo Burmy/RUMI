@@ -10,15 +10,14 @@ import RoommatePref from "./CategoryLists/RoommatePref";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
 import Avatar from "react-avatar";
-
+import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
 import { BsPersonFill } from "react-icons/bs";
-import { AiFillCaretRight } from "react-icons/ai";
 import { FaSmoking } from "react-icons/fa";
 import { MdOutlinePets } from "react-icons/md";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import { DeleteUser } from "../Delete-Edit-Save/DeleteUser";
-
+import { BsFilter } from "react-icons/bs";
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [postCount, setPostCount] = useState([]);
@@ -42,7 +41,7 @@ function Roommates() {
     const [loader, showLoader, hideLoader] = useFullPageLoader();
 
     let history = useHistory();
-
+    const filterstyle = { marginBottom: "-12px" };
     useEffect(() => {
         async function getPosts() {
             showLoader();
@@ -96,9 +95,28 @@ function Roommates() {
     return (
         <div className="home">
             <form className="search" onSubmit={submit}>
-                <Link className="search-icon" to="/rooms">
+                <Link data-tip="Look for Roomms" className="search-icon" to="/rooms">
                     <BsPersonFill />
                 </Link>
+                <div className="filter-toggle">
+                    <label className="collapse" data-tip="Filters" for="_2">
+                        <BsFilter style={filterstyle} />
+                    </label>
+                    <input id="_2" type="checkbox" />
+
+                    <div className="filter-container">
+                        <div className="filter-location">
+                            <div className="filter-heading">Select Gender</div>
+                            <Gender gender={setGender} />
+                        </div>
+
+                        <div className="">
+                            <div className="filter-heading">Select Preferences</div>
+                            <RoommatePref pet={setPet} smoking={setSmoking} />
+                        </div>
+                    </div>
+                </div>
+                <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
                 <input
                     type="text"
                     className="search-text"
@@ -121,31 +139,6 @@ function Roommates() {
             <div>{postCount}</div>
 
             <div className="post-listings">
-                <div className="filter-toggle">
-                    <label className="collapse" for="_2">
-                        Filters
-                        <AiFillCaretRight
-                            style={{
-                                position: "absolute",
-                                top: "18px",
-                                right: "20px",
-                            }}
-                        />
-                    </label>
-                    <input id="_2" type="checkbox" />
-
-                    <div className="filter-container">
-                        <div className="filter-location">
-                            <div className="filter-heading">Select Gender</div>
-                            <Gender gender={setGender} />
-                        </div>
-
-                        <div className="">
-                            <div className="filter-heading">Select Preferences</div>
-                            <RoommatePref pet={setPet} smoking={setSmoking} />
-                        </div>
-                    </div>
-                </div>
                 <div className="post-container">
                     {loader}
                     {listOfPosts &&

@@ -37,7 +37,7 @@ export default class Location extends Component {
 
     render() {
         return (
-            <div>
+            <div className={`filter-heading `}>
                 <Select
                     options={this.state.selectOptions}
                     onChange={this.handleChange.bind(this)}

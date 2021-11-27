@@ -14,14 +14,21 @@
     flex-direction: row;
     justify-content: center;
 }
-
+.filter-toggle {
+    margin-top: 29px;
+}
 .filter-container {
+    position: absolute;
+    background: #fff;
+    z-index: 9999;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    padding: 25px;
+    margin-top: 16px;
+}
+
+.filter-cont {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    /* width: 25%; */
-    max-height: 100%;
+    justify-content: flex-end;
 }
 .filter-heading {
     margin: 10px;
@@ -259,10 +266,15 @@
     padding-top: 15px;
     border: 2px solid #1da699;
 }
+.filter-button:hover,
 .search-button:hover,
 .search-icon:hover {
     border: 2px solid #28bbac;
     background: #28bbac;
+}
+.css-3s3utz-control {
+    cursor: pointer !important;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
 }
 .filter-label {
     display: inline-block;
@@ -272,7 +284,7 @@
     width: 9.5vw;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     transition: 0.14s ease;
-    border: 2px solid #ffffff;
+    border: 2px solid #69666617;
     margin: 5px;
 }
 
@@ -291,6 +303,7 @@
 .filter-label label input {
     position: absolute;
     top: -20px;
+    visibility: hidden;
 }
 
 .filter-label input:checked + span {
@@ -300,18 +313,16 @@
 }
 
 .collapse {
-    cursor: pointer;
-    color: #ffffff;
-    padding: 18px 60px 18px 25px;
-    display: block;
+    border: 2px solid #1da699;
     background: #1da699;
-    position: absolute;
-    /* margin: 20px; */
-    margin-top: -80px;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 35px;
+    padding: 12px 22px;
+    margin: 50px 0px 0px 1px;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     font-family: "Josefin Sans", sans-serif;
-    font-size: 24px;
-    border: 2px solid #1da699;
     transition: 0.14s ease;
 }
 
@@ -328,4 +339,12 @@
 }
 .collapse + input:checked + div {
     display: block;
+}
+
+.tooltip {
+    font-size: 15px !important;
+    padding: 10px !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
+    font-family: "Josefin Sans", sans-serif !important;
 }

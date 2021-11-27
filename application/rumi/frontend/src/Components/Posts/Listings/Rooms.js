@@ -8,10 +8,10 @@ import Gender from "./CategoryLists/Gender";
 import RoomPref from "./CategoryLists/RoomPref";
 import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
-
+import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
-import { AiFillCaretRight } from "react-icons/ai";
+import { BsFilter } from "react-icons/bs";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
 import { MdOutlinePets } from "react-icons/md";
@@ -91,13 +91,37 @@ function Rooms() {
         setEndPrice(price2);
     };
     const style = { width: "32px", height: "32px" };
+    const filterstyle = { marginBottom: "-12px" };
     return (
         <div>
             <div className="home">
                 <form className="search" onSubmit={submit}>
-                    <Link className="search-icon" to="/roommates">
+                    <Link data-tip="Look for Roommates" className="search-icon" to="/roommates">
                         <ImHome />
                     </Link>
+
+                    <div className="filter-toggle">
+                        <label className="collapse" data-tip="Filters" for="_2">
+                            <BsFilter style={filterstyle} />
+                        </label>
+                        <input id="_2" type="checkbox" />
+
+                        <div className="filter-container">
+                            <div className="filter-location">
+                                <div className="filter-heading">Select Location</div>
+                                <Location location={setLocation} />
+                            </div>
+                            <div className="filter-location">
+                                <div className="filter-heading">Select Gender</div>
+                                <Gender gender={setGender} />
+                            </div>
+                            <div className="">
+                                <div className="filter-heading">Select Preferences</div>
+                                <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
+                            </div>
+                        </div>
+                    </div>
+                    <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
                     <input
                         type="text"
                         className="search-text"
@@ -125,34 +149,6 @@ function Rooms() {
                 <div>{postCount}</div>
 
                 <div className="post-listings">
-                    <div className="filter-toggle">
-                        <label className="collapse" for="_1">
-                            Filters
-                            <AiFillCaretRight
-                                style={{
-                                    position: "absolute",
-                                    top: "18px",
-                                    right: "20px",
-                                }}
-                            />
-                        </label>
-                        <input id="_1" type="checkbox" />
-                        <div className="filter-container">
-                            <div className="filter-location">
-                                <div className="filter-heading">Select Location</div>
-                                <Location location={setLocation} />
-                            </div>
-                            <div className="filter-location">
-                                <div className="filter-heading">Select Gender</div>
-                                <Gender gender={setGender} />
-                            </div>
-                            <div className="">
-                                <div className="filter-heading">Select Preferences</div>
-                                <RoomPref parking={setParking} pet={setPet} smoking={setSmoking} />
-                            </div>
-                        </div>
-                    </div>
-
                     <div className="post-container">
                         {loader}
                         {listOfPosts &&

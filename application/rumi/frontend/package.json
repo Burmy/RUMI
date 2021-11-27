@@ -25,7 +25,6 @@
         "react-google-maps": "^9.4.5",
         "react-icons": "^4.3.1",
         "react-moment": "^1.1.1",
-        "react-overlays": "^5.1.1",
         "react-router-dom": "^5.3.0",
         "react-scripts": "^4.0.3",
         "react-select": "^5.1.0",
@@ -33,6 +32,7 @@
         "react-step-wizard": "^5.3.9",
         "react-tabs": "^3.2.3",
         "react-toastify": "^8.0.3",
+        "react-tooltip": "^4.2.21",
         "react-useanimations": "^2.0.6",
         "web-vitals": "^1.1.2",
         "yup": "^0.32.11"
