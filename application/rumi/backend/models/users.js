@@ -26,7 +26,7 @@ UserModel.changeData = (
   console.log(originalUsername);
 let addSQL = [];
 let startSQL = "UPDATE user SET ";
-let endSql = "WHERE username=?;";
+let endSql = `WHERE username='${originalUsername}';`;
 if(username !=''){
 
 addSQL.push("username='"+username+"' ");
@@ -71,7 +71,7 @@ finalsql= finalsql+addSQL[i];
 finalsql=finalsql+endSql;
 console.log(finalsql);
 console.log(username);
-return db.execute(finalsql,[originalUsername])
+return db.execute(finalsql)
 .then(([results,fields])=>{
   return Promise.resolve(results);
 })
