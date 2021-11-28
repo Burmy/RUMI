@@ -10,6 +10,8 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
+    animation: fadeIn;
+    animation-duration: 0.3s;
 }
 
 .reg-form {

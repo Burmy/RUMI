@@ -9,12 +9,17 @@
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 .team-page {
     display: flex;
-    justify-content: ;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 .member {
+    animation: fadeIn;
+    animation-duration: 0.5s;
     width: 450px;
     height: 130px;
     display: flex;
@@ -43,6 +48,8 @@
     min-height: 120px;
     max-height: auto;
     width: 30%;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 
 /* .team-card {

@@ -12,6 +12,8 @@
     left: 0px;
     width: 50%;
     height: 100%;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 
 .right-half {

@@ -19,6 +19,7 @@ import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
+import "animate.css";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);

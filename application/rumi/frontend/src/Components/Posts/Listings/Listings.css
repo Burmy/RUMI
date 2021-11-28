@@ -24,6 +24,8 @@
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.178);
     padding: 25px;
     margin-top: -12px;
+    animation: fadeIn;
+    animation-duration: 0.3s;
 }
 
 .filter-cont {
@@ -71,6 +73,8 @@
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     cursor: pointer;
     overflow: hidden;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 .user-card {
     position: relative;
@@ -86,6 +90,8 @@
     box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
     cursor: pointer;
     overflow: hidden;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 .post-image {
     height: 55%;

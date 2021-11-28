@@ -6,6 +6,8 @@
     margin-bottom: 25px;
     align-items: center;
     padding-bottom: 50px;
+    animation: fadeIn;
+    animation-duration: 0.5s;
 }
 
 .chat-loading {
