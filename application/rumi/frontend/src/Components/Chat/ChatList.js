@@ -6,71 +6,85 @@ import Avatar from "react-avatar";
 import { VscBellDot } from "react-icons/vsc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ReactTooltip from "react-tooltip";
 import "./Chat.css";
 const stylenoti = { marginTop: "10px", width: "35px", height: "35px", color: "#1da699" };
 
 class ChatListComponent extends React.Component {
-    // constructor(props) {
-    //     super(props);
+    iconstyle = {
+        padding: "15px 20px 15px 20px",
+        width: "60px",
+        height: "60px",
+    };
 
-    //     this.notify = this.notify.bind(this);
-    // }
-    // notify() {
-    //     console.log("call notify");
-    //     toast.success("you just got a message!", {
-    //         position: "top-right",
-    //         autoClose: 4000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         closeButton: false,
-    //         progress: 0,
-    //     });
-    // }
-
+    iconstyle2 = {
+        padding: "15px 20px 15px 20px",
+        width: "60px",
+        height: "60px",
+    };
     render() {
         if (this.props.chats.length > 0) {
             return (
-                <div className="chatlist-container">
-                    <button variant="contained" fullWidth color="primary" onClick={this.newChat} className="chat-btn">
-                        New Message
-                    </button>
-                    <ul id="chat-list">
-                        {this.props.chats.map((_chat, _index) => {
-                            return (
-                                <div key={_index}>
-                                    <li
-                                        onClick={() => this.selectChat(_index)}
-                                        className={`segmentsList${this.props.selectedChatIndex === _index ? " selected" : ""}`}
-                                    >
-                                        <div>
-                                            <Avatar
-                                                className="menu-profile"
-                                                name={
-                                                    _chat.users.filter((_user) => _user !== this.props.userEmail)[0].split("")[0]
-                                                }
-                                                round
-                                                size="60px"
-                                                color="white"
-                                            />
+                <div>
+                    <div onClick={this.newChat} className="chat-btn-resp" data-tip="New Message">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/zpxybbhl.json"
+                            trigger="hover"
+                            colors="primary:#ffffff,secondary:#ffffff"
+                            stroke="100"
+                            style={this.iconstyle2}
+                        ></lord-icon>
+                    </div>
+                    <div className="chatList-container-cont">
+                        <div onClick={this.newChat} className="chat-btn" data-tip="New Message">
+                            <lord-icon
+                                src="https://cdn.lordicon.com/zpxybbhl.json"
+                                trigger="hover"
+                                colors="primary:#ffffff,secondary:#ffffff"
+                                stroke="100"
+                                style={this.iconstyle}
+                            ></lord-icon>
+                        </div>
+                        <ReactTooltip className="tooltip" place="bottom" type="dark" effect="solid" />
+                        <div className="chatlist-container">
+                            <ul id="chat-list">
+                                {this.props.chats.map((_chat, _index) => {
+                                    return (
+                                        <div key={_index}>
+                                            <li
+                                                onClick={() => this.selectChat(_index)}
+                                                className={`segmentsList${
+                                                    this.props.selectedChatIndex === _index ? " selected" : ""
+                                                }`}
+                                            >
+                                                <div>
+                                                    <Avatar
+                                                        className="menu-profile"
+                                                        name={
+                                                            _chat.users
+                                                                .filter((_user) => _user !== this.props.userEmail)[0]
+                                                                .split("")[0]
+                                                        }
+                                                        round
+                                                        size="60px"
+                                                        color="white"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <div>{_chat.users.filter((_user) => _user !== this.props.userEmail)[0]}</div>
+                                                </div>
+                                                {_chat.receiverHasRead === false && !this.userIsSender(_chat) ? (
+                                                    <div>
+                                                        <VscBellDot style={stylenoti} />
+                                                    </div>
+                                                ) : null}
+                                            </li>
                                         </div>
-                                        <div>
-                                            <div>{_chat.users.filter((_user) => _user !== this.props.userEmail)[0]}</div>
-                                        </div>
-                                        {_chat.receiverHasRead === false && !this.userIsSender(_chat) ? (
-                                            <div>
-                                                <VscBellDot style={stylenoti} />
-                                                {/* {this.notify()}
-                                                {<ToastContainer />} */}
-                                            </div>
-                                        ) : null}
-                                    </li>
-                                </div>
-                            );
-                        })}
-                    </ul>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             );
         } else {

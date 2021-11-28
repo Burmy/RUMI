@@ -7,13 +7,6 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import ScaleLoader from "react-spinners/ScaleLoader";
-// I need to investigate why sometimes
-// two messages will send instead of just
-// one. I dont know if there are two instances
-// of the chat box component or what...
-
-// I will be using both .then and async/await
-// in this tutorial to give a feel of both.
 
 class DashboardComponent extends React.Component {
     constructor() {
@@ -64,9 +57,9 @@ class DashboardComponent extends React.Component {
             );
         } else {
             return (
-                <div className="loading">
+                <div className="chat-loading">
                     <ScaleLoader height={50} width={8} radius={0} margin={2} color="#1da699" speedMultiplier={1.7} />
-                    <div className="loading">Loading...</div>
+                    <div>Loading...</div>
                 </div>
             );
         }

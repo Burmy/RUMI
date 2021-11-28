@@ -250,6 +250,7 @@ function RoommateDetails() {
                                     </TabPanel>
                                     <TabPanel>
                                         <div style={{ marginBottom: `50px` }}>{commentsCount}</div>
+                                        {loader}
                                         <div>
                                             {userComments
                                                 ? userComments

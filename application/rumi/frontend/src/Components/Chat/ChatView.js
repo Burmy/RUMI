@@ -36,7 +36,6 @@ class ChatViewComponent extends React.Component {
         } else {
             return (
                 <div className="chat-view-container">
-                    <div className="chat-view-heading">{this.props.chat.users.filter((_usr) => _usr !== this.props.user)[0]}</div>
                     <div className="chat-view-container-wrapper">
                         <Scrollbars
                             style={scroll} // This will activate auto hide
@@ -51,14 +50,6 @@ class ChatViewComponent extends React.Component {
                                     return (
                                         <div key={_index} className={_msg.sender === this.props.user ? "sent" : "received"}>
                                             {_msg.message}
-                                            {/* <div
-                                                className={
-                                                    _msg.sender === this.props.user ? "msg-date-sent" : "msg-date-received"
-                                                }
-                                            >
-                                                <Moment format="YYYY/MM/DD">{_msg.timestamp}</Moment>
-                                                <Moment format="hh:mm">{_msg.timestamp}</Moment>
-                                            </div> */}
                                         </div>
                                     );
                                 })}

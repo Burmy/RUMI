@@ -9,6 +9,7 @@ export const GetFav = ({ id }) => {
     const [userFav, setUserFav] = useState([]);
     const [favCount, setFavCount] = useState([]);
     let history = useHistory();
+
     useEffect(() => {
         Axios.get(configData.SERVER_URL + `posts?id=${id}`)
             .then((response) => {
