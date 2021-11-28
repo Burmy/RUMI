@@ -119,6 +119,60 @@ function RoomDetails() {
                                         alt="Missing"
                                     />
                                 </div>
+                                <div className="room-comments-container room-comments-container-resp">
+                                    <div className="messages">
+                                        <div className="nocomm">No Comments Yet!</div>
+                                        {comments
+                                            ? comments
+                                                  .slice(0)
+                                                  .reverse()
+                                                  .map(
+                                                      (comment, key) => (
+                                                          // eslint-disable-next-line no-sequences
+                                                          (comment.created_date = new Date(
+                                                              comment.created_date
+                                                              // eslint-disable-next-line no-sequences
+                                                          ).toDateString()),
+                                                          (
+                                                              <div id="message-" key={key}>
+                                                                  <div className="author-text">@{comment.username}</div>
+                                                                  <div className="date-posted">{comment.created_date}</div>
+                                                                  <div className="comment-text">- {comment.text}</div>
+                                                                  {Cookies.get("token") && Cookies.get("admin") && (
+                                                                      <DeleteComment commentid={comment.id} />
+                                                                  )}
+                                                              </div>
+                                                          )
+                                                      )
+                                                  )
+                                            : null}
+                                    </div>
+
+                                    {Cookies.get("token") && Cookies.get("username") && (
+                                        <div className="enter-comments-container">
+                                            <input
+                                                className="comment-input"
+                                                type="text"
+                                                placeholder="Comment Here..."
+                                                autoComplete="off"
+                                                value={newComment}
+                                                onChange={(event) => {
+                                                    setNewComment(event.target.value);
+                                                }}
+                                            />
+
+                                            <button onClick={addComment} className="comment-button">
+                                                <AiOutlineCaretRight />
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <label className="collapse-comments" data-tip="Filters" for="_2">
+                                    Show Comments
+                                </label>
+                                <input id="_2" type="checkbox" />
+
                                 <div className="room-comments-container">
                                     <div className="messages">
                                         <div className="nocomm">No Comments Yet!</div>
@@ -147,6 +201,7 @@ function RoomDetails() {
                                                   )
                                             : null}
                                     </div>
+
                                     {Cookies.get("token") && Cookies.get("username") && (
                                         <div className="enter-comments-container">
                                             <input

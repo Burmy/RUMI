@@ -202,16 +202,16 @@ function RoommateDetails() {
 
                                     <TabPanel>
                                         <div>{postCount}</div>
-                                        <div className="user-info-container-posts">
-                                            {userPosts &&
-                                                userPosts
-                                                    .slice(0)
-                                                    .reverse()
-                                                    .map((value, key) => {
-                                                        value.created_date = new Date(value.created_date).toDateString();
-                                                        return (
-                                                            <div key={value.id}>
-                                                                <div className="post-card">
+                                        <div className="post-listings">
+                                            <div className="user-info-container-posts">
+                                                {userPosts &&
+                                                    userPosts
+                                                        .slice(0)
+                                                        .reverse()
+                                                        .map((value, key) => {
+                                                            value.created_date = new Date(value.created_date).toDateString();
+                                                            return (
+                                                                <div key={value.id} className="post-card post-card-roommate">
                                                                     <img
                                                                         className="post-image"
                                                                         src={
@@ -243,9 +243,9 @@ function RoommateDetails() {
                                                                         <div className="post-date">{value.created_date}</div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        );
-                                                    })}
+                                                            );
+                                                        })}
+                                            </div>
                                         </div>
                                     </TabPanel>
                                     <TabPanel>
