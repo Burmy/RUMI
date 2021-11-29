@@ -4,6 +4,7 @@ var multer = require("multer");
 var crypto = require("crypto");
 var router = express.Router();
 var PostModel = require("../models/posts");
+var UserModel = require("../models/users");
 var PostError = require("../helpers/error/PostError");
 var { authentication } = require("../middleware/authetication");
 
@@ -75,6 +76,49 @@ router.get("/", function (req, res, next) {
     page,
     size
   )
+    .then((results) => {
+      if (results && results.length) {
+        res.send({
+          resultsStatus: "info",
+          message: `${results.length} result found`,
+          results: results,
+        });
+      } else {
+        res.send({
+          resultsStatus: "info",
+          message: `0 result found`,
+        });
+      }
+    })
+    .catch((err) => next(err));
+});
+
+router.get("/suggest", authentication, function (req, res, next) {
+  let loginUserId = req.headers.loginUserId;
+
+  UserModel.getById(loginUserId)
+    .then((results) => {
+      if (results && results.length) {
+        console.log(results);
+        return PostModel.search(
+          null,
+          null,
+          null,
+          null,
+          null,
+          results[0].pets,
+          results[0].smoker,
+          results[0].gender,
+          null,
+          null,
+          null,
+          null,
+          null
+        );
+      } else {
+        return null;
+      }
+    })
     .then((results) => {
       if (results && results.length) {
         res.send({
