@@ -140,6 +140,8 @@ const stepOneValidationSchema = Yup.object({
     acceptTerms: Yup.bool().oneOf([true], "✖ You must accept our Terms & Conditions"),
 });
 
+
+
 const StepOne = (props) => {
     const [fireUser, setFireUser] = useState("");
     const [fireEmail, setFireEmail] = useState("");
@@ -161,22 +163,33 @@ const StepOne = (props) => {
                 .collection("users")
                 .doc(fireEmail)
                 .set(userObj)
-                .catch((error) => {
-                    // Error
-                    if (error.response) {
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                    } else if (error.request) {
-                        console.log(error.request);
-                    } else {
-                        console.log("Error", error.message);
-                    }
-                    console.log(error.config);
-                });
+        })
+        .catch((error) => {
+            toast.error("The Specified Email or Password already exists! Please try again.", {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                closeButton: false,
+                progress: 0,
+            });
+            setTimeout(() => window.location.reload(), 4100);
+            console.log("That's not good :( ");
+            // Error
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log("Error", error.message);
+            }
+            console.log(error.config);
         });
     };
-
     const style = { marginBottom: "-4px" };
 
     return (
