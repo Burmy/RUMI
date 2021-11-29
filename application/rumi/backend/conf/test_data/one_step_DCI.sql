@@ -248,9 +248,10 @@ CREATE TABLE `notification` (
   `text` varchar(2048) NOT NULL,
   `from_id` int DEFAULT NULL,
   `to_id` int NOT NULL,
-  `post_id` int NOT NULL,
+  `post_id` int NULL,
+  `unread` int NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `deleted` bit(1) DEFAULT NULL,
+  `deleted` int DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
@@ -272,7 +273,7 @@ CREATE TABLE `notification` (
       REFERENCES `post` (`id`)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
