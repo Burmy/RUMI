@@ -19,6 +19,8 @@ import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
+
+import GetNoti from "../../Notification/GetNoti";
 import "animate.css";
 
 function Rooms() {
@@ -100,6 +102,7 @@ function Rooms() {
     };
     return (
         <div>
+            <GetNoti />
             <div className="home">
                 <Link data-tip="Look for Roommates" className="search-icon-resp" to="/roommates">
                     <lord-icon

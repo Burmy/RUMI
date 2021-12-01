@@ -14,6 +14,7 @@ import { GetFav } from "./GetFav";
 import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
 import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import { Link } from "react-router-dom";
+import Notification from "../../Notification/Notification";
 
 function RoommateDetails() {
     let { id } = useParams();
@@ -120,7 +121,7 @@ function RoommateDetails() {
     return (
         <div className="roommate-container">
             <div className="roommate-loading">{loader}</div>
-
+            <Notification />
             {userObject.map(
                 (value, key) => (
                     // eslint-disable-next-line no-sequences
