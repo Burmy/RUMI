@@ -11,7 +11,56 @@ UserModel.getById = (id) => {
     })
     .catch((err) => Promise.reject(err));
 };
+UserModel.changeData = (
+  description,
+  gender,
+  school,
+  major,
+  smoker,
+  pets,
+  originalUsername
+  ) =>{
+let addSQL = [];
+let startSQL = "UPDATE user SET ";
+let endSql = `WHERE username='${originalUsername}';`;
 
+if(description !=''){
+
+addSQL.push("description='"+description+"' ");
+}
+if(gender !=''){
+
+addSQL.push("gender='"+gender+"' ");
+}
+if(school !=''){
+
+addSQL.push("school='"+school+"' ");
+}
+if(major !=''){
+
+addSQL.push("major='"+major+"' ");
+}
+if(smoker !=''){
+
+addSQL.push("smoker='"+smoker+"' ");
+}
+if(pets !=''){
+ 
+addSQL.push("pets='"+pets+"' ");
+}
+let finalsql= startSQL;
+
+for(i=0;i<addSQL.length;i++){
+finalsql= finalsql+addSQL[i];
+}
+finalsql=finalsql+endSql;
+console.log(finalsql);
+return db.execute(finalsql)
+.then(([results,fields])=>{
+  return Promise.resolve(results);
+})
+.catch((err) => Promise.reject(err));
+};
 UserModel.search = (
   searchTerm,
   major,

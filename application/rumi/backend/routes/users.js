@@ -328,5 +328,30 @@ router.delete("/", authentication, function (req, res, next) {
     })
     .catch((err) => next(err));
 });
+router.post('/update', function(req,res,next){
+  let description = req.body.description;
+  let gender = req.body.gender;
+  let school = req.body.school;
+  let major = req.body.major;
+  let smoker = req.body.smoker;
+  let pets = req.body.pets;
+  let originalUsername=req.body.originalUsername;
+
+if(description==''&&gender==''&&school==''&&major==''&&smoker==''&&pets==''){
+
+}
+else{
+UserModel.changeData(
+  description,
+  gender,
+  school,
+  major,
+  smoker,
+  pets,
+  originalUsername
+);
+}
+
+})
 
 module.exports = router;

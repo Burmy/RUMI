@@ -203,6 +203,22 @@ function RoommateDetails() {
                                                 </Link>
                                             </div>
                                         )}
+                                        <div className="user-info-main-cont">
+                                            Contact - {value.phone}, {value.email}
+                                        </div>
+                                        <div>
+                                        {Cookies.get("token") &&
+                                        Cookies.get("username") === value.username && (
+                                        <button
+                                          className="post-edit-button"
+                                         onClick={() => {
+                                            history.push('/edit')
+                                        }}
+                                        >
+                                        Edit
+                                        </button>
+                                        )}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="user-info-posts-container">
