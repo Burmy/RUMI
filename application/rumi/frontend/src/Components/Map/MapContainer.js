@@ -28,7 +28,6 @@ function MapContainer(props) {
     lat: locations[props.location].lat,
     lng: locations[props.location].long, 
   }; 
-      console.log(props.location);
 
   const options = {
     styles: mapStyles,
