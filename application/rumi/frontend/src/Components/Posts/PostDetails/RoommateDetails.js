@@ -233,17 +233,6 @@ function RoommateDetails() {
                                                                             <div className="post-price">${value.price}</div>
                                                                         </div>
                                                                         {/* only logged in user can delete their posts */}
-                                                                        {Cookies.get("token") &&
-                                                                            Cookies.get("username") === value.username && (
-                                                                                <button
-                                                                                    
-                                                                                    onClick={() => {
-                                                                                        editPost(value.id);
-                                                                                    }}
-                                                                                >
-                                                                                    Edit
-                                                                                </button>
-                                                                            )}
                                                                             {Cookies.get("token") &&
                                                                             Cookies.get("username") === value.username && (
                                                                                 <button
