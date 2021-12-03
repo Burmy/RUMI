@@ -4,11 +4,16 @@ const FavoriteModel = {};
 FavoriteModel.search = (id, post_id, saved_by) => {
   parameters = [];
 
-  let baseSQL = `SELECT f.*, u.username
-      FROM favorite f  
-      JOIN user u 
-      ON f.saved_by = u.id
-      WHERE f.unsaved = 0 and u.deleted = 0 and u.activated = 1 `;
+  let baseSQL = `SELECT MAX(f.id) as id, 
+                        post_id, 
+                        MAX(f.saved_by) as saved_by, 
+                        MAX(f.unsaved) as unsaved, 
+                        ANY_VALUE(u.username) as username,
+                        MAX(f.saved_date) as saved_date
+                FROM favorite f  
+                JOIN user u 
+                ON f.saved_by = u.id
+                WHERE f.unsaved = 0 and u.deleted = 0 and u.activated = 1 `;
 
   if (id) {
     baseSQL += ` AND f.id = ? `;
@@ -23,7 +28,8 @@ FavoriteModel.search = (id, post_id, saved_by) => {
     parameters.push(saved_by);
   }
 
-  baseSQL += ` ORDER BY saved_date ASC `;
+  baseSQL += `GROUP BY f.post_id 
+              ORDER BY saved_date ASC `;
 
   return db
     .execute(baseSQL, parameters)
