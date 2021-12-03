@@ -3,8 +3,9 @@ import Axios from "axios";
 import configData from "../../Configs/config.json";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PatchNoti from "./PatchNoti";
 
-const Notification = () => {
+const GetNoti = () => {
     const [noti, setNoti] = useState([]);
     const customId = " ";
     useEffect(() => {
@@ -49,6 +50,7 @@ const Notification = () => {
                                               progress: 0,
                                               toastId: customId,
                                           })}
+                                          <PatchNoti />
                                       </div>
                                   );
                               } else {
@@ -62,4 +64,4 @@ const Notification = () => {
     );
 };
 
-export default Notification;
+export default GetNoti;

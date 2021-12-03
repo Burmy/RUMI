@@ -2,6 +2,8 @@ import React from "react";
 import Axios from "axios";
 import configData from "../../Configs/config.json";
 import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./noti.css";
 
 const Notification = () => {
@@ -14,7 +16,7 @@ const Notification = () => {
             trigger: "",
         },
 
-        onSubmit: (values) => {
+        onSubmit: (values, { resetForm }) => {
             // alert(JSON.stringify(values, null, 2));
             console.log(values.trigger);
 
@@ -22,6 +24,17 @@ const Notification = () => {
             Axios.post(configData.SERVER_URL + "notifications/trigger", data)
                 .then((response) => {
                     console.log("notification sent");
+                    toast.success("Notification Sent!", {
+                        position: "top-right",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        closeButton: false,
+                        progress: 0,
+                    });
+                    resetForm();
                 })
                 .catch((error) => {
                     console.log("error sending notification");

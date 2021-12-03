@@ -1,0 +1,29 @@
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import configData from "../../Configs/config.json";
+
+const PatchNoti = () => {
+    useEffect(() => {
+        Axios.patch(configData.SERVER_URL + `notifications/readAll`)
+            .then((response) => {
+                console.log(response.data.results);
+            })
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    }, []);
+
+    return <div></div>;
+};
+
+export default PatchNoti;

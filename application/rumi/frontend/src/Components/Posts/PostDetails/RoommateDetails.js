@@ -186,7 +186,7 @@ function RoommateDetails() {
                                                 })()}
                                             </div>
                                         </ul>
-                                        {Cookies.get("token") && Cookies.get("admin") === value.username && <Notification />}
+                                        {Cookies.get("token") && Cookies.get("admin") && <Notification />}
 
                                         {Cookies.get("token") && Cookies.get("username") !== value.username && (
                                             <div className="user-info-main-cont">
