@@ -11,6 +11,7 @@ import configData from "../../../Configs/config.json";
 import { AiOutlineCaretLeft } from "react-icons/ai";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function RoomDetails() {
     let history = useHistory();
@@ -19,7 +20,7 @@ function RoomDetails() {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [loader, showLoader, hideLoader] = useFullPageLoader();
-
+    const url = window.location.href;
     useEffect(() => {
         showLoader();
         Axios.get(configData.SERVER_URL + `posts?id=${id}`)
@@ -233,12 +234,22 @@ function RoomDetails() {
                                 </div>
                                 <div className="room-info-main-cont">
                                     <div>Posted on: {value.created_date}</div>
-                                    <div>
+                                    <div style={{ marginTop: "20px" }}>
                                         Posted by: <Link to={`/user/${value.creator_id}`}>{value.username}</Link>
                                     </div>
-                                    <Link className="offer-button" to={`/chat/${value.email}`}>
-                                        Offer
-                                    </Link>
+
+                                    {Cookies.get("token") && Cookies.get("username") !== value.username && (
+                                        <CopyToClipboard text={url}>
+                                            <Link className="offer-button" to={`/chat/${value.email}`}>
+                                                Offer
+                                            </Link>
+                                        </CopyToClipboard>
+                                    )}
+                                    {!Cookies.get("token") && !Cookies.get("username") && (
+                                        <Link className="offer-button" to={`/chat/${value.email}`}>
+                                            Offer
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
 
