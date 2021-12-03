@@ -15,7 +15,7 @@ NotificationModel.search = (user_id) => {
     parameters.push(user_id);
   }
 
-  baseSQL += ` ORDER BY created_date ASC `;
+  baseSQL += ` ORDER BY created_date DESC `;
 
   return db
     .execute(baseSQL, parameters)
