@@ -79,6 +79,10 @@ function RoommateDetails() {
             });
     }, [id]);
 
+    const editPost = (postid) => {
+        //send post id to edit page
+    history.push('/editPost');
+    };
     const deletePost = (postid) => {
         const data = { id: postid };
         Axios.delete(configData.SERVER_URL + `posts`, { data })
@@ -230,6 +234,17 @@ function RoommateDetails() {
                                                                         </div>
                                                                         {/* only logged in user can delete their posts */}
                                                                         {Cookies.get("token") &&
+                                                                            Cookies.get("username") === value.username && (
+                                                                                <button
+                                                                                    
+                                                                                    onClick={() => {
+                                                                                        editPost(value.id);
+                                                                                    }}
+                                                                                >
+                                                                                    Edit
+                                                                                </button>
+                                                                            )}
+                                                                            {Cookies.get("token") &&
                                                                             Cookies.get("username") === value.username && (
                                                                                 <button
                                                                                     className="post-delete-button"

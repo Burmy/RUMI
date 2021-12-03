@@ -298,8 +298,6 @@ router.delete("/", function (req, res, next) {
     .catch((err) => next(err));
 });
 router.post('/update', function(req,res,next){
-  let email = req.body.email;
-  let password = req.body.password;
   let description = req.body.description;
   let gender = req.body.gender;
   let school = req.body.school;
@@ -308,10 +306,11 @@ router.post('/update', function(req,res,next){
   let pets = req.body.pets;
   let originalUsername=req.body.originalUsername;
 
+if(description==''&&gender==''&&school==''&&major==''&&smoker==''&&pets==''){
 
+}
+else{
 UserModel.changeData(
-  password,
-  email,
   description,
   gender,
   school,
@@ -320,6 +319,7 @@ UserModel.changeData(
   pets,
   originalUsername
 );
+}
 
 })
 

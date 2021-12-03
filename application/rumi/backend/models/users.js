@@ -12,8 +12,6 @@ UserModel.getById = (id) => {
     .catch((err) => Promise.reject(err));
 };
 UserModel.changeData = (
-  password,
-  email,
   description,
   gender,
   school,
@@ -22,19 +20,10 @@ UserModel.changeData = (
   pets,
   originalUsername
   ) =>{
-  console.log(originalUsername);
 let addSQL = [];
 let startSQL = "UPDATE user SET ";
 let endSql = `WHERE username='${originalUsername}';`;
 
-if(email !=''){
-
-addSQL.push("email='"+email+"' ");
-}
-if(password !=''){
-
-addSQL.push("password='"+password+"' ");
-}
 if(description !=''){
 
 addSQL.push("description='"+description+"' ");
