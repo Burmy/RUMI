@@ -15,6 +15,7 @@ import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
 import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import { Link } from "react-router-dom";
 import Notification from "../../Notification/Notification";
+import GetNoti from "../../Notification/GetNoti";
 
 function RoommateDetails() {
     let { id } = useParams();
@@ -119,200 +120,217 @@ function RoommateDetails() {
 
     const style = { width: "37px", height: "37px" };
     return (
-        <div className="roommate-container">
-            <div className="roommate-loading">{loader}</div>
-            <Notification />
-            {userObject.map(
-                (value, key) => (
-                    // eslint-disable-next-line no-sequences
-                    (value.created_date = new Date(value.created_date).toDateString()),
-                    (
-                        <div key={value.id} className="user-container">
-                            <div className="user-info-plus-back">
-                                <div class="back-link">
-                                    <span class="addText">Go Back</span>
-                                    <AiOutlineCaretLeft
-                                        style={style}
-                                        className="room-back-button"
-                                        onClick={() => history.goBack()}
-                                    />
-                                </div>
-                                <div className="user-info-container">
-                                    <div className="user-info-main">
-                                        <Avatar
-                                            className="user-info-profile"
-                                            name={value.username[0].split("")[0]}
-                                            round
-                                            size="240px"
-                                            color="white"
-                                            src={configData.SERVER_URL + `files/download?name=${value.photo}`}
+        <div>
+            <GetNoti />
+            <div className="roommate-container">
+                <div className="roommate-loading">{loader}</div>
+
+                {userObject.map(
+                    (value, key) => (
+                        // eslint-disable-next-line no-sequences
+                        (value.created_date = new Date(value.created_date).toDateString()),
+                        (
+                            <div key={value.id} className="user-container">
+                                <div className="user-info-plus-back">
+                                    <div class="back-link">
+                                        <span class="addText">Go Back</span>
+                                        <AiOutlineCaretLeft
+                                            style={style}
+                                            className="room-back-button"
+                                            onClick={() => history.goBack()}
                                         />
-                                        <div className="user-info-main-main">
-                                            {value.username} <span className="user-info-highlight">{value.last_name}</span>
-                                        </div>
-                                        <div className="user-info-main-desc">{value.description}</div>
                                     </div>
-                                    <ul className="user-info-sub">
-                                        <li className="user-info-sub-sub">
-                                            Goes to <span className="user-info-highlight">{value.school}</span>.
-                                        </li>
-                                        <div className="user-filter-pref">
-                                            {(() => {
-                                                // eslint-disable-next-line eqeqeq
-                                                if (value.pets == "1") {
-                                                    return (
-                                                        <li className="user-info-sub-sub">
-                                                            Has a <span className="user-info-highlight">Pet</span>.
-                                                        </li>
-                                                    );
-                                                } else {
-                                                    return <></>;
-                                                }
-                                            })()}
-                                            {(() => {
-                                                // eslint-disable-next-line eqeqeq
-                                                if (value.smoker == "1") {
-                                                    return (
-                                                        <li className="user-info-sub-sub">
-                                                            Is a <span className="user-info-highlight">Smoker</span>.
-                                                        </li>
-                                                    );
-                                                } else {
-                                                    return <></>;
-                                                }
-                                            })()}
+                                    <div className="user-info-container">
+                                        <div className="user-info-main">
+                                            <Avatar
+                                                className="user-info-profile"
+                                                name={value.username[0].split("")[0]}
+                                                round
+                                                size="240px"
+                                                color="white"
+                                                src={configData.SERVER_URL + `files/download?name=${value.photo}`}
+                                            />
+                                            <div className="user-info-main-main">
+                                                {value.username} <span className="user-info-highlight">{value.last_name}</span>
+                                            </div>
+                                            <div className="user-info-main-desc">{value.description}</div>
                                         </div>
-                                    </ul>
-                                    <div className="user-info-main-cont">
-                                        <Link className="offer-button" to={`/chat/${value.email}`}>
-                                            Contact
-                                        </Link>
+                                        <ul className="user-info-sub">
+                                            <li className="user-info-sub-sub">
+                                                Goes to <span className="user-info-highlight">{value.school}</span>.
+                                            </li>
+                                            <div className="user-filter-pref">
+                                                {(() => {
+                                                    // eslint-disable-next-line eqeqeq
+                                                    if (value.pets == "1") {
+                                                        return (
+                                                            <li className="user-info-sub-sub">
+                                                                Has a <span className="user-info-highlight">Pet</span>.
+                                                            </li>
+                                                        );
+                                                    } else {
+                                                        return <></>;
+                                                    }
+                                                })()}
+                                                {(() => {
+                                                    // eslint-disable-next-line eqeqeq
+                                                    if (value.smoker == "1") {
+                                                        return (
+                                                            <li className="user-info-sub-sub">
+                                                                Is a <span className="user-info-highlight">Smoker</span>.
+                                                            </li>
+                                                        );
+                                                    } else {
+                                                        return <></>;
+                                                    }
+                                                })()}
+                                            </div>
+                                        </ul>
+                                        {Cookies.get("token") && Cookies.get("admin") === value.username && <Notification />}
+
+                                        {Cookies.get("token") && Cookies.get("username") !== value.username && (
+                                            <div className="user-info-main-cont">
+                                                <Link className="offer-button" to={`/chat/${value.email}`}>
+                                                    Contact
+                                                </Link>
+                                            </div>
+                                        )}
+
+                                        {!Cookies.get("token") && !Cookies.get("username") && (
+                                            <div className="user-info-main-cont">
+                                                <Link className="offer-button" to={`/chat/${value.email}`}>
+                                                    Contact
+                                                </Link>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="user-info-posts-container">
-                                <div className="user-info-posts-heading">{value.username}'s </div>
-                                <Tabs>
-                                    <TabList>
-                                        <Tab>Posts</Tab>
-                                        <Tab>Comments</Tab>
-                                        {Cookies.get("token") && Cookies.get("username") === value.username && (
-                                            <Tab>Favorites</Tab>
-                                        )}
-                                    </TabList>
+                                <div className="user-info-posts-container">
+                                    <div className="user-info-posts-heading">{value.username}'s </div>
+                                    <Tabs>
+                                        <TabList>
+                                            <Tab>Posts</Tab>
+                                            <Tab>Comments</Tab>
+                                            {Cookies.get("token") && Cookies.get("username") === value.username && (
+                                                <Tab>Favorites</Tab>
+                                            )}
+                                        </TabList>
 
-                                    <TabPanel>
-                                        <div>{postCount}</div>
-                                        <div className="post-listings">
-                                            <div className="user-info-container-posts">
-                                                {userPosts &&
-                                                    userPosts
-                                                        .slice(0)
-                                                        .reverse()
-                                                        .map((value, key) => {
-                                                            value.created_date = new Date(value.created_date).toDateString();
-                                                            return (
-                                                                <div key={value.id} className="post-card post-card-roommate">
-                                                                    <img
-                                                                        className="post-image"
-                                                                        src={
-                                                                            configData.SERVER_URL +
-                                                                            `files/download?name=${value.photo}`
-                                                                        }
-                                                                        alt="Missing"
-                                                                        onClick={() => {
-                                                                            history.push(`/post/${value.id}`);
-                                                                        }}
-                                                                    />
-
-                                                                    <div className="post-price-container">
-                                                                        <div className="post-price">${value.price}</div>
-                                                                    </div>
-                                                                    {/* only logged in user can delete their posts */}
-                                                                    {Cookies.get("token") &&
-                                                                        Cookies.get("username") === value.username && (
-                                                                            <DeleteRoom id={value.id} />
-                                                                        )}
-                                                                    <div
-                                                                        className="post-info-container"
-                                                                        onClick={() => {
-                                                                            history.push(`/post/${value.id}`);
-                                                                        }}
-                                                                    >
-                                                                        <div className="post-caption">{value.caption}</div>
-                                                                        <div className="post-desc">{value.description}</div>
-                                                                        <div className="post-date">{value.created_date}</div>
-                                                                    </div>
-                                                                </div>
-                                                            );
-                                                        })}
-                                            </div>
-                                        </div>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <div style={{ marginBottom: `50px` }}>{commentsCount}</div>
-                                        {loader}
-                                        <div>
-                                            {userComments
-                                                ? userComments
-                                                      .slice(0)
-                                                      .reverse()
-                                                      .map(
-                                                          (comment, key) => (
-                                                              // eslint-disable-next-line no-sequences
-                                                              (comment.created_date = new Date(
-                                                                  comment.created_date
-                                                                  // eslint-disable-next-line no-sequences
-                                                              ).toDateString()),
-                                                              (
-                                                                  <div id="message-" key={key}>
-                                                                      <div className="author-text">@{comment.username}</div>
-                                                                      <div className="date-posted">{comment.created_date}</div>
-                                                                      <div
-                                                                          className="comment-text"
-                                                                          onClick={() => {
-                                                                              history.push(`/post/${comment.post_id}`);
-                                                                          }}
-                                                                          style={{ cursor: `pointer` }}
-                                                                      >
-                                                                          - {comment.text}
-                                                                      </div>
-                                                                      {Cookies.get("token") &&
-                                                                          Cookies.get("username") === value.username && (
-                                                                              <DeleteComment commentid={comment.id} />
-                                                                          )}
-                                                                  </div>
-                                                              )
-                                                          )
-                                                      )
-                                                : null}
-                                        </div>
-                                    </TabPanel>
-                                    {Cookies.get("token") && Cookies.get("username") === value.username && (
                                         <TabPanel>
-                                            <div>{favCount}</div>
-                                            <div className="user-info-container-posts">
-                                                {userFav &&
-                                                    userFav
-                                                        .slice(0)
-                                                        .reverse()
-                                                        .map((value, key) => {
-                                                            value.created_date = new Date(value.created_date).toDateString();
-                                                            return (
-                                                                <div key={value.id}>
-                                                                    <GetFav key={key} id={value.post_id} />
-                                                                </div>
-                                                            );
-                                                        })}
+                                            <div>{postCount}</div>
+                                            <div className="post-listings">
+                                                <div className="user-info-container-posts">
+                                                    {userPosts &&
+                                                        userPosts
+                                                            .slice(0)
+                                                            .reverse()
+                                                            .map((value, key) => {
+                                                                value.created_date = new Date(value.created_date).toDateString();
+                                                                return (
+                                                                    <div key={value.id} className="post-card post-card-roommate">
+                                                                        <img
+                                                                            className="post-image"
+                                                                            src={
+                                                                                configData.SERVER_URL +
+                                                                                `files/download?name=${value.photo}`
+                                                                            }
+                                                                            alt="Missing"
+                                                                            onClick={() => {
+                                                                                history.push(`/post/${value.id}`);
+                                                                            }}
+                                                                        />
+
+                                                                        <div className="post-price-container">
+                                                                            <div className="post-price">${value.price}</div>
+                                                                        </div>
+                                                                        {/* only logged in user can delete their posts */}
+                                                                        {Cookies.get("token") &&
+                                                                            Cookies.get("username") === value.username && (
+                                                                                <DeleteRoom id={value.id} />
+                                                                            )}
+                                                                        <div
+                                                                            className="post-info-container"
+                                                                            onClick={() => {
+                                                                                history.push(`/post/${value.id}`);
+                                                                            }}
+                                                                        >
+                                                                            <div className="post-caption">{value.caption}</div>
+                                                                            <div className="post-desc">{value.description}</div>
+                                                                            <div className="post-date">{value.created_date}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                </div>
                                             </div>
                                         </TabPanel>
-                                    )}
-                                </Tabs>
+                                        <TabPanel>
+                                            <div style={{ marginBottom: `50px` }}>{commentsCount}</div>
+                                            {loader}
+                                            <div>
+                                                {userComments
+                                                    ? userComments
+                                                          .slice(0)
+                                                          .reverse()
+                                                          .map(
+                                                              (comment, key) => (
+                                                                  // eslint-disable-next-line no-sequences
+                                                                  (comment.created_date = new Date(
+                                                                      comment.created_date
+                                                                      // eslint-disable-next-line no-sequences
+                                                                  ).toDateString()),
+                                                                  (
+                                                                      <div id="message-" key={key}>
+                                                                          <div className="author-text">@{comment.username}</div>
+                                                                          <div className="date-posted">
+                                                                              {comment.created_date}
+                                                                          </div>
+                                                                          <div
+                                                                              className="comment-text"
+                                                                              onClick={() => {
+                                                                                  history.push(`/post/${comment.post_id}`);
+                                                                              }}
+                                                                              style={{ cursor: `pointer` }}
+                                                                          >
+                                                                              - {comment.text}
+                                                                          </div>
+                                                                          {Cookies.get("token") &&
+                                                                              Cookies.get("username") === value.username && (
+                                                                                  <DeleteComment commentid={comment.id} />
+                                                                              )}
+                                                                      </div>
+                                                                  )
+                                                              )
+                                                          )
+                                                    : null}
+                                            </div>
+                                        </TabPanel>
+                                        {Cookies.get("token") && Cookies.get("username") === value.username && (
+                                            <TabPanel>
+                                                <div>{favCount}</div>
+                                                <div className="user-info-container-posts">
+                                                    {userFav &&
+                                                        userFav
+                                                            .slice(0)
+                                                            .reverse()
+                                                            .map((value, key) => {
+                                                                value.created_date = new Date(value.created_date).toDateString();
+                                                                return (
+                                                                    <div key={value.id}>
+                                                                        <GetFav key={key} id={value.post_id} />
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                </div>
+                                            </TabPanel>
+                                        )}
+                                    </Tabs>
+                                </div>
                             </div>
-                        </div>
+                        )
                     )
-                )
-            )}
+                )}
+            </div>
         </div>
     );
 }

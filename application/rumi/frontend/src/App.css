@@ -38,3 +38,17 @@ a {
 .favicon {
     width: 4px !important;
 }
+
+.Toastify__toast--info {
+    border: 2px solid #54c6ec50 !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
+    font-family: "Josefin Sans", sans-serif !important;
+    font-size: 25px !important;
+    margin-top: 30px !important;
+}
+
+.Toastify__progress-bar--info {
+    background: #54c7ec !important;
+}

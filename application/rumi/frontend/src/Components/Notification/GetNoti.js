@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Notification = () => {
     const [noti, setNoti] = useState([]);
-
+    const customId = " ";
     useEffect(() => {
         Axios.get(configData.SERVER_URL + `notifications`)
             .then((response) => {
@@ -28,27 +28,33 @@ const Notification = () => {
             });
     }, []);
 
-    const notifySuccess = (message) => {
-        console.log(message);
-        toast.success(message, {
-            position: "top-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            closeButton: false,
-            progress: 0,
-        });
-    };
-
     return (
         <div>
             {noti
                 ? noti.map((value) => (
                       <div>
-                          {notifySuccess(value.text)}
-                          {value.text}
+                          {(() => {
+                              // eslint-disable-next-line eqeqeq
+                              if (value.unread == "1") {
+                                  return (
+                                      <div>
+                                          {toast.info(value.text, {
+                                              position: "top-right",
+                                              autoClose: 4000,
+                                              hideProgressBar: false,
+                                              closeOnClick: true,
+                                              pauseOnHover: true,
+                                              draggable: true,
+                                              closeButton: false,
+                                              progress: 0,
+                                              toastId: customId,
+                                          })}
+                                      </div>
+                                  );
+                              } else {
+                                  return <></>;
+                              }
+                          })()}
                       </div>
                   ))
                 : null}

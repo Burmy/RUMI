@@ -10,7 +10,6 @@ import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
 import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
-import { BsFilter } from "react-icons/bs";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
 import { MdOutlinePets } from "react-icons/md";
@@ -19,7 +18,6 @@ import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
-
 import GetNoti from "../../Notification/GetNoti";
 import "animate.css";
 

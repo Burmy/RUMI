@@ -1,48 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
 import Axios from "axios";
 import configData from "../../Configs/config.json";
+import { useFormik } from "formik";
+import "./noti.css";
 
-const Notification = (props) => {
-    const [trigger, setTrigger] = useState("");
-    const data = { text: trigger };
+const Notification = () => {
+    // Note that we have to initialize ALL of fields with values. These
+    // could come from props, but since we don’t want to prefill this form,
+    // we just use an empty string. If we don’t do this, React will yell
+    // at us.
+    const formik = useFormik({
+        initialValues: {
+            trigger: "",
+        },
 
-    Axios.post(configData.SERVER_URL + "notifications/trigger", data)
-        .then((response) => {
-            console.log("notification sent");
-        })
-        .catch((error) => {
-            console.log("error sending notification");
-            // Error
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log("Error", error.message);
-            }
-            console.log(error.config);
-        });
+        onSubmit: (values) => {
+            // alert(JSON.stringify(values, null, 2));
+            console.log(values.trigger);
 
-    const onInputChange = (event) => {
-        setTrigger(event.target.value);
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log(trigger);
-    };
-
+            const data = { text: values.trigger };
+            Axios.post(configData.SERVER_URL + "notifications/trigger", data)
+                .then((response) => {
+                    console.log("notification sent");
+                })
+                .catch((error) => {
+                    console.log("error sending notification");
+                    // Error
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
+                });
+        },
+    });
     return (
-        <div>
-            <form className="form" noValidate onSubmit={onSubmit}>
-                <input className="form-input" type="text" onChange={onInputChange} />
-                <button className="form-input-btn" type="submit">
-                    Log in
-                </button>
-            </form>
-        </div>
+        <form className="noti-form" onSubmit={formik.handleSubmit}>
+            <textarea
+                className="noti-form-input"
+                id="trigger"
+                name="trigger"
+                type="text"
+                placeholder="Notify all the users.."
+                onChange={formik.handleChange}
+                value={formik.values.trigger}
+            />
+            <button className="noti-form-btn" type="submit">
+                Notify
+            </button>
+        </form>
     );
 };
 
