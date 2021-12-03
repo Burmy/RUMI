@@ -18,7 +18,7 @@ import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import { DeleteUser } from "../Delete-Edit-Save/DeleteUser";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
-import GetNoti from "../../Notification/GetNoti";
+import GetNoti from "../../../Helpers/Notification/GetNoti";
 
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);

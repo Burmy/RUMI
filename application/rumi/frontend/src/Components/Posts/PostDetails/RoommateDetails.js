@@ -14,8 +14,8 @@ import { GetFav } from "./GetFav";
 import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
 import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import { Link } from "react-router-dom";
-import Notification from "../../Notification/Notification";
-import GetNoti from "../../Notification/GetNoti";
+import Notification from "../../../Helpers/Notification/Notification";
+import GetNoti from "../../../Helpers/Notification/GetNoti";
 
 function RoommateDetails() {
     let { id } = useParams();

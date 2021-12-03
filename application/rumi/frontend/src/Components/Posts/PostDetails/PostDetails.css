@@ -106,7 +106,7 @@
 }
 
 .room-info-main-cont {
-    padding-top: 30px;
+    padding-top: 20px;
     font-size: 25px;
     color: #696666;
     padding-bottom: 0px;
@@ -124,7 +124,7 @@
     justify-content: center;
     width: 10vw;
     font-size: 28px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .offer-button:hover {
@@ -437,13 +437,27 @@ div[id^="message-"] {
 .collapse-comments + input {
     display: none; /* hide the checkboxes */
 }
+
 .collapse-comments + input + div {
     display: none;
 }
+
 .collapse-comments + input:checked + div {
     display: block;
 }
-
+.posted-by {
+    color: #1da699;
+}
+.posted-by:hover {
+    color: #28bbac;
+}
+.react-sharing-button__link {
+    border-radius: 0px !important;
+    margin: 10px !important;
+}
+.react-sharing-button__text {
+    display: none !important;
+}
 @media only screen and (max-width: 1024px) {
     .room-post-image {
         border: 0px solid white;
