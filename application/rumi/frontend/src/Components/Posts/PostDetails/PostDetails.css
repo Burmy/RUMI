@@ -405,6 +405,21 @@ div[id^="message-"] {
     transform: scale(1.2);
 }
 
+.post-save-button2 {
+    color: #eb3c1d;
+    margin: 20px;
+    cursor: pointer;
+    transition: 0.14s ease;
+    z-index: 55;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+.post-save-button2:hover {
+    color: #eb3c1d;
+    transform: scale(1.2);
+}
+
 .react-tabs__tab-list {
     border-bottom: 3px solid #1da699 !important;
     margin-bottom: 50px !important;

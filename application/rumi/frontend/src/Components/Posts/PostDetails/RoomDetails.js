@@ -12,8 +12,6 @@ import { AiOutlineCaretLeft } from "react-icons/ai";
 import useFullPageLoader from "../../../Helpers/Loader/UseLoader";
 import { DeleteComment } from "../Delete-Edit-Save/DeleteComment";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { FacebookShareButton, TwitterShareButton } from "react-share";
-import { FacebookIcon, TwitterIcon } from "react-share";
 import Share from "../../../Helpers/Share/Share";
 
 function RoomDetails() {
@@ -261,7 +259,7 @@ function RoomDetails() {
 
                             <div>
                                 <h1>Map</h1>
-                                <MapContainer location = {value.location}  />
+                                <MapContainer location={value.location} />
                             </div>
                         </div>
                     )

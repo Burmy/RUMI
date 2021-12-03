@@ -82,7 +82,7 @@ export const GetFav = ({ id }) => {
                                 </div>
 
                                 {Cookies.get("token") && !Cookies.get("admin") && (
-                                    <div className="post-save-button">
+                                    <div className="post-save-button2">
                                         <BsStarFill
                                             onClick={() => {
                                                 unsavePost(value.id);
