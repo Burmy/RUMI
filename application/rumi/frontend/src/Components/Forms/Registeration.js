@@ -6,7 +6,7 @@ import { React, useState } from "react";
 import "./Form.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AiOutlineCaretRight, AiOutlineCaretLeft } from "react-icons/ai";
+import { AiOutlineCaretRight, AiOutlineCaretLeft, AiOutlineUpload } from "react-icons/ai";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import configData from "../../Configs/config.json";
 import { collection, addDoc } from "firebase/firestore";
@@ -15,6 +15,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "firebase/compat/app";
+import PreviewImage from "../Posts/CreatePost/PreviewImage";
 
 const Registeration = () => {
     let history = useHistory();
@@ -140,8 +141,6 @@ const stepOneValidationSchema = Yup.object({
     acceptTerms: Yup.bool().oneOf([true], "✖ You must accept our Terms & Conditions"),
 });
 
-
-
 const StepOne = (props) => {
     const [fireUser, setFireUser] = useState("");
     const [fireEmail, setFireEmail] = useState("");
@@ -151,44 +150,41 @@ const StepOne = (props) => {
 
     const handleSubmit = (values) => {
         props.next(values);
-        createUserWithEmailAndPassword(auth, fireEmail, firePass).then(() => {
-            const userObj = {
-                email: fireEmail,
-                username: fireUser,
-                friends: [],
-                messages: [],
-            };
-            firebase
-                .firestore()
-                .collection("users")
-                .doc(fireEmail)
-                .set(userObj)
-        })
-        .catch((error) => {
-            toast.error("The Specified Email or Password already exists! Please try again.", {
-                position: "top-right",
-                autoClose: 4000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                closeButton: false,
-                progress: 0,
+        createUserWithEmailAndPassword(auth, fireEmail, firePass)
+            .then(() => {
+                const userObj = {
+                    email: fireEmail,
+                    username: fireUser,
+                    friends: [],
+                    messages: [],
+                };
+                firebase.firestore().collection("users").doc(fireEmail).set(userObj);
+            })
+            .catch((error) => {
+                toast.error("The Specified Email or Password already exists! Please try again.", {
+                    position: "top-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    closeButton: false,
+                    progress: 0,
+                });
+                setTimeout(() => window.location.reload(), 4100);
+                console.log("That's not good :( ");
+                // Error
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
             });
-            setTimeout(() => window.location.reload(), 4100);
-            console.log("That's not good :( ");
-            // Error
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log("Error", error.message);
-            }
-            console.log(error.config);
-        });
     };
     const style = { marginBottom: "-4px" };
 
@@ -413,24 +409,40 @@ const StepThree = (props) => {
     const handleSubmit = (values) => {
         props.next(values, true);
     };
+
+    const validationSchema = Yup.object().shape({
+        photo: Yup.mixed().required("✖ A photo is required"),
+    });
+
     const style = { marginBottom: "-4px" };
+    const uploadstyle = { width: "40px", height: "40px", marginBottom: "-12px" };
     return (
         <div className="form-container">
-            <Formik initialValues={props.data} onSubmit={handleSubmit}>
-                {(formProps, values) => (
+            <Formik validationSchema={validationSchema} initialValues={props.data} onSubmit={handleSubmit}>
+                {({ setFieldValue, values }) => (
                     <Form
                         className="reg-card-upload"
                         // autocomplete="off"
                     >
                         <div className="reg-form">
-                            <p className="form-heading">Join Us!</p>
-                            <input
-                                id="profile-photo"
-                                type="file"
-                                name="photo"
-                                accept="image/jpg,image/jpeg,image/png"
-                                onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
-                            />
+                            <p className="form-heading">Lastly!</p>
+                            <div className="upload-image">
+                                <ErrorMessage className="form-error" name="photo" component="span" />
+
+                                <label for="profile-photo" className="upload-btn">
+                                    <AiOutlineUpload style={uploadstyle} /> Upload a Profile Picture
+                                </label>
+                                <input
+                                    id="profile-photo"
+                                    type="file"
+                                    name="photo"
+                                    accept="image/jpg,image/jpeg,image/png"
+                                    onChange={(event) => {
+                                        setFieldValue("photo", event.target.files[0]);
+                                    }}
+                                />
+                                {values.photo && <PreviewImage file={values.photo} />}
+                            </div>
 
                             <div className="step-container">
                                 <button className="form-input-btn" type="submit" onClick={() => props.prev(values)}>

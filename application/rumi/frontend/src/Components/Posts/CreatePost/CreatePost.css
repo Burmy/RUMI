@@ -29,30 +29,48 @@
 .form-input-select-create:hover {
     border: 2px solid #1da699;
 }
-/* #imgPreview{
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 12px;
-    margin: 15px;
-  } */
 
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.imgPreview {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+}
+.upload-btn {
+    border: 2px solid #1da699;
+    background: #1da699;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 23px;
+    margin: 15px 1px 15px 1px;
+    padding: 15px 10px 19px 10px;
+    width: 250px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+}
+.upload-btn:hover {
+    border: 2px solid #28bbac;
+    background: #28bbac;
+}
 .upload-image {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
+    margin: 30px;
+    font-size: 22px;
     width: 50%;
-    margin: 30px;
-}
-
-#photo {
-    display: flex;
-    margin: 30px;
-    margin-left: auto;
-    margin-right: 2cm;
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 17px;
 }
 
 .upload-info {
@@ -93,14 +111,7 @@
     margin-left: 10px !important;
     color: #999595 !important;
 }
-#imgPreview {
-    width: 650px;
-    vertical-align: middle;
-    position: relative;
-    height: auto;
-    margin: 30px;
-    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
-}
+
 #textarea-post {
     resize: none;
     width: 75% !important;
@@ -157,11 +168,6 @@
     transform: scale(1);
 }
 
-@media only screen and (max-width: 1480px) {
-    #imgPreview {
-        width: 550px;
-    }
-}
 @media only screen and (max-width: 1400px) {
     .upload-container {
         display: flex;
@@ -174,7 +180,23 @@
     .upload-info {
         width: 100%;
     }
-    #imgPreview {
-        width: 900px;
+    .upload-image {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .upload-btn {
+        border: 2px solid #1da699;
+        background: #1da699;
+        color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+        font-size: 21px;
+        margin: 15px 1px 15px 1px;
+        padding: 10px 8px 17px 8px;
+        width: 200px;
+        box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+        font-family: "Josefin Sans", sans-serif;
+        transition: 0.14s ease;
     }
 }

@@ -9,13 +9,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState, useEffect } from "react";
 import ImageUpload from "image-upload-react";
+import PreviewImage from "./PreviewImage";
+import { AiOutlineUpload } from "react-icons/ai";
 
 export const CreatePost = ({ history }) => {
-    // const [imageSrc, setImageSrc] = useState();
+    const [imageSrc, setImageSrc] = useState();
 
-    // const handleImageSelect = (e) => {
-    //     setImageSrc(URL.createObjectURL(e.target.files[0]));
-    // };
     const initialValues = {
         caption: "",
         description: "",
@@ -97,10 +96,11 @@ export const CreatePost = ({ history }) => {
         photo: Yup.mixed().required("✖ A photo is required"),
     });
 
+    const style = { width: "40px", height: "40px", marginBottom: "-12px" };
     return (
         <div className="form-container">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                {(formProps) => (
+                {({ setFieldValue, values }) => (
                     <Form className="upload-card">
                         <div className="reg-form">
                             <p className="form-heading">Post</p>
@@ -108,39 +108,20 @@ export const CreatePost = ({ history }) => {
                             <div className="upload-container">
                                 <div className="upload-image">
                                     <ErrorMessage className="form-error" name="photo" component="span" />
-                                    <label htmlFor="upload">Upload your Image:</label>
-                                    {/* <input
-                                    type="file"
-                                    id="photo"
-                                    accept="image/jpg,image/jpeg,image/png"
-                                    onChange={onSelectFile}
-                                    autoComplete="off"
-                                />
-                                <img src={this.state.file} id="imgPreview" /> */}
 
+                                    <label for="file-upload" className="upload-btn">
+                                        <AiOutlineUpload style={style} /> Upload Image
+                                    </label>
                                     <input
-                                        id="photo"
+                                        id="file-upload"
                                         type="file"
                                         name="photo"
                                         accept="image/jpg,image/jpeg,image/png"
-                                        onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
+                                        onChange={(event) => {
+                                            setFieldValue("photo", event.target.files[0]);
+                                        }}
                                     />
-                                    {/* <ImageUpload
-                                    id="photo"
-                                    name="photo"
-                                    // onChange={(event) => formProps.setFieldValue("photo", event.target.files[0])}
-                                    handleImageSelect={(event) => setImageSrc(URL.createObjectURL(event.target.files[0]))}
-                                    imageSrc={imageSrc}
-                                    setImageSrc={setImageSrc}
-                                    defaultDeleteIconSize={60}
-                                    defaultDeleteIconColor="#222"
-                                    deleteIcon={<div>Delete</div>}
-                                    style={{
-                                        width: 700,
-                                        height: 500,
-                                        background: "gold",
-                                    }}
-                                /> */}
+                                    {values.photo && <PreviewImage file={values.photo} />}
                                 </div>
 
                                 <div className="upload-info">
