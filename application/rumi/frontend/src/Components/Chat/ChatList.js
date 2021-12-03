@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactTooltip from "react-tooltip";
 import "./Chat.css";
 const stylenoti = { marginTop: "10px", width: "35px", height: "35px", color: "#1da699" };
-
+const customId = " ";
 class ChatListComponent extends React.Component {
     iconstyle = {
         padding: "15px 20px 15px 20px",
@@ -76,6 +76,17 @@ class ChatListComponent extends React.Component {
                                                 {_chat.receiverHasRead === false && !this.userIsSender(_chat) ? (
                                                     <div>
                                                         <VscBellDot style={stylenoti} />
+                                                        {toast.info(`You Have Unread Messages`, {
+                                                            position: "top-right",
+                                                            autoClose: 4000,
+                                                            hideProgressBar: false,
+                                                            closeOnClick: true,
+                                                            pauseOnHover: true,
+                                                            draggable: true,
+                                                            closeButton: false,
+                                                            progress: 0,
+                                                            toastId: customId,
+                                                        })}
                                                     </div>
                                                 ) : null}
                                             </li>

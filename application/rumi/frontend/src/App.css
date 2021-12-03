@@ -40,7 +40,7 @@ a {
 }
 
 .Toastify__toast--info {
-    border: 2px solid #54c6ec50 !important;
+    border: 2px solid #1da69850 !important;
     background: #ffffff !important;
     border-radius: 0 !important;
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04) !important;
@@ -50,5 +50,5 @@ a {
 }
 
 .Toastify__progress-bar--info {
-    background: #54c7ec !important;
+    background: #1da699 !important;
 }
