@@ -176,7 +176,6 @@ function Roommates() {
                     </div>
                     <input className="search-button" type="submit" value="Search" />
                 </form>
-                <div>{postCount}</div>
 
                 <div className="post-listings">
                     <div className="post-container">

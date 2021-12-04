@@ -9,11 +9,12 @@
 }
 
 .post-listings {
-    margin-top: 60px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 60px;
 }
+
 .filter-toggle {
     margin-top: 29px;
 }
@@ -127,6 +128,11 @@
 .post-caption {
     font-size: 26px;
     font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .post-desc {
     padding: 15px 0 0 5px;
@@ -418,5 +424,18 @@
     }
     .search {
         padding: 0 5px 0 5px;
+    }
+    .post-card {
+        width: 385px;
+        margin-left: -5px;
+    }
+    .user-card {
+        margin-left: -5px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .post-card-suggested {
+        width: 365px;
     }
 }

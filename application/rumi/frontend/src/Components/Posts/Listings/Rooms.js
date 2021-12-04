@@ -21,7 +21,6 @@ import menu4 from "react-useanimations/lib/menu4";
 import GetNoti from "../../../Helpers/Notification/GetNoti";
 import "animate.css";
 import Suggested from "./Suggested/Suggested";
-import Collapse, { Panel } from "rc-collapse";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -191,12 +190,8 @@ function Rooms() {
                     <input className="search-button" type="submit" value="Search" />
                 </form>
 
-                <div>{postCount}</div>
-                <Collapse accordion={true} defaultActiveKey={"1"}>
-                    <Panel header="Suggested For You">
-                        <Suggested />
-                    </Panel>
-                </Collapse>
+                {Cookies.get("token") && Cookies.get("username") && <Suggested />}
+
                 <div className="post-listings">
                     <div className="post-container">
                         {loader}
