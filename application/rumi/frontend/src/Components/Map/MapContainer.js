@@ -1,6 +1,5 @@
 import React from "react";
-//import {GoogleMaps, withScriptjs, withGoogleMap} from "react-google-maps";
-import { GoogleMap, useLoadScript, Marker, InfoWindow, Circle } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Circle } from "@react-google-maps/api";
 import mapStyles from "./mapStyles.js";
 
 function MapContainer(props) {

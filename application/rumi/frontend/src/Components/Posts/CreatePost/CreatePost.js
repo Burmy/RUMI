@@ -7,13 +7,10 @@ import configData from "../../../Configs/config.json";
 import Cookies from "js-cookie";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useState, useEffect } from "react";
 import PreviewImage from "./PreviewImage";
 import { AiOutlineUpload } from "react-icons/ai";
 
 export const CreatePost = ({ history }) => {
-    const [imageSrc, setImageSrc] = useState();
-
     const initialValues = {
         caption: "",
         description: "",

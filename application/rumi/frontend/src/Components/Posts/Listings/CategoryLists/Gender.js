@@ -43,7 +43,6 @@ export default class Gender extends Component {
                     styles={{
                         control: (provided, state) => ({
                             ...provided,
-                            boxShadow: "none",
                             width: 300,
                             height: 60,
                             border: "2px solid #0000002c",
@@ -56,7 +55,7 @@ export default class Gender extends Component {
                         }),
                         menu: (provided, state) => ({
                             ...provided,
-                            border: "2px solid #f1f5f9",
+                            border: "2px solid #0000002c",
                             boxShadow: "none",
                         }),
                         option: (provided, state) => ({

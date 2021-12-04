@@ -7,7 +7,6 @@ import { BsStarFill } from "react-icons/bs";
 
 export const GetFav = ({ id }) => {
     const [userFav, setUserFav] = useState([]);
-    const [favCount, setFavCount] = useState([]);
     let history = useHistory();
 
     useEffect(() => {
@@ -15,7 +14,6 @@ export const GetFav = ({ id }) => {
             .then((response) => {
                 console.log(response.data.results);
                 setUserFav(response.data.results);
-                setFavCount(response.data.message);
             })
             .catch((error) => {
                 // Error

@@ -1,10 +1,7 @@
 import React from "react";
-// import Avatar from "@material-ui/core/Avatar";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import NotificationImportant from "@material-ui/icons/NotificationImportant";
 import Avatar from "react-avatar";
 import { VscBellDot } from "react-icons/vsc";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactTooltip from "react-tooltip";
 import "./Chat.css";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Axios from "axios";
 import configData from "../../Configs/config.json";
 

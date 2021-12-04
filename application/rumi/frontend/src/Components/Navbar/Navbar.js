@@ -12,7 +12,7 @@ import { RiQuestionAnswerLine } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import Avatar from "react-avatar";
-import configData from "../../Configs/config.json";
+// import configData from "../../Configs/config.json";
 
 const Navbar = () => {
     let history = useHistory();

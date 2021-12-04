@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router";
+import React from "react";
 import NewChatComponent from "./NewChat";
 import ChatListComponent from "./ChatList";
 import ChatViewComponent from "./ChatView";
@@ -25,6 +24,7 @@ class DashboardComponent extends React.Component {
         if (this.state.email) {
             const id = this.props.match.params.id;
             if (id) {
+                // eslint-disable-next-line react/no-direct-mutation-state
                 this.state.id = id;
             }
 
@@ -111,6 +111,7 @@ class DashboardComponent extends React.Component {
     };
 
     selectChat = async (chatIndex) => {
+        // eslint-disable-next-line no-useless-concat
         window.history.replaceState({}, document.title, "/" + "chat");
         this.props.match.params.id = null;
         await this.setState({ selectedChat: chatIndex, newChatFormVisible: false, id: null });

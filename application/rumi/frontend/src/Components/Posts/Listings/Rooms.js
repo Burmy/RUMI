@@ -24,7 +24,6 @@ import Suggested from "./Suggested/Suggested";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
-    const [postCount, setPostCount] = useState([]);
 
     //searchTerm
     const [search, setSearch] = useState("");
@@ -59,7 +58,6 @@ function Rooms() {
                     hideLoader();
                     console.log(response.data.results);
                     console.log(response.data);
-                    setPostCount(response.data.message);
                     setListOfPosts(response.data.results);
                 })
                 .catch((error) => {

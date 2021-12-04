@@ -2,11 +2,8 @@ import React from "react";
 import { RiQuestionAnswerLine } from "react-icons/ri";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { Scrollbars } from "react-custom-scrollbars";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-// import Moment from "react-moment";
-
 const style = { width: "50%", height: "50%", marginLeft: "10px", marginTop: "-5px" };
 const stylebtn = { marginTop: "10px" };
 const scroll = { height: "100vh" };

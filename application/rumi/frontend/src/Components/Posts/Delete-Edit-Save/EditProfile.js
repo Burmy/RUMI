@@ -4,8 +4,8 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import axios from "axios";
 import configData from "../../../Configs/config.json";
-import { Formik, Form, Field, ErrorMessage, useField } from "formik";
-import { Link, useHistory } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const EditProfile = () => {
@@ -14,35 +14,14 @@ const EditProfile = () => {
     const onCloseModal = () => setOpen(false);
 
     let history = useHistory();
-    const editValues = {
-        username: "",
-        email: "",
-        password: "",
-        description: "",
-        gender: "",
-        school: "",
-        major: "",
-        smoker: "",
-        pets: "",
-    };
 
-    //const[email,setEmail] = React.useState('');
-    //const[username,setUsername] = React.useState('');
     const [description, setDescription] = React.useState("");
     const [gender, setGender] = React.useState("");
     const [school, setSchool] = React.useState("");
     const [major, setMajor] = React.useState("");
     const [smoker, setSmoker] = React.useState("");
     const [pets, setPets] = React.useState("");
-    // const[originalUsername,getOriginalUsername] = React.useState('');
     const originalUsername = Cookies.get("username");
-    // const handleOriginalUseraname = (e) =>{
-    //   getOriginalUsername(e.target.value);
-    // }
-    // const handleUsername = (e) =>{
-
-    //     setUsername(Cookies.get("username"));
-    //     }
 
     const handleDescription = (e) => {
         setDescription(e.target.value);
@@ -119,6 +98,7 @@ const EditProfile = () => {
                                         name="tripType"
                                         checked={gender == "M"}
                                         id="gen1"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setGender("M");
                                         }}
@@ -133,6 +113,7 @@ const EditProfile = () => {
                                         name="tripType"
                                         checked={gender == "F"}
                                         id="gen2"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setGender("F");
                                         }}
@@ -147,6 +128,7 @@ const EditProfile = () => {
                                         name="tripType"
                                         checked={gender == "N"}
                                         id="gen3"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setGender("N");
                                         }}
@@ -164,6 +146,7 @@ const EditProfile = () => {
                                         name="smoke"
                                         checked={smoker == "1"}
                                         id="smoke1"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setSmoker("1");
                                         }}
@@ -177,6 +160,7 @@ const EditProfile = () => {
                                         name="smoke"
                                         checked={smoker == "0"}
                                         id="smoke2"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setSmoker("0");
                                         }}
@@ -194,6 +178,7 @@ const EditProfile = () => {
                                         name="pet"
                                         checked={pets == "1"}
                                         id="pet1"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setPets("1");
                                         }}
@@ -207,6 +192,7 @@ const EditProfile = () => {
                                         name="pet"
                                         checked={pets == "0"}
                                         id="pet2"
+                                        onChange={() => {}}
                                         onClick={() => {
                                             setPets("0");
                                         }}

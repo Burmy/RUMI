@@ -1,6 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { FormControl, InputLabel, Input, Button, Paper, withStyles, CssBaseline, Typography } from "@material-ui/core";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -15,6 +13,7 @@ class NewChatComponent extends React.Component {
     }
 
     render() {
+        // eslint-disable-next-line react/no-direct-mutation-state
         this.state.username = this.props.id;
         return (
             <div className="">
@@ -49,8 +48,8 @@ class NewChatComponent extends React.Component {
     }
 
     componentWillMount() {
-        console.log("NewChat")
-        console.log(firebase.auth().currentUser)
+        console.log("NewChat");
+        console.log(firebase.auth().currentUser);
         if (!firebase.auth().currentUser) this.props.history.push("/login");
     }
 

@@ -54,11 +54,9 @@ export default class Major extends Component {
                     styles={{
                         control: (provided, state) => ({
                             ...provided,
-                            boxShadow: "none",
                             width: 270,
                             height: 67,
                             border: "2px solid #0000000e",
-
                             fontSize: "18px",
                             textAlign: "left",
                             paddingLeft: "12px",
@@ -71,7 +69,7 @@ export default class Major extends Component {
                         }),
                         menu: (provided, state) => ({
                             ...provided,
-                            border: "2px solid #f1f5f9",
+                            border: "2px solid #0000002c",
                             boxShadow: "none",
                         }),
                         option: (provided, state) => ({

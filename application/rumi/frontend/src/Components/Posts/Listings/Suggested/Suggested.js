@@ -2,7 +2,6 @@ import { React, useEffect, useState } from "react";
 import Axios from "axios";
 import configData from "../../../../Configs/config.json";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
 import { FaSmoking } from "react-icons/fa";
 import { RiParkingBoxLine } from "react-icons/ri";
 import { MdOutlinePets } from "react-icons/md";
