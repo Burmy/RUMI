@@ -24,8 +24,8 @@ export const CreatePost = ({ history }) => {
         gender: "",
         smoking: "",
         photo: "",
-        longitude: "",
-        latitude: "",
+        longitude: 12,
+        latitude: 12,
     };
     const onSubmit = (values) => {
         let data = new FormData();
@@ -198,8 +198,6 @@ export const CreatePost = ({ history }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <Field className="form-input" name="longitude" placeholder="TEMP long" />
-                                    <Field className="form-input" name="latitude" placeholder="TEMP lat" />
                                 </div>
                             </div>
 
