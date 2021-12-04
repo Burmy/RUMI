@@ -1,0 +1,33 @@
+.post-listings-suggested {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 100px 0 100px;
+    border: 2px solid #1da699;
+}
+
+.rc-collapse-anim-active {
+    transition: height 0.2s ease-out;
+}
+
+.rc-collapse-content {
+    overflow: hidden;
+}
+
+.rc-collapse-content-inactive {
+    display: none;
+}
+.rc-collapse-header {
+    color: #ffffff;
+    margin: 0 100px 0 100px;
+    background-color: #1da699;
+    cursor: pointer;
+    transition: 0.14s ease;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 25px;
+    padding: 8px 0px;
+}
+.rc-collapse-header:hover {
+    background-color: #28bbac;
+}

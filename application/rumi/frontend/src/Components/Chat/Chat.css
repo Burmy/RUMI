@@ -34,6 +34,7 @@
     background: #1da699;
     border: 2px solid #1da699;
     margin-right: 2px;
+    transition: 0.14s ease;
 }
 
 .chat-btn:hover,
@@ -186,6 +187,7 @@ ul {
         background: #1da699;
         border: 2px solid #1da699;
         padding: 25px 10px;
+        transition: 0.14s ease;
     }
     .chat-btn-resp:hover {
         border: 2px solid #28bbac;

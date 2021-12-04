@@ -108,11 +108,11 @@ export const CreatePost = ({ history }) => {
                                 <div className="upload-image">
                                     <ErrorMessage className="form-error" name="photo" component="span" />
 
-                                    <label for="file-upload" className="upload-btn">
+                                    <label for="photo" className="upload-btn">
                                         <AiOutlineUpload style={style} /> Upload Image
                                     </label>
                                     <input
-                                        id="file-upload"
+                                        id="photo"
                                         type="file"
                                         name="photo"
                                         accept="image/jpg,image/jpeg,image/png"

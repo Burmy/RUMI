@@ -20,6 +20,8 @@ import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
 import GetNoti from "../../../Helpers/Notification/GetNoti";
 import "animate.css";
+import Suggested from "./Suggested/Suggested";
+import Collapse, { Panel } from "rc-collapse";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -101,6 +103,7 @@ function Rooms() {
     return (
         <div>
             <GetNoti />
+
             <div className="home">
                 <Link data-tip="Look for Roommates" className="search-icon-resp" to="/roommates">
                     <lord-icon
@@ -189,7 +192,11 @@ function Rooms() {
                 </form>
 
                 <div>{postCount}</div>
-
+                <Collapse accordion={true} defaultActiveKey={"1"}>
+                    <Panel header="Suggested For You">
+                        <Suggested />
+                    </Panel>
+                </Collapse>
                 <div className="post-listings">
                     <div className="post-container">
                         {loader}
