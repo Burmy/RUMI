@@ -50,8 +50,12 @@ addSQL.push("pets='"+pets+"' ");
 }
 let finalsql= startSQL;
 
-for(i=0;i<addSQL.length;i++){
-finalsql= finalsql+addSQL[i];
+finalsql=finalsql+addSQL[0];
+for(i=1;i<addSQL.length;i++){
+  if(addSQL.length>1){
+    finalsql=finalsql+',';
+  finalsql= finalsql+addSQL[i];
+  }
 }
 finalsql=finalsql+endSql;
 console.log(finalsql);
