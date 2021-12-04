@@ -22,7 +22,6 @@ import GetNoti from "../../../Helpers/Notification/GetNoti";
 
 function Roommates() {
     const [listOfPosts, setListOfPosts] = useState([]);
-    const [postCount, setPostCount] = useState([]);
 
     //searchTerm
     const [search, setSearch] = useState("");
@@ -55,8 +54,6 @@ function Roommates() {
                 .then((response) => {
                     hideLoader();
                     console.log(response.data.results);
-                    console.log(response.data);
-                    setPostCount(response.data.message);
                     setListOfPosts(response.data.results);
                 })
                 .catch((error) => {

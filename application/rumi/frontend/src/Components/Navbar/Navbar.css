@@ -10,6 +10,9 @@
     margin: 8px 45px 8px 45px;
     text-align: left;
 }
+.nav-links-margin {
+    margin: 8px 45px 8px 45px;
+}
 .nav-links:hover {
     color: #1da699;
 }
@@ -91,12 +94,12 @@
     right: 0;
     font-size: 22px;
     font-family: "Josefin Sans", sans-serif;
-    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    box-shadow: 5px 5px 24px 5px rgb(0 0 0 / 8%);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
     transition: opacity 0.2s ease, transform 0.4s ease, visibility 0.4s;
-    z-index: 1000;
+    z-index: 99999999;
 }
 
 .menu.active {
@@ -125,6 +128,15 @@
     display: block;
     text-align: center !important;
 }
+.username-nav {
+    padding: 8px 8px 0px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1da699;
+    color: #fff;
+}
+
 @media only screen and (max-width: 768px) {
     .navbar {
         padding: 19px 30px 22px 30px;

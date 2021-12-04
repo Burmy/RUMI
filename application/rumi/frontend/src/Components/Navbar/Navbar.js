@@ -1,9 +1,7 @@
 import { React, useRef } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-// import { useAuth } from "../../Helpers/AuthContext";
 import Cookies from "js-cookie";
-// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
 import { useDetectOutsideClick } from "./useDetectOutsideClick";
@@ -14,7 +12,8 @@ import { RiQuestionAnswerLine } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import Avatar from "react-avatar";
-// import configData from "../../../Configs/config.json";
+import configData from "../../Configs/config.json";
+
 const Navbar = () => {
     let history = useHistory();
     let logged = Cookies.get("logged");
@@ -36,6 +35,11 @@ const Navbar = () => {
         Cookies.remove("csid");
     };
     const style = { width: "30px", height: "30px", marginLeft: "10px", marginTop: "-5px" };
+    const iconstyle = {
+        padding: "0px 0px 10px 0px",
+        width: "42px",
+        height: "42px",
+    };
     return (
         <div>
             <div>
@@ -61,21 +65,33 @@ const Navbar = () => {
                                 <Link id="resp-nav-links" className="nav-links" to="/createpost">
                                     Create
                                 </Link>
-                                <div id="nav" className="nav-links">
+                                <div id="nav" className="nav-links-margin">
                                     <div className="menu-container">
                                         <button onClick={onClick} className="menu-trigger">
-                                            {/* <span>{Cookies.get("username")}</span> */}
                                             <Avatar
                                                 className="menu-profile"
                                                 name={Cookies.get("username")[0].split("")[0]}
                                                 round
                                                 size="60px"
                                                 color="white"
-                                                // src={configData.SERVER_URL + `files/download?name=${value.photo}`}
+                                                // src={configData.SERVER_URL + `files/download?name=${photo}`}
                                             />
                                         </button>
                                         <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>
                                             <ul>
+                                                <li className="username-nav">
+                                                    <span>
+                                                        <lord-icon
+                                                            src="https://cdn.lordicon.com/dxjqoygy.json"
+                                                            trigger="hover"
+                                                            colors="primary:#ffffff,secondary:#ffffff"
+                                                            stroke="100"
+                                                            scale="50"
+                                                            style={iconstyle}
+                                                        />
+                                                        {Cookies.get("username")}
+                                                    </span>
+                                                </li>
                                                 <li>
                                                     <Link to={`/user/${Cookies.get("loggedUserid")}`} className="nav-links">
                                                         <div className="menu-trigger-option">
