@@ -96,9 +96,9 @@ const Navbar = () => {
                                     <div className="menu-container">
                                         <button onClick={onClick} className="menu-trigger">
                                             {userObject &&
-                                                userObject.map((value) => {
+                                                userObject.map((value, key) => {
                                                     return (
-                                                        <div>
+                                                        <div key={value.id}>
                                                             <Avatar
                                                                 className="menu-profile"
                                                                 name={Cookies.get("username")[0].split("")[0]}

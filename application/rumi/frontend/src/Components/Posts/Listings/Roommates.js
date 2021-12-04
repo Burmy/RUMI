@@ -98,7 +98,7 @@ function Roommates() {
 
     return (
         <div>
-            <GetNoti />
+            {Cookies.get("token") && Cookies.get("username") && <GetNoti />}
             <div className="home">
                 <Link data-tip="Look for Rooms" className="search-icon-resp" to="/rooms">
                     <lord-icon
@@ -122,7 +122,7 @@ function Roommates() {
                         ></lord-icon>
                     </Link>
                     <div className="filter-toggle">
-                        <label className="collapse" data-tip="Filters" for="_2">
+                        <label className="collapse" data-tip="Filters" htmlFor="_2">
                             <UseAnimations animation={menu4} size={45} className="filter-icon" />
                         </label>
                         <input id="_2" type="checkbox" />

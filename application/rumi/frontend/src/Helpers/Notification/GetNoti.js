@@ -32,8 +32,8 @@ const GetNoti = () => {
     return (
         <div>
             {noti
-                ? noti.map((value) => (
-                      <div>
+                ? noti.map((value, key) => (
+                      <div key={value.id}>
                           {(() => {
                               // eslint-disable-next-line eqeqeq
                               if (value.unread == "1") {

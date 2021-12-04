@@ -122,7 +122,7 @@ function RoommateDetails() {
     const style = { width: "37px", height: "37px" };
     return (
         <div>
-            <GetNoti />
+            {Cookies.get("token") && Cookies.get("username") && <GetNoti />}
             <div className="roommate-container">
                 <div className="roommate-loading">{loader}</div>
 
@@ -133,8 +133,8 @@ function RoommateDetails() {
                         (
                             <div key={value.id} className="user-container">
                                 <div className="user-info-plus-back">
-                                    <div class="back-link">
-                                        <span class="addText">Go Back</span>
+                                    <div className="back-link">
+                                        <span className="addText">Go Back</span>
                                         <AiOutlineCaretLeft
                                             style={style}
                                             className="room-back-button"

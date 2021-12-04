@@ -432,8 +432,12 @@ div[id^="message-"] {
     border-bottom: none !important;
     color: #ffffff !important;
     padding: 8px 15px !important;
+    border-radius: 0px !important;
 }
-
+.react-tabs__tab {
+    font-size: 28px;
+    padding-top: 10px !important;
+}
 .collapse-comments {
     box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
     font-family: "Josefin Sans", sans-serif;

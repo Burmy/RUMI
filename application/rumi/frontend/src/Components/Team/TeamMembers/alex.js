@@ -10,7 +10,7 @@ const alex = () => {
                 </h1>
             </div>
 
-            <div class="center">
+            <div className="center">
                 <img src={photo} alt="Alex Shirazi" width="100%" height="100%" />
                 <h2>Frontend/Backend Developer</h2>
                 <p>

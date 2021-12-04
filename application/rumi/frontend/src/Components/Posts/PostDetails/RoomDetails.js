@@ -102,8 +102,8 @@ function RoomDetails() {
     return (
         <div className="room-container">
             {loader}
-            <div class="back-link">
-                <span class="addText">Go Back</span>
+            <div className="back-link">
+                <span className="addText">Go Back</span>
                 <AiOutlineCaretLeft style={style} className="room-back-button" onClick={() => history.goBack()} />
             </div>
 
@@ -170,7 +170,7 @@ function RoomDetails() {
                                     )}
                                 </div>
 
-                                <label className="collapse-comments" data-tip="Filters" for="_2">
+                                <label className="collapse-comments" data-tip="Filters" htmlFor="_2">
                                     Show Comments
                                 </label>
                                 <input id="_2" type="checkbox" />
