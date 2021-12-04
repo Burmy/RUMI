@@ -67,6 +67,9 @@
 .menu-profile {
     color: #1da699 !important;
 }
+.sb-avatar__image {
+    border: 2px solid#1da699;
+}
 .sb-avatar__text {
     border: 2px solid #1da699;
 }

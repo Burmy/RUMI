@@ -16,8 +16,8 @@ function MapContainer(props) {
     };
 
     const MapContainerStyle = {
-        width: "75vw",
-        height: "100vh",
+        height: "50vh",
+        boxShadow: "5px 5px 24px 15px rgba(0, 0, 0, 0.04)",
     };
     const mapCenter = {
         lat: locations[props.location].lat,
@@ -38,7 +38,7 @@ function MapContainer(props) {
 
     return (
         <div>
-            <GoogleMap mapContainerStyle={MapContainerStyle} zoom={15} center={mapCenter} options={options}>
+            <GoogleMap className="map" mapContainerStyle={MapContainerStyle} zoom={14.6} center={mapCenter} options={options}>
                 <Circle center={mapCenter} radius={800} options={{ fillColor: "#28bbac8f", strokeColor: "#1da699" }} />
             </GoogleMap>
         </div>

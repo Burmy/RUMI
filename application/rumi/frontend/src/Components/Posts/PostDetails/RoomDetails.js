@@ -257,8 +257,7 @@ function RoomDetails() {
                                 </div>
                             </div>
 
-                            <div>
-                                <h1>Map</h1>
+                            <div className="map">
                                 <MapContainer location={value.location} />
                             </div>
                         </div>

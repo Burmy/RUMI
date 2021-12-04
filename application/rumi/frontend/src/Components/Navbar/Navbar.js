@@ -1,4 +1,4 @@
-import { React, useRef } from "react";
+import { React, useRef, useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -12,13 +12,40 @@ import { RiQuestionAnswerLine } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import Avatar from "react-avatar";
-// import configData from "../../Configs/config.json";
+import configData from "../../Configs/config.json";
+import Axios from "axios";
 
 const Navbar = () => {
     let history = useHistory();
     let logged = Cookies.get("logged");
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+
+    const [userObject, setUserObject] = useState([]);
+
+    useEffect(() => {
+        const getPhoto = async () => {
+            await Axios.get(configData.SERVER_URL + `users?id=${Cookies.get("loggedUserid")}`)
+                .then((response) => {
+                    console.log(response.data.results);
+                    setUserObject(response.data.results);
+                })
+                .catch((error) => {
+                    // Error
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log("Error", error.message);
+                    }
+                    console.log(error.config);
+                });
+        };
+        getPhoto();
+    }, []);
 
     const onClick = () => setIsActive(!isActive);
 
@@ -68,14 +95,21 @@ const Navbar = () => {
                                 <div id="nav" className="nav-links-margin">
                                     <div className="menu-container">
                                         <button onClick={onClick} className="menu-trigger">
-                                            <Avatar
-                                                className="menu-profile"
-                                                name={Cookies.get("username")[0].split("")[0]}
-                                                round
-                                                size="60px"
-                                                color="white"
-                                                // src={configData.SERVER_URL + `files/download?name=${photo}`}
-                                            />
+                                            {userObject &&
+                                                userObject.map((value) => {
+                                                    return (
+                                                        <div>
+                                                            <Avatar
+                                                                className="menu-profile"
+                                                                name={Cookies.get("username")[0].split("")[0]}
+                                                                round
+                                                                size="65px"
+                                                                color="white"
+                                                                src={configData.SERVER_URL + `files/download?name=${value.photo}`}
+                                                            />
+                                                        </div>
+                                                    );
+                                                })}
                                         </button>
                                         <nav ref={dropdownRef} className={`menu ${isActive ? "active" : "inactive"}`}>
                                             <ul>
