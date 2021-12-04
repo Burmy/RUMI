@@ -16,6 +16,7 @@ import { DeleteRoom } from "../Delete-Edit-Save/DeleteRoom";
 import { Link } from "react-router-dom";
 import Notification from "../../../Helpers/Notification/Notification";
 import GetNoti from "../../../Helpers/Notification/GetNoti";
+import EditProfile from "../Delete-Edit-Save/EditProfile";
 
 function RoommateDetails() {
     let { id } = useParams();
@@ -203,21 +204,11 @@ function RoommateDetails() {
                                                 </Link>
                                             </div>
                                         )}
-                                        <div className="user-info-main-cont">
-                                            Contact - {value.phone}, {value.email}
-                                        </div>
+
                                         <div>
-                                        {Cookies.get("token") &&
-                                        Cookies.get("username") === value.username && (
-                                        <button
-                                          className="post-edit-button"
-                                         onClick={() => {
-                                            history.push('/edit')
-                                        }}
-                                        >
-                                        Edit
-                                        </button>
-                                        )}
+                                            {Cookies.get("token") && Cookies.get("username") === value.username && (
+                                                <EditProfile />
+                                            )}
                                         </div>
                                     </div>
                                 </div>

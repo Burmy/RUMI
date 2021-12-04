@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState, useEffect } from "react";
-import ImageUpload from "image-upload-react";
 import PreviewImage from "./PreviewImage";
 import { AiOutlineUpload } from "react-icons/ai";
 

@@ -26,7 +26,6 @@ import ReactGA from "react-ga";
 import { initGA, logPageView } from "./utils/analytics";
 import ChatDashboard from "./Components/Chat/ChatDashboard";
 import Axios from "axios";
-import EditProfile from "./Components/Posts/PostDetails/EditProfile";
 
 ReactGA.initialize("G-JKVQRG8KYM");
 
@@ -59,7 +58,6 @@ function App() {
                         <ProtectedRoute path="/createpost" exact component={CreatePost} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Register} />
-                        <Route path="/edit" exact component={EditProfile} />
 
                         <ProtectedRoute path="/chat" exact component={ChatDashboard} />
                         <ProtectedRoute path="/chat/:id" exact component={ChatDashboard} />

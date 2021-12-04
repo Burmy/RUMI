@@ -473,6 +473,25 @@ div[id^="message-"] {
 .react-sharing-button__text {
     display: none !important;
 }
+.edit-input-btn {
+    border: 2px solid #1da699;
+    background: #1da699;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 30px 1px 0px 1px;
+    width: 250px;
+    padding: 20px 25px;
+    box-shadow: 5px 5px 24px 5px rgba(0, 0, 0, 0.04);
+    font-family: "Josefin Sans", sans-serif;
+    transition: 0.14s ease;
+}
+
+.edit-input-btn:hover {
+    border: 2px solid #28bbac;
+    background: #28bbac;
+}
 @media only screen and (max-width: 1024px) {
     .room-post-image {
         border: 0px solid white;
