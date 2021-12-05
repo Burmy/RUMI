@@ -99,7 +99,7 @@ function Rooms() {
     };
     return (
         <div>
-            {Cookies.get("token") && Cookies.get("username") && <GetNoti />}
+            {Cookies.get("token") && !Cookies.get("admin") && <GetNoti />}
 
             <div className="home">
                 <Link data-tip="Look for Roommates" className="search-icon-resp" to="/roommates">

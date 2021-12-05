@@ -122,7 +122,7 @@ function RoommateDetails() {
     const style = { width: "37px", height: "37px" };
     return (
         <div>
-            {Cookies.get("token") && Cookies.get("username") && <GetNoti />}
+            {Cookies.get("token") && !Cookies.get("admin") && <GetNoti />}
             <div className="roommate-container">
                 <div className="roommate-loading">{loader}</div>
 
