@@ -21,6 +21,7 @@ import menu4 from "react-useanimations/lib/menu4";
 import GetNoti from "../../../Helpers/Notification/GetNoti";
 import "animate.css";
 import Suggested from "./Suggested/Suggested";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Rooms() {
     const [listOfPosts, setListOfPosts] = useState([]);
@@ -201,10 +202,10 @@ function Rooms() {
                                     value.created_date = new Date(value.created_date).toDateString();
                                     return (
                                         <div key={value.id} className="post-card">
-                                            <img
+                                            <LazyLoadImage
+                                                alt={"Missing"}
                                                 className="post-image"
                                                 src={configData.SERVER_URL + `files/download?name=${value.photo}`}
-                                                alt="Missing"
                                                 onClick={() => {
                                                     history.push(`/post/${value.id}`);
                                                 }}
