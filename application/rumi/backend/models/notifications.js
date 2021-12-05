@@ -49,9 +49,10 @@ NotificationModel.readAll = (to_id) => {
      SET unread = 0
      WHERE to_id = ?`;
 
-  return db.execute(baseSQL, [to_id])
+  return db
+    .execute(baseSQL, [to_id])
     .then(([results, fields]) => {
-      return Promise.resolve(results)
+      return Promise.resolve(results);
     })
     .catch((err) => Promise.reject(err));
 };

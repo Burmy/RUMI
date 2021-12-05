@@ -19,51 +19,46 @@ UserModel.changeData = (
   smoker,
   pets,
   originalUsername
-  ) =>{
-let addSQL = [];
-let startSQL = "UPDATE user SET ";
-let endSql = `WHERE username='${originalUsername}';`;
+) => {
+  let addSQL = [];
+  let startSQL = "UPDATE user SET ";
+  let endSql = `WHERE username='${originalUsername}';`;
 
-if(description !=''){
-
-addSQL.push("description='"+description+"' ");
-}
-if(gender !=''){
-
-addSQL.push("gender='"+gender+"' ");
-}
-if(school !=''){
-
-addSQL.push("school='"+school+"' ");
-}
-if(major !=''){
-
-addSQL.push("major='"+major+"' ");
-}
-if(smoker !=''){
-
-addSQL.push("smoker='"+smoker+"' ");
-}
-if(pets !=''){
- 
-addSQL.push("pets='"+pets+"' ");
-}
-let finalsql= startSQL;
-
-finalsql=finalsql+addSQL[0];
-for(i=1;i<addSQL.length;i++){
-  if(addSQL.length>1){
-    finalsql=finalsql+',';
-  finalsql= finalsql+addSQL[i];
+  if (description != "") {
+    addSQL.push("description='" + description + "' ");
   }
-}
-finalsql=finalsql+endSql;
-console.log(finalsql);
-return db.execute(finalsql)
-.then(([results,fields])=>{
-  return Promise.resolve(results);
-})
-.catch((err) => Promise.reject(err));
+  if (gender != "") {
+    addSQL.push("gender='" + gender + "' ");
+  }
+  if (school != "") {
+    addSQL.push("school='" + school + "' ");
+  }
+  if (major != "") {
+    addSQL.push("major='" + major + "' ");
+  }
+  if (smoker != "") {
+    addSQL.push("smoker='" + smoker + "' ");
+  }
+  if (pets != "") {
+    addSQL.push("pets='" + pets + "' ");
+  }
+  let finalsql = startSQL;
+
+  finalsql = finalsql + addSQL[0];
+  for (i = 1; i < addSQL.length; i++) {
+    if (addSQL.length > 1) {
+      finalsql = finalsql + ",";
+      finalsql = finalsql + addSQL[i];
+    }
+  }
+  finalsql = finalsql + endSql;
+  console.log(finalsql);
+  return db
+    .execute(finalsql)
+    .then(([results, fields]) => {
+      return Promise.resolve(results);
+    })
+    .catch((err) => Promise.reject(err));
 };
 UserModel.search = (
   searchTerm,

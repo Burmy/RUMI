@@ -70,10 +70,10 @@ router.patch("/readAll", authentication, function (req, res, next) {
 
   NotificationModel.readAll(loginUserId)
     .then((results) => {
-        res.send({
-          resultsStatus: "info",
-          results: results,
-        });
+      res.send({
+        resultsStatus: "info",
+        results: results,
+      });
     })
     .catch((err) => next(err));
 });
