@@ -57,7 +57,6 @@ function RoommateDetails() {
         Axios.get(configData.SERVER_URL + `posts?creator_id=${id}`)
             .then((response) => {
                 hideLoader();
-                console.log(response.data.results);
                 setUserPosts(response.data.results);
                 setPostCount(response.data.message);
             })
@@ -78,7 +77,6 @@ function RoommateDetails() {
         Axios.get(configData.SERVER_URL + `comments?creator_id=${id}`)
             .then((response) => {
                 hideLoader();
-                console.log(response.data.results);
                 setUserComments(response.data.results);
                 setCommentsCount(response.data.message);
             })
@@ -99,7 +97,6 @@ function RoommateDetails() {
         Axios.get(configData.SERVER_URL + `favorites?saved_by=${id}`)
             .then((response) => {
                 hideLoader();
-                console.log(response.data.results);
                 setUserFav(response.data.results);
                 setFavCount(response.data.message);
             })

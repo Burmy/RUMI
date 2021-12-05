@@ -44,8 +44,6 @@ export const CreatePost = ({ history }) => {
             headers: { "content-type": "multipart/form-data" },
         })
             .then((response) => {
-                console.log("IT WORKED");
-                console.log(response);
                 toast.success("Posted Successfully!", {
                     position: "top-right",
                     autoClose: 4000,

@@ -50,16 +50,10 @@ const Registeration = () => {
         data.append("smoker", values.smoker);
         data.append("gender", values.gender);
 
-        console.log(values.username, "values.photo");
-        console.log(data, "data");
-        console.log(values, "values");
-
         Axios.post(configData.SERVER_URL + "users/registration", data, {
             headers: { "content-type": "multipart/form-data" },
         })
             .then(() => {
-                console.log("IT WORKED");
-                console.log(data);
                 toast.success("Registered Successfully!", {
                     position: "top-right",
                     autoClose: 4000,

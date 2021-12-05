@@ -17,13 +17,9 @@ const Notification = () => {
         },
 
         onSubmit: (values, { resetForm }) => {
-            // alert(JSON.stringify(values, null, 2));
-            console.log(values.trigger);
-
             const data = { text: values.trigger };
             Axios.post(configData.SERVER_URL + "notifications/trigger", data)
                 .then((response) => {
-                    console.log("notification sent");
                     toast.success("Notification Sent!", {
                         position: "top-right",
                         autoClose: 4000,
@@ -37,7 +33,6 @@ const Notification = () => {
                     resetForm();
                 })
                 .catch((error) => {
-                    console.log("error sending notification");
                     // Error
                     if (error.response) {
                         console.log(error.response.data);

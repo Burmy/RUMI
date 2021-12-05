@@ -28,7 +28,6 @@ export default class Major extends Component {
     handleChange(e) {
         this.setState({ id: e.value, name: e.label });
         this.props.major(e.value);
-        console.log(e.value);
     }
 
     componentDidMount() {

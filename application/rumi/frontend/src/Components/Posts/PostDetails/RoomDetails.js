@@ -27,10 +27,7 @@ function RoomDetails() {
         Axios.get(configData.SERVER_URL + `posts?id=${id}`)
             .then((response) => {
                 hideLoader();
-                console.log(id, "post");
-                console.log(Cookies.get("loggedUserid"), "creator");
                 setPostObject(response.data.results);
-                console.log(response.data.results);
             })
             .catch((error) => {
                 // Error
@@ -48,7 +45,6 @@ function RoomDetails() {
 
         Axios.get(configData.SERVER_URL + `comments?post_id=${id}`)
             .then((response) => {
-                console.log(response.data.results);
                 setComments(response.data.results);
             })
             .catch((error) => {
@@ -75,15 +71,11 @@ function RoomDetails() {
         })
             .then(() => {
                 window.location.reload(); //comments dont update untill page is reloaded
-                console.log(id, "post");
-                console.log(Cookies.get("loggedUserid"), "creator");
                 const commentToAdd = { text: newComment };
                 setComments([...comments, commentToAdd]);
                 setNewComment("");
             })
             .catch((error) => {
-                console.log(id, "post");
-                console.log(Cookies.get("loggedUserid"), "creator");
                 // Error
                 if (error.response) {
                     console.log(error.response.data);

@@ -45,13 +45,9 @@ const EditProfile = () => {
         originalUsername: originalUsername,
     };
     const handlePost = () => {
-        console.log(data);
-        axios
-            .post(configData.SERVER_URL + "users/update", data)
-            // .then(document.write(json));
-            .then((response) => {
-                history.goBack();
-            });
+        axios.post(configData.SERVER_URL + "users/update", data).then((response) => {
+            history.goBack();
+        });
     };
 
     return (

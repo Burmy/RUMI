@@ -15,7 +15,6 @@ const Suggested = () => {
     useEffect(() => {
         Axios.get(configData.SERVER_URL + `posts/suggest`)
             .then((response) => {
-                console.log(response.data.results, "yooo");
                 setSuggested(response.data.results);
             })
             .catch((error) => {

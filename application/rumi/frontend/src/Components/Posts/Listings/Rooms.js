@@ -57,8 +57,6 @@ function Rooms() {
             )
                 .then((response) => {
                     hideLoader();
-                    console.log(response.data.results);
-                    console.log(response.data);
                     setListOfPosts(response.data.results);
                 })
                 .catch((error) => {

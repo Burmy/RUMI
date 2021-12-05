@@ -89,7 +89,6 @@ class DashboardComponent extends React.Component {
     newChatBtnClicked = () => this.setState({ newChatFormVisible: true, selectedChat: null });
 
     newChatSubmit = async (chatObj) => {
-        console.log([this.state.email, chatObj.sendTo]);
         const docKey = this.buildDocKey(chatObj.sendTo);
         await firebase
             .firestore()
@@ -140,8 +139,6 @@ class DashboardComponent extends React.Component {
 
     componentDidMount = () => {
         firebase.auth().onAuthStateChanged(async (_usr) => {
-            console.log("componentWillMount");
-            console.log(_usr);
             if (!_usr) this.props.history.push("/login");
             else {
                 await firebase

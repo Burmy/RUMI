@@ -9,19 +9,7 @@ export const DeleteComment = ({ commentid }) => {
         const data = { id: commentid };
         Axios.delete(configData.SERVER_URL + `comments`, { data })
             .then(() => {
-                console.log("deleted");
-                // history.push("/");
                 window.location.reload();
-                // toast.success("Post Deleted!", {
-                //     position: "top-right",
-                //     autoClose: 4000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     closeButton: false,
-                //     progress: 0,
-                // });
             })
             .catch((error) => {
                 // Error

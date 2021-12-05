@@ -27,7 +27,6 @@ const Navbar = () => {
         const getPhoto = async () => {
             await Axios.get(configData.SERVER_URL + `users?id=${Cookies.get("loggedUserid")}`)
                 .then((response) => {
-                    console.log(response.data.results);
                     setUserObject(response.data.results);
                 })
                 .catch((error) => {
@@ -53,7 +52,6 @@ const Navbar = () => {
         history.push("/");
         window.location.reload();
         firebase.auth().signOut();
-        console.log("clicked");
         Cookies.remove("username");
         Cookies.remove("loggedUserid");
         Cookies.remove("logged");

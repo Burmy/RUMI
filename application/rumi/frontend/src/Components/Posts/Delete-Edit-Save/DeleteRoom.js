@@ -9,7 +9,6 @@ export const DeleteRoom = ({ id }) => {
         const data = { id: id };
         Axios.delete(configData.SERVER_URL + `posts`, { data })
             .then(() => {
-                console.log("deleted");
                 window.location.reload();
             })
             .catch((error) => {

@@ -48,8 +48,6 @@ class NewChatComponent extends React.Component {
     }
 
     componentWillMount() {
-        console.log("NewChat");
-        console.log(firebase.auth().currentUser);
         if (!firebase.auth().currentUser) this.props.history.push("/login");
     }
 
@@ -93,7 +91,7 @@ class NewChatComponent extends React.Component {
     chatExists = async () => {
         const docKey = this.buildDocKey();
         const chat = await firebase.firestore().collection("chats").doc(docKey).get();
-        console.log(chat.exists);
+
         return chat.exists;
     };
     userExists = async () => {

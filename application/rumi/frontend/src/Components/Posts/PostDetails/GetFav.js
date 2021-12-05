@@ -12,7 +12,6 @@ export const GetFav = ({ id }) => {
     useEffect(() => {
         Axios.get(configData.SERVER_URL + `posts?id=${id}`)
             .then((response) => {
-                console.log(response.data.results);
                 setUserFav(response.data.results);
             })
             .catch((error) => {
@@ -34,7 +33,6 @@ export const GetFav = ({ id }) => {
 
     const unsavePost = (unsaveid) => {
         const data = { post_id: unsaveid };
-        console.log(unsaveid, "favid");
 
         Axios.delete(configData.SERVER_URL + "favorites", { data })
             .then(() => {

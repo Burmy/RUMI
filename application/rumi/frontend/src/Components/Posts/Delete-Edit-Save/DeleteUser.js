@@ -9,7 +9,6 @@ export const DeleteUser = ({ id }) => {
         const data = { id: userid };
         Axios.delete(configData.SERVER_URL + `users`, { data })
             .then(() => {
-                console.log("deleted");
                 window.location.reload();
             })
             .catch((error) => {

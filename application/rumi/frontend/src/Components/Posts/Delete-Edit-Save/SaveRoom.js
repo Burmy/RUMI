@@ -12,11 +12,6 @@ export const SaveRoom = ({ id }) => {
 
         Axios.post(configData.SERVER_URL + "favorites", data)
             .then(() => {
-                console.log(id, "post_id");
-                console.log(Cookies.get("loggedUserid"), "saved_by");
-                console.log("saved");
-            })
-            .then(() => {
                 toast.success(`Post Saved!`, {
                     position: "top-right",
                     autoClose: 4000,
@@ -30,8 +25,6 @@ export const SaveRoom = ({ id }) => {
             })
             .catch((error) => {
                 // Error
-                console.log(id, "post_id");
-                console.log(Cookies.get("loggedUserid"), "saved_by");
                 if (error.response) {
                     console.log(error.response.data);
                     console.log(error.response.status);

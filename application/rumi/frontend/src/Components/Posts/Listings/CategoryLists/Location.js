@@ -28,7 +28,6 @@ export default class Location extends Component {
     handleChange(e) {
         this.setState({ id: e.value, name: e.label });
         this.props.location(e.value);
-        // console.log(e.value);
     }
 
     componentDidMount() {

@@ -26,13 +26,11 @@ const Login = () => {
         Axios.defaults.withCredentials = true;
         Axios.post(configData.SERVER_URL + "users/login", data)
             .then((response) => {
-                console.log("logged in sql db");
                 email = response.data.result.email;
                 localStorage.setItem("loggedUserid", Cookies.get("loggedUserid"));
                 return signInWithEmailAndPassword(auth, email, password);
             })
             .then((cred) => {
-                console.log("logged in firebase", cred.user);
                 history.push("/");
                 window.location.reload();
             })
@@ -47,7 +45,7 @@ const Login = () => {
                     closeButton: false,
                     progress: 0,
                 });
-                console.log("oh nononoon");
+
                 // Error
                 if (error.response) {
                     console.log(error.response.data);

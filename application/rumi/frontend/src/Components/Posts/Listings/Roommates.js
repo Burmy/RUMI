@@ -53,7 +53,6 @@ function Roommates() {
 
                 .then((response) => {
                     hideLoader();
-                    console.log(response.data.results);
                     setListOfPosts(response.data.results);
                 })
                 .catch((error) => {

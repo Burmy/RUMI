@@ -21,7 +21,6 @@ export default class Gender extends Component {
     handleChange(e) {
         this.setState({ id: e.value });
         this.props.gender(e.value);
-        // console.log(e.value);
     }
 
     render() {

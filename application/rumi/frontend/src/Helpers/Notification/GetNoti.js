@@ -12,7 +12,6 @@ const GetNoti = () => {
         Axios.get(configData.SERVER_URL + `notifications`)
             .then((response) => {
                 setNoti(response.data.results);
-                console.log(response.data.results);
             })
             .catch((error) => {
                 // Error
