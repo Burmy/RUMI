@@ -587,11 +587,8 @@ div[id^="message-"] {
     }
     .room-container {
         padding-top: 10px;
-        margin-left: -15px;
     }
-    .user-info-container {
-        margin-left: -15px;
-    }
+
     .room-info-container-desc {
         font-size: 22px;
     }
