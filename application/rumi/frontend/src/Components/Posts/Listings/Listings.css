@@ -66,11 +66,12 @@
     display: flex;
     flex-direction: column;
     background: #ffffff;
+    border: 3px solid #ffffff;
     transition: 0.25s ease;
-    margin: 12px;
+    margin: 14px;
     font-size: 22px;
     text-align: left;
-    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.04);
+    box-shadow: 5px 5px 24px 15px rgba(0, 0, 0, 0.07);
     cursor: pointer;
     overflow: hidden;
     animation: fadeIn;
