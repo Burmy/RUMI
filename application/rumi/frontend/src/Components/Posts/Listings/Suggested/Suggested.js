@@ -43,7 +43,7 @@ const Suggested = () => {
                         .map((value, key) => {
                             value.created_date = new Date(value.created_date).toDateString();
                             return (
-                                <div>
+                                <div key={value.id}>
                                     {Cookies.get("token") && Cookies.get("username") !== `${value.username}` && (
                                         <div className="post-card-suggested-cont">
                                             <div className="post-suggest-container">
