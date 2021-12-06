@@ -5,7 +5,6 @@ import { Modal } from "react-responsive-modal";
 import axios from "axios";
 import configData from "../../../Configs/config.json";
 import { Formik, Form, Field } from "formik";
-import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const EditProfile = () => {
@@ -13,7 +12,6 @@ const EditProfile = () => {
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
 
-    let history = useHistory();
 
     const [description, setDescription] = React.useState("");
     const [gender, setGender] = React.useState("");
@@ -46,7 +44,13 @@ const EditProfile = () => {
     };
     const handlePost = () => {
         axios.post(configData.SERVER_URL + "users/update", data).then((response) => {
-            history.goBack();
+            console.log("cannot go there, why?")
+            setTimeout(function() { 
+                window.location.reload();
+            }.bind(this), 1000)
+            
+        })
+        .catch((err) => {
         });
     };
 
@@ -202,11 +206,11 @@ const EditProfile = () => {
                     )}
                 </Formik>
                 <div>
-                    <form className="reg-form">
+                    <div className="reg-form">
                         <button className="form-input-btn" onClick={handlePost}>
                             Save
                         </button>
-                    </form>
+                    </div>
                 </div>
             </Modal>
         </div>

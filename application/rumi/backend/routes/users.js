@@ -345,6 +345,7 @@ router.post("/update", function (req, res, next) {
     smoker == "" &&
     pets == ""
   ) {
+    res.send({ message: "Nothing updated" });
   } else {
     UserModel.changeData(
       description,
@@ -354,7 +355,12 @@ router.post("/update", function (req, res, next) {
       smoker,
       pets,
       originalUsername
-    );
+    )
+      .then((results) => {
+        console.log(results)
+        res.send({ message: results });
+      })
+      .catch((err) => next(err));
   }
 });
 
