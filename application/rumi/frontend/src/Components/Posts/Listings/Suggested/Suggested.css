@@ -30,7 +30,7 @@
 }
 .post-card-suggested-cont {
     transition: 0.25s ease;
-    margin: 40px 12px 10px 12px;
+    margin: 40px 17px 10px 17px;
 }
 .post-card-suggested-cont:hover {
     transform: scale(1.015);
@@ -57,12 +57,9 @@
     .post-card-suggested {
         width: 385px;
     }
-    .post-card-suggested-cont {
-        margin-left: -5px;
-    }
 }
 @media only screen and (max-width: 400px) {
     .post-card-suggested {
-        width: 365px;
+        width: 345px;
     }
 }
