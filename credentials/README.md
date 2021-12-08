@@ -7,7 +7,7 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP: http://18.190.48.206:3000
+1. Server URL or IP: https://18.190.48.206
 2. SSH username: ubuntu
 3. SSH password or key.: rumi-20210906.pem
     <br> If a ssh key is used please upload the key to the credentials folder.
