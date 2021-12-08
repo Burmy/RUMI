@@ -1,6 +1,6 @@
 # csc648 Repository
 
-## https://18.190.48.206
+## RUMI - https://18.190.48.206
 
 ## Please do the following steps before completing Milestone 0.
 1. Change the name of the repository. All that needs to change is the NN to your respective team number. Team numbers whose value is less than 10, please pad with a 0. Ex team 1 is Team01 team 11 is Team11. Please make sure to also remove the username from the repository as well. Teams with incorrectly name repository will have points deducted from their milestone 0 grades.
