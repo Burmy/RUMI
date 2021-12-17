@@ -1,19 +1,11 @@
-# csc648 Repository
+## What is RUMI
+According to an ACS Data study, the city of San Francisco is home to the highest percentage of 18-39 year olds living with roommates. At 28%, the number of young adults living with roommates in the San Francisco Bay Area exceeds that of any other city in the United States. Previously, searching for an apartment to rent or finding a compatible roommate would take countless hours browsing social media housing groups and unorganized forms online. The city of San Francisco and the larger surrounding Bay Area has long called for a reliable solution. 
+This is why our team has built RUMI - the new age digital housing solution providing a seamless transition into life in the Bay Area. RUMI is a web-based application helping students and young professionals alike find rooms and rent apartments around the San Francisco Bay Area. With RUMI, roommates no longer need to copy/paste their listing specifications countless times in online groups, discussion forms, and insecure sites online.
 
-## RUMI - https://18.190.48.206
-
-## Please do the following steps before completing Milestone 0.
-1. Change the name of the repository. All that needs to change is the NN to your respective team number. Team numbers whose value is less than 10, please pad with a 0. Ex team 1 is Team01 team 11 is Team11. Please make sure to also remove the username from the repository as well. Teams with incorrectly name repository will have points deducted from their milestone 0 grades.
-      - Please follow the naming convention assigned by your instructor.
-
-1. PLEASE REMOVE THE USERNAME FROM THE REPOSITORY NAME!!!
-
-2. Add ALL members of your team to this repository. For it to count, they must ACCEPT the invite.
-
-3. Fill out the table below
+## https://18.190.48.206
 
 
-| Student Name | Student Email | GitHub Username |
+| Team member | Member Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
 | Nakulan Karthikeyan     | nkarthikeyan@mail.sfsu.edu | knakulan2001 |
 | Alex Shirazi     |        Aredjaian@mail.sfsu.edu       |     Alex-Shirazi1            |
@@ -22,5 +14,3 @@
 | Joshua Miranda      |       jmiranda7@mail.sfsu.edu        |        jmiranda7         |
 | Anmol Burmy      |   aburmy@mail.sfsu.edu    |    Burmy      |
 | Cheng-Yu Chuang | cchuang2@mail.sfsu.edu | yueyue0401 |
-
-## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
