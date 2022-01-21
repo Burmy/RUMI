@@ -7,12 +7,12 @@ This is why our team has built RUMI - the new age digital housing solution provi
 
 ##
 
-| Team member | Member Email | GitHub Username |
-|    :---:     |     :---:     |     :---:       |
-| Nakulan Karthikeyan     | nkarthikeyan@mail.sfsu.edu | knakulan2001 |
-| Alex Shirazi     |        Aredjaian@mail.sfsu.edu       |     Alex-Shirazi1            |
-| Jasmine Kilani      |     jkilani@mail.sfsu.edu          |      hthoch189           | 
-| Rasul Imanov      |     rimanov@mail.sfsu.edu          |      rimanov           |
-| Joshua Miranda      |       jmiranda7@mail.sfsu.edu        |        jmiranda7         |
-| Anmol Burmy      |   aburmy@mail.sfsu.edu    |    Burmy      |
-| Cheng-Yu Chuang | cchuang2@mail.sfsu.edu | yueyue0401 |
+| Team member  | GitHub Username |
+|    :---:     |     :---:       |
+| Nakulan Karthikeyan     |  knakulan2001 |
+| Alex Shirazi     |             Alex-Shirazi1            |
+| Jasmine Kilani      |          hthoch189           | 
+| Rasul Imanov      |           rimanov           |
+| Joshua Miranda      |              jmiranda7         |
+| Anmol Burmy      |       Burmy      |
+| Cheng-Yu Chuang |  yueyue0401 |
