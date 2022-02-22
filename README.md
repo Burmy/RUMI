@@ -5,6 +5,10 @@ This is why our team has built RUMI - the new age digital housing solution provi
 
 ### https://18.190.48.206
 
+## Demo
+
+[![DEMO](http://img.youtube.com/vi/vsSw3u31dvY/0.jpg)](https://youtu.be/vsSw3u31dvY)
+
 ##
 
 | Team member  | GitHub Username |
